@@ -99,6 +99,7 @@ env.bak/
 venv.bak/
 Pipfile.lock
 Pipfile
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -117,3 +118,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+r.txt
