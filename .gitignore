@@ -103,7 +103,7 @@ Pipfile
 # Spyder project settings
 .spyderproject
 .spyproject
-*settings.py
+privacy.py
 
 # Rope project settings
 .ropeproject
