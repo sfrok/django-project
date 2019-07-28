@@ -10,6 +10,8 @@ flake8 = "*"
 [packages]
 django = "*"
 psycopg2-binary = "*"
+python-logstash = "*"
+django-elasticsearch-dsl = "*"
 
 [requires]
 python_version = "3.6"
