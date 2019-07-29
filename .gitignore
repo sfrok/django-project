@@ -120,3 +120,4 @@ dmypy.json
 *.code-workspace
 r.txt
 .vscode/
+migrations/

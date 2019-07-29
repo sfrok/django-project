@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_elasticsearch_dsl',
     'baseapp',
-    'django_elasticsearch_dsl'
 ]
 
-ELASTICSEARCH_DSL={
+
+ELASTICSEARCH_DSL = {
     'default': {
         'hosts': 'localhost:9200'
     },
@@ -54,7 +55,7 @@ LOGGING = {
   'disable_existing_loggers': False,
   'formatters': {
       'simple': {
-            'format': 'velname)s %(message)s'
+            'format': '%(levelname)s %(message)s'
         },
   },
   'handlers': {
@@ -64,20 +65,21 @@ LOGGING = {
             'formatter': 'simple'
         },
         'logstash': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logstash.TCPLogstashHandler',
             'host': 'localhost',
-            'port': 5959, # Default value: 5959
-            'version': 1, # Version of logstash event schema. Default value: 0 (for backward compatibility of the library)
+            'port': 5959,  # Default value: 5959
+            'version': 1,  # Version of logstash event schema.
+            # Default value: 0 (for backward compatibility of the library)
             'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
-            'fqdn': False, # Fully qualified domain name. Default value: false.
-            'tags': ['django.request'], # list of tags. Default: None.
+            'fqdn': False,  # Fully qualified domain name. Default value: false.
+            'tags': ['django.request'],  # list of tags. Default: None.
         },
   },
   'loggers': {
         'django.request': {
             'handlers': ['logstash'],
-            'level': 'WARNING',
+            'level': 'INFO',
             'propagate': True,
         },
         'django': {
