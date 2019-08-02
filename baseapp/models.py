@@ -18,7 +18,7 @@ class Product(models.Model):
     ship_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     ship_discount = models.FloatField(default=0.0)
     photo = models.ImageField()
-    post_date = models.DateTimeField(default=timezone.now())
+    post_date = models.DateTimeField(default=timezone.now)
 
     class Meta:
         constraints = [
@@ -29,5 +29,4 @@ class Product(models.Model):
             models.CheckConstraint(check=models.Q(ship_discount__gte=0), name='ship_discount0'),
             models.CheckConstraint(check=models.Q(ship_discount__lte=100), name='ship_discount1'),
             models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
-            models.CheckConstraint(check=models.Q(price__gte=0), name='price0')
         ]
