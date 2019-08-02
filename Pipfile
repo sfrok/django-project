@@ -13,6 +13,7 @@ psycopg2-binary = "*"
 python-logstash = "*"
 django-elasticsearch-dsl = "*"
 elasticsearch-dsl = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"

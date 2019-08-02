@@ -1,18 +1,30 @@
 from django.db import models
+import datetime
 
 class Category(models.Model):
-    def __init__(self, name='LOL'):
-        self.name = name
+    name = models.CharField(max_length=20)
 
 class Product(models.Model):
-    def __init__(self):
-        self.name = 'LOL'
-        self.desc = 'LOL MORE'
-        self.cats = [Category() for i in range(5)]
-        self.price = 0
-        self.disc = []
-        self.amount = 0
-        self.sell_type = 0
-        self.ship_to = []
-        self.ship_prices = []
-        self.photo = 'Image path here'
+    name = models.CharField(max_length=50)
+    description = models.TextField(max_length=3000)
+    categories = models.ManyToManyField(Category)
+    price = models.DecimalField(default=0.00, max_digits = 10, decimal_places = 2)
+    discount = models.FloatField(default=0.0)
+    amount = models.IntegerField(default=0)
+    selling_type = models.IntegerField(default=0)
+    ship_to = models.TextField(max_length=300)
+    ship_price = models.DecimalField(default=0.00, max_digits = 10, decimal_places = 2)
+    ship_discount = models.FloatField(default=0.0)
+    photo = models.ImageField()
+    post_date = models.DateTimeField(default=datetime.datetime.now())
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(price__gte=0), name='price0'),
+            models.CheckConstraint(check=models.Q(ship_price__gte=0), name='ship_price0'),
+            models.CheckConstraint(check=models.Q(discount__gte=0), name='discount0'),
+            models.CheckConstraint(check=models.Q(discount__lte=100), name='discount1'),
+            models.CheckConstraint(check=models.Q(ship_discount__gte=0), name='ship_discount0'),
+            models.CheckConstraint(check=models.Q(ship_discount__lte=100), name='ship_discount1'),
+            models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
+            models.CheckConstraint(check=models.Q(price__gte=0), name='price0')
+        ]
