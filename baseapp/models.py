@@ -1,22 +1,25 @@
 from django.db import models
-import datetime
+from django.utils import timezone
+
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
+
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000)
     categories = models.ManyToManyField(Category)
-    price = models.DecimalField(default=0.00, max_digits = 10, decimal_places = 2)
+    price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
     selling_type = models.IntegerField(default=0)
     ship_to = models.TextField(max_length=300)
-    ship_price = models.DecimalField(default=0.00, max_digits = 10, decimal_places = 2)
+    ship_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     ship_discount = models.FloatField(default=0.0)
     photo = models.ImageField()
-    post_date = models.DateTimeField(default=datetime.datetime.now())
+    post_date = models.DateTimeField(default=timezone.now())
+
     class Meta:
         constraints = [
             models.CheckConstraint(check=models.Q(price__gte=0), name='price0'),
