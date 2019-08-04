@@ -22,6 +22,7 @@ import baseapp.views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home2/', v.home2, name='home2'),
+    path('reg/', v.registration_form, name='registration_form'),
     path('', v.home, name='home')
 ]
 if settings.DEBUG:
