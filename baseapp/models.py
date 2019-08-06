@@ -1,8 +1,11 @@
 from django.db import models
 from django.utils import timezone
-from django import forms
-from django.forms import ModelForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    a_country = models.CharField(max_length=128, blank=True)
+    a_city = models.CharField(max_length=128, blank=True)
 
 
 class Category(models.Model):
@@ -34,22 +37,4 @@ class Product(models.Model):
             models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
         ]
 
-
-class RegistrationForm(ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-    confirm_password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = User
-        fields = ['first_name',
-                  'last_name',
-                  'email',
-                  'password',
-                  'confirm_password']
-
-    def clean(self):
-        password = self.cleaned_data['password']
-        confirm_password = self.cleaned_data['confirm_password']
-        if password != confirm_password:
-            raise forms.ValidationError('Your passwords should be equal')
 

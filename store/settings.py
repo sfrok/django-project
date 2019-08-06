@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'baseapp',
 ]
 
+AUTH_USER_MODEL = 'baseapp.User'
+
 
 ELASTICSEARCH_DSL = {
     'default': {

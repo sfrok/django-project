@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import RegistrationForm
+from .forms import RegistrationForm
 
 
 def home(request):
@@ -13,8 +13,10 @@ def home2(request):
 
 
 def registration_form(request):
-    form = RegistrationForm()
+    form = RegistrationForm(request.POST or None)
     if form.is_valid():
+        new_user = form.save(commit=False)
+        new_user.save()
         return HttpResponseRedirect(reverse('home'))
     context = {
         'form': form
