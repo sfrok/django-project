@@ -17,13 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-import baseapp.views as v
+from baseapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home2/', v.home2, name='home2'),
-    path('reg/', v.registration_form, name='registration_form'),
-    path('', v.home, name='home')
+    path('reg/', views.registration_form, name='registration_form'),
+    path('auth/', views.authorization_form, name='authorization_form'),
+    path('', views.base, name='base'),
+
 ]
 if settings.DEBUG:
     """

@@ -40,11 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_elasticsearch_dsl',
+    'crispy_forms',
     'baseapp',
+
 ]
 
 AUTH_USER_MODEL = 'baseapp.User'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ELASTICSEARCH_DSL = {
     'default': {
