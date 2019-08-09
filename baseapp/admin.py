@@ -1,8 +1,10 @@
+from .forms import UserAdmin
 from django.contrib import admin
-from .models import Product, Category, User
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
+from .models import Product, Category, User, PersonalDiscount
 
 admin.site.register(Category)
 admin.site.register(Product)
+admin.site.register(PersonalDiscount)
 admin.site.register(User, UserAdmin)
-
+admin.site.unregister(Group)

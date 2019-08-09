@@ -14,6 +14,7 @@ python-logstash = "*"
 django-elasticsearch-dsl = "*"
 elasticsearch-dsl = "*"
 pillow = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.6"
