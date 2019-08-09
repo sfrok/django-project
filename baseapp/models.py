@@ -37,4 +37,22 @@ class Product(models.Model):
             models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
         ]
 
+class Order(models.Models):
+    user = ForeignKey(User, on_delete=models.CASCADE)
+    product = ForeignKey(Product, on_delete=models.CASCADE)
+    status = ForeignKey(Status, on_delete=models.CASCADE)
+    date = models.DataTimeField(default=timezone.now)
+    delivery_date = models.DataTimeField(default=timezone.now)
+    amount = models.IntegerField(default=1)
+    sum_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    sum_ship_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check-models.Q(amount__gte=1), name='amount1'),
+            models.CheckConstraint(check-models.Q(sum_price__gte=0), name='sim_price1')
+        ]
+
+
+class Status(models.Models):
+    name = models.CharFields(max_lenght=32)
