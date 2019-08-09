@@ -45,14 +45,14 @@ class User(AbstractUser):
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    first_name = models.CharField(max_length=64)
-    last_name = models.CharField(max_length=64)
-    a_country = models.CharField(max_length=128)
-    a_city = models.CharField(max_length=128)
-    a_address = models.CharField(max_length=128)
-    post_index = models.IntegerField(default=0)
-    payment_info = models.CharField(max_length=128)
-    phone_number = models.CharField(max_length=16)
+    first_name = models.CharField(max_length=64, blank=True, null=True)
+    last_name = models.CharField(max_length=64, blank=True, null=True)
+    a_country = models.CharField(max_length=128, blank=True, null=True)
+    a_city = models.CharField(max_length=128, blank=True, null=True)
+    a_address = models.CharField(max_length=128, blank=True, null=True)
+    post_index = models.IntegerField(default=0, blank=True, null=True)
+    payment_info = models.CharField(max_length=128, blank=True, null=True)
+    phone_number = models.CharField(max_length=16, blank=True, null=True)
     objects = MyUserManager()
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
@@ -112,25 +112,32 @@ class Product(models.Model):
             models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
         ]
 
+
+class Status(models.Model):
+    name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
+
+
 class Order(models.Model):
-    user = ForeignKey(User, on_delete=models.CASCADE)
-    product = ForeignKey(Product, on_delete=models.CASCADE)
-    status = ForeignKey(Status, on_delete=models.CASCADE)
-    date = models.DataTimeField(default=timezone.now)
-    delivery_date = models.DataTimeField(default=timezone.now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    delivery_date = models.DateTimeField
     amount = models.IntegerField(default=1)
     sum_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     sum_ship_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
 
     class Meta:
         constraints = [
-            models.CheckConstraint(check-models.Q(amount__gte=1), name='amount1'),
-            models.CheckConstraint(check-models.Q(sum_price__gte=0), name='sim_price1')
+            models.CheckConstraint(check=models.Q(amount__gte=1), name='amount1'),
+            models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sim_price1')
         ]
 
-
-class Status(models.Model):
-    name = models.CharFields(max_lenght=32)
+    def __str__(self):
+        return self.sum_price
 
 
 class PersonalDiscount(models.Model):
