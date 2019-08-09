@@ -112,7 +112,7 @@ class Product(models.Model):
             models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
         ]
 
-class Order(models.Models):
+class Order(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE)
     product = ForeignKey(Product, on_delete=models.CASCADE)
     status = ForeignKey(Status, on_delete=models.CASCADE)
@@ -129,10 +129,10 @@ class Order(models.Models):
         ]
 
 
-class Status(models.Models):
+class Status(models.Model):
     name = models.CharFields(max_lenght=32)
 
-    
+
 class PersonalDiscount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)

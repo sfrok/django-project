@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_elasticsearch_dsl',
+    #'django_elasticsearch_dsl',
     'crispy_forms',
     'baseapp',
 
@@ -54,7 +54,7 @@ ELASTICSEARCH_DSL = {
         'hosts': 'localhost:9200'
     },
 }
-
+"""
 LOGGING = {
   'version': 1,
   'disable_existing_loggers': False,
@@ -93,7 +93,7 @@ LOGGING = {
         },
     }
 }
-
+"""
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
