@@ -1,19 +1,73 @@
+{% block content %}
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href='{% static "ba-css/bootstrap.css" %}'>
-    <link rel="stylesheet" href='{% static "ba-css/base.css" %}'>
-</head>
-<body>
-Hello World
-</body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/base.css" %}">
+    <title>home</title>
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <h1 style="text-align: center">New</h1>
+    <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+
+                        <div class="card" style="width: 30rem; margin-top: 10px">
+                          <div class="card-body">
+                            <h5 class="card-title">Product 1</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa est nemo obcaecati, odit officiis perferendis provident totam veritatis.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card" style="width: 30rem; margin-top: 10px">
+                          <div class="card-body">
+                            <h5 class="card-title">Product 2</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae cum, doloribus harum laboriosam nihil reprehenderit suscipit ullam?</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card" style="width: 30rem; margin-top: 10px">
+                          <div class="card-body">
+                            <h5 class="card-title">Product 3</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores cum impedit magnam maiores repudiandae saepe ullam voluptas.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card" style="width: 30rem; margin-top: 10px">
+                          <div class="card-body">
+                            <h5 class="card-title">Product 4</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem doloribus facere perspiciatis ut. Iste labore necessitatibus voluptas voluptatum!</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+   <h1 style="text-align: center; margin-top: 20px">Trending</h1>
+    <h1 style="text-align: center; margin-top: 20px">On SALE</h1>
+  </body>
 <footer>
     {% block footer %}
     {% endblock %}
 </footer>
 </html>
+{% endblock %}
+
