@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('reg/', views.registration_form, name='registration_form'),
     path('auth/', views.authorization_form, name='authorization_form'),
-    path('', views.base, name='base'),
+    path('', views.footer, name='footer'),
 
 ]
 if settings.DEBUG:
