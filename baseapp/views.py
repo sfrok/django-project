@@ -5,8 +5,8 @@ from .forms import UserCreationForm, UserAuthorizationForm
 from django.contrib.auth import authenticate
 
 
-def footer(request):
-    return render(request, 'footer.html', {})
+def home(request):
+    return render(request, 'base.html', {})
 
 
 def registration_form(request):

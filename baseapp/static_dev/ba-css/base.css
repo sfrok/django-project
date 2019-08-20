@@ -1,0 +1,51 @@
+.header {
+ height: 270px;
+ background-color: #d3d9df;
+}
+
+.navbar-brand {
+ margin-left: 1rem;
+}
+
+.navbar-text {
+ padding-top: 0.01rem;
+ margin-left: 2rem;
+}
+.nav-item {
+ padding-top: 0.5rem;
+}
+
+.form-inline {
+ padding-top: 1.5rem;
+ margin-left: 1.5rem;
+}
+
+.form-control {
+ margin-right: 1rem !important;
+ width: 35rem !important;
+}
+
+.product-cart {
+ margin-top: 15px;
+ background-color: bisque;
+ width: 150px;
+ height: 250px;
+}
+
+.slaider {
+ margin-top: 15px;
+ width: 270px;
+ height: 170px;
+ background-color: lightcoral;
+}
+
+.footer-info {
+ margin-top: 7px;
+}
+
+footer {
+ background-color: lightsteelblue;
+ margin-top: 15px;
+}
+
+
