@@ -12,92 +12,88 @@
     <title>home</title>
   </head>
   <body>
-    <!--Header-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a id="a1" class="navbar brand" href="#">Logo</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-targer="navbarMenu" name="button" >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="navigation nav-link" href="#">Главная</a>
-          </li>
-          <li class="nav-item">
-            <a class="navigation nav-link" href="#">Каталог</a>
-          </li>
-          <li class="nav-item">
-            <a class="navigation nav-link" href="#">Контакты</a>
-          </li>
-          <li class="nav-item">
-            <a class="basket nav-link" href="#">Перейти в коризну</a>
-          </li>
-          <li class="nav-item">
-            <a class="autorisation nav-link" href="#">Вход</a>
-          </li>
-          <li class="nav-item">
-            <a class="autorisation nav-link" href="#">Регестрация</a>
-          </li>
-        </ul>
-      </div>
-    <form class="form-inline my-2 my-lg-0" action="index.html" method="post">
-      <input class="form-contol mr-sm-2" type="search" placeorder="Search" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    </nav>
-    <!--Header-->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <h1 style="text-align: center">New</h1>
-    <div class="container">
+        <!-- HEADER START-->
+    <div class="header">{#fixed-top: top, lef, right -> 0#}
+        <div class="navbar navbar-expand">
+            <a class="navbar-brand">Название</a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Авторизироватся</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Регистрация</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#"><img src="../media/checkout.png" alt="checkout" class="nav-link" ></a>
+                </li>
+            </ul>
+        </div>
+        <a class="navbar-text" href="#">Главная</a>
+        <a class="navbar-text" href="#">Каталог</a>
+        <a class="navbar-text" href="#">Контакты</a>
+        <form class="form-inline my-2 my-md-2">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-3 my-sm-3" type="submit">Search</button>
+        </form>
+    </div>
+    <!-- HEADER END-->
+    <!-- BODY START-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="row">
-                    <div class="col-xl-6">
-
-                        <div class="card" style="width: 30rem; margin-top: 10px">
-                          <div class="card-body">
-                            <h5 class="card-title">Product 1</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa est nemo obcaecati, odit officiis perferendis provident totam veritatis.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card" style="width: 30rem; margin-top: 10px">
-                          <div class="card-body">
-                            <h5 class="card-title">Product 2</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae cum, doloribus harum laboriosam nihil reprehenderit suscipit ullam?</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card" style="width: 30rem; margin-top: 10px">
-                          <div class="card-body">
-                            <h5 class="card-title">Product 3</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores cum impedit magnam maiores repudiandae saepe ullam voluptas.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card" style="width: 30rem; margin-top: 10px">
-                          <div class="card-body">
-                            <h5 class="card-title">Product 4</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem doloribus facere perspiciatis ut. Iste labore necessitatibus voluptas voluptatum!</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="product-cart"></div>
                     </div>
                 </div>
+            </div>
         </div>
-    <h1 style="text-align: center; margin-top: 20px">Trending</h1>
-    <h1 style="text-align: center; margin-top: 20px">On SALE</h1>
-      <footer>
-        {% block footer %}
-        {% endblock %}
+    </div>
+    <!-- BODY END-->
+
+    <!-- FOOTER START-->
+    <footer>
+        <div class="footer-container container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="footer-info">Информация</p>
+                    <ul style="list-style-type:none;">
+                        <li> <a href="#">О нас</a> </li>
+                        <li> <a href="#">Доставка и оплата</a> </li>
+                        <li> <a href="#">Контакты</a> </li>
+                    </ul>
+                    <p>Мы в соцсетях</p>
+                </div>
+            </div>
+        </div>
     </footer>
+  <!-- FOOTER END-->
+
   </body>
 </html>

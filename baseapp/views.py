@@ -5,7 +5,7 @@ from .forms import UserCreationForm, UserAuthorizationForm
 from django.contrib.auth import authenticate
 
 
-def base(request):
+def home(request):
     return render(request, 'base.html', {})
 
 
