@@ -1,8 +1,12 @@
 from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search
  
 def search(line):
-    es = Elasticsearch()
-    res = es.search(index="СЕРЫЙ СКАЖИ ИМЯ", doc_type="products", body={"query": {"match": {"name": line}}})
-    print("%d documents found" % res['hits']['total'])
-    for doc in res['hits']['hits']:
-        print("%s) %s" % (doc['_id'], doc['_source']['name']))
+    client = Elasticsearch()
+    s = Search(using=client, index="products").query("match", title=line)
+    response = s.execute()
+
+    for hit in response:
+        print(hit.meta.score, hit.title)
+    for tag in response.aggregations.per_tag.buckets:
+        print(tag.key, tag.max_lines.value)
