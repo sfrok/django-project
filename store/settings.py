@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import store.privacy as pc
+import logging
+logger = logging.getLogger('Settings')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,7 +56,7 @@ ELASTICSEARCH_DSL = {
         'hosts': 'localhost:9200'
     },
 }
-"""
+
 LOGGING = {
   'version': 1,
   'disable_existing_loggers': False,
@@ -69,7 +71,7 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'logstash': {
+        """'logstash': {
             'level': 'INFO',
             'class': 'logstash.TCPLogstashHandler',
             'host': 'localhost',
@@ -79,9 +81,9 @@ LOGGING = {
             'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
             'fqdn': False,  # Fully qualified domain name. Default value: false.
             'tags': ['django.request'],  # list of tags. Default: None.
-        },
-  },
-  'loggers': {
+        },"""
+      }
+  """'loggers': {
         'django.request': {
             'handlers': ['logstash'],
             'level': 'INFO',
@@ -91,9 +93,9 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': True,
         },
-    }
+    }"""
 }
-"""
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
