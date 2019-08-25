@@ -21,17 +21,6 @@
     <div class="header">{#fixed-top: top, lef, right -> 0#}
         <div class="navbar navbar-expand">
             <a class="navbar-brand">Название</a>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Авторизироватся</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Регистрация</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#"><img src="../media/checkout.png" alt="checkout" class="nav-link" ></a>
-                </li>
-            </ul>
         </div>
         <a class="navbar-text" href="#">Главная</a>
         <a class="navbar-text" href="#">Каталог</a>
@@ -46,31 +35,31 @@
     {% endblock %}
     <!-- BODY START-->
     <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
                         <div class="product-cart"></div>
                     </div>
                 </div>
@@ -83,19 +72,24 @@
     <footer>
         <div class="footer-container container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <p class="footer-info">Информация</p>
+                <div class="col-md-12 footer-bg">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p class="footer-info">Информация: </p>
                     <ul style="list-style-type:none;">
                         <li> <a href="#">О нас</a> </li>
                         <li> <a href="#">Доставка и оплата</a> </li>
                         <li> <a href="#">Контакты</a> </li>
                     </ul>
-                    <p>Мы в соцсетях</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="footer-info">Мы в соцсетях: </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
   <!-- FOOTER END-->
-
   </body>
 </html>
