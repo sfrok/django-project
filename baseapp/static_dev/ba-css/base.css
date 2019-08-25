@@ -1,3 +1,8 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 .header {
  height: 270px;
  background-color: #d3d9df;
@@ -26,26 +31,29 @@
 }
 
 .product-cart {
- margin-top: 15px;
  background-color: bisque;
- width: 150px;
- height: 250px;
-}
-
-.slaider {
- margin-top: 15px;
- width: 270px;
- height: 170px;
- background-color: lightcoral;
+ width: 214px;
+ height: 265px;
+ margin: auto;
 }
 
 .footer-info {
- margin-top: 7px;
-}
-
-footer {
- background-color: lightsteelblue;
  margin-top: 15px;
 }
 
+footer {
+ padding-top: 4rem;
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ height: 60px;
+}
 
+.cart {
+ height: 350px;
+ display: flex;
+}
+
+.footer-bg {
+ background-color: lightsteelblue;
+}
