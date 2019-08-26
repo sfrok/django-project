@@ -11,8 +11,8 @@ Welcome to django-project's documentation!
    :caption: project:
 
    pages/project/authorization_system
-   pages/project/products
-   pages/project/orders
+   pages/project/product_storage_system
+   pages/project/order_management_system
 
 .. toctree::
    :maxdepth: 2
