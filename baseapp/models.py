@@ -77,17 +77,15 @@ class User(AbstractUser):
         return self.is_admin
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name
-
-
 class Product(models.Model):
+    CATEGORIES = (
+        ('tech', 'Technology'),
+        ('toys', 'Toys'),
+        ('food', 'Food'),
+    )
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000)
-    categories = models.ManyToManyField(Category)
+    category = models.CharField(max_length=50, choices=CATEGORIES)
     price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
