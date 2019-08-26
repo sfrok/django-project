@@ -82,10 +82,11 @@ class Product(models.Model):
         ('tech', 'Technology'),
         ('toys', 'Toys'),
         ('food', 'Food'),
+        ('none', 'None'),
     )
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000)
-    category = models.CharField(max_length=50, choices=CATEGORIES)
+    category = models.CharField(max_length=50, choices=CATEGORIES, default='none')
     price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
