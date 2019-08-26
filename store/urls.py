@@ -25,7 +25,7 @@ urlpatterns = [
     path('reg/', views.registration_form, name='registration_form'),
     path('auth/', views.authorization_form, name='authorization_form'),
     path('', views.home, name='home'),
-    path('contacts/', views.contacts, name='contacts')
+    path('contacts/', views.contacts, name='contacts'),
 
 ]
 if settings.DEBUG:

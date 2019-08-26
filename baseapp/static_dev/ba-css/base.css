@@ -57,3 +57,13 @@ footer {
 .footer-bg {
  background-color: lightsteelblue;
 }
+
+.contacts {
+ font-size: 20px;
+ padding-top: 75px;
+ margin-left: 115px;
+}
+
+.information{
+  padding-top: 35px;
+}
