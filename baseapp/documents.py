@@ -16,4 +16,5 @@ class ProductDoc(Document):
         model = Product
         fields = ['name',
                   'description',
+                  'category',
                   ]
