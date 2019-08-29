@@ -8,7 +8,8 @@ from django.utils import six
 def search(line, cat=None):
     client = Elasticsearch()
     if cat is None:
-        s = Search(using=client, index="products").query("match_phrase", name=line)
+        s = Search(using=client, index="products").\
+            query("match_phrase", name=line)
     else:
         queries = []
         for i in cat:
