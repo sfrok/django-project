@@ -1,0 +1,69 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.header {
+ height: 270px;
+ background-color: #d3d9df;
+}
+
+.navbar-brand {
+ margin-left: 1rem;
+}
+
+.navbar-text {
+ padding-top: 0.01rem;
+ margin-left: 2rem;
+}
+.nav-item {
+ padding-top: 0.5rem;
+}
+
+.form-inline {
+ padding-top: 1.5rem;
+ margin-left: 1.5rem;
+}
+
+.form-control {
+ margin-right: 1rem !important;
+ width: 35rem !important;
+}
+
+.product-cart {
+ background-color: bisque;
+ width: 214px;
+ height: 265px;
+ margin: auto;
+}
+
+.footer-info {
+ margin-top: 15px;
+}
+
+footer {
+ padding-top: 4rem;
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ height: 60px;
+}
+
+.cart {
+ height: 350px;
+ display: flex;
+}
+
+.footer-bg {
+ background-color: lightsteelblue;
+}
+
+.contacts {
+ font-size: 20px;
+ padding-top: 75px;
+ margin-left: 115px;
+}
+
+.information{
+  padding-top: 35px;
+}

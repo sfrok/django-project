@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/base.css" %}">
+    <title>home</title>
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- HEADER START-->
+    <div class="header">{#fixed-top: top, lef, right -> 0#}
+        <div class="navbar navbar-expand">
+            <a class="navbar-brand">Название</a>
+        </div>
+        <a class="navbar-text" href="#">Главная</a>
+        <a class="navbar-text" href="#">Каталог</a>
+        <a class="navbar-text" href="contacts/">Контакты</a>
+        <form class="form-inline my-2 my-md-2">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-3 my-sm-3" type="submit">Search</button>
+        </form>
+    </div>
+    <!-- HEADER END-->
+    {% block content %}
+    <!-- BODY START-->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                        <div class="product-cart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BODY END-->
+    {% endblock %}
+    <!-- FOOTER START-->
+    <footer>
+        <div class="footer-container container-fluid">
+            <div class="row">
+                <div class="col-md-12 footer-bg">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p class="footer-info">Информация: </p>
+                    <ul style="list-style-type:none;">
+                        <li> <a href="#">О нас</a> </li>
+                        <li> <a href="#">Доставка и оплата</a> </li>
+                        <li> <a href="#">Контакты</a> </li>
+                    </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="footer-info">Мы в соцсетях: </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- FOOTER END-->
+  </body>
+</html>

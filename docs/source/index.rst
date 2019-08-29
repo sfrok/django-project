@@ -8,9 +8,15 @@ Welcome to django-project's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: FAQ:
+   :caption: project:
 
-   pages/base/FAQ
+   pages/project/authorization_system
+   pages/project/product_storage_system
+   pages/project/order_management_system
+
+.. toctree::
+   :maxdepth: 2
+   :caption: base:
 
 
 

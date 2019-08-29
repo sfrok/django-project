@@ -5,10 +5,16 @@ verify_ssl = true
 
 [dev-packages]
 sphinx = "*"
+flake8 = "*"
 
 [packages]
 django = "*"
 psycopg2-binary = "*"
+python-logstash = "*"
+django-elasticsearch-dsl = "*"
+elasticsearch-dsl = "*"
+pillow = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.6"
