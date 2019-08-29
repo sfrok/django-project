@@ -24,13 +24,14 @@
         </div>
         <a class="navbar-text" href="#">Главная</a>
         <a class="navbar-text" href="#">Каталог</a>
-        <a class="navbar-text" href="#">Контакты</a>
+        <a class="navbar-text" href="contacts/">Контакты</a>
         <form class="form-inline my-2 my-md-2">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-3 my-sm-3" type="submit">Search</button>
         </form>
     </div>
     <!-- HEADER END-->
+    {% block content %}
     <!-- BODY START-->
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -65,7 +66,7 @@
         </div>
     </div>
     <!-- BODY END-->
-
+    {% endblock %}
     <!-- FOOTER START-->
     <footer>
         <div class="footer-container container-fluid">

@@ -7,6 +7,10 @@ import logging
 logger = logging.getLogger('Views')
 
 
+def contacts(request):
+    return render(request, 'contacts.html')
+
+
 def home(request):
     return render(request, 'base.html', {})
 
