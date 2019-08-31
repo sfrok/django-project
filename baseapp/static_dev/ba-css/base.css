@@ -3,31 +3,28 @@ html {
   min-height: 100%;
 }
 
+.nav-header {
+ list-style: none;
+ padding-left: 0px;
+ font-size: 18px;
+}
+
+.nav-header li {
+ display: inline-block;
+ padding-right: 10px;
+}
+
+.sys li {
+ padding-left: 15px;
+ display: inline-block;
+}
+
 .header {
- height: 270px;
+ height: 300px;
  background-color: #d3d9df;
-
-}
-
-.navbar-brand {
- margin-left: 1rem;
-}
-
-.navbar-text {
- padding-top: 0.01rem;
- margin-left: 2rem;
-}
-.nav-item {
- padding-top: 0.5rem;
-}
-
-.form-inline {
- padding-top: 1.5rem;
- margin-left: 1.5rem;
 }
 
 .form-control {
- margin-right: 1rem !important;
  width: 35rem !important;
 }
 

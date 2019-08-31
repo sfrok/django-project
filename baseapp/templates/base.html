@@ -19,16 +19,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <!-- HEADER START-->
     <div class="header">{#fixed-top: top, lef, right -> 0#}
-        <div class="navbar navbar-expand">
-            <a class="navbar-brand">Название</a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <h1>Название</h1>
+                        <ul class="nav-header">
+                            <li><a href="#">Главная</a></li>
+                            <li><a href="#">Каталог</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    <form class="form-inline my-2 my-md-2">
+                        <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-3 my-sm-3" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="row justify-content-lg-end">
+                        <ul class="nav-header sys">
+                            <li><a href="#">Авторизироватся</a></li>
+                            <li><a href="#">Зарегистрироватся</a></li>
+                            <li><img src="media/checkout.png" alt="checkout"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a class="navbar-text" href="#">Главная</a>
-        <a class="navbar-text" href="#">Каталог</a>
-        <a class="navbar-text" href="contacts/">Контакты</a>
-        <form class="form-inline my-2 my-md-2">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-3 my-sm-3" type="submit">Search</button>
-        </form>
     </div>
     <!-- HEADER END-->
     {% block content %}
@@ -37,28 +52,28 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 cart">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2 cart">
                         <div class="product-cart"></div>
                     </div>
                 </div>
