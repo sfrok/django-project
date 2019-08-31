@@ -6,6 +6,7 @@ html {
 .header {
  height: 270px;
  background-color: #d3d9df;
+
 }
 
 .navbar-brand {
@@ -60,10 +61,11 @@ footer {
 
 .contacts {
  font-size: 20px;
- padding-top: 75px;
- margin-left: 115px;
+ /* padding-top: 6rem;
+ margin-left: 11rem; */
 }
 
 .information{
-  padding-top: 35px;
+/* padding-top: 5rem;
+padding-left: 10rem; */
 }
