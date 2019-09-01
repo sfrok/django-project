@@ -3,36 +3,35 @@ html {
   min-height: 100%;
 }
 
-.nav-header {
- list-style: none;
+.header-upper {
+ height: 75px;
+ background-color: saddlebrown;
+}
+
+.main-header {
+ margin-left: 15px;
+}
+
+.header-side {
  padding-left: 0px;
- font-size: 18px;
+ margin-top: auto;
+ margin-bottom: auto;
 }
 
-.nav-header li {
+.header-side li {
+ list-style: none;
  display: inline-block;
- padding-right: 10px;
+ margin-right: 15px;
 }
 
-.sys li {
- padding-left: 15px;
- display: inline-block;
+.header-side li a {
+ color: black;
+ text-decoration: none;
 }
 
-.header {
- height: 300px;
- background-color: #d3d9df;
-}
-
-.form-control {
- width: 35rem !important;
-}
-
-.product-cart {
+.header-lower {
+ height: 75px;
  background-color: bisque;
- width: 214px;
- height: 265px;
- margin: auto;
 }
 
 .footer-info {
@@ -45,11 +44,6 @@ footer {
  bottom: 0;
  width: 100%;
  height: 60px;
-}
-
-.cart {
- height: 350px;
- display: flex;
 }
 
 .footer-bg {

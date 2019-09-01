@@ -13,9 +13,11 @@ def search(line, cat=None, sort_attr=None):
             .sort('name' if sort_attr is None else sort_attr)
     else:
         queries = []
-        for i in cat: queries.append(Q('match', category=i))
+        for i in cat:
+            queries.append(Q('match', category=i))
         s = Search(using=client, index="products")\
-            .query(Q('match_phrase', name=line) & Q(six.moves.reduce(ior, queries)))\
+            .query(Q('match_phrase', name=line) &
+                   Q(six.moves.reduce(ior, queries)))\
             .sort('name' if sort_attr is None else sort_attr)
     response = s.execute()
     return [hit.name for hit in response]
