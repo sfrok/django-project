@@ -5,7 +5,7 @@ from operator import ior
 from django.utils import six
 
 
-def search(line, cat=None, sort_attr=None):
+def search_products(line, cat=None, sort_attr=None):
     client = Elasticsearch()
     if cat is None:
         s = Search(using=client, index="products")\
