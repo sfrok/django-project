@@ -13,6 +13,7 @@ Welcome to django-project's documentation!
    pages/project/authorization_system
    pages/project/product_storage_system
    pages/project/order_management_system
+   pages/project/search_algorythms
 
 .. toctree::
    :maxdepth: 2
