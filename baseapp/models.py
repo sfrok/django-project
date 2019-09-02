@@ -137,21 +137,17 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
-    delivery_date = models.DateTimeField
+    delivery_date = models.DateTimeField(default=timezone.now)
     amount = models.IntegerField(default=1)
-    sum_price = models.DecimalField(default=0.00,
-                                    max_digits=10,
-                                    decimal_places=2)
-    sum_ship_price = models.DecimalField(default=0.00,
-                                         max_digits=10,
-                                         decimal_places=2)
+    sum_price = models.IntegerField(default=0)
+    sum_ship_price = models.IntegerField(default=0)
 
     class Meta:
         constraints = [
             models.CheckConstraint(check=models.Q(amount__gte=1),
                                    name='amount1'),
             models.CheckConstraint(check=models.Q(sum_price__gte=0),
-                                   name='sim_price1')
+                                   name='sum_price1')
         ]
 
     def __str__(self):
@@ -161,7 +157,7 @@ class Order(models.Model):
 class PersonalDiscount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
-    expires = models.DateTimeField
+    expires = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=64)
     value = models.IntegerField(default=0)
     amount = models.IntegerField(default=0)

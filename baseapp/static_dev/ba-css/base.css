@@ -16,6 +16,7 @@ html {
  padding-left: 0px;
  margin-top: auto;
  margin-bottom: auto;
+ display: inline-block;
 }
 
 .header-side li {
@@ -32,6 +33,14 @@ html {
 .header-lower {
  height: 75px;
  background-color: bisque;
+}
+
+.lower-header-info {
+ font-size: 20px;
+}
+
+.lower-header-sidebar {
+ margin: auto;
 }
 
 .footer-info {
