@@ -5,7 +5,7 @@ from operator import ior
 from django.utils import six
 
 
-def search_products(line, cat=None, sort_attr=None):
+def search(line, cat=None, sort_attr=None):
     client = Elasticsearch()
     if cat is None:
         s = Search(using=client, index="products")\
@@ -19,6 +19,16 @@ def search_products(line, cat=None, sort_attr=None):
             .query(Q('match_phrase', name=line) &
                    Q(six.moves.reduce(ior, queries)))\
             .sort('name' if sort_attr is None else sort_attr)
+    response = s.execute()
+    return [hit.name for hit in response]
+
+
+def query(i, line, attr, match_attr, sort_attr=None):
+    client = Elasticsearch()
+    s = Search(using=client, index=i)\
+        .query("match_phrase" if match_attr is None else match_attr,\
+            **{('name' if attr is None else attr): line})\
+        .sort('name' if sort_attr is None else sort_attr)
     response = s.execute()
     return [hit.name for hit in response]
 
