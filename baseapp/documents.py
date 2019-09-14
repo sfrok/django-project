@@ -17,8 +17,9 @@ class ProductDoc(Document):
         fields = ['name',
                   'description',
                   'category',
+                  'price'
                   ]
-                  
+
 
 @registry.register_document
 class OrderDoc(Document):
@@ -37,7 +38,7 @@ class OrderDoc(Document):
                   'sum_ship_price',
                   ]
 
-                  
+
 @registry.register_document
 class StatusDoc(Document):
     class Index:
@@ -52,7 +53,7 @@ class StatusDoc(Document):
         fields = ['name',
                   ]
 
-                  
+
 @registry.register_document
 class UserDoc(Document):
     class Index:
@@ -76,7 +77,7 @@ class UserDoc(Document):
                   'phone_number',
                   ]
 
-                  
+
 @registry.register_document
 class DiscountDoc(Document):
     class Index:

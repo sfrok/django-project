@@ -36,7 +36,7 @@ def authorization_form(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            return HttpResponseRedirect(reverse('base'))
+            return HttpResponseRedirect(reverse('home'))
     context = {
         'auth_form': auth_form
     }

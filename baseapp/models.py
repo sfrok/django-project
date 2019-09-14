@@ -89,9 +89,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50,
                                 choices=CATEGORIES,
                                 default='none')
-    price = models.DecimalField(default=0.00,
-                                max_digits=10,
-                                decimal_places=2)
+    price = models.IntegerField(default=0)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
     selling_type = models.IntegerField(default=0)
