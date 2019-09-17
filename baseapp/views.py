@@ -42,7 +42,8 @@ def authorization_form(request):
         'auth_form': auth_form
     }
     return render(request, 'auth.html', context)
- 
+
 
 def search_result(request):
-    return render(request, "index.html", context={'responce':search('')})
+    return render(request, "search_result.html",
+                  context={'response': search('')})

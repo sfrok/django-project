@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/search.css" %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <header>
+                    <h3 class="resualt-head">Результаты поиска:</h3>
+                </header>
+            </div>
+            <div class="col-md-6">
+                <div class="search-card">
+                    <header>
+                        <h4 class="product-head">{{response.0.name}}</h4>
+                    </header>
+                    <div class="description">
+                        {{response.0.description}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="search-card">
+                    <header>
+                        <h4 class="product-head">{{response.1.name}}</h4>
+                    </header>
+                    <div class="description">
+                        {{ response.1.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

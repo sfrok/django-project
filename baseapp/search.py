@@ -46,4 +46,4 @@ def query(i, line=None, attr=None, match_attr=None, sort_attr=None):
     return [vars(hit) for hit in response]
 
 
-print(search("", sort_attr='price'))
+# print(search("", sort_attr='price'))
