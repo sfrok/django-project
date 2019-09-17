@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import UserCreationForm, UserAuthorizationForm
 from django.contrib.auth import authenticate
+from .search import search
 import logging
 logger = logging.getLogger('Views')
 
@@ -41,3 +42,7 @@ def authorization_form(request):
         'auth_form': auth_form
     }
     return render(request, 'auth.html', context)
+ 
+
+def search_result(request):
+    return render(request, "index.html", context={'responce':search('')})
