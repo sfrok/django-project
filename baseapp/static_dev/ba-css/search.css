@@ -1,15 +1,33 @@
+.resualt-head {
+    text-align: center;
+    margin-bottom: 20px;
+}
 .search-card {
-    border: 4px solid bisque;
-    width: 350px;
-    height: 350px;
-    margin: auto;
+    border: 2px solid bisque;
+    max-width: 330px;
+    margin: auto auto 20px;
 }
 
-.description {
-    width: 300px;
-    padding-left: 35px;
+.description p {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
 }
 
 .product-head {
     text-align: center;
+    margin-top: 10px;
+}
+
+.product-image {
+    text-align: center;
+}
+
+.image-width {
+    width: 80%;
+}
+
+.search-card:hover {
+    background-color: linen;
+    cursor: pointer;
 }

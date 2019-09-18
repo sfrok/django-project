@@ -1,4 +1,5 @@
 {% load static %}
+{% block search_result %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,8 +24,11 @@
                     <header>
                         <h4 class="product-head">{{response.0.name}}</h4>
                     </header>
+                    <div class="product-image">
+                        <img class="image-width" src="{{response.0.photo}}" alt="">
+                    </div>
                     <div class="description">
-                        {{response.0.description}}
+                        <p>{{response.0.description}}</p>
                     </div>
                 </div>
             </div>
@@ -33,8 +37,11 @@
                     <header>
                         <h4 class="product-head">{{response.1.name}}</h4>
                     </header>
+                    <div class="product-image">
+                        <img class="image-width" src="{{response.1.photo}}" alt="">
+                    </div>
                     <div class="description">
-                        {{ response.1.description }}
+                        <p>{{response.1.description }}</p>
                     </div>
                 </div>
             </div>
@@ -42,3 +49,4 @@
     </div>
 </body>
 </html>
+{% endblock search_result %}

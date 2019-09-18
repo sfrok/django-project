@@ -14,6 +14,7 @@ Welcome to django-project's documentation!
    pages/project/product_storage_system
    pages/project/order_management_system
    pages/project/search_algorythms
+   pages/project/search_template
 
 .. toctree::
    :maxdepth: 2
