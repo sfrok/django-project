@@ -1,71 +1,8 @@
-html {
-  position: relative;
-  min-height: 100%;
+.sidebar {
+    background-color: bisque;
 }
 
-.header-upper {
- min-height: 75px;
- background-color: lightsalmon;
-}
+.content {
+    background-color: lightsteelblue;
 
-.main-header {
- margin-left: 15px;
-}
-
-.header-side {
- padding-left: 0px;
- margin-top: auto;
- margin-bottom: auto;
- display: inline-block;
-}
-
-.header-side li {
- list-style: none;
- display: inline-block;
- margin-right: 15px;
-}
-
-.header-side li a {
- color: black;
- text-decoration: none;
-}
-
-.header-lower {
- min-height: 75px;
- background-color: bisque;
-}
-
-.lower-header-info {
- font-size: 20px;
-}
-
-.lower-header-sidebar {
- margin: auto;
-}
-
-.footer-info {
- margin-top: 15px;
-}
-
-footer {
- padding-top: 4rem;
- position: absolute;
- bottom: 0;
- width: 100%;
- height: 60px;
-}
-
-.footer-bg {
- background-color: lightsteelblue;
-}
-
-.contacts {
- font-size: 20px;
- /* padding-top: 6rem;
- margin-left: 11rem; */
-}
-
-.information{
-/* padding-top: 5rem;
-padding-left: 10rem; */
 }
