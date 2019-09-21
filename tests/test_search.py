@@ -2,4 +2,5 @@ import baseapp.search as func
 
 
 def test_search():
-    assert func.search("Train", cat=['tech', 'food']) == 5
+    f = func.search("Train", cat=['tech', 'food'])
+    assert type(f) is list and len(f) > 0

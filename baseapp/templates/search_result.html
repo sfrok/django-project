@@ -19,32 +19,21 @@
                     <h3 class="resualt-head">Результаты поиска:</h3>
                 </header>
             </div>
+            {% for item in response %}
             <div class="col-md-6">
                 <div class="search-card">
                     <header>
-                        <h4 class="product-head">{{response.0.name}}</h4>
+                        <h4 class="product-head">{{item.name}}</h4>
                     </header>
                     <div class="product-image">
-                        <img class="image-width" src="{{response.0.photo}}" alt="">
+                        <img class="image-width" src="{{item.photo}}" alt="">
                     </div>
                     <div class="description">
-                        <p>{{response.0.description}}</p>
+                        <p>{{item.description}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="search-card">
-                    <header>
-                        <h4 class="product-head">{{response.1.name}}</h4>
-                    </header>
-                    <div class="product-image">
-                        <img class="image-width" src="{{response.1.photo}}" alt="">
-                    </div>
-                    <div class="description">
-                        <p>{{response.1.description }}</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </body>
