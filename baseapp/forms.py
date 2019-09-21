@@ -103,3 +103,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+
+
+class SerchForm(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100)
