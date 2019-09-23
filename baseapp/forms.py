@@ -105,5 +105,5 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-class SerchForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
+class SearchForm(forms.Form):
+    line = forms.CharField(label='Search', max_length=100)

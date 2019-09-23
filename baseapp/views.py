@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import UserCreationForm, UserAuthorizationForm
+from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
 import logging
@@ -45,5 +45,19 @@ def authorization_form(request):
 
 
 def search_result(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SearchForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return render(request, "search_result.html",
+                  context={'response': search('form.line')})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SearchForm()
     return render(request, "search_result.html",
-                  context={'response': search('')})
+                  context={'response': search('form.line')})
