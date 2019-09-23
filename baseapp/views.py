@@ -5,6 +5,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
 import logging
+
 logger = logging.getLogger('Views')
 
 
@@ -53,11 +54,10 @@ def search_result(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+            line = form.cleaned_data['line']
             return render(request, "search_result.html",
-                  context={'response': search('form.line')})
+                          context={'response': search(line)})
 
     # if a GET (or any other method) we'll create a blank form
-    else:
-        form = SearchForm()
     return render(request, "search_result.html",
-                  context={'response': search('form.line')})
+                  context={'response': search('')})
