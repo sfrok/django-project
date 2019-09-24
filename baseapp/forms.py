@@ -2,6 +2,7 @@ from django import forms
 from .models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from store.data import CATEGORIES
 
 
 class UserAuthorizationForm(forms.ModelForm):
@@ -107,3 +108,4 @@ class UserAdmin(BaseUserAdmin):
 
 class SearchForm(forms.Form):
     line = forms.CharField(label='Search', max_length=100)
+    locals().update({i[0]:forms.CharField(max_length=100) for i in CATEGORIES if i[0] != 'none'})

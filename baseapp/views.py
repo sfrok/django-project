@@ -15,12 +15,11 @@ def contacts(request):
 
 
 def home(request):
-    data = (i[1] for i in CATEGORIES if i[0] != 'none')
-    return render(request, 'base.html', {'response': data})
+    return render(request, 'base.html', {'response': CATEGORIES})
 
 
 def registration_form(request):
-    logger.info("Go to the regestration page")
+    logger.info("Go to the registration page")
     reg_form = UserCreationForm(request.POST or None)
     if reg_form.is_valid():
         new_user = reg_form.save(commit=False)
@@ -57,8 +56,10 @@ def search_result(request):
             # ...
             # redirect to a new URL:
             line = form.cleaned_data['line']
+            # for i in CATEGORIES: print(form.cleaned_data[i[0]]) #############################################
+            cats = [i[0] for i in CATEGORIES if form.cleaned_data[i[0]] == True]
             return render(request, "search_result.html",
-                          context={'response': search(line)})
+                          context={'response': search(line, cat=cats)})
 
     # if a GET (or any other method) we'll create a blank form
     return render(request, "search_result.html",
