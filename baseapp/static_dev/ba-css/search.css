@@ -31,3 +31,8 @@
     background-color: linen;
     cursor: pointer;
 }
+
+.bar {
+    background-color: bisque;
+    height: 100vh;
+}

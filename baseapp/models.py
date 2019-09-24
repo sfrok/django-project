@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import (
     BaseUserManager, AbstractUser)
+from store.data import CATEGORIES as cat
 
 
 class MyUserManager(BaseUserManager):
@@ -78,12 +79,7 @@ class User(AbstractUser):
 
 
 class Product(models.Model):
-    CATEGORIES = (
-        ('tech', 'Technology'),
-        ('toys', 'Toys'),
-        ('food', 'Food'),
-        ('none', 'None'),
-    )
+    CATEGORIES = cat
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000)
     category = models.CharField(max_length=50,

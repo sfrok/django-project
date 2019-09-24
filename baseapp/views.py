@@ -4,6 +4,7 @@ from django.urls import reverse
 from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
+from store.data import CATEGORIES
 import logging
 
 logger = logging.getLogger('Views')
@@ -14,7 +15,8 @@ def contacts(request):
 
 
 def home(request):
-    return render(request, 'base.html', {})
+    data = (i[1] for i in CATEGORIES if i[0] != 'none')
+    return render(request, 'base.html', {'response': data})
 
 
 def registration_form(request):

@@ -2,7 +2,24 @@
     background-color: bisque;
 }
 
-.content {
-    background-color: lightsteelblue;
+.cat {
+    list-style-type: none;
 
+}
+
+.hide::before {
+    content: "[Развернуть] ";
+}
+
+.show::before {
+    content: "[Свернуть] ";
+}
+
+.hover_cat:hover {
+    cursor: pointer;
+}
+
+.cat ul{
+    list-style-type: none;
+    padding-inline-start: 15px;
 }
