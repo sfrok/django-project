@@ -109,3 +109,7 @@ class UserAdmin(BaseUserAdmin):
 class SearchForm(forms.Form):
     line = forms.CharField(label='Search', max_length=100)
     locals().update({i[0]:forms.CharField(max_length=100) for i in CATEGORIES if i[0] != 'none'})
+
+
+class ProductForm(forms.Form):
+    line = forms.NumberInput(label='id')

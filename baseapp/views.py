@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
+from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, ProductForm
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES
@@ -64,3 +64,21 @@ def search_result(request):
     # if a GET (or any other method) we'll create a blank form
     return render(request, "search_result.html",
                   context={'response': search('')})
+
+
+def product(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProductForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            product_id = form.cleaned_data['id']
+            return render(request, "search_result.html",
+                          context={'response': 'product_id почитать в инете'})
+
+    # if a GET (or any other method) we'll create a blank form
+    return render(request, "search_result.html",
+                  context={})
