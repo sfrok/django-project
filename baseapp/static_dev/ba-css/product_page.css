@@ -1,0 +1,50 @@
+.image {
+    border: 2px solid crimson;
+    max-width: 500px;
+    min-height: 350px;
+    margin: auto;
+}
+
+.image-low {
+    border: 2px solid crimson;
+    max-width: 250px;
+    min-height: 150px;
+}
+
+.product-header, .price, .add-to-basket {
+    text-align: center;
+}
+
+.price {
+    border: 1px solid midnightblue;
+    background-color: dodgerblue;
+    width: 170px;
+    height: 40px;
+    border-radius: 6px;
+    margin: auto;
+}
+.basket {
+    border: 1px solid saddlebrown;
+    background-color: bisque;
+    max-width: 190px;
+    height: 40px;
+    border-radius: 6px;
+    margin: auto;
+    box-shadow: 7px 12px 20px bisque;
+}
+.text-span {
+    display: block;
+    text-align: center;
+    margin-top: 6px;
+}
+
+.price-span {
+    color: white;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.button:hover {
+    cursor: pointer;
+    box-shadow: 5px 2px 20px lightslategray;
+}

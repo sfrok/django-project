@@ -9,8 +9,7 @@ def search(line, cat=None, sort_attr=None):
     client = Elasticsearch()
     if cat is None:
         if line != '':
-            s = Search(using=client, index="products") \
-                .query("match_phrase", name=line)  # \
+            s = Search(using=client, index="products").query("match_phrase", name=line)
                 # .sort('name' if sort_attr is None else sort_attr)
         else:
             s = Search(using=client, index="products")
@@ -46,4 +45,4 @@ def query(i, line=None, attr=None, match_attr=None, sort_attr=None):
     return [vars(hit) for hit in response]
 
 
-# print(search("", sort_attr='price'))
+# print(search("Train", sort_attr='price'))
