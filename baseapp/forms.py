@@ -111,3 +111,5 @@ class SearchForm(forms.Form):
     locals().update({i[0]: forms.BooleanField(required=False) for i in CATEGORIES if i[0] != 'none'})
 
 
+class ProductForm(forms.Form):
+    line = forms.NumberInput(label='id')
