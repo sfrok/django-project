@@ -14,7 +14,8 @@ class ProductDoc(Document):
 
     class Django:
         model = Product
-        fields = ['name',
+        fields = ['id',
+                  'name',
                   'description',
                   'category',
                   'price',

@@ -5,6 +5,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, ProductF
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES
+from .models import Product
 import logging
 
 logger = logging.getLogger('Views')
@@ -77,7 +78,7 @@ def product(request):
             # redirect to a new URL:
             product_id = form.cleaned_data['id']
             return render(request, "search_result.html",
-                          context={'response': 'product_id почитать в инете'})
+                          context={'response': Product.objects.get(id=product_id)})
 
     # if a GET (or any other method) we'll create a blank form
     return render(request, "search_result.html",
