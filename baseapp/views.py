@@ -11,12 +11,17 @@ import logging
 logger = logging.getLogger('Views')
 
 
+def product_page(request):
+    return render(request, 'product_page.html')
+
+
 def contacts(request):
     return render(request, 'contacts.html')
 
 
 def home(request):
-    return render(request, 'base.html', {'response': CATEGORIES})
+    cat = (i for i in CATEGORIES if i[0] != 'none')
+    return render(request, 'base.html', {'response': cat})
 
 
 def registration_form(request):
@@ -57,10 +62,9 @@ def search_result(request):
             # ...
             # redirect to a new URL:
             line = form.cleaned_data['line']
-            # for i in CATEGORIES: print(form.cleaned_data[i[0]]) #############################################
-            cats = [i[0] for i in CATEGORIES if form.cleaned_data[i[0]] == True]
+            cats = [i[0] for i in CATEGORIES if i[0] != 'none' and form.cleaned_data[i[0]] == True]
             return render(request, "search_result.html",
-                          context={'response': search(line, cat=cats)})
+                          context={'response': search(line, cat=(cats if cats != [] else None))})
 
     # if a GET (or any other method) we'll create a blank form
     return render(request, "search_result.html",

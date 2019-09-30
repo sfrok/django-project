@@ -1,0 +1,68 @@
+{% load static %}
+{% block product_page %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/product_page.css" %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <section>
+                    <div class="image mt-3"></div>
+                </section>
+                <div class="row">
+                    <div class="col-md-4 mt-3">
+                        <div class="image-low m-auto"></div>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <div class="image-low m-auto"></div>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <div class="image-low m-auto"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <section>
+                    <div class="description mt-3">
+                        <header>
+                            <h2 class="product-header">Название продукта</h2>
+                        </header>
+                        <div class="main mt-5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="price"><span class="text-span price-span">22740грн.</span></div>
+                                </div>
+                                <div class="button col-md-6 add-to-basket mt-3 mt-md-0 basket "><span class="text-span">Добавить в корзину</span></div>
+                            </div>
+                            <p class="mt-4 product-description">
+                                <h5 class="text-center">Описания товара</h5>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci animi asperiores aspernatur cum doloremque, dolores ducimus ea eligendi fuga id illum in iusto laborum molestias nam nihil nisi officia porro qui quis quod reiciendis repellat reprehenderit saepe sunt unde voluptatem. A accusantium adipisci illum nesciunt quaerat sequi temporibus vel!
+                            </p>
+                            <section class="shipped-to">
+                                <p class="mt-4 product-shipped">
+                                    <h5 class="text-center">Доставка</h5>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi atque, consequatur cumque dolore, error fuga hic illo iusto laborum molestias mollitia natus necessitatibus nesciunt, praesentium quasi quis rem reprehenderit? Dicta, eaque fugiat hic illo iure molestiae neque totam ut!
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock product_page %}
