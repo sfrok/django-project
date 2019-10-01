@@ -38,23 +38,23 @@
                 <section>
                     <div class="description mt-3">
                         <header>
-                            <h2 class="product-header">Название продукта</h2>
+                            <h2 class="product-header">{{response.name}}</h2>
                         </header>
                         <div class="main mt-5">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="price"><span class="text-span price-span">22740грн.</span></div>
+                                    <div class="price"><span class="text-span price-span">{{response.price}} грн.</span></div>
                                 </div>
                                 <div class="button col-md-6 add-to-basket mt-3 mt-md-0 basket "><span class="text-span">Добавить в корзину</span></div>
                             </div>
                             <p class="mt-4 product-description">
                                 <h5 class="text-center">Описания товара</h5>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci animi asperiores aspernatur cum doloremque, dolores ducimus ea eligendi fuga id illum in iusto laborum molestias nam nihil nisi officia porro qui quis quod reiciendis repellat reprehenderit saepe sunt unde voluptatem. A accusantium adipisci illum nesciunt quaerat sequi temporibus vel!
+                                {{response.description}}
                             </p>
                             <section class="shipped-to">
                                 <p class="mt-4 product-shipped">
                                     <h5 class="text-center">Доставка</h5>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi atque, consequatur cumque dolore, error fuga hic illo iusto laborum molestias mollitia natus necessitatibus nesciunt, praesentium quasi quis rem reprehenderit? Dicta, eaque fugiat hic illo iure molestiae neque totam ut!
+                                    {{response.ship_to}}
                                 </p>
                             </section>
                         </div>

@@ -35,6 +35,7 @@
                         </div>
                         {% for item in response %}
             <div class="col-md-12 col-lg-6">
+                <a href="/product/{{item.id}}" class="link">
                 <div class="search-card">
                     <header>
                         <h4 class="product-head">{{item.name}}</h4>
@@ -46,6 +47,7 @@
                         <p>{{item.description}}</p>
                     </div>
                 </div>
+                    </a>
             </div>
             {% endfor %}
                     </div>

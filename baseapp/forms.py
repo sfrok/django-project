@@ -112,4 +112,4 @@ class SearchForm(forms.Form):
 
 
 class ProductForm(forms.Form):
-    line = forms.NumberInput(label='id')
+    line = forms.NumberInput()

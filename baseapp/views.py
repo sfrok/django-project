@@ -11,10 +11,6 @@ import logging
 logger = logging.getLogger('Views')
 
 
-def product_page(request):
-    return render(request, 'product_page.html')
-
-
 def contacts(request):
     return render(request, 'contacts.html')
 
@@ -52,7 +48,7 @@ def authorization_form(request):
     return render(request, 'auth.html', context)
 
 
-def search_result(request):
+def search_input(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = SearchForm(request.POST)
@@ -71,19 +67,8 @@ def search_result(request):
                   context={'response': search('')})
 
 
-def product(request):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = ProductForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            product_id = form.cleaned_data['id']
-            return render(request, "search_result.html",
-                          context={'response': Product.objects.get(id=product_id)})
+def product(request, _):
+    product_id = int(request.path[9:])
+    return render(request, "product_page.html",
+                  context={'response': Product.objects.get(id=product_id)})
 
-    # if a GET (or any other method) we'll create a blank form
-    return render(request, "search_result.html",
-                  context={})

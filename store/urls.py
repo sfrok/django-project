@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from baseapp import views
 
 
@@ -26,8 +26,8 @@ urlpatterns = [
     path('auth/', views.authorization_form, name='authorization_form'),
     path('', views.home, name='home'),
     path('contacts/', views.contacts, name='contacts'),
-    path('search/', views.search_result, name='search_result'),
-    path('product/', views.product_page, name='product_page'),
+    path('search/', views.search_input, name='search_input'),
+    re_path(r'(product/)', views.product, name='product_page'),
 
 ]
 if settings.DEBUG:
