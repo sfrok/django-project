@@ -13,11 +13,7 @@ class UserAuthorizationForm(forms.ModelForm):
     def clean(self):
         current_username = self.cleaned_data.get('username')
         user_in_database = User(username=current_username)
-        if user_in_database is None:
-            """
-         Place for logger :)
-            """
-            # if current_username is empty:
+        if user_in_database is None: # if current_username is empty:
             raise forms.ValidationError('Incorrect login! Try again')
 
 
@@ -109,7 +105,3 @@ class UserAdmin(BaseUserAdmin):
 class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
     locals().update({i[0]: forms.BooleanField(required=False) for i in CATEGORIES if i[0] != 'none'})
-
-
-class ProductForm(forms.Form):
-    line = forms.NumberInput()

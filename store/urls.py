@@ -18,21 +18,20 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path
 from baseapp import views
+from .data import HtmlPages as HP
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('reg/', views.registration_form, name='registration_form'),
-    path('auth/', views.authorization_form, name='authorization_form'),
-    path('', views.home, name='home'),
-    path('contacts/', views.contacts, name='contacts'),
-    path('search/', views.search_input, name='search_input'),
-    re_path(r'(product/)', views.product, name='product_page'),
-
+    path(f'{HP.reg}/', views.registration_view, name='reg_page'),
+    path(f'{HP.auth}/', views.authorization_view, name='auth_page'),
+    path('', views.search_input_view, name='s_in_page'),
+    path(f'{HP.contacts}/', views.contacts_view, name='cont_page'),
+    path(f'{HP.search_result}/', views.search_result_view, name='s_res_page'),
+    re_path(r'(product/)', views.product_view, name='prod_page'),
 ]
+
 if settings.DEBUG:
-    """
-    only serves the actual STATIC_ROOT folder
-    """
+    # only serves the actual STATIC_ROOT folder
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

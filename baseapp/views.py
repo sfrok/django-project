@@ -4,23 +4,18 @@ from django.urls import reverse
 from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, ProductForm
 from django.contrib.auth import authenticate
 from .search import search
-from store.data import CATEGORIES
+from store.data import CATEGORIES, HtmlPages
 from .models import Product
 import logging
 
 logger = logging.getLogger('Views')
 
 
-def contacts(request):
-    return render(request, 'contacts.html')
+def contacts_view(request):
+    return render(request, f'{HtmlPages.contacts}.html')
 
 
-def home(request):
-    cat = (i for i in CATEGORIES if i[0] != 'none')
-    return render(request, 'base.html', {'response': cat})
-
-
-def registration_form(request):
+def registration_view(request):
     logger.info("Go to the registration page")
     reg_form = UserCreationForm(request.POST or None)
     if reg_form.is_valid():
@@ -30,10 +25,10 @@ def registration_form(request):
     context = {
         'reg_form': reg_form
     }
-    return render(request, 'registaration.html', context)
+    return render(request, f'{HtmlPages.reg}.html', context)
 
 
-def authorization_form(request):
+def authorization_view(request):
     logger.info("Go to the login page")
     auth_form = UserAuthorizationForm(request.POST or None)
     if auth_form.is_valid():
@@ -45,30 +40,29 @@ def authorization_form(request):
     context = {
         'auth_form': auth_form
     }
-    return render(request, 'auth.html', context)
+    return render(request, f'{HtmlPages.auth}.html', context)
 
 
-def search_input(request):
+# SEARCH
+
+def search_input_view(request):
+    cat = (i for i in CATEGORIES if i[0] != 'none')
+    return render(request, f'{HtmlPages.search_input}.html', {'response': cat})
+
+
+def search_result_view(request):
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
         form = SearchForm(request.POST)
-        # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             line = form.cleaned_data['line']
             cats = [i[0] for i in CATEGORIES if i[0] != 'none' and form.cleaned_data[i[0]] == True]
-            return render(request, "search_result.html",
-                          context={'response': search(line, cat=(cats if cats != [] else None))})
-
-    # if a GET (or any other method) we'll create a blank form
-    return render(request, "search_result.html",
-                  context={'response': search('')})
+            return render(request, f'{HtmlPages.search_result}.html',
+                          {'response': search(line, cat=(cats if cats != [] else None))})
+    return render(request, f'{HtmlPages.search_result}.html', {'response': search('')})
 
 
-def product(request, _):
+# PRODUCT
+
+def product_view(request, _=None):
     product_id = int(request.path[9:])
-    return render(request, "product_page.html",
-                  context={'response': Product.objects.get(id=product_id)})
-
+    return render(request, f'{HtmlPages.product_page}.html', {'response': Product.objects.get(id=product_id)})

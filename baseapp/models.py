@@ -2,17 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import (
     BaseUserManager, AbstractUser)
-from store.data import CATEGORIES as cat
+from store.data import CATEGORIES, SELL_STATES
 
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
-        """
-        Creates and saves a User with the given email, date of
-        birth and password.
-        """
-        if not email:
-            raise ValueError('Users must have an email address')
+        # Creates and saves a User with the given params.
+        if not email: raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
@@ -24,10 +20,7 @@ class MyUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password):
-        """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
-        """
+        # Creates and saves a superuser with the given params.
         user = self.create_user(
             email,
             password=password,
@@ -61,40 +54,34 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-    def has_perm(self, perm, obj=None):
-        """Does the user have a specific permission?"""
-        # Simplest possible answer: Yes, always
-        return True
+    def has_perm(self, perm, obj=None): # Does the user have a specific permission?
+        return True # Simplest possible answer: Yes, always
 
-    def has_module_perms(self, app_label):
-        """Does the user have permissions to view the app `app_label`?"""
-        # Simplest possible answer: Yes, always
-        return True
+    def has_module_perms(self, app_label): # Does the user have permissions to view the app `app_label`?
+        return True # Simplest possible answer: Yes, always
 
     @property
-    def is_staff(self):
-        """Is the user a member of staff?"""
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
+    def is_staff(self): # Is the user a member of staff?
+        return self.is_admin # Simplest possible answer: All admins are staff
 
 
 class Product(models.Model):
-    CATEGORIES = cat
     name = models.CharField(max_length=50)
-    description = models.TextField(max_length=3000)
+    description = models.TextField(max_length=3000,
+                                default='')
     category = models.CharField(max_length=50,
                                 choices=CATEGORIES,
                                 default='none')
     price = models.IntegerField(default=0)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
-    selling_type = models.IntegerField(default=0)
-    ship_to = models.TextField(max_length=300)
-    ship_price = models.DecimalField(default=0.00,
-                                     max_digits=10,
-                                     decimal_places=2)
+    sell_state = models.IntegerField(default=0,
+                                     choices=SELL_STATES)
+    ship_to = models.TextField(max_length=300,
+                                default='none')
+    ship_price = models.IntegerField(default=0)
     ship_discount = models.FloatField(default=0.0)
-    photo = models.ImageField()
+    photo = models.ImageField(default=None)
     post_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
