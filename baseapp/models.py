@@ -54,21 +54,21 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-    def has_perm(self, perm, obj=None): # Does the user have a specific permission?
-        return True # Simplest possible answer: Yes, always
+    def has_perm(self, perm, obj=None):  # Does the user have a specific permission?
+        return True  # Simplest possible answer: Yes, always
 
-    def has_module_perms(self, app_label): # Does the user have permissions to view the app `app_label`?
-        return True # Simplest possible answer: Yes, always
+    def has_module_perms(self, app_label):  # Does the user have permissions to view the app `app_label`?
+        return True  # Simplest possible answer: Yes, always
 
     @property
-    def is_staff(self): # Is the user a member of staff?
-        return self.is_admin # Simplest possible answer: All admins are staff
+    def is_staff(self):  # Is the user a member of staff?
+        return self.is_admin  # Simplest possible answer: All admins are staff
 
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000,
-                                default='')
+                                   default='')
     category = models.CharField(max_length=50,
                                 choices=CATEGORIES,
                                 default='none')
@@ -78,7 +78,7 @@ class Product(models.Model):
     sell_state = models.IntegerField(default=0,
                                      choices=SELL_STATES)
     ship_to = models.TextField(max_length=300,
-                                default='none')
+                               default='none')
     ship_price = models.IntegerField(default=0)
     ship_discount = models.FloatField(default=0.0)
     photo = models.ImageField(default=None)

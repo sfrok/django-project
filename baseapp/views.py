@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, ProductForm
+from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES, HtmlPages
@@ -46,6 +46,8 @@ def authorization_view(request):
 # SEARCH
 
 def search_input_view(request):
+    for i in range(10):
+        Product(id=i + 1, name='Товар ' + str(i + 1), price=i ** 2 * 1000, amount=100 - i * 10).save()
     cat = (i for i in CATEGORIES if i[0] != 'none')
     return render(request, f'{HtmlPages.search_input}.html', {'response': cat})
 
