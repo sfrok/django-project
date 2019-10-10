@@ -131,12 +131,10 @@ WSGI_APPLICATION = 'store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': f'django.db.backends.{pc.ADAPTER}',
-        'NAME': f'{pc.NAME}',
-        'USER': f'{pc.USER}',
-        'PASSWORD': f'{pc.PASSWORD}',
-        'HOST': f'{pc.HOST}',
-        'PORT': f'{pc.PORT}',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test_db',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
