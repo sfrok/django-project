@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl',
     'crispy_forms',
     'baseapp',
-
 ]
 
 AUTH_USER_MODEL = 'baseapp.User'
@@ -131,13 +130,33 @@ WSGI_APPLICATION = 'store.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'postgres': {
         'ENGINE': f'django.db.backends.{pc.ADAPTER}',
         'NAME': f'{pc.NAME}',
         'USER': f'{pc.USER}',
         'PASSWORD': f'{pc.PASSWORD}',
         'HOST': f'{pc.HOST}',
         'PORT': f'{pc.PORT}',
+        'TEST': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'test_db',
+            'USER': f'{pc.USER}',
+            'PASSWORD': f'{pc.PASSWORD}',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': f'{pc.NAME}',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+        'TEST': {
+            'ENGINE': f'django.db.backends.sqlite3',
+            'NAME': 'test_db',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
 }
 
