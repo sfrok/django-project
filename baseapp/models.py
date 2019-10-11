@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractUser)
+from django.contrib.auth.models import BaseUserManager, AbstractUser
 from store.data import CATEGORIES, SELL_STATES
 
 
@@ -57,7 +56,7 @@ class User(AbstractUser):
     def has_perm(self, perm, obj=None):  # Does the user have a specific permission?
         return True  # Simplest possible answer: Yes, always
 
-    def has_module_perms(self, app_label):  # Does the user have permissions to view the app `app_label`?
+    def has_module_perms(self, app_label):  # Does the user have permissions to view the app_label?
         return True  # Simplest possible answer: Yes, always
 
     @property

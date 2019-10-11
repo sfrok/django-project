@@ -46,8 +46,6 @@ def authorization_view(request):
 # SEARCH
 
 def search_input_view(request):
-    for i in range(10):
-        Product(id=i + 1, name='Товар ' + str(i + 1), price=i ** 2 * 1000, amount=100 - i * 10).save()
     cat = (i for i in CATEGORIES if i[0] != 'none')
     return render(request, f'{HtmlPages.search_input}.html', {'response': cat})
 
@@ -57,7 +55,7 @@ def search_result_view(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             line = form.cleaned_data['line']
-            cats = [i[0] for i in CATEGORIES if i[0] != 'none' and form.cleaned_data[i[0]] == True]
+            cats = [i[0] for i in CATEGORIES if i[0] != 'none' and form.cleaned_data[i[0]]]
             return render(request, f'{HtmlPages.search_result}.html',
                           {'response': search(line, cat=(cats if cats != [] else None))})
     return render(request, f'{HtmlPages.search_result}.html', {'response': search('')})
@@ -67,4 +65,5 @@ def search_result_view(request):
 
 def product_view(request, _=None):
     product_id = int(request.path[9:])
-    return render(request, f'{HtmlPages.product_page}.html', {'response': Product.objects.get(id=product_id)})
+    return render(request, f'{HtmlPages.product_page}.html',
+        {'response': Product.objects.get(id=product_id)})

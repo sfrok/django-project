@@ -57,42 +57,42 @@ ELASTICSEARCH_DSL = {
 }
 
 LOGGING = {
-  'version': 1,
-  'disable_existing_loggers': False,
-  'formatters': {
-      'simple': {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
             'format': '%(levelname)s %(message)s'
         },
-  },
-  'handlers': {
+    },
+    'handlers': {
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        #'logstash': {
-            #'level': 'INFO',
-            #'class': 'logstash.TCPLogstashHandler',
-            #'host': 'localhost',
-            #'port': 5959,  # Default value: 5959
-            #'version': 1,  # Version of logstash event schema.
-            ## Default value: 0 (for backward compatibility of the library)
-            #'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
-            #'fqdn': False,  # Fully qualified domain name. Default value: false.
-            #'tags': ['django.request'],  # list of tags. Default: None.
-        #},
-      }
-  #'loggers': {
-        #'django.request': {
-            #'handlers': ['logstash'],
-            #'level': 'INFO',
-            #'propagate': True,
-        #},
-        #'django': {
-            #'handlers': ['console'],
-            #'propagate': True,
-        #},
-    #}
+        # 'logstash': {
+            # 'level': 'INFO',
+            # 'class': 'logstash.TCPLogstashHandler',
+            # 'host': 'localhost',
+            # 'port': 5959,  # Default value: 5959
+            # 'version': 1,  # Version of logstash event schema.
+            # # Default value: 0 (for backward compatibility of the library)
+            # 'message_type': 'django',  # 'type' field in logstash message. Default: 'logstash'.
+            # 'fqdn': False,  # Fully qualified domain name. Default value: false.
+            # 'tags': ['django.request'],  # list of tags. Default: None.
+        # },
+    }
+    # 'loggers': {
+        # 'django.request': {
+            # 'handlers': ['logstash'],
+            # 'level': 'INFO',
+            # 'propagate': True,
+        # },
+        # 'django': {
+            # 'handlers': ['console'],
+            # 'propagate': True,
+        # },
+    # }
 }
 
 MIDDLEWARE = [
@@ -164,25 +164,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-# The file storage engine to use when collecting static files with the collectstatic management command.
+# The file storage engine to use when collecting static files
+# with the collectstatic management command.
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'baseapp/../static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'baseapp/../media')
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'baseapp/../static_dev'),
     os.path.join(BASE_DIR, 'baseapp/../media')
