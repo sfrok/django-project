@@ -16,8 +16,12 @@
     <title></title>
 </head>
 <body>
+<div class="order-effect">
     <div class="container main">
         <div class="row">
+            <div id="modal-form" class="form">
+               <button id="modal-quit" class="quit">x</button>
+            </div>
             <div class="col-md-12 col-lg-6">
                 <section>
                     <div class="image mt-3"></div>
@@ -54,17 +58,14 @@
                                 <div class="col-md-6">
                                     <div class="price"><span class="text-span price-span">{{response.price}} грн.</span></div>
                                 </div>
-                                <div class="button col-md-6 add-to-basket mt-3 mt-md-0 basket "><span class="text-span">Добавить в корзину</span></div>
+                                <div id="make-order" class="button col-md-6 mt-3 mt-md-0 basket "><span class="text-span">Купить</span></div>
                             </div>
-                            <p class="mt-4 product-description">
-                                <h5 class="text-center">Описания товара</h5>
+                                <h5 class="text-center mt-5">Описания товара</h5>
                                 {{response.description}}
-                            </p>
                             <section class="shipped-to">
                                 <p class="mt-4 product-shipped">
                                     <h5 class="text-center">Доставка</h5>
                                     {{response.ship_to}}
-                                </p>
                             </section>
                         </div>
                     </div>
@@ -72,30 +73,32 @@
             </div>
         </div>
     </div>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-                <div class="form">
-                  <h3 class="form_title">Форма заказа</h3>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text">
-                  </div>
-                  <div class="col-md-12 col-2 column">
-                    <input class="input_field" type="text">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text">
-                  </div>
-                  <div class="col-md-12 checkout "><span>Оформить заказ</span></div>
-                </div>
-        </div>
-      </div>
+{#    <div class="container">#}
+{#      <div class="row justify-content-center">#}
+{#        <div class="col-md-6">#}
+{#                <div class="form">#}
+{#                  <h3 class="form_title">Форма заказа</h3>#}
+{#                  <div class="col-md-12 column">#}
+{#                    <input class="input_field" type="text">#}
+{#                  </div>#}
+{#                  <div class="col-md-12 column">#}
+{#                    <input class="input_field" type="text">#}
+{#                  </div>#}
+{#                  <div class="col-md-12 column">#}
+{#                    <input class="input_field" type="text">#}
+{#                  </div>#}
+{#                  <div class="col-md-12 col-2 column">#}
+{#                    <input class="input_field" type="text">#}
+{#                  </div>#}
+{#                  <div class="col-md-12 column">#}
+{#                    <input class="input_field" type="text">#}
+{#                  </div>#}
+{#                  <div class="col-md-12 checkout "><span>Оформить заказ</span></div>#}
+{#                </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+    <script src="{% static "ba-js/order-form.js" %}"></script>
     </div>
 </body>
 </html>

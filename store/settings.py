@@ -176,10 +176,10 @@ USE_TZ = True
 # with the collectstatic management command.
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'baseapp/../static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'baseapp/static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'baseapp/../media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'baseapp/media')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'baseapp/../static_dev'),
-    os.path.join(BASE_DIR, 'baseapp/../media')
+    os.path.join(BASE_DIR, 'baseapp/static_dev'),
+    os.path.join(BASE_DIR, 'baseapp/media')
 )

@@ -48,3 +48,27 @@
     cursor: pointer;
     box-shadow: 5px 2px 20px lightslategray;
 }
+
+.form {
+    width: 400px;
+    height: 500px;
+    border: 1px solid black;
+    background: rgba(255, 228, 186, 1);
+    position: absolute;
+    border-radius: 6px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 100px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+
+}
+
+.quit {
+    position: relative;
+    top: 8px;
+    left: 365px;
+
+}
