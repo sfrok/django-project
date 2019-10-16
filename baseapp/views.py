@@ -37,7 +37,7 @@ def authorization_view(request):
         user = authenticate(username=username, password=password)
         if user:
             request.session['usr'] = user.id
-            return HttpResponseRedirect(reverse(HtmlPages.search_input))
+            return render(request, f'{HtmlPages.search_input}.html')
     context = {
         'auth_form': auth_form
     }
@@ -73,11 +73,11 @@ def product_view(request, _=None):
     }
     user_id = request.session.get('usr', None)
     if user_id is not None:
-        user = User.get(pk=user_id)
+        user = User.objects.get(pk=user_id)
         user_info = {
             'name': user.last_name + ' ' + user.first_name,
             'address': user.address,
-            'phone': user.phone,
+            'phone': user.phone_number,
         }
     return render(request, f'{HtmlPages.product_page}.html',
-        {'product': Product.objects.get(id=product_id), 'prefill': user_info})
+                  {'product': Product.objects.get(id=product_id), 'prefill': user_info})

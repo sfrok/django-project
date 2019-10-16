@@ -117,7 +117,7 @@ class Order(models.Model):
     amount = models.IntegerField(default=1)
     sum_price = models.IntegerField(default=0)
     sum_ship_price = models.IntegerField(default=0)
-    user_info = models.TextField(max_length=512)
+    user_info = models.TextField(max_length=512, default='')
 
     class Meta:
         constraints = [

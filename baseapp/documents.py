@@ -72,10 +72,6 @@ class UserDoc(Document):
                   'last_name',
                   'is_active',
                   'is_admin',
-                  'a_country',
-                  'a_city',
-                  'a_address',
-                  'post_index',
                   'phone_number',
                   ]
 
