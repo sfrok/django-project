@@ -4,6 +4,7 @@ import logging
 
 logger = logging.getLogger('Settings')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SECRET_KEY = f'{pc.sk}'
 DEBUG = True
 ALLOWED_HOSTS = []

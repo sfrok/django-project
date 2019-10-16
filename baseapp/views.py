@@ -5,7 +5,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES, HtmlPages
-from .models import Product
+from .models import Product, User
 import logging
 
 logger = logging.getLogger('Views')
@@ -36,7 +36,8 @@ def authorization_view(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            return HttpResponseRedirect(reverse('home'))
+            request.session['usr'] = user.id
+            return HttpResponseRedirect(reverse(HtmlPages.search_input))
     context = {
         'auth_form': auth_form
     }
@@ -65,5 +66,18 @@ def search_result_view(request):
 
 def product_view(request, _=None):
     product_id = int(request.path[9:])
+    user_info = {
+        'name': '',
+        'address': '',
+        'phone': '',
+    }
+    user_id = request.session.get('usr', None)
+    if user_id is not None:
+        user = User.get(pk=user_id)
+        user_info = {
+            'name': user.last_name + ' ' + user.first_name,
+            'address': user.address,
+            'phone': user.phone,
+        }
     return render(request, f'{HtmlPages.product_page}.html',
-        {'response': Product.objects.get(id=product_id)})
+        {'product': Product.objects.get(id=product_id), 'prefill': user_info})

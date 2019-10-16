@@ -40,11 +40,7 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    a_country = models.CharField(max_length=128)
-    a_city = models.CharField(max_length=128)
-    a_address = models.CharField(max_length=128)
-    post_index = models.IntegerField(default=0)
-    payment_info = models.CharField(max_length=128)
+    address = models.CharField(max_length=128)
     phone_number = models.CharField(max_length=16)
     objects = MyUserManager()
     USERNAME_FIELD = 'username'
@@ -121,6 +117,7 @@ class Order(models.Model):
     amount = models.IntegerField(default=1)
     sum_price = models.IntegerField(default=0)
     sum_ship_price = models.IntegerField(default=0)
+    user_info = models.TextField(max_length=512)
 
     class Meta:
         constraints = [
