@@ -21,6 +21,26 @@
         <div class="row">
             <div id="modal-form" class="form">
                <button id="modal-quit" class="quit">x</button>
+               <div class="container">
+                 <div class="row justify-content-center">
+                   <div class="col-md-6">
+                             <div>
+                               <img class="close-button" src="https://avatanplus.com/files/resources/mid/573b43405fee9154bf7eb389.png">
+                             </div>
+                             <h3 class="form_title">Форма заказа</h3>
+                             <div class="col-md-12 column">
+                               <input class="input_field" type="text" placeholder="Имя и Фамилия" value="{{prefill.name}}">
+                             </div>
+                             <div class="col-md-12 column">
+                               <input class="input_field" type="text" placeholder="Номер телефона" value="{{prefill.phone}}">
+                             </div>
+                             <div class="col-md-12 column">
+                               <input class="input_field" type="text" placeholder="Адресс доставки" value="{{prefill.address}}">
+                             </div>
+                             <div class="col-md-12 checkout "><span>Оформить заказ</span></div>
+                   </div>
+                 </div>
+               </div>
             </div>
             <div class="col-md-12 col-lg-6">
                 <section>
@@ -72,34 +92,6 @@
                 </section>
             </div>
         </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-                <div class="order_form">
-                  <div>
-                    <img class="close-button" src="https://avatanplus.com/files/resources/mid/573b43405fee9154bf7eb389.png">
-                  </div>
-                  <h3 class="form_title">Форма заказа</h3>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text" placeholder="Имя и Фамилия" value="{{prefill.name}}">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text" placeholder="Номер телефона" value="{{prefill.phone}}">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text" placeholder="E-mail">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text" placeholder="Город">
-                  </div>
-                  <div class="col-md-12 column">
-                    <input class="input_field" type="text" placeholder="Адресс доставки" value="{{prefill.address}}">
-                  </div>
-                  <div class="col-md-12 checkout "><span>Оформить заказ</span></div>
-                </div>
-        </div>
-      </div>
     </div>
     <script src="{% static "ba-js/order-form.js" %}"></script>
     </div>

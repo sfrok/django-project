@@ -53,7 +53,7 @@
     width: 400px;
     height: 500px;
     border: 1px solid black;
-    background: rgba(255, 228, 186, 1);
+    background-color: #FFFAFA;
     position: absolute;
     border-radius: 6px;
     margin-right: auto;
@@ -102,16 +102,6 @@
   cursor: pointer;
 }
 
-.order_form {
-  margin-top: 25px;
-  max-width: 450px;
-  height: 550px;
-  border: 2px solid black;
-  margin-bottom: 25px;
-  text-align: center;
-  background-color: #FFFAFA;
-}
-
 .input_field {
   width: 300px;
   border-radius: 3px;
@@ -121,13 +111,14 @@
 
 .column {
   width: 350px;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  right: 80px;
   margin-top: 50px;
 }
 
 .form_title {
   text-align: center;
+  margin-top: -30px;
 }
 
 .checkout {
@@ -135,7 +126,7 @@
   border: 1px solid #A9A9A9;
   width: 150px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: center;
   background-color: #65c000;
   color: white;
