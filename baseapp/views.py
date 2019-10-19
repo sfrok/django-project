@@ -37,7 +37,9 @@ def authorization_view(request):
         user = authenticate(username=username, password=password)
         if user:
             request.session['usr'] = user.id
-            return render(request, f'{HtmlPages.search_input}.html')
+            response = HttpResponseRedirect('/')
+            response.set_cookie('usr', user.id)
+            return response
     context = {
         'auth_form': auth_form
     }
