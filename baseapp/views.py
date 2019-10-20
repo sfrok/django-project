@@ -38,11 +38,12 @@ def authorization_view(request):
         if user:
             request.session['usr'] = user.id
             response = HttpResponseRedirect('/')
-            response.set_cookie('usr', user.id)
+            response.set_signed_cookie('usr', user.id)
             return response
     context = {
         'auth_form': auth_form
     }
+    request.delete_cookie('usr')
     return render(request, f'{HtmlPages.auth}.html', context)
 
 
