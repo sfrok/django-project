@@ -1,8 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.chrome.webdriver import WebDriver
 from baseapp.models import User
-from importlib import import_module
-from django.conf import settings
 from django.contrib.sessions.models import Session
 
 
@@ -13,11 +11,6 @@ class TestRegAuth(StaticLiveServerTestCase):
         super().setUpClass()
         cls.selenium = WebDriver()
         cls.selenium.implicitly_wait(10)
-        SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
-        s = SessionStore()
-        s.create()
-        cls.session = Session.objects.get(pk=s.session_key)
-        print(cls.session)
 
     @classmethod
     def tearDownClass(cls):
@@ -50,8 +43,9 @@ class TestRegAuth(StaticLiveServerTestCase):
             self.selenium.find_element_by_id('id_username').send_keys(entry[1])
             self.selenium.find_element_by_id('id_password').send_keys(entry[2])
             self.selenium.find_element_by_id('auth_button').click()
-            print(self.selenium.get_cookies())
-            print(self.session)
-            val = self.session.get('usr', None)
+            session = Session.objects.get(pk=(self.selenium.get_cookie('sessionid'))['value'])
+            val = session.get_decoded()
+            # print(val) - get session variables
+            val = val['usr'] if 'usr' in val else None
             user_id = u.id if entry[1] is entries[0][1] and entry[2] is entries[0][2] else None
-            self.assertEqual(val, user_id, f'{entry[0]}, session: {self.session}')
+            self.assertEqual(val, user_id, f'{entry[0]}, session: {session.get_decoded()}')
