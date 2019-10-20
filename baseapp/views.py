@@ -4,7 +4,7 @@ from django.urls import reverse
 from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
-from store.data import CATEGORIES, HtmlPages
+from store.data import CATEGORIES, HtmlPages, usr
 from .models import Product, User
 import logging
 
@@ -21,6 +21,7 @@ def registration_view(request):
     if reg_form.is_valid():
         new_user = reg_form.save(commit=False)
         new_user.save()
+        request.session[usr] = new_user.id
         return HttpResponseRedirect(reverse('base'))
     context = {
         'reg_form': reg_form
@@ -36,14 +37,10 @@ def authorization_view(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            response = HttpResponseRedirect('/')
-            request.session['usr'] = user.id
-            response.set_cookie('usr', user.id)
-            return response
-    context = {
-        'auth_form': auth_form
-    }
-    return render(request, f'{HtmlPages.auth}.html', context)
+            request.session[usr] = user.id
+            return HttpResponseRedirect('/')
+    if usr in request.session: del request.session[usr]
+    return render(request, f'{HtmlPages.auth}.html', {'auth_form': auth_form})
 
 
 # SEARCH
@@ -73,7 +70,7 @@ def product_view(request, _=None):
         'address': '',
         'phone': '',
     }
-    user_id = request.session.get('usr', None)
+    user_id = request.session.get(usr, None)
     if user_id is not None:
         user = User.objects.get(pk=user_id)
         user_info = {

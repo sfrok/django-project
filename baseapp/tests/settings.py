@@ -4,10 +4,10 @@ import logging
 
 logger = logging.getLogger('Settings')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SECRET_KEY = f'{pc.sk}'
 DEBUG = True
 ALLOWED_HOSTS = []
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,18 +16,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_elasticsearch_dsl',
+    # 'django_elasticsearch_dsl',
     'crispy_forms',
     'baseapp',
 ]
 
 AUTH_USER_MODEL = 'baseapp.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': 'localhost:9200'
-    },
-}
+# ELASTICSEARCH_DSL = {
+#     'default': {
+#         'hosts': 'localhost:9200'
+#     },
+# }
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
