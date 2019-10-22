@@ -30,7 +30,7 @@
     height: 40px;
     border-radius: 6px;
     margin: auto;
-    box-shadow: 7px 12px 20px bisque;
+    /*box-shadow: 7px 12px 20px bisque;*/
 }
 .text-span {
     display: block;
