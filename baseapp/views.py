@@ -65,6 +65,12 @@ def search_result_view(request):
 
 def product_view(request, _=None):
     product_id = int(request.path[9:])
+    return render(request, f'{HtmlPages.product_page}.html',
+                  {'product': Product.objects.get(id=product_id)})
+
+
+def order_view(request, _=None):
+    product = Product.objects.get(id=int(request.path[7:]))
     user_info = {
         'name': '',
         'address': '',
@@ -79,4 +85,4 @@ def product_view(request, _=None):
             'phone': user.phone_number,
         }
     return render(request, f'{HtmlPages.product_page}.html',
-                  {'product': Product.objects.get(id=product_id), 'prefill': user_info})
+                  {'amount': product.amount, 'sell_type': product.sell_type, 'prefill': user_info})
