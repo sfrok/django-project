@@ -4,7 +4,7 @@ from django.urls import reverse
 from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
-from store.data import CATEGORIES, HtmlPages, usr
+from store.data import CATEGORIES, HtmlPages, usr, hdn
 from .models import Product, User
 import logging
 
@@ -21,7 +21,7 @@ def registration_view(request):
     if reg_form.is_valid():
         new_user = reg_form.save(commit=False)
         new_user.save()
-        request.session[usr] = new_user.id
+        if new_user.id != hdn: request.session[usr] = new_user.id
         return HttpResponseRedirect(reverse('base'))
     context = {
         'reg_form': reg_form
@@ -37,7 +37,7 @@ def authorization_view(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            request.session[usr] = user.id
+            if user.id != hdn: request.session[usr] = user.id
             return HttpResponseRedirect('/')
     if usr in request.session: del request.session[usr]
     return render(request, f'{HtmlPages.auth}.html', {'auth_form': auth_form})
@@ -65,6 +65,12 @@ def search_result_view(request):
 
 def product_view(request, _=None):
     product_id = int(request.path[9:])
+    return render(request, f'{HtmlPages.product_page}.html',
+                  {'product': Product.objects.get(id=product_id)})
+
+
+def order_view(request, _=None):
+    product = Product.objects.get(id=int(request.path[7:]))
     user_info = {
         'name': '',
         'address': '',
@@ -79,4 +85,4 @@ def product_view(request, _=None):
             'phone': user.phone_number,
         }
     return render(request, f'{HtmlPages.product_page}.html',
-                  {'product': Product.objects.get(id=product_id), 'prefill': user_info})
+                  {'amount': product.amount, 'sell_type': product.sell_type, 'prefill': user_info})

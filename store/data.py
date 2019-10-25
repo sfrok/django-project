@@ -24,3 +24,4 @@ SELL_STATES = (
 
 
 usr = 'usr'
+hdn = 0
