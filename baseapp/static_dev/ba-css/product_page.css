@@ -48,6 +48,19 @@
     cursor: pointer;
     box-shadow: 5px 2px 20px lightslategray;
 }
+.hide {
+    display: none;
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 1;
+}
 
 .form {
     width: 850px;
@@ -61,7 +74,6 @@
     margin-top: 100px;
     left: 0;
     right: 0;
-    z-index: 999;
     display: none;
 }
 
