@@ -14,12 +14,21 @@ class HtmlPages():  # Названия html-файлов без .html
     search_input = 'base'
     search_result = 'search_result'
     product_page = 'product_page'
+    ord = 'order'
+    com_ord = 'complete_order'
 
 
 SELL_STATES = (
     (0, 'Есть в наличии'),
     (1, 'Нет в наличии'),
     (2, 'На заказ'),
+)
+
+
+STATUSES = (
+    (0, 'Заказ оплачен'),
+    (1, 'Товар отправлен'),
+    (2, 'Товар доставлен'),
 )
 
 

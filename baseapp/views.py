@@ -5,7 +5,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES, HtmlPages, usr, hdn
-from .models import Product, User
+from .models import Product, User, Order
 import logging
 
 logger = logging.getLogger('Views')
@@ -84,5 +84,22 @@ def order_view(request, _=None):
             'address': user.address,
             'phone': user.phone_number,
         }
-    return render(request, f'{HtmlPages.product_page}.html',
+    return render(request, f'{HtmlPages.ord}.html',
                   {'amount': product.amount, 'sell_type': product.sell_type, 'prefill': user_info})
+
+
+def order_complete_view(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            order = Order(
+                user = request.session.get(usr, 0),
+                product = form.cleaned_data['product_id'],
+                amount = form.cleaned_data['amount'],
+                sum_price = form.cleaned_data['sum_price'],
+                sum_ship_price = form.cleaned_data['sum_ship_price'],
+                info = form.cleaned_data['info'],
+            )
+            return render(request, f'{HtmlPages.com_ord}.html',
+                          {'order_info': order})
+    return render(request, f'{HtmlPages.com_ord}.html', {'response': search('')})

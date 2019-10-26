@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractUser
-from store.data import CATEGORIES, SELL_STATES
+from store.data import CATEGORIES, SELL_STATES, STATUSES
 
 
 class MyUserManager(BaseUserManager):
@@ -101,23 +101,16 @@ class Product(models.Model):
         ]
 
 
-class Status(models.Model):
-    name = models.CharField(max_length=32)
-
-    def __str__(self):
-        return self.name
-
-
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.IntegerField(default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    status = models.IntegerField(default=0, choices=STATUSES)
     date = models.DateTimeField(default=timezone.now)
     delivery_date = models.DateTimeField(default=timezone.now)
     amount = models.IntegerField(default=1)
     sum_price = models.IntegerField(default=0)
     sum_ship_price = models.IntegerField(default=0)
-    user_info = models.TextField(max_length=512, default='')
+    info = models.TextField(max_length=512, default='')
 
     class Meta:
         constraints = [
