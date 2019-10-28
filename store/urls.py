@@ -29,7 +29,7 @@ urlpatterns = [
     path(f'{HP.contacts}/', views.contacts_view, name='cont_page'),
     path(f'{HP.search_result}/', views.search_result_view, name='s_res_page'),
     re_path(r'(product/)', views.product_view, name='prod_page'),
-    re_path(r'(order/)', views.order_complete_view, name='com_ord_page'),
+    re_path(r'(order/)', views.order_view, name='ord_page'),
 ]
 
 if settings.DEBUG:

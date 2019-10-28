@@ -10,7 +10,6 @@ import logging
 
 logger = logging.getLogger('Views')
 
-
 def contacts_view(request):
     return render(request, f'{HtmlPages.contacts}.html')
 
@@ -85,7 +84,7 @@ def order_view(request, _=None):
             'phone': user.phone_number,
         }
     return render(request, f'{HtmlPages.ord}.html',
-                  {'amount': product.amount, 'sell_type': product.sell_type, 'prefill': user_info})
+                  {'amount': product.amount, 'sell_state': product.sell_state, 'prefill': user_info})
 
 
 def order_complete_view(request):

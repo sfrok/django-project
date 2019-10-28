@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+    <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "ba-css/order.css" %}">
+    <title></title>
+  </head>
+  <style>
+    body {
+      background: #f6f6f6;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-6 header">
+          <span>Оформление заказа</span>
+          <hr>
+        </div>
+        <div class="col-5 text-right header">
+          <span>Ваш заказ</span>
+          <hr>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-6 contacts">
+              <span class="header">Контактные данные</span>
+              <div class="col-6 field">
+                <span>Имя и фамилия:</span><br>
+                <input class="input-field" type="text" placeholder="Имя и Фамилию">
+              </div>
+              <div class="col-6 field">
+                <span>Номер телефона:</span><br>
+                <input class="input-field" type="text" value="+380">
+              </div>
+              <div class="col-6 field">
+                <span>E-mail:</span><br>
+                <input class="input-field" type="text" placeholder="E-mail">
+              </div>
+              <div class="col-6 field">
+                <span>Адрес доставки</span>
+                <input class="input-field" type="text" placeholder="Город, улица, дом">
+              </div>
+            </div>
+            <div class="col-5 product">
+              <div class="row">
+                <div class="col-6 image-place">
+                  <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
+                </div>
+                <div class="col-6 description">
+                  Sony Playstation 4 PRO 1Tb (PS4 PRO) CUH-7116
+                </div>
+                <div class="col-12">
+                  Place for counter
+                </div>
+                <div class="col-6 order-info">
+                  <span>Всего к оплате:</span>
+                </div>
+                <div class="col-6 text-right order-info" >
+                  <span>9500грн</span>
+                </div>
+                <div class="col-12 checkout">
+                  <span>Подтвердить заказ</span>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
