@@ -10,6 +10,7 @@ import logging
 
 logger = logging.getLogger('Views')
 
+
 def contacts_view(request):
     return render(request, f'{HtmlPages.contacts}.html')
 
@@ -84,7 +85,9 @@ def order_view(request, _=None):
             'phone': user.phone_number,
         }
     return render(request, f'{HtmlPages.ord}.html',
-                  {'amount': product.amount, 'sell_state': product.sell_state, 'prefill': user_info})
+                  {'amount': product.amount,
+                   'sell_state': product.sell_state,
+                   'prefill': user_info})
 
 
 def order_complete_view(request):
@@ -92,12 +95,12 @@ def order_complete_view(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             order = Order(
-                user = request.session.get(usr, 0),
-                product = form.cleaned_data['product_id'],
-                amount = form.cleaned_data['amount'],
-                sum_price = form.cleaned_data['sum_price'],
-                sum_ship_price = form.cleaned_data['sum_ship_price'],
-                info = form.cleaned_data['info'],
+                user=request.session.get(usr, 0),
+                product=form.cleaned_data['product_id'],
+                amount=form.cleaned_data['amount'],
+                sum_price=form.cleaned_data['sum_price'],
+                sum_ship_price=form.cleaned_data['sum_ship_price'],
+                info=form.cleaned_data['info'],
             )
             return render(request, f'{HtmlPages.com_ord}.html',
                           {'order_info': order})

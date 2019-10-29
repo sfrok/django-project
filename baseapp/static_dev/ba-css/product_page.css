@@ -195,3 +195,7 @@
 .counter:hover {
     cursor: pointer;
 }
+
+.stock {
+    display: none;
+}
