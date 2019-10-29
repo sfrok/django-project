@@ -16,6 +16,7 @@ class HtmlPages():  # Названия html-файлов без .html
     product_page = 'product_page'
     ord = 'order'
     com_ord = 'complete_order'
+    home = 'base'
 
 
 SELL_STATES = (
@@ -26,9 +27,10 @@ SELL_STATES = (
 
 
 STATUSES = (
-    (0, 'Заказ оплачен'),
-    (1, 'Товар отправлен'),
-    (2, 'Товар доставлен'),
+    (0, 'Корзина открыта'),
+    (1, 'Заказ оплачен'),
+    (2, 'Товар отправлен'),
+    (3, 'Товар доставлен'),
 )
 
 

@@ -101,15 +101,35 @@ class Product(models.Model):
         ]
 
 
-class Order(models.Model):
-    user = models.IntegerField(default=0)
+class SingleOrder(models.Model):
+    basket_id = models.IntegerField(default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0, choices=STATUSES)
-    date = models.DateTimeField(default=timezone.now)
-    delivery_date = models.DateTimeField(default=timezone.now)
     amount = models.IntegerField(default=1)
     sum_price = models.IntegerField(default=0)
     sum_ship_price = models.IntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(amount__gte=1),
+                                   name='amount1'),
+            models.CheckConstraint(check=models.Q(sum_price__gte=0),
+                                   name='sum_price1')
+        ]
+
+    def __str__(self):
+        return self.sum_price
+
+
+class Basket(models.Model):
+    status = models.IntegerField(default=0, choices=STATUSES)
+    date = models.DateTimeField(default=timezone.now)
+    delivery_date = models.DateTimeField(default=timezone.now)
+    sum_price = models.IntegerField(default=0)
+    sum_ship_price = models.IntegerField(default=0)
+    user = models.IntegerField(default=0)
+    fio = models.CharField(max_length=130, default='')
+    address = models.CharField(max_length=128, default='')
+    phone_number = models.CharField(max_length=16, default='')
     info = models.TextField(max_length=512, default='')
 
     class Meta:
