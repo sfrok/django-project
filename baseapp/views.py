@@ -9,10 +9,13 @@ from .models import Product, User, SingleOrder, Basket
 import logging
 
 logger = logging.getLogger('Views')
+
+
 def session_clear(func):
-    def wrapper(request):
-        func(request)
+    def wrapper(request, *_):
+        response = func(request)
         if 'pid' in request.session: del request.session['pid']
+        return response
     return wrapper
 
 
@@ -73,7 +76,6 @@ def search_result_view(request):
 
 # PRODUCT
 
-@session_clear
 def product_view(request, _=None):
     product_id = int(request.path[9:])
     product = Product.objects.get(id=product_id)
@@ -84,9 +86,9 @@ def product_view(request, _=None):
 @session_clear
 def order_view(request):
     if request.method == 'POST' and 'pid' in request.session:
+        print(request.POST)
         form = SearchForm(request.POST)
         if form.is_valid():
-
             # Презаполнение формы
             user_info = {'name': '', 'address': '', 'phone': '', }
             user_id = request.session.get(usr, None)
@@ -97,7 +99,7 @@ def order_view(request):
                     'address': user.address,
                     'phone': user.phone_number,
                 }
-            
+
             # Создание корзины, если ее еще нет
             if 'bid' in request.session and 'bcont' in request.session:
                 basket = request.session.get('bid', None)
@@ -105,18 +107,19 @@ def order_view(request):
             elif user_id is not None:
                 try:
                     basket = Basket.objects.get(status=0)
-                except basket.DoesNotExist:
+                except Basket.DoesNotExist:
                     basket = Basket(user=user_id)
                 container = [i for i in SingleOrder.objects.filter(basket_id=basket.id)]
             else:
                 basket = Basket()
                 container = []
             if user_id is not None: basket.save()
-                
+
             # Добавление нового заказа в корзину
             product = Product.objects.get(id=request.session.get('pid', None))
             amount = form.cleaned_data['product-count']
             container.append(SingleOrder(basket_id=basket.id, product=product, amount=amount))
+            del request.session['pid']
 
             request.session['bid'] = basket
             request.session['bcont'] = container
@@ -155,7 +158,7 @@ def order_view(request):
                 'address': user.address,
                 'phone': user.phone_number,
             }
-        
+
         # Создание корзины, если ее еще нет
         if 'bid' in request.session and 'bcont' in request.session:
             basket = request.session.get('bid', None)

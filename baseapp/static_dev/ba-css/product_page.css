@@ -199,3 +199,10 @@
 .stock {
     display: none;
 }
+
+.product-count {
+    border-width: 0px;
+    width: 30px;
+    text-align: center;
+    background-color: inherit;
+}

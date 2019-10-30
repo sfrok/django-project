@@ -134,10 +134,8 @@ class Basket(models.Model):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(check=models.Q(amount__gte=1),
-                                   name='amount1'),
             models.CheckConstraint(check=models.Q(sum_price__gte=0),
-                                   name='sum_price1')
+                                   name='sum_price2')
         ]
 
     def __str__(self):

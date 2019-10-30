@@ -20,7 +20,7 @@
     <div class="container main">
         <div class="row">
             <div class="overlay hide">
-                <form action="" method="post">
+                <form action="/order/" method="post">
                     {% csrf_token %}
             <div id="modal-form" class="form">
               <img  id="modal-quit" class="close-button" src="https://avatanplus.com/files/resources/mid/573b43405fee9154bf7eb389.png">
@@ -39,7 +39,7 @@
                               <div class="col-md-2 text-center">
                                   <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
                                   <div class="count-change cart-item">
-                                      <span id="product-count">1</span>
+                                      <label for="product-count"></label><input type="text" id="product-count" value="1" name="product-count" class="product-count">
                                   </div>
                                    <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
                               </div>
