@@ -13,7 +13,7 @@ class HtmlPages():  # Названия html-файлов без .html
     contacts = 'contacts'
     search_input = 'base'
     search_result = 'search_result'
-    product_page = 'product_page'
+    product = 'product_page'
     ord = 'order'
     com_ord = 'complete_order'
     settings = 'settings'

@@ -101,3 +101,11 @@ class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
     locals().update(
         {i[0]: forms.BooleanField(required=False) for i in CATEGORIES if i[0] != 'none'})
+
+        
+class OrderForm(forms.Form):
+    product_count = forms.IntField(default=1)
+        
+        
+class OrderCompleteForm(forms.Form):
+    fio = forms.CherField(max_length=130, required=False)

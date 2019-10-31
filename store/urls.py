@@ -23,15 +23,18 @@ from .data import HtmlPages as HP
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(f'{HP.reg}/', views.registration_view, name='reg_page'),
-    path(f'{HP.auth}/', views.authorization_view, name='auth_page'),
-    path('', views.search_input_view, name='s_in_page'),
-    path(f'{HP.contacts}/', views.contacts_view, name='cont_page'),
-    path(f'{HP.search_result}/', views.search_result_view, name='s_res_page'),
-    re_path(r'(product/)', views.product_view, name='prod_page'),
-    path(f'{HP.ord}/', views.order_view, name='ord_page'),
-    path(f'{HP.com_ord}/', views.order_complete_view, name='ord_com_page'),
-    path(f'{HP.settings}/', views.user_settings, name='settings'),
+    path(f'{HP.reg}/', views.registration_view, name=f'{HP.reg}_page'),
+    path(f'{HP.auth}/', views.authorization_view, name=f'{HP.auth}_page'),
+
+    path('', views.search_input_view, name=f'{HP.search_input}_page'),
+    path(f'{HP.search_result}/', views.search_result_view, name=f'{HP.search_result}_page'),
+
+    re_path(r'(product/)', views.product_view, name=f'{HP.product}_page'),
+    path(f'{HP.ord}/', views.order_view, name=f'ord_page'),
+    path(f'{HP.com_ord}/', views.order_complete_view, name=f'ord_com_page'),
+
+    path(f'{HP.settings}/', views.settings_view, name=f'settings_page'),
+    path(f'{HP.contacts}/', views.contacts_view, name=f'cont_page'),
 ]
 
 if settings.DEBUG:

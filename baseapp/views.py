@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import UserCreationForm, UserAuthorizationForm, SearchForm
+from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, OrderForm, OrderCompleteForm
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES, HtmlPages, usr, hdn
@@ -80,14 +80,14 @@ def product_view(request, _=None):
     product_id = int(request.path[9:])
     product = Product.objects.get(id=product_id)
     request.session['pid'] = product_id
-    return render(request, f'{HtmlPages.product_page}.html', {'product': product})
+    return render(request, f'{HtmlPages.product}.html', {'product': product})
 
 
 @session_clear
 def order_view(request):
     if request.method == 'POST' and 'pid' in request.session:
         print(request.POST)
-        form = SearchForm(request.POST)
+        form = OrderForm(request.POST)
         if form.is_valid():
             # Презаполнение формы
             user_info = {'name': '', 'address': '', 'phone': '', }
@@ -117,7 +117,7 @@ def order_view(request):
 
             # Добавление нового заказа в корзину
             product = Product.objects.get(id=request.session.get('pid', None))
-            amount = form.cleaned_data['product-count']
+            amount = form.cleaned_data['product_count']
             container.append(SingleOrder(basket_id=basket.id, product=product, amount=amount))
             del request.session['pid']
 
@@ -125,16 +125,17 @@ def order_view(request):
             request.session['bcont'] = container
             return render(request, f'{HtmlPages.ord}.html',
                   {'prefill': user_info})
-    return render(request, f'{HtmlPages.home}.html')
+    return HttpResponseRedirect(f'/{HtmlPages.home}/')
 
 
 @session_clear
 def order_complete_view(request):
     if request.method == 'POST' and 'bid' in request.session and 'bcont' in request.session:
-        form = SearchForm(request.POST)
+        form = OrderCompleteForm(request.POST)
         if form.is_valid():
             basket = request.session.get('bid', None)
             container = request.session.get('bcont', None)
+            basket.fio = form.cleaned_data['fio']
             basket.save()
             for order in container:
                 order.save()
@@ -142,11 +143,11 @@ def order_complete_view(request):
             del request.session['bcont']
             return render(request, f'{HtmlPages.com_ord}.html',
                           {'basket': basket, 'orders': container})
-    return render(request, f'{HtmlPages.home}.html')
+    return HttpResponseRedirect(f'/{HtmlPages.home}/')
 
 
 @session_clear
-def user_settings(request):
+def settings_view(request):
     return render(request, f'{HtmlPages.settings}.html')
 
 
