@@ -145,6 +145,11 @@ def order_complete_view(request):
     return render(request, f'{HtmlPages.home}.html')
 
 
+@session_clear
+def user_settings(request):
+    return render(request, f'{HtmlPages.settings}.html')
+
+
 """
 @session_clear
 def order_view(request):

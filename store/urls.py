@@ -31,6 +31,7 @@ urlpatterns = [
     re_path(r'(product/)', views.product_view, name='prod_page'),
     path(f'{HP.ord}/', views.order_view, name='ord_page'),
     path(f'{HP.com_ord}/', views.order_complete_view, name='ord_com_page'),
+    path(f'{HP.settings}/', views.user_settings, name='settings'),
 ]
 
 if settings.DEBUG:

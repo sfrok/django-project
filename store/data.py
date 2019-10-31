@@ -16,6 +16,7 @@ class HtmlPages():  # Названия html-файлов без .html
     product_page = 'product_page'
     ord = 'order'
     com_ord = 'complete_order'
+    settings = 'settings'
     home = 'base'
 
 
