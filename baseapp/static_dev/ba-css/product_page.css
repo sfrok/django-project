@@ -109,16 +109,6 @@
   margin-top: 15px;
 }
 
-/*.quantity-container {*/
-/*  border: 1px solid #696969;*/
-/*  height: 35px;*/
-/*  width: 90px;*/
-/*  border-radius: 4px;*/
-/*  margin-top: 5px;*/
-/*  position: relative;*/
-/*  left: 40px;*/
-/*}*/
-
 .delete-product {
   position: relative;
   height: 25px;
@@ -160,6 +150,7 @@
   color: white;
   box-shadow: 0px 4px 12px #65c000;
   line-height: 50px;
+  width: 282.66px;
 }
 
 .checkout:hover{
