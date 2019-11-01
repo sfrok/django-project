@@ -1,3 +1,4 @@
+from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -85,9 +86,12 @@ def product_view(request, _=None):
 
 @session_clear
 def order_view(request):
+    print(request.method)
+    print(request.session)
     if request.method == 'POST' and 'pid' in request.session:
         print(request.POST)
         form = OrderForm(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             # Презаполнение формы
             user_info = {'name': '', 'address': '', 'phone': '', }
@@ -101,8 +105,9 @@ def order_view(request):
                 }
 
             # Создание корзины, если ее еще нет
+            basket = Basket()
             if 'bid' in request.session and 'bcont' in request.session:
-                basket = request.session.get('bid', None)
+                basket.__dict__.update(request.session.get('bid', None))
                 container = request.session.get('bcont', None)
             elif user_id is not None:
                 try:
@@ -111,21 +116,24 @@ def order_view(request):
                     basket = Basket(user=user_id)
                 container = [i for i in SingleOrder.objects.filter(basket_id=basket.id)]
             else:
-                basket = Basket()
                 container = []
             if user_id is not None: basket.save()
 
             # Добавление нового заказа в корзину
             product = Product.objects.get(id=request.session.get('pid', None))
             amount = form.cleaned_data['product_count']
-            container.append(SingleOrder(basket_id=basket.id, product=product, amount=amount))
+            container.append(model_to_dict(SingleOrder(basket_id=basket.id,
+                                                       product=product,
+                                                       amount=amount)))
             del request.session['pid']
-
-            request.session['bid'] = basket
+            tmp = model_to_dict(basket)
+            del tmp['date']
+            del tmp['delivery_date']
+            request.session['bid'] = tmp
             request.session['bcont'] = container
             return render(request, f'{HtmlPages.ord}.html',
                   {'prefill': user_info})
-    return HttpResponseRedirect(f'/{HtmlPages.home}/')
+    return HttpResponseRedirect('/')
 
 
 @session_clear
@@ -133,17 +141,20 @@ def order_complete_view(request):
     if request.method == 'POST' and 'bid' in request.session and 'bcont' in request.session:
         form = OrderCompleteForm(request.POST)
         if form.is_valid():
-            basket = request.session.get('bid', None)
+            basket = Basket()
+            basket.__dict__.update(request.session.get('bid', None))
             container = request.session.get('bcont', None)
             basket.fio = form.cleaned_data['fio']
             basket.save()
-            for order in container:
+            for item in container:
+                order = SingleOrder()
+                order.__dict__ = item
                 order.save()
             del request.session['bid']
             del request.session['bcont']
             return render(request, f'{HtmlPages.com_ord}.html',
                           {'basket': basket, 'orders': container})
-    return HttpResponseRedirect(f'/{HtmlPages.home}/')
+    return HttpResponseRedirect('/')
 
 
 @session_clear
