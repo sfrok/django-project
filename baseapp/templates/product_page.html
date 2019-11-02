@@ -23,50 +23,60 @@
                 <form action="/order/" method="post">
                     {% csrf_token %}
             <div id="modal-form" class="form">
-              <img  id="modal-quit" class="close-button" src="https://avatanplus.com/files/resources/mid/573b43405fee9154bf7eb389.png">
-                <div class="container">
-                    <h1 class="header">Корзина</h1>
-                  <div class="row justify-content-center">
-                    <div class="col-2 image-place">
-                      <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
-                    </div>
-                   <div class="col-9 product-description">
-                    {{product.description}}
-                  </div>
-                      <div class="col-md-12 mt-3">
-                          <div class="stock" id="stock">{{ product.amount }}</div>
-                          <div class="row justify-content-center">
-                              <div class="col-md-2 text-center">
-                                  <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
-                                  <div class="count-change cart-item">
-                                      <label for="product-count"></label><input type="text" id="product-count" value="1" name="product_count" class="product-count">
-                                  </div>
-                                   <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
-                              </div>
-                              <div class="col-md-9 sum-for-product text-right" >{{ product.price }}</div>
-                          </div>
-                      </div>
-                </div>
-                    <hr>
-              </div>
               <div class="container">
                 <div class="row">
-                  <div class="col-6 quantity text-center">
-                    <h5 class="main-count">Количество: <span id="main-count">1</span></h5>
+                  <div class="header col-9">
+                    <span class="pl-3">Корзина</span>
                   </div>
-                  <div class="col-6 purchases-price text-center">
-                    <h5>Итоговая сумма: <strong id="full-sum"></strong></h5>
+                  <div class="col-3 place-close-button">
+                    <img  id="modal-quit" class="close-button" src="https://avatanplus.com/files/resources/mid/573b43405fee9154bf7eb389.png">
                   </div>
-                  <div class="container">
-                      <div class="row justify-content-around mt-5">
-                          <div class="col-4 back">
-                    Вернутся к покупкам
-                  </div>
-                  <button class="checkout" id="product_id" value="{{ product.id}}">Оформить заказ</button>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-3 image-place">
+                          <hr>
+                          <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid">
+                        </div>
+                        <div class="col-9 description">
+                          <hr>
+                          <span class="p-3">Sony Playstation 4 PRO 1Tb (PS4 PRO) CUH-7116</span>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-3 text-center">
+                              <div class="stock" id="stock">{{ product.amount }}</div>
+                              <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
+                              <div class="count-change cart-item">
+                                  <label for="product-count"></label><input type="text" id="product-count" value="1" name="product_count" class="product-count">
+                              </div>
+                               <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
+                            </div>
+                            <div class="col-9 sum-for-product text-right" >{{ product.price }}</div>
+                          </div>
+                          <hr>
+                        </div>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-6">
+                              <h5 class="main-count">Количество: <span id="main-count">1</span></h5>
+                            </div>
+                            <div class="col-6 text-right">
+                              <h5>Итоговая сумма: <strong id="full-sum"></strong></h5>
+                            </div>
+                            <div class="col-6 text-center pt-3">
+                              <button class="back">Вернутся к покупкам</button>
+                            </div>
+                            <div class="col-6 text-center pt-3">
+                              <button class="checkout" id="product_id" value="{{ product.id}}">Оформить заказ</button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                  </div>
+                    </div>
                 </div>
               </div>
+
+
             </div>
           </form>
             </div>
