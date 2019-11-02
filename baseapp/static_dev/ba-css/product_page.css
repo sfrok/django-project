@@ -63,10 +63,10 @@
 }
 
 .form {
-    width: 850px;
+    max-width: 850px;
     height: 400px;
     border: 1px solid black;
-    background-color: #FFFAFA;
+    background-color: #f6f6f6;
     position: absolute;
     border-radius: 6px;
     margin-right: auto;
@@ -76,100 +76,43 @@
     right: 0;
     display: none;
 }
+ .image-place {
+   text-align: left;
+ }
 
 .close-button {
-  height: 20px;
   width: 20px;
-  position: relative;
-  top: 5px;
-  left: 815px;
-}
-
-.close-button:hover {
-  cursor: pointer;
 }
 
 .header {
-    margin-top: 10px;
-    font-size: 25px;
-    color: #696969;
-    padding-left: 35px;
-
-}
-
-.image-place {
-  margin-top: 10px;
-
-}
-
-.product-description {
-  font-size: 25px;
-  color: #696969;
-  text-align: end;
   margin-top: 15px;
+  text-align: left;
+  font-size: 25px;
+  margin-bottom: 5px;
 }
 
-.delete-product {
-  position: relative;
-  height: 25px;
-  width: 25px;
-  left: 45px;
-  bottom: 2px;
+.place-close-button {
+  margin-top: 5px;
+  text-align: right;
 }
 
-.delete-product:hover {
-  cursor: pointer;
+.description {
+  font-size: 25px;
 }
 
-.product-price {
-  margin-top: 10px;
-  color: #696969;
+.cart-item {
+    display: inline-block;
+    width: 30px;
+    height: 25px;
 }
 
-.total-price {
-  margin-top: 10px;
-  color: #696969;
-  position: relative;
-  left: 450px;
+.sum-for-product {
+    color: #696969;
+    font-size: 18px;
 }
 
-.quantity {
-  color: #696969;
-}
-
-.purchases-price {
-  color: #696969;
-
-}
-
-.checkout {
-  border-radius: 3px;
-  height: 50px;
-  text-align: center;
-  background-color: #65c000;
-  color: white;
-  box-shadow: 0px 4px 12px #65c000;
-  line-height: 50px;
-  width: 282.66px;
-}
-
-.checkout:hover{
-  cursor: pointer;
-}
-
-.back {
-  border-radius: 3px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  background-color: #48D1CC;
-  box-shadow: 0px 4px 12px  #48D1CC;
-
-  color: white;
-}
-
-.back:hover {
-  cursor: pointer;
+.counter:hover {
+    cursor: pointer;
 }
 
 .cart-item {
@@ -196,4 +139,34 @@
     width: 30px;
     text-align: center;
     background-color: inherit;
+}
+
+.back {
+  border-radius: 3px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #48D1CC;
+  box-shadow: 0px 4px 12px  #48D1CC;
+  color: white;
+  width: 260px;
+}
+
+.back:hover {
+  cursor: pointer;
+}
+
+.checkout {
+  border-radius: 3px;
+  height: 50px;
+  text-align: center;
+  background-color: #65c000;
+  color: white;
+  box-shadow: 0px 4px 12px #65c000;
+  line-height: 50px;
+  width: 260px;
+}
+
+.checkout:hover{
+  cursor: pointer;
 }
