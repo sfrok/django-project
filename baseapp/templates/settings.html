@@ -30,7 +30,7 @@
   <div class="container form">
         <div class="row justify-content-center">
             <div class="col-md-8 form-body">
-                <form action="" method="post">
+                <form action="/settings/" method="post"> {% csrf_token %}
                     <label for="name" class="form-label-title">Имя:</label>
                     <input type="text" class="form-control mb-2" id="name" name="first_name" value={{ user.first_name }}>
                     <label for="surname" class="form-label-title">Фамилия:</label>
@@ -43,7 +43,7 @@
                     <input type="text" class="form-control mb-2" id="address" name="address" value={{ user.address }}>
                     <div class="row justify-content-center">
                         <div class="col-auto form-button">
-                            <button type="button" class="btn btn-outline-success btn-lg mt-3">Сохранить данные</button>
+                            <button type="submit" class="btn btn-outline-success btn-lg mt-3 ">Сохранить данные</button>
                         </div>
                     </div>
                 </form>

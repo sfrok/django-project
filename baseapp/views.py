@@ -2,7 +2,8 @@ from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, OrderForm, OrderCompleteForm
+from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, \
+    OrderForm, OrderCompleteForm, SettingsForm
 from django.contrib.auth import authenticate
 from .search import search
 from store.data import CATEGORIES, HtmlPages, usr, hdn
@@ -16,7 +17,8 @@ def session_clear(func):
     def wrapper(request, *_):
         response = func(request)
         if 'pid' in request.session: del request.session['pid']
-        print(request.path)
+        if request.path != '/settings/' and 'ucs' in request.session:
+            del request.session['ucs']
         return response
     return wrapper
 
@@ -126,7 +128,7 @@ def order_view(request):
             order = SingleOrder(basket_id=basket.id, product=product, amount=amount)
             if user_id is not None: order.save()
             container.append(model_to_dict(order))
-            
+
             del request.session['pid']
             tmp = model_to_dict(basket)
             del tmp['date']
@@ -164,8 +166,7 @@ def settings_view(request):
     if usr in request.session:
         user = User.objects.get(pk=request.session.get(usr, None))
         if request.method == 'POST' and 'ucs' in request.session:
-            del request.session['ucs']
-            form = OrderCompleteForm(request.POST)
+            form = SettingsForm(request.POST)
             if form.is_valid():
                 user.first_name = form.cleaned_data['first_name']
                 user.last_name = form.cleaned_data['last_name']

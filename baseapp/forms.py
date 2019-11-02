@@ -109,3 +109,11 @@ class OrderForm(forms.Form):
 
 class OrderCompleteForm(forms.Form):
     fio = forms.CharField(max_length=130, required=False)
+
+
+class SettingsForm(forms.Form):
+    first_name = forms.CharField(max_length=64, required=False)
+    last_name = forms.CharField(max_length=64, required=False)
+    email = forms.CharField(max_length=255, required=False)
+    address = forms.CharField(max_length=128, required=False)
+    phone_number = forms.CharField(max_length=16, required=False)
