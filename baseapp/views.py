@@ -122,9 +122,10 @@ def order_view(request):
             # Добавление нового заказа в корзину
             product = Product.objects.get(id=request.session.get('pid', None))
             amount = form.cleaned_data['product_count']
-            container.append(model_to_dict(SingleOrder(basket_id=basket.id,
-                                                       product=product,
-                                                       amount=amount)))
+            order = SingleOrder(basket_id=basket.id, product=product, amount=amount)
+            if user_id is not None: order.save()
+            container.append(model_to_dict(order))
+            
             del request.session['pid']
             tmp = model_to_dict(basket)
             del tmp['date']
@@ -159,7 +160,11 @@ def order_complete_view(request):
 
 @session_clear
 def settings_view(request):
-    return render(request, f'{HtmlPages.settings}.html')
+    if usr in request.session:
+        user = User.objects.get(pk=request.session.get(usr, None))
+        return render(request, f'{HtmlPages.settings}.html',
+                      {'prefill': user})
+    return HttpResponseRedirect('/')
 
 
 """
