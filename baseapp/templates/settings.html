@@ -32,15 +32,15 @@
             <div class="col-md-8 form-body">
                 <form action="" method="post">
                     <label for="name" class="form-label-title">Имя:</label>
-                    <input type="text" class="form-control mb-2" id="name" name="first_name">
+                    <input type="text" class="form-control mb-2" id="name" name="first_name" value={{ user.first_name }}>
                     <label for="surname" class="form-label-title">Фамилия:</label>
-                    <input type="text" class="form-control mb-2" id="surname" name="last_name">
+                    <input type="text" class="form-control mb-2" id="surname" name="last_name" value={{ user.last_name }}>
                     <label for="phone" class="form-label-title">Номер телефона:</label>
-                    <input type="text" class="form-control mb-2" id="phone" name="phone_number">
+                    <input type="text" class="form-control mb-2" id="phone" name="phone_number" value={{ user.phone_number }}>
                     <label for="email" class="form-label-title">E-mail:</label>
-                    <input type="text" class="form-control mb-2 " id="email" name="email">
+                    <input type="text" class="form-control mb-2 " id="email" name="email" value={{ user.email }}>
                     <label for="address" class="form-label-title">Адрес:</label>
-                    <input type="text" class="form-control mb-2" id="address" name="address">
+                    <input type="text" class="form-control mb-2" id="address" name="address" value={{ user.address }}>
                     <div class="row justify-content-center">
                         <div class="col-auto form-button">
                             <button type="button" class="btn btn-outline-success btn-lg mt-3">Сохранить данные</button>

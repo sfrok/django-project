@@ -16,6 +16,7 @@ def session_clear(func):
     def wrapper(request, *_):
         response = func(request)
         if 'pid' in request.session: del request.session['pid']
+        print(request.path)
         return response
     return wrapper
 
@@ -162,8 +163,19 @@ def order_complete_view(request):
 def settings_view(request):
     if usr in request.session:
         user = User.objects.get(pk=request.session.get(usr, None))
-        return render(request, f'{HtmlPages.settings}.html',
-                      {'prefill': user})
+        if request.method == 'POST' and 'ucs' in request.session:
+            del request.session['ucs']
+            form = OrderCompleteForm(request.POST)
+            if form.is_valid():
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.email = form.cleaned_data['email']
+                user.address = form.cleaned_data['address']
+                user.phone_number = form.cleaned_data['phone_number']
+                user.save()
+                return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
+        else: request.session['ucs'] = True
+        return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
     return HttpResponseRedirect('/')
 
 
