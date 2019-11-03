@@ -1,0 +1,15 @@
+.page-title {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.order-cart {
+    border: 1px solid black;
+    max-width: 1200px;
+    height: 50px;
+    background-color: #c9ddeb;
+}
+
+.order-cart-light {
+    background-color: white;
+}

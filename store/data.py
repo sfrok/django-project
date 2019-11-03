@@ -17,6 +17,7 @@ class HtmlPages():  # Названия html-файлов без .html
     ord = 'order'
     com_ord = 'complete_order'
     settings = 'settings'
+    order_list = 'order_list'
     home = 'base'
 
 
@@ -33,6 +34,3 @@ STATUSES = (
     (2, 'Товар отправлен'),
     (3, 'Товар доставлен'),
 )
-
-
-usr = 'usr'

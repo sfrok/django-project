@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/order_list.css" %}">
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>home</title>
+  </head>
+  <body>
+  <div class="container page-info">
+      <div class="row">
+          <div class="col-md-12">
+              <img src="{% static "order.png" %}" alt="settings" class="img-thumbnail m-2">
+                <h1 class="display-4 page-title">Ваши заказы</h1>
+                <p class="lead m-2 page-description">Панель управления заказами пользователя</p>
+                <hr>
+          </div>
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-12 header">
+                      <button type="button" class="btn btn-info">
+                          Все заказы <span class="badge badge-dark">0</span>
+                        </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container body-info mt-5">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="row ">
+                  <div class="col-md-12">
+                      <ul class="nav justify-content-around">
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Дата</a>
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Адрес</a>
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Статус</a>
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Итоговая сумма</a>
+                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Товары</a>
+                      </ul>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-12 mb-2">
+                              <div class="order-cart">
+                              <div class="row justify-content-around">
+                                  <p class="lead">19.19.19</p>
+                                  <p class="lead">ул. Уличная, 18</p>
+                                  <p class="lead">В обработке</p>
+                                  <p class="lead">18344 грн.</p>
+                                  <p class="lead">Товар1, Товар2, Товар3</p>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="col-md-12 mb-2">
+                              <div class="order-cart order-cart-light">
+                              <div class="row justify-content-around">
+                                  <p class="lead">19.19.19</p>
+                                  <p class="lead">ул. Уличная, 18</p>
+                                  <p class="lead">В обработке</p>
+                                  <p class="lead">18344 грн.</p>
+                                  <p class="lead">Товар1, Товар2, Товар3</p>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="col-md-12 mb-2">
+                              <div class="order-cart">
+                              <div class="row justify-content-around">
+                                  <p class="lead">19.19.19</p>
+                                  <p class="lead">ул. Уличная, 18</p>
+                                  <p class="lead">В обработке</p>
+                                  <p class="lead">18344 грн.</p>
+                                  <p class="lead">Товар1, Товар2, Товар3</p>
+                              </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+          </div>
+  </body>
+</html>
+

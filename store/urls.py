@@ -33,6 +33,7 @@ urlpatterns = [
     re_path(r'(product/)', views.product_view, name=f'{HP.product}_page'),
     path(f'{HP.ord}/', views.order_view, name=f'ord_page'),
     path(f'{HP.com_ord}/', views.order_complete_view, name=f'ord_com_page'),
+    path(f'{HP.order_list}/', views.order_list, name=f'order_list'),
 
     path(f'{HP.settings}/', views.settings_view, name=f'settings_page'),
     path(f'{HP.contacts}/', views.contacts_view, name=f'cont_page'),
