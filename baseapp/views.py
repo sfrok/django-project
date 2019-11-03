@@ -19,8 +19,8 @@ def session_clear(func):
         if 'pid' in request.session: del request.session['pid']
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
-        if request.path[:9] != '/product/' and 'pid' in request.session:
-            del request.session['pid']
+        if request.path[:9] != '/product/' and request.path != '/order/':
+            if 'pid' in request.session: del request.session['pid']
         return response
     return wrapper
 
@@ -84,6 +84,7 @@ def search_result_view(request):
 
 @session_clear
 def product_view(request, _=None):
+    print(request.path[:9])
     product_id = int(request.path[9:])
     product = Product.objects.get(id=product_id)
     request.session['pid'] = product_id
@@ -93,7 +94,7 @@ def product_view(request, _=None):
 @session_clear
 def order_view(request):
     print(request.method)
-    print(request.session)
+    print(request.path[:9])
     if request.method == 'POST' and 'pid' in request.session:
         print(request.POST)
         form = OrderForm(request.POST)
