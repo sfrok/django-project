@@ -15,12 +15,20 @@ logger = logging.getLogger('Views')
 
 def session_clear(func):
     def wrapper(request, *_):
-        response = func(request)
-        if 'pid' in request.session: del request.session['pid']
+        print("request.method:", request.method)
+        print("request.path:", request.path)
+        if request.method == 'POST': print("request.POST:", request.POST)
+        if 'pid' in request.session: print('request.session.pid:', request.session['pid'])
+        if 'bid' in request.session: print('request.session.bid:', request.session['bid'])
+        if usr in request.session: print('request.session.usr:', request.session[usr])
+
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
         if request.path[:9] != '/product/' and request.path != '/order/':
+            print("we here")
             if 'pid' in request.session: del request.session['pid']
+        
+        response = func(request)
         return response
     return wrapper
 
@@ -93,12 +101,10 @@ def product_view(request, _=None):
 
 @session_clear
 def order_view(request):
-    print(request.method)
-    print(request.path[:9])
+    print('---------lll:')
+    if 'pid' in request.session: print('---------pid:', request.session['pid'])
     if request.method == 'POST' and 'pid' in request.session:
-        print(request.POST)
         form = OrderForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             # Презаполнение формы
             user_info = {'name': '', 'address': '', 'phone': '', }
@@ -118,7 +124,7 @@ def order_view(request):
                 container = request.session.get('bcont', None)
             elif user_id is not None:
                 try:
-                    basket = Basket.objects.get(status=0)
+                    basket = Basket.objects.get()
                 except Basket.DoesNotExist:
                     basket = Basket(user=user_id)
                 container = [i for i in SingleOrder.objects.filter(basket_id=basket.id)]
@@ -132,8 +138,8 @@ def order_view(request):
             order = SingleOrder(basket_id=basket.id, product=product, amount=amount)
             if user_id is not None: order.save()
             container.append(model_to_dict(order))
-
             del request.session['pid']
+
             tmp = model_to_dict(basket)
             del tmp['date']
             del tmp['delivery_date']
