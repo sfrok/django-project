@@ -190,6 +190,11 @@ def settings_view(request):
 
 
 @session_clear
+def order_list(request):
+    return render(request, f'{HtmlPages.order_list}.html')
+
+
+@session_clear
 def home_view(request):
     cat = (i for i in CATEGORIES if i[0] != 'none')
     return render(request, f'{HtmlPages.home}.html', {'response': cat})
