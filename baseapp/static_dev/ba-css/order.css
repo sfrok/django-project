@@ -5,13 +5,12 @@
 
 .product {
   background-color: white;
-  height: 300px;
-  /* border: 1px solid black; */
-  height: 350px;
+  height: 370px;
 }
 
 .contacts {
   background-color: white;
+  height: 460px;
   /* border: 1px solid black; */
 }
 
