@@ -2,10 +2,11 @@ from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, OrderForm, OrderCompleteForm
+from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, \
+    OrderForm, OrderCompleteForm, SettingsForm
 from django.contrib.auth import authenticate
 from .search import search
-from store.data import CATEGORIES, HtmlPages, usr, hdn
+from store.data import CATEGORIES, HtmlPages, usr
 from .models import Product, User, SingleOrder, Basket
 import logging
 
@@ -16,6 +17,10 @@ def session_clear(func):
     def wrapper(request, *_):
         response = func(request)
         if 'pid' in request.session: del request.session['pid']
+        if request.path != '/settings/' and 'ucs' in request.session:
+            del request.session['ucs']
+        if request.path[:9] != '/product/' and 'pid' in request.session:
+            del request.session['pid']
         return response
     return wrapper
 
@@ -32,7 +37,7 @@ def registration_view(request):
     if reg_form.is_valid():
         new_user = reg_form.save(commit=False)
         new_user.save()
-        if new_user.id != hdn: request.session[usr] = new_user.id
+        request.session[usr] = new_user.id
         return HttpResponseRedirect(reverse('base'))
     context = {
         'reg_form': reg_form
@@ -49,7 +54,7 @@ def authorization_view(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            if user.id != hdn: request.session[usr] = user.id
+            request.session[usr] = user.id
             return HttpResponseRedirect('/')
     if usr in request.session: del request.session[usr]
     return render(request, f'{HtmlPages.auth}.html', {'auth_form': auth_form})
@@ -77,6 +82,7 @@ def search_result_view(request):
 
 # PRODUCT
 
+@session_clear
 def product_view(request, _=None):
     product_id = int(request.path[9:])
     product = Product.objects.get(id=product_id)
@@ -125,7 +131,7 @@ def order_view(request):
             order = SingleOrder(basket_id=basket.id, product=product, amount=amount)
             if user_id is not None: order.save()
             container.append(model_to_dict(order))
-            
+
             del request.session['pid']
             tmp = model_to_dict(basket)
             del tmp['date']
@@ -150,6 +156,10 @@ def order_complete_view(request):
             for item in container:
                 order = SingleOrder()
                 order.__dict__ = item
+                if usr in request.session:
+                    order = SingleOrder.objects.get(pk=order.id)
+                order.product.sold -= 1
+                order.product.amount -= order.amount
                 order.save()
             del request.session['bid']
             del request.session['bcont']
@@ -162,9 +172,25 @@ def order_complete_view(request):
 def settings_view(request):
     if usr in request.session:
         user = User.objects.get(pk=request.session.get(usr, None))
-        return render(request, f'{HtmlPages.settings}.html',
-                      {'prefill': user})
+        if request.method == 'POST' and 'ucs' in request.session:
+            form = SettingsForm(request.POST)
+            if form.is_valid():
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.email = form.cleaned_data['email']
+                user.address = form.cleaned_data['address']
+                user.phone_number = form.cleaned_data['phone_number']
+                user.save()
+                return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
+        else: request.session['ucs'] = True
+        return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
     return HttpResponseRedirect('/')
+
+
+@session_clear
+def home_view(request):
+    cat = (i for i in CATEGORIES if i[0] != 'none')
+    return render(request, f'{HtmlPages.home}.html', {'response': cat})
 
 
 """

@@ -36,4 +36,3 @@ STATUSES = (
 
 
 usr = 'usr'
-hdn = 0

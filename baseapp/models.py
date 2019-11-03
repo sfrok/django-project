@@ -78,6 +78,7 @@ class Product(models.Model):
     ship_discount = models.FloatField(default=0.0)
     photo = models.ImageField(default=None)
     post_date = models.DateTimeField(default=timezone.now)
+    sold = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
