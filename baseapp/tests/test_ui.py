@@ -49,8 +49,8 @@ class TestRegAuth(StaticLiveServerTestCase):
             val = val['usr'] if 'usr' in val else None
             user_id = u.id if entry[1] is entries[0][1] and entry[2] is entries[0][2] else None
             self.assertEqual(val, user_id, f'{entry[0]}, session: {session.get_decoded()}')
-    
-    def test_settings(self):
+
+    def test_user_settings(self):
         u = User.objects.create_user('hello@world.check', 'crock', 'check123')
         u.first_name = 'test name'
         u.last_name = 'test surname'
@@ -68,5 +68,7 @@ class TestRegAuth(StaticLiveServerTestCase):
         session = Session.objects.get(pk=(self.selenium.get_cookie('sessionid'))['value'])
         val = session.get_decoded()['usr']
         u = User.objects.get(pk=val)
-        self.assertEqual(u.first_name, 'new name', f'{u.first_name}, session: {session.get_decoded()}')
-        self.assertEqual(u.last_name, 'new address', f'{u.last_name}, session: {session.get_decoded()}')
+        self.assertEqual(u.first_name, 'new name', f'{u.first_name}, '
+                                                   f'session: {session.get_decoded()}')
+        self.assertEqual(u.address, 'new address', f'{u.address}, '
+                                                   f'session: {session.get_decoded()}')

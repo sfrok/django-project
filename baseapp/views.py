@@ -1,7 +1,6 @@
 from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, \
     OrderForm, OrderCompleteForm, SettingsForm
 from django.contrib.auth import authenticate
@@ -15,8 +14,7 @@ logger = logging.getLogger('Views')
 
 def session_clear(func):
     def wrapper(request, *_):
-        print("request.method:", request.method)
-        print("request.path:", request.path)
+        print("request.(path, method):", request.method, request.path)
         if request.method == 'POST': print("request.POST:", request.POST)
         if 'pid' in request.session: print('request.session.pid:', request.session['pid'])
         if 'bid' in request.session: print('request.session.bid:', request.session['bid'])
@@ -45,7 +43,12 @@ def registration_view(request):
         new_user = reg_form.save(commit=False)
         new_user.save()
         request.session[usr] = new_user.id
-        return HttpResponseRedirect(reverse('base'))
+        username = reg_form.cleaned_data.get("username")
+        password = reg_form.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        if user:
+            request.session[usr] = user.id
+            return HttpResponseRedirect('/')
     context = {
         'reg_form': reg_form
     }
@@ -119,6 +122,8 @@ def order_view(request):
             basket = Basket()
             if 'bid' in request.session and 'bcont' in request.session:
                 basket.__dict__.update(request.session.get('bid', None))
+                if usr in request.session:
+                    basket.user = request.session[usr]
                 container = request.session.get('bcont', None)
             else:
                 container = []

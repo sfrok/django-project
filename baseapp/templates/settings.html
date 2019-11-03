@@ -32,15 +32,15 @@
             <div class="col-md-8 form-body">
                 <form action="/settings/" method="post"> {% csrf_token %}
                     <label for="name" class="form-label-title">Имя:</label>
-                    <input type="text" class="form-control mb-2" id="name" name="first_name" value={{ user.first_name }}>
+                    <input type="text" class="form-control mb-2" id="name" name="first_name" value={{ prefill.first_name }}>
                     <label for="surname" class="form-label-title">Фамилия:</label>
-                    <input type="text" class="form-control mb-2" id="surname" name="last_name" value={{ user.last_name }}>
+                    <input type="text" class="form-control mb-2" id="surname" name="last_name" value={{ prefill.last_name }}>
                     <label for="phone" class="form-label-title">Номер телефона:</label>
-                    <input type="text" class="form-control mb-2" id="phone" name="phone_number" value={{ user.phone_number }}>
+                    <input type="text" class="form-control mb-2" id="phone" name="phone_number" value={{ prefill.phone_number }}>
                     <label for="email" class="form-label-title">E-mail:</label>
-                    <input type="text" class="form-control mb-2 " id="email" name="email" value={{ user.email }}>
+                    <input type="text" class="form-control mb-2 " id="email" name="email" value={{ prefill.email }}>
                     <label for="address" class="form-label-title">Адрес:</label>
-                    <input type="text" class="form-control mb-2" id="address" name="address" value={{ user.address }}>
+                    <input type="text" class="form-control mb-2" id="address" name="address" value={{ prefill.address }}>
                     <div class="row justify-content-center">
                         <div class="col-auto form-button">
                             <button type="submit" class="btn btn-outline-success btn-lg mt-3" id="apply_button">Сохранить данные</button>
