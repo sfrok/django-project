@@ -3,9 +3,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, \
     OrderForm, OrderCompleteForm, SettingsForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from .search import search
-from store.data import CATEGORIES, HtmlPages, usr
+from store.data import CATEGORIES, HtmlPages
 from .models import Product, User, SingleOrder, Basket
 import logging
 
@@ -18,7 +18,6 @@ def session_clear(func):
         if request.method == 'POST': print("request.POST:", request.POST)
         if 'pid' in request.session: print('request.session.pid:', request.session['pid'])
         if 'bid' in request.session: print('request.session.bid:', request.session['bid'])
-        if usr in request.session: print('request.session.usr:', request.session[usr])
 
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
@@ -42,16 +41,16 @@ def registration_view(request):
     if reg_form.is_valid():
         new_user = reg_form.save(commit=False)
         new_user.save()
-        request.session[usr] = new_user.id
         username = reg_form.cleaned_data.get("username")
-        password = reg_form.cleaned_data.get("password")
+        password = reg_form.cleaned_data.get("password1")
         user = authenticate(username=username, password=password)
         if user:
-            request.session[usr] = user.id
+            login(request, user)
             return HttpResponseRedirect('/')
     context = {
         'reg_form': reg_form
     }
+    logout(request)
     return render(request, f'{HtmlPages.reg}.html', context)
 
 
@@ -64,9 +63,9 @@ def authorization_view(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            request.session[usr] = user.id
+            login(request, user)
             return HttpResponseRedirect('/')
-    if usr in request.session: del request.session[usr]
+    logout(request)
     return render(request, f'{HtmlPages.auth}.html', {'auth_form': auth_form})
 
 
@@ -108,22 +107,20 @@ def order_view(request):
         if form.is_valid():
             # Презаполнение формы
             user_info = {'name': '', 'phone': '', 'email': '', 'address': '', }
-            user_id = request.session.get(usr, None)
-            if user_id is not None:
-                user = User.objects.get(pk=user_id)
+            if request.user.is_authenticated:
                 user_info = {
-                    'name': user.last_name + ' ' + user.first_name,
-                    'phone': user.phone_number,
-                    'email': user.email,
-                    'address': user.address,
+                    'name': request.user.last_name + ' ' + request.user.first_name,
+                    'phone': request.user.phone_number,
+                    'email': request.user.email,
+                    'address': request.user.address,
                 }
 
             # Создание корзины, если ее еще нет
             basket = Basket()
             if 'bid' in request.session and 'bcont' in request.session:
                 basket.__dict__.update(request.session.get('bid', None))
-                if usr in request.session:
-                    basket.user = request.session[usr]
+                if request.user.is_authenticated:
+                    basket.user = request.user.id
                 container = request.session.get('bcont', None)
             else:
                 container = []
@@ -157,9 +154,7 @@ def order_complete_view(request):
             basket.save()
             for item in container:
                 order = SingleOrder()
-                order.__dict__ = item
-                if usr in request.session:
-                    order = SingleOrder.objects.get(pk=order.id)
+                order.__dict__.update(item)
                 order.product.sold -= 1
                 order.product.amount -= order.amount
                 order.save()
@@ -172,20 +167,19 @@ def order_complete_view(request):
 
 @session_clear
 def settings_view(request):
-    if usr in request.session:
-        user = User.objects.get(pk=request.session.get(usr, None))
+    if request.user.is_authenticated:
         if request.method == 'POST' and 'ucs' in request.session:
             form = SettingsForm(request.POST)
             if form.is_valid():
-                user.first_name = form.cleaned_data['first_name']
-                user.last_name = form.cleaned_data['last_name']
-                user.email = form.cleaned_data['email']
-                user.address = form.cleaned_data['address']
-                user.phone_number = form.cleaned_data['phone_number']
-                user.save()
-                return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
+                request.user.first_name = form.cleaned_data['first_name']
+                request.user.last_name = form.cleaned_data['last_name']
+                request.user.email = form.cleaned_data['email']
+                request.user.address = form.cleaned_data['address']
+                request.user.phone_number = form.cleaned_data['phone_number']
+                request.user.save()
+                return render(request, f'{HtmlPages.settings}.html')
         else: request.session['ucs'] = True
-        return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
+        return render(request, f'{HtmlPages.settings}.html')
     return HttpResponseRedirect('/')
 
 
