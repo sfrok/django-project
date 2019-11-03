@@ -27,7 +27,7 @@ def session_clear(func):
         if request.path[:9] != '/product/' and request.path != '/order/':
             print("we here")
             if 'pid' in request.session: del request.session['pid']
-        
+
         response = func(request)
         return response
     return wrapper
@@ -122,15 +122,8 @@ def order_view(request):
             if 'bid' in request.session and 'bcont' in request.session:
                 basket.__dict__.update(request.session.get('bid', None))
                 container = request.session.get('bcont', None)
-            elif user_id is not None:
-                try:
-                    basket = Basket.objects.get()
-                except Basket.DoesNotExist:
-                    basket = Basket(user=user_id)
-                container = [i for i in SingleOrder.objects.filter(basket_id=basket.id)]
             else:
                 container = []
-            if user_id is not None: basket.save()
 
             # Добавление нового заказа в корзину
             product = Product.objects.get(id=request.session.get('pid', None))
