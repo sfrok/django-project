@@ -23,10 +23,11 @@ from .data import HtmlPages as HP
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home_view, name=f'{HP.home}_page'),
     path(f'{HP.reg}/', views.registration_view, name=f'{HP.reg}_page'),
     path(f'{HP.auth}/', views.authorization_view, name=f'{HP.auth}_page'),
 
-    path('', views.search_input_view, name=f'{HP.search_input}_page'),
+    path(f'{HP.search_input}/', views.search_input_view, name=f'{HP.search_input}_search_page'),
     path(f'{HP.search_result}/', views.search_result_view, name=f'{HP.search_result}_page'),
 
     re_path(r'(product/)', views.product_view, name=f'{HP.product}_page'),

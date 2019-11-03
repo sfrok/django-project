@@ -6,7 +6,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, \
     OrderForm, OrderCompleteForm, SettingsForm
 from django.contrib.auth import authenticate
 from .search import search
-from store.data import CATEGORIES, HtmlPages, usr, hdn
+from store.data import CATEGORIES, HtmlPages, usr
 from .models import Product, User, SingleOrder, Basket
 import logging
 
@@ -37,7 +37,7 @@ def registration_view(request):
     if reg_form.is_valid():
         new_user = reg_form.save(commit=False)
         new_user.save()
-        if new_user.id != hdn: request.session[usr] = new_user.id
+        request.session[usr] = new_user.id
         return HttpResponseRedirect(reverse('base'))
     context = {
         'reg_form': reg_form
@@ -54,7 +54,7 @@ def authorization_view(request):
         password = auth_form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            if user.id != hdn: request.session[usr] = user.id
+            request.session[usr] = user.id
             return HttpResponseRedirect('/')
     if usr in request.session: del request.session[usr]
     return render(request, f'{HtmlPages.auth}.html', {'auth_form': auth_form})
@@ -158,6 +158,8 @@ def order_complete_view(request):
                 order.__dict__ = item
                 if usr in request.session:
                     order = SingleOrder.objects.get(pk=order.id)
+                order.product.sold -= 1
+                order.product.amount -= order.amount
                 order.save()
             del request.session['bid']
             del request.session['bcont']
@@ -183,6 +185,12 @@ def settings_view(request):
         else: request.session['ucs'] = True
         return render(request, f'{HtmlPages.settings}.html', {'prefill': user})
     return HttpResponseRedirect('/')
+
+
+@session_clear
+def home_view(request):
+    cat = (i for i in CATEGORIES if i[0] != 'none')
+    return render(request, f'{HtmlPages.home}.html', {'response': cat})
 
 
 """
