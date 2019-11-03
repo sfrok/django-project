@@ -1,72 +1,57 @@
 from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import UserCreationForm, UserAuthorizationForm, SearchForm, \
-    OrderForm, OrderCompleteForm, SettingsForm
 from django.contrib.auth import authenticate, login, logout
 from .search import search
 from store.data import CATEGORIES, HtmlPages
 from .models import Product, User, SingleOrder, Basket
+from baseapp import forms
 import logging
 
 logger = logging.getLogger('Views')
 
 
 def session_clear(func):
-    def wrapper(request, *_):
-        print("request.(path, method):", request.method, request.path)
-        if request.method == 'POST': print("request.POST:", request.POST)
-        if 'pid' in request.session: print('request.session.pid:', request.session['pid'])
-        if 'bid' in request.session: print('request.session.bid:', request.session['bid'])
+    def wrapper(request, *args):
+        print("request (path, method):", request.path, request.method)
+        if request.method == 'POST': print("- POST:", request.POST)
+        for i in ('ucs', 'pid', 'bid', 'bcont'):
+            if i in request.session: print(f'- session {i}:', request.session[i])
 
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
         if request.path[:9] != '/product/' and request.path != '/order/':
             if 'pid' in request.session: del request.session['pid']
-
-        response = func(request)
-        return response
+        return func(request)
     return wrapper
 
 
-@session_clear
-def contacts_view(request):
-    return render(request, f'{HtmlPages.contacts}.html')
+# AUTH
+
+def auth(request, form, page):  # Main auth func for both auth and reg
+    if form.is_valid():
+        if page == HtmlPages.reg:
+            (form.save(commit=False)).save()  # Saving new user
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return HttpResponseRedirect('/')
+    logout(request)
+    return render(request, f'{page}.html', {'login_form': form})
 
 
 @session_clear
 def registration_view(request):
-    logger.info("Go to the registration page")
-    reg_form = UserCreationForm(request.POST or None)
-    if reg_form.is_valid():
-        new_user = reg_form.save(commit=False)
-        new_user.save()
-        username = reg_form.cleaned_data.get("username")
-        password = reg_form.cleaned_data.get("password1")
-        user = authenticate(username=username, password=password)
-        if user:
-            login(request, user)
-            return HttpResponseRedirect('/')
-    context = {
-        'reg_form': reg_form
-    }
-    logout(request)
-    return render(request, f'{HtmlPages.reg}.html', context)
+    form = forms.UserCreationForm(request.POST or None)
+    return auth(request, form, HtmlPages.reg)
 
 
 @session_clear
 def authorization_view(request):
-    logger.info("Go to the login page")
-    auth_form = UserAuthorizationForm(request.POST or None)
-    if auth_form.is_valid():
-        username = auth_form.cleaned_data.get("username")
-        password = auth_form.cleaned_data.get("password")
-        user = authenticate(username=username, password=password)
-        if user:
-            login(request, user)
-            return HttpResponseRedirect('/')
-    logout(request)
-    return render(request, f'{HtmlPages.auth}.html', {'auth_form': auth_form})
+    form = forms.UserAuthorizationForm(request.POST or None)
+    return auth(request, form, HtmlPages.auth)
 
 
 # SEARCH
@@ -80,7 +65,7 @@ def search_input_view(request):
 @session_clear
 def search_result_view(request):
     if request.method == 'POST':
-        form = SearchForm(request.POST)
+        form = forms.SearchForm(request.POST)
         if form.is_valid():
             line = form.cleaned_data['line']
             cats = [i[0] for i in CATEGORIES if i[0] != 'none' and form.cleaned_data[i[0]]]
@@ -102,50 +87,30 @@ def product_view(request, _=None):
 
 @session_clear
 def order_view(request):
-    if request.method == 'POST' and 'pid' in request.session:
-        form = OrderForm(request.POST)
+    # Создание корзины, если ее еще нет, или обновление уже существующей
+    basket = request.session.get('bid', Basket())
+    container = request.session.get('bcont', [])
+    if request.method == 'POST':  # Добавление нового заказа в корзину
+        form = forms.OrderForm(request.POST)
         if form.is_valid():
-            # Презаполнение формы
-            user_info = {'name': '', 'phone': '', 'email': '', 'address': '', }
-            if request.user.is_authenticated:
-                user_info = {
-                    'name': request.user.last_name + ' ' + request.user.first_name,
-                    'phone': request.user.phone_number,
-                    'email': request.user.email,
-                    'address': request.user.address,
-                }
-
-            # Создание корзины, если ее еще нет
-            basket = Basket()
-            if 'bid' in request.session and 'bcont' in request.session:
-                basket.__dict__.update(request.session.get('bid', None))
-                if request.user.is_authenticated:
-                    basket.user = request.user.id
-                container = request.session.get('bcont', None)
-            else:
-                container = []
-
-            # Добавление нового заказа в корзину
-            product = Product.objects.get(id=request.session.get('pid', None))
-            amount = form.cleaned_data['product_count']
-            order = SingleOrder(basket_id=basket.id, product=product, amount=amount)
-            container.append(model_to_dict(order))
-            del request.session['pid']
-
-            tmp = model_to_dict(basket)
-            del tmp['date']
-            del tmp['delivery_date']
-            request.session['bid'] = tmp
-            request.session['bcont'] = container
-            return render(request, f'{HtmlPages.ord}.html',
-                  {'prefill': user_info})
-    return HttpResponseRedirect('/')
+            if 'pid' in request.session:
+                amount = form.cleaned_data['product_count']
+                add_order(request, request.session.get('pid', None), amount, basket.id)
+                del request.session['pid']
+    if request.user.is_authenticated:
+        basket.user_id = request.user.id
+    basket_dict = model_to_dict(basket)
+    del basket_dict['date']
+    del basket_dict['delivery_date']
+    request.session['bid'] = basket_dict
+    request.session['bcont'] = container
+    return render(request, f'{HtmlPages.ord}.html')
 
 
 @session_clear
 def order_complete_view(request):
     if request.method == 'POST' and 'bid' in request.session and 'bcont' in request.session:
-        form = OrderCompleteForm(request.POST)
+        form = forms.OrderCompleteForm(request.POST)
         if form.is_valid():
             basket = Basket()
             basket.__dict__.update(request.session.get('bid', None))
@@ -169,7 +134,7 @@ def order_complete_view(request):
 def settings_view(request):
     if request.user.is_authenticated:
         if request.method == 'POST' and 'ucs' in request.session:
-            form = SettingsForm(request.POST)
+            form = forms.SettingsForm(request.POST)
             if form.is_valid():
                 request.user.first_name = form.cleaned_data['first_name']
                 request.user.last_name = form.cleaned_data['last_name']
@@ -184,8 +149,9 @@ def settings_view(request):
 
 
 @session_clear
-def order_list(request):
-    return render(request, f'{HtmlPages.order_list}.html')
+def order_list_view(request):
+    orders = Basket.objects.filter(user_id=request.user.id)
+    return render(request, f'{HtmlPages.ord_list}.html', {'orders': orders})
 
 
 @session_clear
@@ -194,37 +160,14 @@ def home_view(request):
     return render(request, f'{HtmlPages.home}.html', {'response': cat})
 
 
-"""
 @session_clear
-def order_view(request):
-        # Презаполнение формы
-        user_info = {'name': '', 'address': '', 'phone': '', }
-        user_id = request.session.get(usr, None)
-        if user_id is not None:
-            user = User.objects.get(pk=user_id)
-            user_info = {
-                'name': user.last_name + ' ' + user.first_name,
-                'address': user.address,
-                'phone': user.phone_number,
-            }
+def contacts_view(request):
+    return render(request, f'{HtmlPages.contacts}.html')
 
-        # Создание корзины, если ее еще нет
-        if 'bid' in request.session and 'bcont' in request.session:
-            basket = request.session.get('bid', None)
-            container = request.session.get('bcont', None)
-        elif user_id is not None:
-            try:
-                basket = Basket.objects.get(status=0)
-            except basket.DoesNotExist:
-                basket = Basket(user=user_id)
-            container = [i for i in SingleOrder.objects.filter(basket_id=basket.id)]
-        else:
-            basket = Basket()
-            container = []
-        if user_id is not None: basket.save()
 
-        request.session['bid'] = basket
-        request.session['bcont'] = container
-        return render(request, f'{HtmlPages.ord}.html', {'prefill': user_info})
-    return render(request, f'{HtmlPages.home}.html')
-"""
+def add_order(request, product_id, amount, basket_id):
+    product = Product.objects.get(id=product_id)
+    order = SingleOrder(basket_id=basket_id, product=product, amount=amount)
+    container = request.session.get('bcont', [])
+    container.append(model_to_dict(order))
+    request.session['bcont'] = container

@@ -30,19 +30,19 @@
               <span class="header">Контактные данные</span>
               <div class="col-6 field">
                 <span>Имя и фамилия:</span><br>
-                <input class="input-field" type="text" placeholder="Имя и Фамилию" value={{prefill.name}}>
+                <input class="input-field" type="text" placeholder="Имя и Фамилию" value={{user.last_name|add:" "|add:user.last_name}}>
               </div>
               <div class="col-6 field">
                 <span>Номер телефона:</span><br>
-                <input class="input-field" type="text" value={{prefill.phone}}>
+                <input class="input-field" type="text" value={{user.phone_number}}>
               </div>
               <div class="col-6 field">
                 <span>E-mail:</span><br>
-                <input class="input-field" type="text" placeholder="E-mail" value={{prefill.email}}>
+                <input class="input-field" type="text" placeholder="E-mail" value={{user.email}}>
               </div>
               <div class="col-6 field">
                 <span>Адрес доставки</span>
-                <input class="input-field" type="text" placeholder="Город, улица, дом" value={{prefill.address}}>
+                <input class="input-field" type="text" placeholder="Город, улица, дом" value={{user.address}}>
               </div>
             </div>
             <div class="col-5 product">

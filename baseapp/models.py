@@ -8,12 +8,10 @@ class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         # Creates and saves a User with the given params.
         if not email: raise ValueError('Users must have an email address')
-
         user = self.model(
             email=self.normalize_email(email),
             username=username,
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -62,20 +60,12 @@ class User(AbstractUser):
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    description = models.TextField(max_length=3000,
-                                   default='')
-    category = models.CharField(max_length=50,
-                                choices=CATEGORIES,
-                                default='none')
+    description = models.TextField(max_length=3000, default='')
+    category = models.CharField(max_length=50, choices=CATEGORIES, default='none')
     price = models.IntegerField(default=0)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
-    sell_state = models.IntegerField(default=0,
-                                     choices=SELL_STATES)
-    ship_to = models.TextField(max_length=300,
-                               default='none')
-    ship_price = models.IntegerField(default=0)
-    ship_discount = models.FloatField(default=0.0)
+    sell_state = models.IntegerField(default=0, choices=SELL_STATES)
     photo = models.ImageField(default=None)
     post_date = models.DateTimeField(default=timezone.now)
     sold = models.IntegerField(default=0)
@@ -85,20 +75,10 @@ class Product(models.Model):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(check=models.Q(price__gte=0),
-                                   name='price0'),
-            models.CheckConstraint(check=models.Q(ship_price__gte=0),
-                                   name='ship_price0'),
-            models.CheckConstraint(check=models.Q(discount__gte=0),
-                                   name='discount0'),
-            models.CheckConstraint(check=models.Q(discount__lte=100),
-                                   name='discount1'),
-            models.CheckConstraint(check=models.Q(ship_discount__gte=0),
-                                   name='ship_discount0'),
-            models.CheckConstraint(check=models.Q(ship_discount__lte=100),
-                                   name='ship_discount1'),
-            models.CheckConstraint(check=models.Q(amount__gte=0),
-                                   name='amount0'),
+            models.CheckConstraint(check=models.Q(price__gte=0), name='price0'),
+            models.CheckConstraint(check=models.Q(discount__gte=0), name='discount0'),
+            models.CheckConstraint(check=models.Q(discount__lte=100), name='discount1'),
+            models.CheckConstraint(check=models.Q(amount__gte=0), name='amount0'),
         ]
 
 
@@ -107,14 +87,11 @@ class SingleOrder(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField(default=1)
     sum_price = models.IntegerField(default=0)
-    sum_ship_price = models.IntegerField(default=0)
 
     class Meta:
         constraints = [
-            models.CheckConstraint(check=models.Q(amount__gte=1),
-                                   name='amount1'),
-            models.CheckConstraint(check=models.Q(sum_price__gte=0),
-                                   name='sum_price1')
+            models.CheckConstraint(check=models.Q(amount__gte=1), name='amount1'),
+            models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sum_price1')
         ]
 
     def __str__(self):
@@ -126,8 +103,7 @@ class Basket(models.Model):
     date = models.DateTimeField(default=timezone.now)
     delivery_date = models.DateTimeField(default=timezone.now)
     sum_price = models.IntegerField(default=0)
-    sum_ship_price = models.IntegerField(default=0)
-    user = models.IntegerField(default=0)
+    user_id = models.IntegerField(default=0)
     fio = models.CharField(max_length=130, default='')
     address = models.CharField(max_length=128, default='')
     phone_number = models.CharField(max_length=16, default='')
@@ -135,8 +111,7 @@ class Basket(models.Model):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(check=models.Q(sum_price__gte=0),
-                                   name='sum_price2')
+            models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sum_price2')
         ]
 
     def __str__(self):
