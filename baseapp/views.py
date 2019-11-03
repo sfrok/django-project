@@ -19,6 +19,8 @@ def session_clear(func):
         if 'pid' in request.session: del request.session['pid']
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
+        if request.path[:9] != '/product/' and 'pid' in request.session:
+            del request.session['pid']
         return response
     return wrapper
 
@@ -80,6 +82,7 @@ def search_result_view(request):
 
 # PRODUCT
 
+@session_clear
 def product_view(request, _=None):
     product_id = int(request.path[9:])
     product = Product.objects.get(id=product_id)
@@ -153,6 +156,8 @@ def order_complete_view(request):
             for item in container:
                 order = SingleOrder()
                 order.__dict__ = item
+                if usr in request.session:
+                    order = SingleOrder.objects.get(pk=order.id)
                 order.save()
             del request.session['bid']
             del request.session['bcont']
