@@ -25,7 +25,6 @@ def session_clear(func):
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
         if request.path[:9] != '/product/' and request.path != '/order/':
-            print("we here")
             if 'pid' in request.session: del request.session['pid']
 
         response = func(request)
@@ -101,20 +100,19 @@ def product_view(request, _=None):
 
 @session_clear
 def order_view(request):
-    print('---------lll:')
-    if 'pid' in request.session: print('---------pid:', request.session['pid'])
     if request.method == 'POST' and 'pid' in request.session:
         form = OrderForm(request.POST)
         if form.is_valid():
             # Презаполнение формы
-            user_info = {'name': '', 'address': '', 'phone': '', }
+            user_info = {'name': '', 'phone': '', 'email': '', 'address': '', }
             user_id = request.session.get(usr, None)
             if user_id is not None:
                 user = User.objects.get(pk=user_id)
                 user_info = {
                     'name': user.last_name + ' ' + user.first_name,
-                    'address': user.address,
                     'phone': user.phone_number,
+                    'email': user.email,
+                    'address': user.address,
                 }
 
             # Создание корзины, если ее еще нет
@@ -129,7 +127,6 @@ def order_view(request):
             product = Product.objects.get(id=request.session.get('pid', None))
             amount = form.cleaned_data['product_count']
             order = SingleOrder(basket_id=basket.id, product=product, amount=amount)
-            if user_id is not None: order.save()
             container.append(model_to_dict(order))
             del request.session['pid']
 
