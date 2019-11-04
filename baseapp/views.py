@@ -90,7 +90,8 @@ def product_view(request, _=None):
 @session_clear
 def order_view(request):
     # Создание корзины, если ее еще нет, или обновление уже существующей
-    basket = request.session.get('bid', Basket())
+    basket = Basket()
+    basket.__dict__.update(request.session.get('bid', {}))
     container = request.session.get('bcont', [])
     if request.method == 'POST':  # Добавление нового заказа в корзину
         form = forms.OrderForm(request.POST)
