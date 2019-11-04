@@ -10,8 +10,7 @@
 
 .contacts {
   background-color: white;
-  height: 460px;
-  /* border: 1px solid black; */
+  height: 550px;
 }
 
 .input-field {
@@ -23,7 +22,6 @@
 }
 
 .image-place {
-  margin-top: 15px;
 }
 
 .description {
@@ -33,13 +31,11 @@
 
 .order-info {
   font-size: 18px;
-  margin-top: 10px;
 }
 
 .checkout {
   border-radius: 3px;
   height: 50px;
-  margin-top: 60px;
   text-align: center;
   background-color: #65c000;
   color: white;
