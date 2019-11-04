@@ -57,18 +57,26 @@
                 <div class="col-12 text-lg-right text-md-left text-right">
                   <span class="header">Ваш заказ</span><hr>
                 </div>
-                <div class="col-4 image-place">
-                  <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
-                </div>
-                <div class="col-8 description">
-                  {{container.1.product.description}}
-                </div>
                 <div class="col-8 order-info">
                   <span>Всего к оплате:</span>
                 </div>
                 <div class="col-4 order-info">
-                  <span><strong>9500грн</strong></span>
+                  <span><strong>{% widthratio request.session.bid.sum_price 100 1 %} грн</strong></span>
                 </div>
+                {% for i in request.session.bcont %}
+                  <div class="col-4 image-place"><hr>
+                    <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
+                  </div>
+                  <div class="col-8 description"><hr>
+                    Sony Playstation 4 PRO 1Tb (PS4 PRO) CUH-7116
+                  </div>
+                  <div class="col-8 order-info">
+                    <span>Цена:</span>
+                  </div>
+                  <div class="col-4 order-info">
+                    <span><strong>{% widthratio i.sum_price 100 1 %} грн</strong></span>
+                  </div><hr>
+                {% endfor %}
               </div>
             </div>
           </div>

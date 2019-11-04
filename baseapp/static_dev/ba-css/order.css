@@ -5,7 +5,6 @@
 
 .product {
   background-color: white;
-  height: 370px;
 }
 
 .contacts {
@@ -25,7 +24,6 @@
 }
 
 .description {
-  margin-top: 15px;
   font-size: 18px;
 }
 
@@ -40,7 +38,6 @@
   background-color: #65c000;
   color: white;
   box-shadow: 0px 4px 12px #65c000;
-  line-height: 50px;
   max-width: 250px;
 }
 
