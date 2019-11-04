@@ -13,7 +13,7 @@
     }
   </style>
   <body>
-    <form action="" method="post">
+    <form action="/complete_order/" method="post"> {% csrf_token %}
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-12 col-md-12 col-lg-6">
@@ -26,20 +26,21 @@
                   <span class="header">Контактные данные:</span>
                 </div>
                 <div class="col-12">
-                  <label for="name" class="form-label-title">ФИО:</label><br>
-                  <input class="input-field form-control" type="text" placeholder="Имя и Фамилия" value={{user.last_name|add:" "|add:user.last_name}}>
+                  <label for="fio" class="form-label-title">ФИО:</label><br>
+                  <input class="input-field form-control" type="text" name="fio"
+                    value="{% if user.is_authenticated %}{{user.last_name}} {{user.first_name}}{% endif %}">
                 </div>
                 <div class="col-12">
-                  <label for="phone" class="form-label-title">Номер телефона:</label> <br>
-                  <input class="input-field form-control" type="text" value={{user.phone_number}}>
+                  <label for="phone_number" class="form-label-title">Номер телефона:</label><br>
+                  <input class="input-field form-control" type="text" name="phone_number" value={{user.phone_number}}>
                 </div>
                 <div class="col-12">
-                  <label for="email" class="form-label-title">E-mail</label><br>
-                  <input class="input-field form-control" type="text" placeholder="E-mail" value={{user.email}}>
+                  <label for="email" class="form-label-title">E-mail:</label><br>
+                  <input class="input-field form-control" type="text" name="email" value={{user.email}}>
                 </div>
                 <div class="col-12">
-                  <label for="address" class="form-label-title">Адрес доставки:</label>
-                  <input class="input-field form-control" type="text" placeholder="Город, улица, дом" value={{user.address}}>
+                  <label for="address" class="form-label-title">Адрес доставки:</label><br>
+                  <input class="input-field form-control" type="text" name="address" value="{{user.address}}">
                 </div>
                 <div class="col-12">
                   <div class="row ">
@@ -61,20 +62,20 @@
                   <span>Всего к оплате:</span>
                 </div>
                 <div class="col-4 order-info">
-                  <span><strong>{% widthratio request.session.bid.sum_price 100 1 %} грн</strong></span>
+                  <span><strong>{{sum_price}}.00 грн</strong></span>
                 </div>
-                {% for i in request.session.bcont %}
+                {% for i in items %}
                   <div class="col-4 image-place"><hr>
                     <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
                   </div>
                   <div class="col-8 description"><hr>
-                    Sony Playstation 4 PRO 1Tb (PS4 PRO) CUH-7116
+                    {{i.name}}
                   </div>
                   <div class="col-8 order-info">
                     <span>Цена:</span>
                   </div>
                   <div class="col-4 order-info">
-                    <span><strong>{% widthratio i.sum_price 100 1 %} грн</strong></span>
+                    <span><strong>{{i.price}}.00 грн</strong></span>
                   </div><hr>
                 {% endfor %}
               </div>

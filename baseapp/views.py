@@ -16,7 +16,7 @@ logger = logging.getLogger('Views')
 def session_clear(func):
     def wrapper(request, *args):
         print("\nrequest (path, method):", request.path, request.method)
-        print(f'\t- session:', ', '.join([f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]))
+        print(f'\t', ',\t'.join([f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]))
         if request.method == 'POST': print(f'\t- POST: {request.POST}\n')
 
         if request.path != '/settings/' and 'ucs' in request.session:
@@ -58,7 +58,7 @@ def authorization_view(request):
 @session_clear
 def search_input_view(request):
     cats = (i for i in CATEGORIES if i[0])
-    return render(request, f'{HtmlPages.search_input}.html', {'response': cats})
+    return render(request, f'{HtmlPages.srch_inp}.html', {'response': cats})
 
 
 @session_clear
@@ -68,8 +68,8 @@ def search_result_view(request):
         if form.is_valid():
             line = form.cleaned_data['line']
             cats = [i[0] for i in CATEGORIES if i[0] and form.cleaned_data[i[0]]]
-            return render(request, f'{HtmlPages.search_result}.html', {'response': search(line, cats)})
-    return render(request, f'{HtmlPages.search_result}.html', {'response': search()})
+            return render(request, f'{HtmlPages.srch_res}.html', {'response': search(line, cats)})
+    return render(request, f'{HtmlPages.srch_res}.html', {'response': search()})
 
 
 # PRODUCT
@@ -89,8 +89,13 @@ def order_view(request):
             amount = form.cleaned_data['product_count']
             add_order(request, request.session.get('pid', None), amount)
             del request.session['pid']
-    return render(request, f'{HtmlPages.ord}.html', 
-        {'sum_price': sum([i['sum_price'] for i in request.session.get('bcont', [])])})
+    if 'bcont' in request.session:
+        c = request.session.get('bcont', [])
+        return render(request, f'{HtmlPages.ord}.html', {
+            'sum_price': sum([i['sum_price'] for i in c]), 'items': [{
+                'name': Product.objects.get(pk=i['product']).name, 
+                'price': i['sum_price']} for i in c]})
+    return HttpResponseRedirect('/')
 
 
 @session_clear
@@ -100,19 +105,19 @@ def order_complete_view(request):
         if form.is_valid():
             # Создание корзины, если ее еще нет, или обновление уже существующей
             basket = Basket.objects.create(
-                fio = form.cleaned_data['fio'],
-                email = form.cleaned_data['email'],
-                address = form.cleaned_data['address'],
-                phone_number = form.cleaned_data['phone_number'],
-                sum_price = sum([i['sum_price'] for i in request.session.get('bcont', [])]),
-                user_id = request.user.id if request.user.is_authenticated else 0)
+                fio=form.cleaned_data['fio'],
+                email=form.cleaned_data['email'],
+                address=form.cleaned_data['address'],
+                phone_number=form.cleaned_data['phone_number'],
+                sum_price=sum([i['sum_price'] for i in request.session.get('bcont', [])]),
+                user=request.user if request.user.is_authenticated else None)
             for item in request.session.get('bcont', []):
                 order = basket.singleorder_set.create(**item)
                 order.product.sold += 1
                 order.product.amount -= order.amount
                 order.save()
             del request.session['bcont']
-            return render(request, f'{HtmlPages.com_ord}.html')
+            return render(request, f'{HtmlPages.ord_com}.html')
     return HttpResponseRedirect('/')
 
 

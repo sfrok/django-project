@@ -49,27 +49,15 @@
             </tr>
           </thead>
         <tbody>
+            {% for i in user.basket_set.all %}
             <tr>
-              <td>19.19.19</td>
-              <td>ул. Уличная, 18</td>
-              <td>В обработке</td>
-              <td>18344 грн.</td>
-              <td>Товар1, Товар2, Товар3</td>
+              <td>{{i.date}}</td>
+              <td>{{i.address}}</td>
+              <td>{{i.status}}</td>
+              <td>{{i.sum_price}}</td>
+              <td>{{i.singleorder_set.all|join:", "}}</td>
             </tr>
-            <tr>
-              <td>19.19.19</td>
-              <td>ул. Уличная, 18</td>
-              <td>В обработке</td>
-              <td>18344 грн.</td>
-              <td>Товар1, Товар2, Товар3</td>
-            </tr>
-              <tr>
-              <td>19.19.19</td>
-              <td>ул. Уличная, 18</td>
-              <td>В обработке</td>
-              <td>18344 грн.</td>
-              <td>Товар1, Товар2, Товар3</td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
       </div>
