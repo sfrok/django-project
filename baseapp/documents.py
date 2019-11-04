@@ -1,7 +1,7 @@
 from django_elasticsearch_dsl import Document
 from django_elasticsearch_dsl.registries import registry
 
-from .models import Product, Order, Status, User, PersonalDiscount
+from .models import Product, SingleOrder, Basket, User, PersonalDiscount
 
 
 @registry.register_document
@@ -25,35 +25,34 @@ class ProductDoc(Document):
 
 
 @registry.register_document
-class OrderDoc(Document):
+class SingleOrderDoc(Document):
     class Index:
         # Name of the Elasticsearch index
-        name = 'orders'
+        name = 'singleorders'
         # See Elasticsearch Indices API reference for available settings
         settings = {'number_of_shards': 1,
                     'number_of_replicas': 0}
 
     class Django:
-        model = Order
-        fields = ['date',
-                  'delivery_date',
-                  'sum_price',
-                  'sum_ship_price',
+        model = SingleOrder
+        fields = ['sum_price',
                   ]
 
 
 @registry.register_document
-class StatusDoc(Document):
+class BasketDoc(Document):
     class Index:
         # Name of the Elasticsearch index
-        name = 'statuses'
+        name = 'baskets'
         # See Elasticsearch Indices API reference for available settings
         settings = {'number_of_shards': 1,
                     'number_of_replicas': 0}
 
     class Django:
-        model = Status
-        fields = ['name',
+        model = Basket
+        fields = ['date',
+                  'delivery_date',
+                  'sum_price',
                   ]
 
 

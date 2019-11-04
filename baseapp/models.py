@@ -19,22 +19,14 @@ class MyUserManager(BaseUserManager):
 
     def create_superuser(self, email, username, password):
         # Creates and saves a superuser with the given params.
-        user = self.create_user(
-            email,
-            password=password,
-            username=username,
-        )
+        user = self.create_user(email, password=password, username=username)
         user.is_admin = True
         user.save(using=self._db)
         return user
 
 
 class User(AbstractUser):
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
-    )
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     first_name = models.CharField(max_length=64)
@@ -46,7 +38,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.username
+        return self.last_name + ' ' + self.first_name
 
     def has_perm(self, perm, obj=None):  # Does the user have a specific permission?
         return True  # Simplest possible answer: Yes, always
@@ -62,7 +54,7 @@ class User(AbstractUser):
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000, default='')
-    category = models.CharField(max_length=50, choices=CATEGORIES, default='none')
+    category = models.CharField(max_length=50, choices=CATEGORIES, default=None)
     price = models.IntegerField(default=0)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
@@ -83,8 +75,29 @@ class Product(models.Model):
         ]
 
 
+class Basket(models.Model):
+    status = models.IntegerField(default=0, choices=STATUSES)
+    date = models.DateTimeField(default=timezone.now)
+    delivery_date = models.DateTimeField(default=timezone.now)
+    sum_price = models.IntegerField(default=0)
+    user_id = models.IntegerField(default=0)
+    fio = models.CharField(max_length=130, default='')
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    address = models.CharField(max_length=128, default='')
+    phone_number = models.CharField(max_length=16, default='')
+    info = models.TextField(max_length=512, default='')
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sum_price2')
+        ]
+
+    def __str__(self):
+        return self.sum_price
+
+
 class SingleOrder(models.Model):
-    basket_id = models.IntegerField(default=0)
+    basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField(default=1)
     sum_price = models.IntegerField(default=0)
@@ -93,26 +106,6 @@ class SingleOrder(models.Model):
         constraints = [
             models.CheckConstraint(check=models.Q(amount__gte=1), name='amount1'),
             models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sum_price1')
-        ]
-
-    def __str__(self):
-        return self.sum_price
-
-
-class Basket(models.Model):
-    status = models.IntegerField(default=0, choices=STATUSES)
-    date = models.DateTimeField(default=timezone.now)
-    delivery_date = models.DateTimeField(default=timezone.now)
-    sum_price = models.IntegerField(default=0)
-    user_id = models.IntegerField(default=0)
-    fio = models.CharField(max_length=130, default='')
-    address = models.CharField(max_length=128, default='')
-    phone_number = models.CharField(max_length=16, default='')
-    info = models.TextField(max_length=512, default='')
-
-    class Meta:
-        constraints = [
-            models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sum_price2')
         ]
 
     def __str__(self):

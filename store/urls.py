@@ -30,7 +30,7 @@ urlpatterns = [
     path(f'{HP.search_input}/', views.search_input_view, name=f'{HP.search_input}_search_page'),
     path(f'{HP.search_result}/', views.search_result_view, name=f'{HP.search_result}_page'),
 
-    re_path(r'(product/)', views.product_view, name=f'{HP.product}_page'),
+    re_path(r'(product/)(\d+)', views.product_view, name=f'{HP.product}_page'),
     path(f'{HP.ord}/', views.order_view, name=f'ord_page'),
     path(f'{HP.com_ord}/', views.order_complete_view, name=f'ord_com_page'),
     path(f'{HP.ord_list}/', views.order_list_view, name=f'{HP.ord_list}_page'),

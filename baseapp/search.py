@@ -6,13 +6,13 @@ from elasticsearch_dsl import Search
 from elasticsearch_dsl.query import Q
 
 
-def search(line, cat=None, sort_attr=None):
+def search(line='', cats=[], sort_attr=None):
     client = Elasticsearch()
-    if cat is None:
+    if cats is []:
         s = Search(using=client, index="products")
         if line != '': s = s.query("match_phrase", name=line)
     else:
-        queries = [Q('match', category=i) for i in cat]
+        queries = [Q('match', category=i) for i in cats]
         s = Search(using=client, index="products")
         if line != '':
             s = s.query(Q('match_phrase', name=line) & Q(six.moves.reduce(ior, queries)))

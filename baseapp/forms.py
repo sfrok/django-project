@@ -99,15 +99,18 @@ class UserAdmin(BaseUserAdmin):
 class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
     locals().update(
-        {i[0]: forms.BooleanField(required=False) for i in CATEGORIES if i[0] != 'none'})
+        {i[0]: forms.BooleanField(required=False) for i in CATEGORIES if i[0]})
 
 
-class OrderForm(forms.Form):
+class SingleOrderForm(forms.Form):
     product_count = forms.CharField(max_length=130, required=False)
 
 
-class OrderCompleteForm(forms.Form):
+class OrderForm(forms.Form):
     fio = forms.CharField(max_length=130, required=False)
+    email = forms.CharField(max_length=255, required=False)
+    address = forms.CharField(max_length=128, required=False)
+    phone_number = forms.CharField(max_length=16, required=False)
 
 
 class SettingsForm(forms.Form):
