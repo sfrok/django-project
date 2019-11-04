@@ -1,12 +1,14 @@
-from django.forms import model_to_dict
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
-from .search import search
-from store.data import CATEGORIES, HtmlPages
-from .models import Product, User, SingleOrder, Basket
-from baseapp import forms
 import logging
+
+from django.contrib.auth import authenticate, login, logout
+from django.forms import model_to_dict
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from baseapp import forms
+from store.data import CATEGORIES, HtmlPages
+from .models import Product, SingleOrder, Basket
+from .search import search
 
 logger = logging.getLogger('Views')
 

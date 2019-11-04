@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 
-import os
-import store.privacy as pc
 import logging
+import os
+
+import store.privacy as pc
+
 logger = logging.getLogger('Settings')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

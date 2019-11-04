@@ -1,7 +1,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
+
 from baseapp.models import User
-from django.contrib.sessions.models import Session
 
 
 class TestRegAuth(StaticLiveServerTestCase):
@@ -47,7 +47,7 @@ class TestRegAuth(StaticLiveServerTestCase):
             # val = session.get_decoded()['usr']
             # val = session.get_decoded()
             # print(val) - get session variables
-            
+
             # left = responce.request.user.is_authenticated
             # right = True if entry[1] is entries[0][1] and entry[2] is entries[0][2] else False
             # self.assertEqual(left, right, f'{entry[0]}, "{left}" != "{right}"')

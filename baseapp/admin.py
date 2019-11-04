@@ -1,6 +1,7 @@
-from .forms import UserAdmin
 from django.contrib import admin
 from django.contrib.auth.models import Group
+
+from .forms import UserAdmin
 from .models import Product, User, PersonalDiscount, SingleOrder, Basket
 
 admin.site.register(SingleOrder)

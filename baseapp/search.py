@@ -1,8 +1,9 @@
+from operator import ior
+
+from django.utils import six
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 from elasticsearch_dsl.query import Q
-from operator import ior
-from django.utils import six
 
 
 def search(line, cat=None, sort_attr=None):

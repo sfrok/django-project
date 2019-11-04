@@ -1,6 +1,7 @@
 from django.test import TestCase
-from baseapp.models import Product
+
 import baseapp.search as func
+from baseapp.models import Product
 
 
 class TestDB(TestCase):
