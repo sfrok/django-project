@@ -29,11 +29,11 @@
                         <form class="form-inline my-2 my-lg-0 " action="/search_result/" method="post">
                             {% csrf_token %}
                             <input id="line" name="line" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            {% for item in response %}
+                            {% for item in Category.objects.all %}
                          <div class="form-check">
-                            <input id="{{item.0}}" name="{{item.0}}" class="form-check-input" type="checkbox">
-                            <label class="form-check-label" for="{{item.0}}">
-                            {{item.1}}
+                            <input id="cat_{{item.id}}" name="cat_{{item.id}}" class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="cat_{{item.id}}">
+                            {{item.name}}
                             </label>
                         </div>
                         {% endfor %}

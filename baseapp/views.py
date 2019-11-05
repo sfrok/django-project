@@ -1,14 +1,10 @@
-import logging
-
-from django.contrib.auth import authenticate, login, logout
-from django.forms import model_to_dict
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from baseapp import forms
-from store.data import CATEGORIES, HtmlPages
-from .models import Product, SingleOrder, Basket
-from .search import search
+from .models import Product, Basket, Category
+from baseapp.scripts import HtmlPages, search, auth, add_order
+import logging
 
 logger = logging.getLogger('Views')
 
@@ -29,20 +25,6 @@ def session_clear(func):
 
 # AUTH
 
-def auth(request, form, page):  # Main auth func for both auth and reg
-    if form.is_valid():
-        if page == HtmlPages.reg:
-            (form.save(commit=False)).save()  # Saving new user
-        username = form.cleaned_data.get("username")
-        password = form.cleaned_data.get("password")
-        user = authenticate(username=username, password=password)
-        if user:
-            login(request, user)
-            return HttpResponseRedirect('/')
-    logout(request)
-    return render(request, f'{page}.html', {'login_form': form})
-
-
 @session_clear
 def registration_view(request):
     return auth(request, forms.UserCreationForm(request.POST or None), HtmlPages.reg)
@@ -57,8 +39,7 @@ def authorization_view(request):
 
 @session_clear
 def search_input_view(request):
-    cats = (i for i in CATEGORIES if i[0])
-    return render(request, f'{HtmlPages.srch_inp}.html', {'response': cats})
+    return render(request, f'{HtmlPages.srch_inp}.html')
 
 
 @session_clear
@@ -67,9 +48,9 @@ def search_result_view(request):
         form = forms.SearchForm(request.POST)
         if form.is_valid():
             line = form.cleaned_data['line']
-            cats = [i[0] for i in CATEGORIES if i[0] and form.cleaned_data[i[0]]]
-            return render(request, f'{HtmlPages.srch_res}.html', {'response': search(line, cats)})
-    return render(request, f'{HtmlPages.srch_res}.html', {'response': search()})
+            cats = [i for i in Category.objects.all() if form.cleaned_data['cat_'+str(i.id)]]
+            return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
+    return render(request, f'{HtmlPages.srch_res}.html', {'items': search()})
 
 
 # PRODUCT
@@ -164,18 +145,9 @@ def order_list_view(request):
 
 @session_clear
 def home_view(request):
-    cats = (i for i in CATEGORIES if i[0])
-    return render(request, f'{HtmlPages.home}.html', {'response': cats})
+    return render(request, f'{HtmlPages.home}.html')
 
 
 @session_clear
 def contacts_view(request):
     return render(request, f'{HtmlPages.contacts}.html')
-
-
-def add_order(request, product_id, amount):
-    product = Product.objects.get(id=product_id)
-    order = SingleOrder(product=product, amount=amount, sum_price=product.price)
-    orders = request.session.get('bcont', [])
-    orders.append(model_to_dict(order))
-    request.session['bcont'] = orders
