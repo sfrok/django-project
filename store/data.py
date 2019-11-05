@@ -1,12 +1,3 @@
-CATEGORIES = (
-    (None, '...'),
-    ('cat_1', 'Категория 1'),
-    ('cat_2', 'Категория 2'),
-    ('cat_3', 'Категория 3'),
-    ('cat_4', 'Категория 4'),
-)
-
-
 class HtmlPages():  # Названия html-файлов без .html
     auth = 'auth'
     reg = 'registration'
@@ -14,6 +5,7 @@ class HtmlPages():  # Названия html-файлов без .html
     srch_inp = 'base'
     srch_res = 'search_result'
     product = 'product_page'
+    pro_edit = 'product_edit'
     ord = 'order'
     ord_com = 'order_complete'
     settings = 'settings'

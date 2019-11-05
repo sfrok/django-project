@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django_elasticsearch_dsl',
     'crispy_forms',
     'baseapp',
 ]
@@ -51,12 +50,6 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'baseapp.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# ELASTICSEARCH_DSL = {
-#     'default': {
-#         'hosts': 'localhost:9200'
-#     },
-# }
 
 LOGGING = {
     'version': 1,
