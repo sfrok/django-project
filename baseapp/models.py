@@ -52,7 +52,7 @@ class User(AbstractUser):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=32, default='')
 
     def __str__(self):
         return self.name
@@ -129,3 +129,9 @@ class PersonalDiscount(models.Model):
 
     def __str__(self):
         return self.name
+
+
+try:
+    cats = (str(i.id) for i in Category.objects.all())
+except:
+    cats = []

@@ -1,10 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+import logging
 
-from baseapp import forms
 from .models import Product, Basket, Category
 from baseapp.scripts import HtmlPages, search, auth, add_order
-import logging
+from baseapp import forms
 
 logger = logging.getLogger('Views')
 
@@ -20,6 +20,7 @@ def session_clear(func):
         if request.path[:9] != '/product/' and request.path != '/order/':
             if 'pid' in request.session: del request.session['pid']
         return func(request)
+
     return wrapper
 
 
@@ -86,7 +87,7 @@ def order_view(request):
         c = request.session.get('bcont', [])
         return render(request, f'{HtmlPages.ord}.html', {
             'sum_price': sum([i['sum_price'] for i in c]), 'items': [{
-                'name': Product.objects.get(pk=i['product']).name, 
+                'name': Product.objects.get(pk=i['product']).name,
                 'price': i['sum_price']} for i in c]})
     return HttpResponseRedirect('/')
 
@@ -129,7 +130,8 @@ def settings_view(request):
                 request.user.phone_number = form.cleaned_data['phone_number']
                 request.user.save()
                 return render(request, f'{HtmlPages.settings}.html')
-        else: request.session['ucs'] = True
+        else:
+            request.session['ucs'] = True
         return render(request, f'{HtmlPages.settings}.html')
     return HttpResponseRedirect('/')
 
@@ -144,7 +146,8 @@ def order_list_view(request):
 
 @session_clear
 def home_view(request):
-    return render(request, f'{HtmlPages.home}.html')
+    items = Category.objects.all()
+    return render(request, f'{HtmlPages.home}.html', {'items': items})
 
 
 @session_clear

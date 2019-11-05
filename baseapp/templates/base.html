@@ -19,6 +19,7 @@
   <body>
     <!-- HEADER START-->
     <div class="container-fluid">
+        <div class="ordering-first order-2 order-sm-0">
         <div class="row">
             <div class="col-md-12 first-background">
                <div class="row justify-content-center justify-content-md-between">
@@ -34,6 +35,8 @@
                </div>
             </div>
         </div>
+        </div>
+        <div class="ordering-second order-1 order-sm-0">
         <div class="row">
             <div class="col-md-12 second-background">
                 <nav class="navbar navbar-expand-md navbar-light">
@@ -49,37 +52,38 @@
             </nav>
             </div>
         </div>
+        </div>
     </div>
     <!-- HEADER STOP-->
 
     <!-- BODY START-->
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 navbar sidebar">
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <form class="form-inline my-2 my-lg-0 " action="/search_result/" method="post">
+                            {% csrf_token %}
+                            <input id="line" name="line" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            {% for item in items %}
+                         <div class="form-check">
+                            <input id="cat_{{item.id}}" name="cat_{{item.id}}" class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="cat_{{item.id}}">
+                            {{item.name}}
+                            </label>
+                        </div>
+                        {% endfor %}
+                            <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- BODY STOP-->
   </body>
 </html>
 {#<script src="{% static "ba-js/base_category.js" %}"></script>#}
 
-{#  <div class="container-fluid">#}
-{#        <div class="row">#}
-{#            <div class="col-md-4 navbar sidebar">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-12 mb-2">#}
-{#                        <form class="form-inline my-2 my-lg-0 " action="/search_result/" method="post">#}
-{#                            {% csrf_token %}#}
-{#                            <input id="line" name="line" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-{#                            {% for item in response %}#}
-{#                         <div class="form-check">#}
-{#                            <input id="{{item.0}}" name="{{item.0}}" class="form-check-input" type="checkbox">#}
-{#                            <label class="form-check-label" for="{{item.0}}">#}
-{#                            {{item.1}}#}
-{#                            </label>#}
-{#                        </div>#}
-{#                        {% endfor %}#}
-{#                            <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                    <div class="col-md-12">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
