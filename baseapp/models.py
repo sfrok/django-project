@@ -80,9 +80,9 @@ class Basket(models.Model):
     date = models.DateTimeField(default=timezone.now)
     delivery_date = models.DateTimeField(default=timezone.now)
     sum_price = models.IntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     fio = models.CharField(max_length=130, default='')
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    email = models.EmailField(default='', max_length=255)
     address = models.CharField(max_length=128, default='')
     phone_number = models.CharField(max_length=16, default='')
     info = models.TextField(max_length=512, default='')
@@ -109,7 +109,7 @@ class SingleOrder(models.Model):
         ]
 
     def __str__(self):
-        return self.sum_price
+        return self.product.name + ' x' + str(self.amount)
 
 
 class PersonalDiscount(models.Model):

@@ -112,7 +112,9 @@ def order_complete_view(request):
                 sum_price=sum([i['sum_price'] for i in request.session.get('bcont', [])]),
                 user=request.user if request.user.is_authenticated else None)
             for item in request.session.get('bcont', []):
-                order = basket.singleorder_set.create(**item)
+                p = Product.objects.get(id=item.pop('product', None))
+                item.update({'amount': int(item['amount'])})
+                order = basket.singleorder_set.create(product=p, **item)
                 order.product.sold += 1
                 order.product.amount -= order.amount
                 order.save()

@@ -15,7 +15,7 @@ class HtmlPages():  # Названия html-файлов без .html
     srch_res = 'search_result'
     product = 'product_page'
     ord = 'order'
-    ord_com = 'complete_order'
+    ord_com = 'order_complete'
     settings = 'settings'
     ord_list = 'order_list'
     home = 'base'
