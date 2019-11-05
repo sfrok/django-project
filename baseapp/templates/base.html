@@ -18,35 +18,68 @@
   </head>
   <body>
     <!-- HEADER START-->
-    <!-- HEADER STOP-->
-
-    <!-- BODY START-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 navbar sidebar">
-                <div class="row">
-                    <div class="col-md-12 mb-2">
-                        <form class="form-inline my-2 my-lg-0 " action="/search_result/" method="post">
-                            {% csrf_token %}
-                            <input id="line" name="line" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            {% for item in response %}
-                         <div class="form-check">
-                            <input id="{{item.0}}" name="{{item.0}}" class="form-check-input" type="checkbox">
-                            <label class="form-check-label" for="{{item.0}}">
-                            {{item.1}}
-                            </label>
-                        </div>
-                        {% endfor %}
-                            <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
-                        </form>
+            <div class="col-md-12 first-background">
+               <div class="row justify-content-center justify-content-md-between">
+                    <div class="col-auto">
+                      <img src="https://via.placeholder.com/80" class="m-3 my-3" alt="...">
+                      <h3 class="first-background-logo-name">Название</h3>
                     </div>
-                    <div class="col-md-12">
-                    </div>
-                </div>
+                   <div class="col-auto align-self-center m-3">
+                       <a class="auth nav-item nav-link active text-center" href="#">Авторизация</a>
+                       <a class="auth nav-item nav-link text-center" href="#">Регистрация</a>
+                       <img src="https://via.placeholder.com/50" class=".d-none .d-sm-block .d-md-none m-3 m-sm-auto my-3" alt="...">
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 second-background">
+                <nav class="navbar navbar-expand-md navbar-light">
+              <button class="navbar-toggler m-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-md-around" id="navbarNavAltMarkup">
+                  <a class="nav-item nav-link active text-center" href="#">ГЛАВНАЯ</a>
+                  <a class="nav-item nav-link text-center" href="#">КОНТАКТЫ</a>
+                  <a class="nav-item nav-link text-center" href="#">КАТАЛОГ</a>
+                  <a class="nav-item nav-link text-center " href="#" >НОВОСТИ</a>
+              </div>
+            </nav>
             </div>
         </div>
     </div>
+    <!-- HEADER STOP-->
+
+    <!-- BODY START-->
+    <!-- BODY STOP-->
   </body>
 </html>
 {#<script src="{% static "ba-js/base_category.js" %}"></script>#}
 
+{#  <div class="container-fluid">#}
+{#        <div class="row">#}
+{#            <div class="col-md-4 navbar sidebar">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-12 mb-2">#}
+{#                        <form class="form-inline my-2 my-lg-0 " action="/search_result/" method="post">#}
+{#                            {% csrf_token %}#}
+{#                            <input id="line" name="line" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+{#                            {% for item in response %}#}
+{#                         <div class="form-check">#}
+{#                            <input id="{{item.0}}" name="{{item.0}}" class="form-check-input" type="checkbox">#}
+{#                            <label class="form-check-label" for="{{item.0}}">#}
+{#                            {{item.1}}#}
+{#                            </label>#}
+{#                        </div>#}
+{#                        {% endfor %}#}
+{#                            <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                    <div class="col-md-12">#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
