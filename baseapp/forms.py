@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import User, cats
+from .models import User, Category
 
 
 class UserAuthorizationForm(forms.ModelForm):
@@ -97,10 +97,8 @@ class UserAdmin(BaseUserAdmin):
 
 class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
-    try:
-        locals().update({i: forms.BooleanField(required=False) for i in cats})
-    except:
-        pass
+    locals().update(
+        {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
 
 
 class SingleOrderForm(forms.Form):

@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-import baseapp.search as func
-from baseapp.models import Product
+import baseapp.scripts as func
+from baseapp.models import Product, Category
 
 
 class TestDB(TestCase):
@@ -13,8 +13,9 @@ class TestDB(TestCase):
             cls.data.append(Product(
                 id=i + 1,
                 name='Товар ' + str(i + 1),
-                price=i ** 2 * 1000,
-                amount=100 - i * 10))
+                description='Это описание товара №' + str(i + 1) + '.',
+                amount=100 - i * 5,
+                price=(i + 1) ** 2 * 1000 - 1000 * i))
 
     def test_model_product(self):
         for i in self.data:

@@ -11,8 +11,8 @@ logger = logging.getLogger('Views')
 
 def session_clear(func):
     def wrapper(request, *args):
-        print("\nrequest (path, method):", request.path, request.method)
-        print(f'\t', ',\t'.join([f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]))
+        print("\nrequest (path, method):", request.path, request.method,
+            f'\t', ',\t'.join([f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]))
         if request.method == 'POST': print(f'\t- POST: {request.POST}\n')
 
         if request.path != '/settings/' and 'ucs' in request.session:
@@ -40,7 +40,7 @@ def authorization_view(request):
 
 @session_clear
 def search_input_view(request):
-    return render(request, f'{HtmlPages.srch_inp}.html')
+    return render(request, f'{HtmlPages.srch_inp}.html', {'items': Category.objects.all()})
 
 
 @session_clear
@@ -48,6 +48,7 @@ def search_result_view(request):
     if request.method == 'POST':
         form = forms.SearchForm(request.POST)
         if form.is_valid():
+            print(dict(form.cleaned_data))
             line = form.cleaned_data['line']
             cats = [i for i in Category.objects.all() if form.cleaned_data['cat_' + str(i.id)]]
             return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
@@ -146,8 +147,7 @@ def order_list_view(request):
 
 @session_clear
 def home_view(request):
-    items = Category.objects.all()
-    return render(request, f'{HtmlPages.home}.html', {'items': items})
+    return render(request, f'{HtmlPages.home}.html', {'items': Category.objects.all()})
 
 
 @session_clear
