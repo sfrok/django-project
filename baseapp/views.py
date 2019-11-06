@@ -65,18 +65,6 @@ def product_view(request):
 
 
 @session_clear
-def product_edit_view(request):
-    if request.method == 'POST':  # Добавление нового заказа в корзину
-        form = forms.SingleOrderForm(request.POST)
-        if form.is_valid() and 'pid' in request.session:
-            product = Product.objects.get(pk=request.session.get('pid', None))
-            del request.session['pid']
-            return render(request, f'{HtmlPages.prod_edit}.html', {'product': product})
-    product = Product.objects.get(pk=1)
-    return render(request, f'{HtmlPages.prod_edit}.html', {'product': product})
-
-
-@session_clear
 def order_view(request):
     if request.method == 'POST':  # Добавление нового заказа в корзину
         form = forms.SingleOrderForm(request.POST)
