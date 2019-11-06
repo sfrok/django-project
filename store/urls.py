@@ -38,6 +38,11 @@ urlpatterns = [
 
     path(f'{HP.settings}/', views.settings_view, name=f'{HP.settings}_page'),
     path(f'{HP.contacts}/', views.contacts_view, name=f'{HP.contacts}_page'),
+    
+    path(f'{HP.edit_all}/', views.edit_all_view, name=f'{HP.edit_all}_page'),
+    path(f'{HP.edit_bst}/', views.edit_bst_view, name=f'{HP.edit_bst}_page'),
+    path(f'{HP.edit_cat}/', views.edit_cat_view, name=f'{HP.edit_cat}_page'),
+    path(f'{HP.edit_prd}/', views.edit_prd_view, name=f'{HP.edit_prd}_page'),
 ]
 
 if settings.DEBUG:

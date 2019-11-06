@@ -5,12 +5,15 @@ class HtmlPages():  # Названия html-файлов без .html
     srch_inp = 'base'
     srch_res = 'search_result'
     product = 'product_page'
-    prod_edit = 'product_edit'
     ord = 'order'
     ord_com = 'order_complete'
     settings = 'settings'
     ord_list = 'order_list'
     home = 'base'
+    edit_all = 'edit_panel'
+    edit_prd = 'edit_product'
+    edit_cat = 'edit_category'
+    edit_bst = 'edit_basket'
 
 
 SELL_STATES = (

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.forms import model_to_dict
 
-from .models import Product, SingleOrder, Category, User
+from .models import Product, SingleOrder
 from store.data import HtmlPages
 
 
@@ -38,6 +38,7 @@ def add_order(request, product_id, amount):
 
 def populate():
     from random import randint
+    from .models import Category, User
     u = User.objects.create_user('ivan@i.ua', 'ivan', 'ivan')
     u.first_name = 'Иван'
     u.last_name = 'Иванов'
@@ -47,11 +48,7 @@ def populate():
     for i in range(4):
         Category.objects.create(
             id=i + 1,
-            name=('Телефоны', 'Ноутбуки', 'Аксессуары', 'Детали')[i],
-            description='Это описание товара №' + str(i + 1) + '.',
-            category=Category.objects.get(pk=randint(1, 4)),
-            amount=100 - i * randint(3, 5),
-            price=(i + 1) ** 2 * 1000 - 1000 * i)
+            name=('Телефоны', 'Ноутбуки', 'Аксессуары', 'Детали')[i])
     for i in range(10):
         Product.objects.create(
             id=i + 1,

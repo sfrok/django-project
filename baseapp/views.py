@@ -3,7 +3,7 @@ from django.shortcuts import render
 import logging
 
 from .models import Product, Basket, Category
-from baseapp.scripts import HtmlPages, search, auth, add_order
+from baseapp.scripts import HtmlPages, search, auth, add_order, populate
 from baseapp import forms
 
 logger = logging.getLogger('Views')
@@ -153,3 +153,31 @@ def home_view(request):
 @session_clear
 def contacts_view(request):
     return render(request, f'{HtmlPages.contacts}.html')
+
+
+@session_clear
+def edit_all_view(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        return render(request, f'{HtmlPages.edit_all}.html')
+    else: return HttpResponseRedirect('/')
+
+
+@session_clear
+def edit_bst_view(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        return render(request, f'{HtmlPages.edit_bst}.html')
+    else: return HttpResponseRedirect('/')
+
+
+@session_clear
+def edit_cat_view(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        return render(request, f'{HtmlPages.edit_cat}.html')
+    else: return HttpResponseRedirect('/')
+
+
+@session_clear
+def edit_prd_view(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        return render(request, f'{HtmlPages.edit_prd}.html')
+    else: return HttpResponseRedirect('/')
