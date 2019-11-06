@@ -61,7 +61,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000, default='')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, db_column='category', on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)
@@ -129,9 +129,3 @@ class PersonalDiscount(models.Model):
 
     def __str__(self):
         return self.name
-
-
-try:
-    cats = (str(i.id) for i in Category.objects.all())
-except:
-    cats = []

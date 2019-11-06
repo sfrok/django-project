@@ -9,7 +9,7 @@ from store.data import HtmlPages
 
 def search(line='', cats=[], sort_attr='name'):
     response = Product.objects.filter(name__icontains=line)
-    if cats: response = response.filter(category__in=cats)
+    if cats: response = response.filter(category_id__in=[i.id for i in cats])
     response = response.order_by(sort_attr)
     return response
 
