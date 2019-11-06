@@ -97,8 +97,8 @@ class UserAdmin(BaseUserAdmin):
 
 class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
-    #locals().update(
-    #    {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
+    locals().update(
+        {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
 
 
 class SingleOrderForm(forms.Form):
