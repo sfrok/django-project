@@ -25,12 +25,11 @@ function modalWindowQuit() {
 }
 
 function plusProduct() {
-    let count_stock  = document.querySelector("#stock");
     let upCounter = document.querySelector('#product-count');
-    let makeInt = parseInt(upCounter.innerText);
-    if (clickPlus && makeInt < parseInt(count_stock.innerText)){
+    let makeInt = parseInt(upCounter.value);
+    if (clickPlus && makeInt){
         makeInt += 1;
-        upCounter.innerText = makeInt;
+        upCounter.value= makeInt;
 
 
         let upMainCounter = document.querySelector('#main-count');
@@ -43,10 +42,10 @@ function plusProduct() {
 
 function minusProduct() {
     let upCounter = document.querySelector('#product-count');
-    let makeInt = parseInt(upCounter.innerText);
-    if (clickPlus && makeInt > 1){
+    let makeInt = parseInt(upCounter.value);
+    if (clickMinus && makeInt > 1){
         makeInt -= 1;
-        upCounter.innerText = makeInt;
+        upCounter.value = makeInt;
 
         let upMainCounter = document.querySelector('#main-count');
         let makeMainInt = parseInt(upMainCounter.innerText);
