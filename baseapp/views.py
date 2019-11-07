@@ -48,7 +48,7 @@ def search_result_view(request):
     if request.method == 'POST':
         form = forms.SearchForm(request.POST)
         if form.is_valid():
-            log('form data:', dict(form.cleaned_data))
+            log('form data:', str(form.cleaned_data))
             line = form.cleaned_data['line']
             cats = [i for i in Category.objects.all() if form.cleaned_data['cat_' + str(i.id)]]
             return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
