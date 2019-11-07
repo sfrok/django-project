@@ -1,19 +1,19 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-import logging
+from store.data import getLogger
 
 from .models import Product, Basket, Category
 from baseapp.scripts import HtmlPages, search, auth, add_order, populate
 from baseapp import forms
 
-logger = logging.getLogger('Views')
+log = lambda *info: getLogger().info(' '.join(info))
 
 
 def session_clear(func):
     def wrapper(request, *args):
-        print("\nrequest (path, method):", request.path, request.method,
-            f'\t', ',\t'.join([f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]))
-        if request.method == 'POST': print(f'\t- POST: {request.POST}\n')
+        session_vars = [f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]
+        if session_vars: log("session:", ',\t'.join(session_vars))
+        if request.method == 'POST': log(f'POST: {request.POST}')
 
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
@@ -48,7 +48,7 @@ def search_result_view(request):
     if request.method == 'POST':
         form = forms.SearchForm(request.POST)
         if form.is_valid():
-            print(dict(form.cleaned_data))
+            log('form data:', dict(form.cleaned_data))
             line = form.cleaned_data['line']
             cats = [i for i in Category.objects.all() if form.cleaned_data['cat_' + str(i.id)]]
             return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
@@ -69,6 +69,7 @@ def order_view(request):
     if request.method == 'POST':  # Добавление нового заказа в корзину
         form = forms.SingleOrderForm(request.POST)
         if form.is_valid() and 'pid' in request.session:
+            log('form data:', dict(form.cleaned_data))
             amount = form.cleaned_data['product_count']
             add_order(request, request.session.get('pid', None), amount)
             del request.session['pid']
@@ -86,6 +87,7 @@ def order_complete_view(request):
     if request.method == 'POST' and 'bcont' in request.session:
         form = forms.OrderForm(request.POST)
         if form.is_valid():
+            log('form data:', dict(form.cleaned_data))
             # Создание корзины, если ее еще нет, или обновление уже существующей
             basket = Basket.objects.create(
                 fio=form.cleaned_data['fio'],
@@ -112,6 +114,7 @@ def settings_view(request):
         if request.method == 'POST' and 'ucs' in request.session:
             form = forms.SettingsForm(request.POST)
             if form.is_valid():
+                log('form data:', dict(form.cleaned_data))
                 request.user.first_name = form.cleaned_data['first_name']
                 request.user.last_name = form.cleaned_data['last_name']
                 request.user.email = form.cleaned_data['email']

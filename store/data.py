@@ -1,3 +1,9 @@
+def getLogger():
+    import logging, sys
+    logging.basicConfig(format='[%(filename)s] %(message)s', stream=sys.stdout, level=logging.INFO)
+    return logging.getLogger()
+
+
 class HtmlPages():  # Названия html-файлов без .html
     auth = 'auth'
     reg = 'registration'

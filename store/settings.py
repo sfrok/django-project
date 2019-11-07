@@ -51,44 +51,29 @@ AUTH_USER_MODEL = 'baseapp.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        # 'logstash': {
-            # 'level': 'INFO',
-            # 'class': 'logstash.TCPLogstashHandler',
-            # 'host': 'localhost',
-            # 'port': 5959,  # Default value: 5959
-            # 'version': 1,  # Version of logstash event schema.
-            # # Default value: 0 (for backward compatibility of the library)
-            # 'message_type': 'django',  # 'type' field in logstash message. Default: 'logstash'.
-            # 'fqdn': False,  # Fully qualified domain name. Default value: false.
-            # 'tags': ['django.request'],  # list of tags. Default: None.
+# LOGGING = {
+    # 'version': 1,
+    # 'disable_existing_loggers': False,
+    # 'formatters': {
+        # 'simple': {
+            # 'format': '[Request] %(message)s'
         # },
-    }
+    # },
+    # 'handlers': {
+        # 'console': {
+            # 'level': 'INFO',
+            # 'class': 'logging.StreamHandler',
+            # 'formatter': 'simple'
+        # },
+    # },
     # 'loggers': {
         # 'django.request': {
-            # 'handlers': ['logstash'],
-            # 'level': 'INFO',
-            # 'propagate': True,
-        # },
-        # 'django': {
             # 'handlers': ['console'],
+            # 'level': 'INFO',
             # 'propagate': True,
         # },
     # }
-}
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -4,7 +4,9 @@ from django.shortcuts import render
 from django.forms import model_to_dict
 
 from .models import Product, SingleOrder
-from store.data import HtmlPages
+from store.data import HtmlPages, getLogger
+
+log = lambda *info: getLogger().info(' '.join(info))
 
 
 def search(line='', cats=[], sort_attr='name'):
@@ -30,7 +32,7 @@ def auth(request, form, page):  # Main auth func for both auth and reg
 
 def add_order(request, product_id, amount):
     product = Product.objects.get(id=product_id)
-    order = SingleOrder(product=product, amount=amount, sum_price=product.price)
+    order = SingleOrder(product=product, amount=amount, sum_price=amount*product.price)
     orders = request.session.get('bcont', [])
     orders.append(model_to_dict(order))
     request.session['bcont'] = orders

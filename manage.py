@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
-import os
-import sys
-import logging
-logger = logging.getLogger('Manage')
+import os, sys
+from store.data import getLogger
+
+log = lambda *info: getLogger().info(' '.join(info))
 
 
 def main():
-    logger.info("Server start")
+    log("Server start")
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')
     try:
         from django.core.management import execute_from_command_line

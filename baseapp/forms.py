@@ -3,6 +3,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import User, Category
+from store.data import getLogger
+
+log = lambda *info: getLogger().info(' '.join(info))
 
 
 class UserAuthorizationForm(forms.ModelForm):
@@ -97,6 +100,7 @@ class UserAdmin(BaseUserAdmin):
 
 class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
+    log(', '.join(['cat_' + str(i.id) for i in Category.objects.all()]))
     locals().update(
         {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
 
