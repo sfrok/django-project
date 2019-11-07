@@ -25,9 +25,10 @@ function modalWindowQuit() {
 }
 
 function plusProduct() {
+    let count_stock  = document.querySelector("#stock");
     let upCounter = document.querySelector('#product-count');
     let makeInt = parseInt(upCounter.value);
-    if (clickPlus && makeInt){
+    if (clickPlus && makeInt < parseInt(count_stock.innerText)){
         makeInt += 1;
         upCounter.value= makeInt;
 
