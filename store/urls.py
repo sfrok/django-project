@@ -37,7 +37,7 @@ urlpatterns = [
 
     path(f'{HP.settings}/', views.settings_view, name=f'{HP.settings}_page'),
     path(f'{HP.contacts}/', views.contacts_view, name=f'{HP.contacts}_page'),
-    
+
     path(f'edit/', views.edit_all_view, name=f'{HP.edit_all}_page'),
     path(f'edit/orders/', views.edit_bst_view, name=f'{HP.edit_bst}_page'),
     path(f'edit/categories/', views.edit_cat_view, name=f'{HP.edit_cat}_page'),

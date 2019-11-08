@@ -1,0 +1,20 @@
+.table_head {
+  background-color: saddlebrown;
+}
+
+.info {
+  color: black;
+}
+
+.delete_button {
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+  width: 134px;
+}
+
+.delete_selected {
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+}
