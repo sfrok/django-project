@@ -20,6 +20,9 @@ class HtmlPages():  # Названия html-файлов без .html
     edit_prd = 'edit_product'
     edit_cat = 'edit_category'
     edit_bst = 'edit_basket'
+    add_prd = 'add_product'
+    add_cat = 'add_category'
+    add_bst = 'add_basket'
 
 
 SELL_STATES = (

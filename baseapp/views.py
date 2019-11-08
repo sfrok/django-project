@@ -3,25 +3,11 @@ from django.shortcuts import render
 from store.data import getLogger
 
 from .models import Product, Basket, Category
-from baseapp.scripts import HtmlPages, search, auth, add_order, populate
+from baseapp.scripts import HtmlPages, search, auth, add_order, populate, session_clear
 from baseapp import forms
+from baseapp.views_admin import *
 
 log = lambda *info: getLogger().info(' '.join(info))
-
-
-def session_clear(func):
-    def wrapper(request, *args):
-        session_vars = [f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]
-        if session_vars: log("session:", ',\t'.join(session_vars))
-        if request.method == 'POST': log(f'POST: {request.POST}')
-
-        if request.path != '/settings/' and 'ucs' in request.session:
-            del request.session['ucs']
-        if request.path[:9] != '/product/' and request.path != '/order/':
-            if 'pid' in request.session: del request.session['pid']
-        return func(request)
-
-    return wrapper
 
 
 # AUTH
@@ -148,31 +134,3 @@ def home_view(request):
 @session_clear
 def contacts_view(request):
     return render(request, f'{HtmlPages.contacts}.html')
-
-
-@session_clear
-def edit_all_view(request):
-    if request.user.is_authenticated and request.user.is_admin:
-        return render(request, f'{HtmlPages.edit_all}.html')
-    else: return HttpResponseRedirect('/')
-
-
-@session_clear
-def edit_bst_view(request):
-    if request.user.is_authenticated and request.user.is_admin:
-        return render(request, f'{HtmlPages.edit_bst}.html')
-    else: return HttpResponseRedirect('/')
-
-
-@session_clear
-def edit_cat_view(request):
-    if request.user.is_authenticated and request.user.is_admin:
-        return render(request, f'{HtmlPages.edit_cat}.html')
-    else: return HttpResponseRedirect('/')
-
-
-@session_clear
-def edit_prd_view(request):
-    if request.user.is_authenticated and request.user.is_admin:
-        return render(request, f'{HtmlPages.edit_prd}.html')
-    else: return HttpResponseRedirect('/')

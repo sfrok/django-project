@@ -66,3 +66,16 @@ def populate():
             category=Category.objects.get(pk=randint(1, 4)),
             amount=100 - i * randint(3, 5),
             price=(i + 1) ** 2 * 1000 - 1000 * i)
+
+
+def session_clear(func):
+    def wrapper(request, *args):
+        session_vars = [f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]
+        if session_vars: log("session:", ',\t'.join(session_vars))
+        if request.method == 'POST': log(f'POST: {request.POST}')
+        if request.path != '/settings/' and 'ucs' in request.session:
+            del request.session['ucs']
+        if request.path[:9] != '/product/' and request.path != '/order/':
+            if 'pid' in request.session: del request.session['pid']
+        return func(request)
+    return wrapper
