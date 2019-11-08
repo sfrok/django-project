@@ -37,7 +37,7 @@ def add_order(request, product_id, amount):
     for item in orders:
         if item['product'] == product.id:
             order_exists = True
-            item['amount'] += amount
+            item['amount'] = amount
             break
     if not order_exists:
         order = SingleOrder(product=product, amount=amount, sum_price=amount*product.price)
