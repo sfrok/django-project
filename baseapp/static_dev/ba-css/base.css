@@ -1,3 +1,7 @@
+body {
+    background-color: #b4b4c8;
+}
+
 .cat ul{
     list-style-type: none;
     padding-inline-start: 15px;
@@ -23,3 +27,9 @@
     display: inline-block;
 }
 
+/*saidebar*/
+
+.background-sidebar {
+    display: block;
+    height: 100%;
+}
