@@ -100,7 +100,11 @@ def order_complete_view(request):
                 p = Product.objects.get(id=item.pop('product', None))
                 item.update({'amount': int(item['amount'])})
                 order = basket.singleorder_set.create(product=p, **item)
-                order.product.sold += 1
+                if order.product.amount < order.amount:  # Заказ превысил кол-во товара на складе
+                    basket.delete()  # Вся корзина удаляется (но не из сессии)
+                    request.session.get('bcont', []).remove(item)  # Конфликтный заказ убирается
+                    return HttpResponseRedirect('/order/')
+                order.product.sold += order.amount
                 order.product.amount -= order.amount
                 order.save()
             del request.session['bcont']

@@ -32,9 +32,16 @@ def auth(request, form, page):  # Main auth func for both auth and reg
 
 def add_order(request, product_id, amount):
     product = Product.objects.get(id=product_id)
-    order = SingleOrder(product=product, amount=amount, sum_price=amount*product.price)
     orders = request.session.get('bcont', [])
-    orders.append(model_to_dict(order))
+    order_exists = False
+    for item in orders:
+        if item['product'] == product.id:
+            order_exists = True
+            item['amount'] += amount
+            break
+    if not order_exists:
+        order = SingleOrder(product=product, amount=amount, sum_price=amount*product.price)
+        orders.append(model_to_dict(order))
     request.session['bcont'] = orders
 
 
