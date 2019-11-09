@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "ba-css/add_product.css" %}">
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-sm-center justify-content-md-center justify-content-lg-start">
+        <div class="col-5 mt-2">
+          <div class="row">
+            <div class="col-12">
+              <span>Add product</span>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="name" class="form-label-title">Name:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" class="form-control input_field">
+              </div>
+            </div>
+          </div>
+          <div class="col-12"><hr>
+            <div class="row">
+              <div class="col-3">
+                <label for="description" class="form-label-title">Description::</label>
+              </div>
+              <div class="col-9">
+                <textarea class="form-control is-invalid" id="validationTextarea" required></textarea>
+              </div>
+            </div><hr>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="category" class="form-label-title">Category:</label>
+              </div>
+              <div class="col-9">
+                <select class="custom-select">
+                  <option selected>---------</option>
+                  <option>Телефоны</option>
+                  <option>Ноутбуки</option>
+                  <option>Аксессуары</option>
+                  <option>Запчасти</option>
+                </select>
+                <a href="#"><img class="ml-2" src="{% static "close_button.png" %}" width="15px" height="15px"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12"><hr>
+            <div class="row">
+              <div class="col-3">
+                <label for="price" class="form-label-title">Price:</label>
+              </div>
+              <div class="col-9">
+                <input type="number" class="form-control input_field" value="0">
+              </div>
+            </div><hr>
+          </div>
+          <div class="col-12"><hr>
+            <div class="row">
+              <div class="col-3">
+                <label for="discount" class="form-label-title">Discount:</label>
+              </div>
+              <div class="col-9">
+                <input type="number" class="form-control input_field" value="0.00">
+              </div>
+            </div><hr>
+          </div>
+          <div class="col-12"><hr>
+            <div class="row">
+              <div class="col-3">
+                <label for="amount" class="form-label-title">Amount:</label>
+              </div>
+              <div class="col-9">
+                <input type="number" class="form-control input_field" value="0.00">
+              </div>
+            </div><hr>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="state" class="form-label-title">Sale state:</label>
+              </div>
+              <div class="col-9">
+                <select class="custom-select">
+                  <option selected>---------</option>
+                  <option>Есть в наличии</option>
+                  <option>Нет в наличии</option>
+                  <option>На заказ</option>
+                </select>
+              </div>
+            </div><hr>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="photo" class="form-label-title">Photo:</label>
+              </div>
+              <div class="col-9 custom-file">
+                <label class="custom-file-label input_field ml-3" for="customFile">Choose file</label>
+                <input type="file" class="custom-file-input" id="customFile">
+              </div>
+            </div><hr>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="post_date"  class="form-label-title">Post date:</label>
+              </div>
+              <div class="col-9">
+                <input type="date" class="form-control input_field" id="date" name="date" placeholder="Дата" required>
+              </div>
+              <div class="col-12 mt-2">
+                <div class="row">
+                  <div class="col-3">
+                    <label for="time" class="form-label-title">Time:</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="time"  class="form-control input_field">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12"><hr>
+                <div class="row">
+                  <div class="col-3">
+                    <label for="sold" class="form-label-title">Sold:</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="number" class="form-control input_field" value="0">
+                  </div>
+                </div><hr>
+              </div>
+              <div class="col-12">
+                <div class="row ">
+                  <div class="col-12 text-center">
+                    <form method="post">
+                      <button type="button submit" class="save_button btn btn-primary">Save</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

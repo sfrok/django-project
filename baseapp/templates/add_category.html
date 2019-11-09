@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "ba-css/add_category.css" %}">
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-sm-center justify-content-md-center justify-content-lg-start">
+        <div class="col-5">
+            <div class="row mt-2">
+              <div class="col-12">
+                <span>Add categories</span>
+              </div>
+            </div><hr>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-3">
+                  <label for="name" class="form-label-title">Name:</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" class="form-control input_field">
+                </div>
+              </div>
+            </div><hr>
+            <div class="col-12">
+              <div class="row ">
+                <div class="col-12 text-center">
+                  <form method="post">
+                    <button type="button submit" class="save_button btn btn-primary">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
