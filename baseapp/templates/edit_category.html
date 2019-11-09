@@ -28,10 +28,11 @@
             </tr>
           </thead>
           <tbody>
+            {% for cat in cats %}
             <tr>
               <td>
                 <input type="checkbox">
-                <a class="info" href="#">Детали</a>
+                <a class="info" href="#">{{cat}}</a>
               </td>
               <td>
                 <div class="text-right">
@@ -40,42 +41,7 @@
                 </div>
               </td>
             </tr>
-            <tr>
-              <td>
-                <input type="checkbox">
-                <a class="info" href="#">Аксессуары</a>
-              </td>
-              <td>
-                <div class="text-right">
-                  <img src="{% static "trash.png" %}" width="15px" height="15px">
-                  <a href="#" class="mr-3 info">Delete</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox">
-                <a class="info" href="#">Ноутбуки</a>
-              </td>
-              <td>
-                <div class="text-right">
-                  <img src="{% static "trash.png" %}" width="15px" height="15px">
-                  <a href="#" class="mr-3 info">Delete</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox">
-                <a class="info" href="#">Телефоны</a>
-              </td>
-              <td>
-                <div class="text-right">
-                  <img src="{% static "trash.png" %}" width="15px" height="15px">
-                  <a href="#" class="mr-3 info">Delete</a>
-                </div>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         <div class="col-12 mt-3">
