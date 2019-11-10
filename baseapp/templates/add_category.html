@@ -11,6 +11,7 @@
     <div class="container-fluid">
       <div class="row justify-content-sm-center justify-content-md-center justify-content-lg-start">
         <div class="col-5">
+            <form method="post" action="/edit/categories/"> {% csrf_token %}
             <div class="row mt-2">
               <div class="col-12">
                 <span>Add categories</span>
@@ -22,19 +23,18 @@
                   <label for="name" class="form-label-title">Name:</label>
                 </div>
                 <div class="col-9">
-                  <input type="text" name="name" class="form-control input_field">
+                  <input type="text" name="name" class="form-control input_field" value="{{cat}}">
                 </div>
               </div>
             </div><hr>
             <div class="col-12">
               <div class="row ">
                 <div class="col-12 text-center">
-                  <form method="post">
-                    <button type="button submit" class="save_button btn btn-primary"><a href="/edit/categories/">Save</a></button>
-                  </form>
+                    <button type="button submit" class="save_button btn btn-primary">Save</button>
                 </div>
               </div>
             </div>
+            </form>
           </div>
         </div>
       </div>

@@ -44,10 +44,7 @@
               <div class="col-9">
                 <select class="custom-select">
                   <option selected>---------</option>
-                  <option>Телефоны</option>
-                  <option>Ноутбуки</option>
-                  <option>Аксессуары</option>
-                  <option>Запчасти</option>
+                  {% for cat in cats %}<option>cat</option>{% endfor %}
                 </select>
                 <a href="#"><img class="ml-2" src="{% static "close_button.png" %}" width="15px" height="15px"></a>
               </div>

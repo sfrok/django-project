@@ -122,3 +122,7 @@ class SettingsForm(forms.Form):
     email = forms.CharField(max_length=255, required=False)
     address = forms.CharField(max_length=128, required=False)
     phone_number = forms.CharField(max_length=16, required=False)
+
+
+class AdminCatForm(forms.Form):
+    name = forms.CharField(max_length=32, required=False)
