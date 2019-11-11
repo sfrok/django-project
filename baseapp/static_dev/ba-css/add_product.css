@@ -9,3 +9,8 @@
 .save_button {
   width: 150px;
 }
+
+.back_button {
+  border-radius: 6px;
+  background: #007bff;
+}
