@@ -55,7 +55,7 @@ def order_view(request):
     if request.method == 'POST':  # Добавление нового заказа в корзину
         form = forms.SingleOrderForm(request.POST)
         if form.is_valid() and 'pid' in request.session:
-            log('form data:', dict(form.cleaned_data))
+            log('form data:', str(form.cleaned_data))
             amount = form.cleaned_data['product_count']
             add_order(request, request.session.get('pid', None), amount)
             del request.session['pid']
@@ -73,7 +73,7 @@ def order_complete_view(request):
     if request.method == 'POST' and 'bcont' in request.session:
         form = forms.OrderForm(request.POST)
         if form.is_valid():
-            log('form data:', dict(form.cleaned_data))
+            log('form data:', str(form.cleaned_data))
             # Создание корзины, если ее еще нет, или обновление уже существующей
             basket = Basket.objects.create(
                 fio=form.cleaned_data['fio'],
@@ -104,7 +104,7 @@ def settings_view(request):
         if request.method == 'POST' and 'ucs' in request.session:
             form = forms.SettingsForm(request.POST)
             if form.is_valid():
-                log('form data:', dict(form.cleaned_data))
+                log('form data:', str(form.cleaned_data))
                 request.user.first_name = form.cleaned_data['first_name']
                 request.user.last_name = form.cleaned_data['last_name']
                 request.user.email = form.cleaned_data['email']

@@ -11,6 +11,7 @@
     <div class="container-fluid">
       <div class="row justify-content-sm-center justify-content-md-center justify-content-lg-start">
         <div class="col-5 mt-2">
+          <form method="post" action="/edit/products/"> {% csrf_token %}
           <div class="row">
             <div class="col-12">
               <span>Add product</span>
@@ -22,17 +23,17 @@
                 <label for="name" class="form-label-title">Name:</label>
               </div>
               <div class="col-9">
-                <input type="text" class="form-control input_field">
+                <input type="text" class="form-control input_field" value="{{product.name}}">
               </div>
             </div>
           </div>
           <div class="col-12"><hr>
             <div class="row">
               <div class="col-3">
-                <label for="description" class="form-label-title">Description::</label>
+                <label for="description" class="form-label-title">Description:</label>
               </div>
               <div class="col-9">
-                <textarea class="form-control is-invalid" id="validationTextarea" required></textarea>
+                <textarea class="form-control is-invalid" id="validationTextarea" name="description" value="{{product.description}}"></textarea>
               </div>
             </div><hr>
           </div>
@@ -42,11 +43,11 @@
                 <label for="category" class="form-label-title">Category:</label>
               </div>
               <div class="col-9">
-                <select class="custom-select">
+                <select class="custom-select" name="category" value="{{product.category}}">
                   <option selected>---------</option>
-                  {% for cat in cats %}<option>cat</option>{% endfor %}
+                  {% for cat in cats %}<option>{{cat}}</option>{% endfor %}
                 </select>
-                <a href="#"><img class="ml-2" src="{% static "close_button.png" %}" width="15px" height="15px"></a>
+                <a href="/edit/categories/0"><img class="ml-2" src="{% static "close_button.png" %}" width="15px" height="15px"></a>
               </div>
             </div>
           </div>
@@ -56,7 +57,7 @@
                 <label for="price" class="form-label-title">Price:</label>
               </div>
               <div class="col-9">
-                <input type="number" class="form-control input_field" value="0">
+                <input type="number" class="form-control input_field" value="{{product.price}}" name="price">
               </div>
             </div><hr>
           </div>
@@ -66,7 +67,7 @@
                 <label for="discount" class="form-label-title">Discount:</label>
               </div>
               <div class="col-9">
-                <input type="number" class="form-control input_field" value="0.00">
+                <input type="number" class="form-control input_field" value="{{product.discount}}" name="discount">
               </div>
             </div><hr>
           </div>
@@ -76,17 +77,17 @@
                 <label for="amount" class="form-label-title">Amount:</label>
               </div>
               <div class="col-9">
-                <input type="number" class="form-control input_field" value="0.00">
+                <input type="number" class="form-control input_field" value="{{product.amount}}" name="amount">
               </div>
             </div><hr>
           </div>
           <div class="col-12">
             <div class="row">
               <div class="col-3">
-                <label for="state" class="form-label-title">Sale state:</label>
+                <label for="sell_state" class="form-label-title">Sale state:</label>
               </div>
               <div class="col-9">
-                <select class="custom-select">
+                <select class="custom-select" name="sell_state" value="{{product.sell_state}}">
                   <option selected>---------</option>
                   <option>Есть в наличии</option>
                   <option>Нет в наличии</option>
@@ -102,49 +103,18 @@
               </div>
               <div class="col-9 custom-file">
                 <label class="custom-file-label input_field ml-3" for="customFile">Choose file</label>
-                <input type="file" class="custom-file-input" id="customFile">
+                <input type="file" class="custom-file-input" id="customFile" name="photo" value="{{product.photo}}">
               </div>
             </div><hr>
           </div>
           <div class="col-12">
-            <div class="row">
-              <div class="col-3">
-                <label for="post_date"  class="form-label-title">Post date:</label>
-              </div>
-              <div class="col-9">
-                <input type="date" class="form-control input_field" id="date" name="date" placeholder="Дата" required>
-              </div>
-              <div class="col-12 mt-2">
-                <div class="row">
-                  <div class="col-3">
-                    <label for="time" class="form-label-title">Time:</label>
-                  </div>
-                  <div class="col-9">
-                    <input type="time"  class="form-control input_field">
-                  </div>
-                </div>
-              </div>
-              <div class="col-12"><hr>
-                <div class="row">
-                  <div class="col-3">
-                    <label for="sold" class="form-label-title">Sold:</label>
-                  </div>
-                  <div class="col-9">
-                    <input type="number" class="form-control input_field" value="0">
-                  </div>
-                </div><hr>
-              </div>
-              <div class="col-12">
-                <div class="row ">
-                  <div class="col-12 text-center">
-                    <form method="post">
-                      <button type="button submit" class="save_button btn btn-primary"><a href="/edit/categories/">Save</a></button>
-                    </form>
-                  </div>
-                </div>
+            <div class="row ">
+              <div class="col-12 text-center">
+                <button type="button submit" class="save_button btn btn-primary">Save</button>
               </div>
             </div>
           </div>
+          </form>
         </div>
       </div>
     </div>

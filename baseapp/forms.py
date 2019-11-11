@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import User, Category
-from store.data import getLogger
+from store.data import getLogger, SELL_STATES
 
 log = lambda *info: getLogger().info(' '.join(info))
 
@@ -126,3 +126,14 @@ class SettingsForm(forms.Form):
 
 class AdminCatForm(forms.Form):
     name = forms.CharField(max_length=32, required=False)
+
+
+class AdminProductForm(forms.Form):
+    name = forms.CharField(max_length=50, required=False)
+    description = forms.CharField(max_length=3000, required=False)
+    category = forms.ChoiceField(choices=Category.objects.all(), required=False)
+    price = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0, required=False)
+    discount = forms.FloatField(required=False)
+    amount = forms.IntegerField(required=False)
+    sell_state = forms.ChoiceField(choices=SELL_STATES, required=False)
+    photo = forms.ImageField(required=False)

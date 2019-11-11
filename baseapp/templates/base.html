@@ -26,10 +26,14 @@
                       <img src="https://via.placeholder.com/80" class="m-3 my-3" alt="...">
                       <h3 class="first-background-logo-name">Название</h3>
                     </div>
-                   <div class="col-auto align-self-center m-3 text-center">
-                       <a class="auth nav-item nav-link active text-center" href="#">Авторизация</a>
-                       <a class="auth nav-item nav-link text-center" href="#">Регистрация</a>
-                       <img src="https://via.placeholder.com/50" class=".d-none .d-sm-block .d-md-none m-3 m-sm-auto my-3" alt="...">
+                    <div class="col-auto align-self-center m-3 text-center">
+                      {% if user.is_authenticated %}
+                      Добро пожаловать, <a href="/settings/">{{user}}</a>!
+                      {% else %}
+                      <a class="auth nav-item nav-link active text-center" href="/auth/">Вход</a>
+                      <a class="auth nav-item nav-link text-center" href="/registration/">Регистрация</a>
+                      {% endif %}
+                      <img src="https://via.placeholder.com/50" class=".d-none .d-sm-block .d-md-none m-3 m-sm-auto my-3" alt="...">
                    </div>
                </div>
             </div>
