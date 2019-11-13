@@ -26,7 +26,7 @@
                 <label for="name" class="form-label-title">Name:</label>
               </div>
               <div class="col-9">
-                <input type="text" class="form-control input_field" value="{{product.name}}">
+                <input type="text" class="form-control input_field" value="{{product.name}}" name="name">
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <label for="description" class="form-label-title">Description:</label>
               </div>
               <div class="col-9">
-                <textarea class="form-control is-invalid" id="validationTextarea" name="description" value="{{product.description}}"></textarea>
+                <textarea class="form-control is-invalid" id="validationTextarea" name="description">{{product.description}}</textarea>
               </div>
             </div><hr>
           </div>
@@ -46,9 +46,10 @@
                 <label for="category" class="form-label-title">Category:</label>
               </div>
               <div class="col-9">
-                <select class="custom-select" name="category" value="{{product.category}}">
-                  <option selected>---------</option>
-                  {% for cat in cats %}<option>{{cat}}</option>{% endfor %}
+                <select class="custom-select" name="category">
+                  {% for cat in cats %}
+                  <option value="{{cat.id}}" {% if product.category == cat %}selected{% endif %}>{{cat}}</option>
+                  {% endfor %}
                 </select>
                 <a href="/edit/categories/0"><img class="ml-2" src="{% static "close_button.png" %}" width="15px" height="15px"></a>
               </div>
@@ -90,11 +91,10 @@
                 <label for="sell_state" class="form-label-title">Sale state:</label>
               </div>
               <div class="col-9">
-                <select class="custom-select" name="sell_state" value="{{product.sell_state}}">
-                  <option selected>---------</option>
-                  <option>Есть в наличии</option>
-                  <option>Нет в наличии</option>
-                  <option>На заказ</option>
+                <select class="custom-select" name="sell_state">
+                  {% for state in states %}
+                  <option value="{{state.0}}" {% if product.sell_state == state.0 %}selected{% endif %}>{{state.1}}</option>
+                  {% endfor %}
                 </select>
               </div>
             </div><hr>

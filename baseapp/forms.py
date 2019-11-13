@@ -129,9 +129,9 @@ class AdminCatForm(forms.Form):
 
 
 class AdminProductForm(forms.Form):
-    name = forms.CharField(max_length=50, required=False)
-    description = forms.CharField(max_length=3000, required=False)
-    category = forms.ChoiceField(choices=Category.objects.all(), required=False)
+    name = forms.CharField(max_length=50)
+    description = forms.CharField(max_length=3000, required=False, widget=forms.Textarea)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
     price = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0, required=False)
     discount = forms.FloatField(required=False)
     amount = forms.IntegerField(required=False)

@@ -1,9 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from store.data import getLogger
 
 from .models import Product, Basket, Category
 from .forms import AdminCatForm, AdminProductForm
-from baseapp.scripts import HtmlPages, session_clear
+from .scripts import HtmlPages, session_clear
+from store.data import SELL_STATES
+
+log = lambda *info: getLogger().info(' '.join(info))
 
 @session_clear
 def edit_all_view(request):
@@ -66,6 +70,7 @@ def edit_prd_view(request):
                     p.photo = form.cleaned_data['photo']
                     p.save()
                 del request.session['edit_prd_id']
+            else: log('form failed! form:', str(form.cleaned_data))
         return render(request, f'{HtmlPages.edit_prd}.html', {'products': Product.objects.all()})
     else: return HttpResponseRedirect('/')
 
@@ -96,5 +101,5 @@ def add_prd_view(request):
         else: prd = Product()
         request.session['edit_prd_id'] = prd_id
         return render(request, f'{HtmlPages.add_prd}.html', 
-            {'product': prd, 'cats': Category.objects.all()})
+            {'product': prd, 'cats': Category.objects.all(), 'states': SELL_STATES})
     else: return HttpResponseRedirect('/')
