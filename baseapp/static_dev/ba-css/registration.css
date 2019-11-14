@@ -1,0 +1,10 @@
+.form {
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.reg_button{
+  background-color: green;
+  border: green;
+  border-radius: 6px;
+}
