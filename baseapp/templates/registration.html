@@ -16,39 +16,13 @@
           <div class="col-12 text-lg-left text-sm-center text-md-center">
             <span><h1>Регистрация</h1></span>
           </div>
-          <div class="col-12">
-            <label for="first_name" class="form-label-title">Имя:</label>
-            <input type="text" name="first_name" class="input-field form-control" placeholder="Введите Имя" value="">
-          </div>
-          <div class="col-12 mt-1">
-            <label for="last_name" class="form-label-title">Фамилия:</label>
-            <input type="text" class="input-field form-control" placeholder="Введите Фамилию" value="">
-          </div>
-          <div class="col-12 mt-1">
-            <label for="username" class="form-label-title">Логин:</label>
-            <input type="text" class="input-field form-control" placeholder="Введите Логин" value="">
-          </div>
-          <div class="col-12 mt-1">
-            <label for="email" class="form-label-title">E-mail:</label>
-            <input type="email" class="input-field form-control" placeholder="Введите E-mail" value="">
-          </div>
-          <div class="col-12 mt-1">
-            <label for="password" class="form-label-title">Придумайте пароль:</label>
-            <input type="password" class="input-field form-control" placeholder="Пароль:" value="">
-            <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small>
-          </div>
-          <div class="col-12 mt-1">
-            <label for="password2" class="form-label-title">Повторите пароль:</label>
-            <input type="password" class="input-field form-control"placeholder="Пароль:" value="">
-          </div>
-          <div class="col-12 mt-1">
-            <label for="address" class="form-label-title">Адрес:</label>
-            <input type="text" class="input-field form-control"placeholder="Город, улица, дом" value="">
-          </div>
-          <div class="col-12 mt-1">
-            <label for="phone_number" class="form-label-title">Номер телефона:</label>
-            <input type="text" class="input-field form-control" placeholder="+380">
-          </div>
+          {{ form.non_field_errors }}
+          {% for field in form %}
+            <div class="col-12 {% if field.name != "first_name" %}mt-1{% endif %}">
+                {{ field.errors }} <label class="form-label-title" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }}
+                {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
+            </div>
+          {% endfor %}
           <div class="col-12 mt-3 mb-2 text-center">
             <button type="button submit" class="reg_button btn btn-primary">Зарегистрироваться</button>
           </div>

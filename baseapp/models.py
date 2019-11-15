@@ -6,45 +6,36 @@ from store.data import SELL_STATES, STATUSES
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, password):
         # Creates and saves a User with the given params.
         if not email: raise ValueError('Users must have an email address')
-        user = self.model(
-            email=self.normalize_email(email),
-            username=username,
-        )
-        user.set_password(password)
+        user = self.model(email=self.normalize_email(email), password=password)
+        # user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password):
+    def create_superuser(self, email, password):
         # Creates and saves a superuser with the given params.
-        user = self.create_user(email, password=password, username=username)
+        user = self.create_user(email=self.normalize_email(email), password=password)
         user.is_admin = True
         user.save(using=self._db)
         return user
 
 
 class User(AbstractUser):
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    first_name = models.CharField(max_length=64)
-    last_name = models.CharField(max_length=64)
-    address = models.CharField(max_length=128)
-    phone_number = models.CharField(max_length=16)
+    name = models.CharField(max_length=128, default='')
+    address = models.CharField(max_length=128, default='')
+    phone_number = models.CharField(max_length=16, default='')
     objects = MyUserManager()
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.last_name + ' ' + self.first_name
-
-    def has_perm(self, perm, obj=None):  # Does the user have a specific permission?
-        return True  # Simplest possible answer: Yes, always
-
-    def has_module_perms(self, app_label):  # Does the user have permissions to view the app_label?
-        return True  # Simplest possible answer: Yes, always
+        return self.name
 
     @property
     def is_staff(self):  # Is the user a member of staff?
@@ -53,9 +44,16 @@ class User(AbstractUser):
 
 class Category(models.Model):
     name = models.CharField(max_length=32, default='')
+    discount = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(discount__gte=0), name='discount2'),
+            models.CheckConstraint(check=models.Q(discount__lte=100), name='discount3'),
+        ]
 
 
 class Product(models.Model):

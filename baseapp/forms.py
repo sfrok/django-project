@@ -23,8 +23,8 @@ class UserAuthorizationForm(forms.ModelForm):
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -100,9 +100,9 @@ class UserAdmin(BaseUserAdmin):
 
 class SearchForm(forms.Form):
     line = forms.CharField(max_length=100, required=False)
-    log(', '.join(['cat_' + str(i.id) for i in Category.objects.all()]))
-    locals().update(
-        {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
+    # log(', '.join(['cat_' + str(i.id) for i in Category.objects.all()]))
+    # locals().update(
+        # {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
 
 
 class SingleOrderForm(forms.Form):
@@ -116,12 +116,15 @@ class OrderForm(forms.Form):
     phone_number = forms.CharField(max_length=16, required=False)
 
 
-class SettingsForm(forms.Form):
-    first_name = forms.CharField(max_length=64, required=False)
-    last_name = forms.CharField(max_length=64, required=False)
-    email = forms.CharField(max_length=255, required=False)
-    address = forms.CharField(max_length=128, required=False)
-    phone_number = forms.CharField(max_length=16, required=False)
+class SettingsForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'address', 'phone_number')
+        labels = {
+            'first_name': 'Имя:', 'last_name': 'Фамилия:', 
+            'email': 'E-mail:', 'address': 'Адрес:', 
+            'phone_number': 'Номер телефона:'
+        }
 
 
 class AdminCatForm(forms.Form):
@@ -129,11 +132,11 @@ class AdminCatForm(forms.Form):
 
 
 class AdminProductForm(forms.Form):
-    name = forms.CharField(max_length=50)
-    description = forms.CharField(max_length=3000, required=False, widget=forms.Textarea)
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
-    price = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0, required=False)
-    discount = forms.FloatField(required=False)
-    amount = forms.IntegerField(required=False)
-    sell_state = forms.ChoiceField(choices=SELL_STATES, required=False)
-    photo = forms.ImageField(required=False)
+    name = forms.CharField(max_length=50, label="Name:")
+    description = forms.CharField(max_length=3000, widget=forms.Textarea, label="Description:")
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False, label="Category:")
+    price = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0, label="Price:")
+    discount = forms.FloatField(label="Discount:")
+    amount = forms.IntegerField(label="Amount:")
+    sell_state = forms.ChoiceField(choices=SELL_STATES, label="Sell state:")
+    photo = forms.ImageField(required=False, label="Photo:")

@@ -101,11 +101,11 @@ def order_complete_view(request):
 @session_clear
 def settings_view(request):
     if request.user.is_authenticated:
-        if request.method == 'POST' and 'ucs' in request.session:
+        if request.method == 'POST':
             form = forms.SettingsForm(request.POST)
             if form.is_valid():
                 log('form data:', str(form.cleaned_data))
-                request.user.first_name = form.cleaned_data['first_name']
+                request.user.first_name = form.cleaned_data.get('first_name')
                 request.user.last_name = form.cleaned_data['last_name']
                 request.user.email = form.cleaned_data['email']
                 request.user.address = form.cleaned_data['address']
@@ -113,8 +113,8 @@ def settings_view(request):
                 request.user.save()
                 return render(request, f'{HtmlPages.settings}.html')
         else:
-            request.session['ucs'] = True
-        return render(request, f'{HtmlPages.settings}.html')
+            form = forms.SettingsForm(instance=request.user)
+        return render(request, f'{HtmlPages.settings}.html', {'form': form})
     return HttpResponseRedirect('/')
 
 
