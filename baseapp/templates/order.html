@@ -24,24 +24,12 @@
                 </div>
                 <div class="col-12">
                   <span class="header">Контактные данные:</span>
-                </div>
-                <div class="col-12">
-                  <label for="fio" class="form-label-title">ФИО:</label><br>
-                  <input class="input-field form-control" type="text" name="fio"
-                    value="{% if user.is_authenticated %}{{user.last_name}} {{user.first_name}}{% endif %}">
-                </div>
-                <div class="col-12">
-                  <label for="phone_number" class="form-label-title">Номер телефона:</label><br>
-                  <input class="input-field form-control" type="text" name="phone_number" value={{user.phone_number}}>
-                </div>
-                <div class="col-12">
-                  <label for="email" class="form-label-title">E-mail:</label><br>
-                  <input class="input-field form-control" type="text" name="email" value={{user.email}}>
-                </div>
-                <div class="col-12">
-                  <label for="address" class="form-label-title">Адрес доставки:</label><br>
-                  <input class="input-field form-control" type="text" name="address" value="{{user.address}}">
-                </div>
+                </div> {{ form.non_field_errors }}
+                {% for field in form %}
+                  <div class="col-12">
+                    <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
+                  </div>
+                {% endfor %}
                 <div class="col-12">
                   <div class="row ">
                     <div class="col-12 text-center ">

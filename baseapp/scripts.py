@@ -18,16 +18,15 @@ def search(line='', cats=[], sort_attr='name'):
 
 def auth(request, form, page):  # Main auth func for both auth and reg
     if form.is_valid():
-        if page == HtmlPages.reg:
-            (form.save(commit=False)).save()  # Saving new user
-        username = form.cleaned_data.get("username")
+        if page == HtmlPages.reg: form.save()  # Saving new user
+        email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
         if user:
             login(request, user)
             return HttpResponseRedirect('/')
     logout(request)
-    return render(request, f'{page}.html', {'login_form': form})
+    return render(request, f'{page}.html', {'form': form})
 
 
 def add_order(request, product_id, amount):

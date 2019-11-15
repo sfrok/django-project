@@ -1,6 +1,8 @@
-from django.contrib.auth.models import BaseUserManager, AbstractUser
+from django.contrib.auth.models import BaseUserManager, PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
+from django.core.mail import send_mail
 
 from store.data import SELL_STATES, STATUSES
 
@@ -10,7 +12,7 @@ class MyUserManager(BaseUserManager):
         # Creates and saves a User with the given params.
         if not email: raise ValueError('Users must have an email address')
         user = self.model(email=self.normalize_email(email), password=password)
-        # user.set_password(password)
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
@@ -18,17 +20,19 @@ class MyUserManager(BaseUserManager):
         # Creates and saves a superuser with the given params.
         user = self.create_user(email=self.normalize_email(email), password=password)
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     name = models.CharField(max_length=128, default='')
     address = models.CharField(max_length=128, default='')
     phone_number = models.CharField(max_length=16, default='')
+    date_joined = models.DateTimeField(default=timezone.now)
     objects = MyUserManager()
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
@@ -40,6 +44,10 @@ class User(AbstractUser):
     @property
     def is_staff(self):  # Is the user a member of staff?
         return self.is_admin  # Simplest possible answer: All admins are staff
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        """Send an email to this user."""
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class Category(models.Model):

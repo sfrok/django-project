@@ -24,8 +24,8 @@ from .data import HtmlPages as HP
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name=f'{HP.home}_page'),
-    path(f'{HP.reg}/', views.registration_view, name=f'{HP.reg}_page'),
-    path(f'{HP.auth}/', views.authorization_view, name=f'{HP.auth}_page'),
+    path(f'{HP.reg}/', views.reg_view, name=f'{HP.reg}_page'),
+    path(f'{HP.auth}/', views.auth_view, name=f'{HP.auth}_page'),
 
     path(f'{HP.srch_inp}/', views.search_input_view, name=f'{HP.srch_inp}_page'),
     path(f'{HP.srch_res}/', views.search_result_view, name=f'{HP.srch_res}_page'),

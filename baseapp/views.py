@@ -13,12 +13,12 @@ log = lambda *info: getLogger().info(' '.join(info))
 # AUTH
 
 @session_clear
-def registration_view(request):
+def reg_view(request):
     return auth(request, forms.UserCreationForm(request.POST or None), HtmlPages.reg)
 
 
 @session_clear
-def authorization_view(request):
+def auth_view(request):
     return auth(request, forms.UserAuthorizationForm(request.POST or None), HtmlPages.auth)
 
 
@@ -32,12 +32,9 @@ def search_input_view(request):
 @session_clear
 def search_result_view(request):
     if request.method == 'POST':
-        form = forms.SearchForm(request.POST)
-        if form.is_valid():
-            log('form data:', str(form.cleaned_data))
-            line = form.cleaned_data['line']
-            cats = [i for i in Category.objects.all() if form.cleaned_data['cat_' + str(i.id)]]
-            return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
+        line = request.POST['line']
+        cats = [i for i in Category.objects.all() if request.POST['cat_' + str(i.id)]]
+        return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
     return render(request, f'{HtmlPages.srch_res}.html', {'items': search()})
 
 
@@ -53,18 +50,16 @@ def product_view(request):
 @session_clear
 def order_view(request):
     if request.method == 'POST':  # Добавление нового заказа в корзину
-        form = forms.SingleOrderForm(request.POST)
-        if form.is_valid() and 'pid' in request.session:
-            log('form data:', str(form.cleaned_data))
-            amount = form.cleaned_data['product_count']
-            add_order(request, request.session.get('pid', None), amount)
-            del request.session['pid']
+        amount = request.POST['product_count']
+        add_order(request, request.session.get('pid', None), amount)
+        del request.session['pid']
     if 'bcont' in request.session:
+        form = forms.OrderForm(instance=request.user if request.user.is_authenticated else None)
         c = request.session.get('bcont', [])
         return render(request, f'{HtmlPages.ord}.html', {
             'sum_price': sum([i['sum_price'] for i in c]), 'items': [{
                 'name': Product.objects.get(pk=i['product']).name,
-                'price': i['sum_price']} for i in c]})
+                'price': i['sum_price']} for i in c], 'form': form})
     return HttpResponseRedirect('/')
 
 
@@ -105,15 +100,11 @@ def settings_view(request):
             form = forms.SettingsForm(request.POST)
             if form.is_valid():
                 log('form data:', str(form.cleaned_data))
-                request.user.first_name = form.cleaned_data.get('first_name')
-                request.user.last_name = form.cleaned_data['last_name']
-                request.user.email = form.cleaned_data['email']
-                request.user.address = form.cleaned_data['address']
-                request.user.phone_number = form.cleaned_data['phone_number']
+                request.user.name = form.cleaned_data.get('name')
+                request.user.address = form.cleaned_data.get('address')
+                request.user.phone_number = form.cleaned_data.get('phone_number')
                 request.user.save()
-                return render(request, f'{HtmlPages.settings}.html')
-        else:
-            form = forms.SettingsForm(instance=request.user)
+        form = forms.SettingsForm(instance=request.user)
         return render(request, f'{HtmlPages.settings}.html', {'form': form})
     return HttpResponseRedirect('/')
 

@@ -11,11 +11,10 @@ log = lambda *info: getLogger().info(' '.join(info))
 class UserAuthorizationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('email', 'password')
 
     def clean(self):
-        current_username = self.cleaned_data.get('username')
-        user_in_database = User(username=current_username)
+        user_in_database = User(email=self.cleaned_data.get('email'))
         if user_in_database is None:  # if current_username is empty:
             raise forms.ValidationError('Incorrect login! Try again')
 
@@ -28,9 +27,8 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username',
-                  'email', 'password', 'password2', 'address',
-                  'phone_number',)
+        fields = ('name', 'email', 'password', 'password2', 'address', 'phone_number',)
+        labels = {'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:', 'phone_number': 'Телефон:',}
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -40,12 +38,11 @@ class UserCreationForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2
 
-    def save(self, commit=True):
+    def save(self):
         # Save the provided password in hashed format
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
+        user.save()
         return user
 
 
@@ -75,12 +72,11 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username', 'email', 'is_admin')
+    list_display = ('email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'username',
-                                      'phone_number', 'address')}),
+        ('Personal info', {'fields': ('name', 'phone_number', 'address')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -88,9 +84,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('first_name', 'last_name', 'username',
-                       'email', 'password', 'password2', 'address',
-                       'phone_number',)}
+            'fields': ('name', 'email', 'password', 'password2', 'address', 'phone_number',)}
          ),
     )
     search_fields = ('email',)
@@ -98,33 +92,26 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-class SearchForm(forms.Form):
-    line = forms.CharField(max_length=100, required=False)
-    # log(', '.join(['cat_' + str(i.id) for i in Category.objects.all()]))
-    # locals().update(
-        # {'cat_' + str(i.id): forms.BooleanField(required=False) for i in Category.objects.all()})
-
-
-class SingleOrderForm(forms.Form):
-    product_count = forms.CharField(max_length=130, required=False)
-
-
-class OrderForm(forms.Form):
-    fio = forms.CharField(max_length=130, required=False)
-    email = forms.CharField(max_length=255, required=False)
-    address = forms.CharField(max_length=128, required=False)
-    phone_number = forms.CharField(max_length=16, required=False)
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('fio', 'email', 'address', 'phone_number')
+        labels = {
+            'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:', 
+            'phone_number': 'Номер телефона:'
+        }
+        widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}
 
 
 class SettingsForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'address', 'phone_number')
+        fields = ('name', 'address', 'phone_number')
         labels = {
-            'first_name': 'Имя:', 'last_name': 'Фамилия:', 
-            'email': 'E-mail:', 'address': 'Адрес:', 
+            'name': 'ФИО:', 'address': 'Адрес:', 
             'phone_number': 'Номер телефона:'
         }
+        widgets = {i: forms.TextInput(attrs={'class':'form-control mb-2'}) for i in fields}
 
 
 class AdminCatForm(forms.Form):

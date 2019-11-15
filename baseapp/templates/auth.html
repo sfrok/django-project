@@ -1,6 +1,6 @@
 {% load static %}
 <form id="auth_form" action="" method="post">
     {% csrf_token %}
-    {{ login_form }}
+    {{ form }}
     <input id="auth_button" type="submit" value="Submit">
 </form>
