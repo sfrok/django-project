@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import User, Category, Product
-from store.data import getLogger, SELL_STATES
+from .models import User, Category, Product, Basket
+from store.data import getLogger
 
 log = lambda *info: getLogger().info(' '.join(info))
 
@@ -94,7 +94,7 @@ class UserAdmin(BaseUserAdmin):
 
 class OrderForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Basket
         fields = ('fio', 'email', 'address', 'phone_number')
         labels = {
             'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:', 

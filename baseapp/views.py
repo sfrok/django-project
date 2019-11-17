@@ -22,6 +22,11 @@ def auth_view(request):
     return auth(request, forms.UserAuthorizationForm(request.POST or None), HtmlPages.auth)
 
 
+@session_clear
+def home_view(request):
+    return render(request, f'{HtmlPages.home}.html', {'items': Category.objects.all()})
+
+
 # SEARCH
 
 @session_clear
@@ -84,7 +89,7 @@ def order_complete_view(request):
                 if order.product.amount < order.amount:  # Заказ превысил кол-во товара на складе
                     basket.delete()  # Вся корзина удаляется (но не из сессии)
                     request.session.get('bcont', []).remove(item)  # Конфликтный заказ убирается
-                    return HttpResponseRedirect('/order/')
+                    return HttpResponseRedirect(f'/{HtmlPages.ord}/')
                 order.product.sold += order.amount
                 order.product.amount -= order.amount
                 order.save()
@@ -115,11 +120,6 @@ def order_list_view(request):
         orders = Basket.objects.filter(user_id=request.user.id)
         return render(request, f'{HtmlPages.ord_list}.html', {'orders': orders})
     return HttpResponseRedirect('/')
-
-
-@session_clear
-def home_view(request):
-    return render(request, f'{HtmlPages.home}.html', {'items': Category.objects.all()})
 
 
 @session_clear
