@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import User, Category
+from .models import User, Basket, Category
 from store.data import getLogger, SELL_STATES
 
 log = lambda *info: getLogger().info(' '.join(info))
@@ -94,10 +94,10 @@ class UserAdmin(BaseUserAdmin):
 
 class OrderForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Basket
         fields = ('fio', 'email', 'address', 'phone_number')
         labels = {
-            'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:', 
+            'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
             'phone_number': 'Номер телефона:'
         }
         widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}
@@ -108,7 +108,7 @@ class SettingsForm(forms.ModelForm):
         model = User
         fields = ('name', 'address', 'phone_number')
         labels = {
-            'name': 'ФИО:', 'address': 'Адрес:', 
+            'name': 'ФИО:', 'address': 'Адрес:',
             'phone_number': 'Номер телефона:'
         }
         widgets = {i: forms.TextInput(attrs={'class':'form-control mb-2'}) for i in fields}

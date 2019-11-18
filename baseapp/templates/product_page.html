@@ -2,26 +2,28 @@
 {% block product_page %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <!-- Required meta tags -->
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/product_page.css" %}">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title></title>
-</head>
-<body>
-<div class="order-effect" id="order-effect">
-    <div class="container main">
-        <div class="row">
-            <div class="overlay hide">
-                <form action="/order/" method="post">
-                    {% csrf_token %}
+  </head>
+  <style>
+    body {
+      background: #f6f6f6;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="overlay hide">
+          <form action="/order/" method="post">
+            {% csrf_token %}
             <div id="modal-form" class="form">
               <div class="container">
                 <div class="row">
@@ -79,64 +81,90 @@
                     </div>
                 </div>
               </div>
-
-
             </div>
           </form>
-            </div>
-            <div class="col-md-12 col-lg-6">
-                <section>
-                    <div class="image mt-3"></div>
-                </section>
-                <div class="row">
-                    <div class="col-md-2 mt-3">
-                        <div class="image-low m-auto"></div>
-                    </div>
-                    <div class="col-md-2 mt-3">
-                        <div class="image-low m-auto"></div>
-                    </div>
-                    <div class="col-md-2 mt-3">
-                        <div class="image-low m-auto"></div>
-                    </div>
-                    <div class="col-md-2 mt-3">
-                        <div class="image-low m-auto"></div>
-                    </div>
-                    <div class="col-md-2 mt-3">
-                        <div class="image-low m-auto"></div>
-                    </div>
-                    <div class="col-md-2 mt-3">
-                        <div class="image-low m-auto"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-6">
-                <section>
-                    <div class="description mt-3">
-                        <header>
-                            <h2 class="product-header">{{product.name}}</h2>
-                        </header>
-                        <div class="main mt-5">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="price"><span class="text-span price-span">{{product.price}} грн</span></div>
-                                </div>
-                                <div id="make-order" class="button col-md-6 mt-3 mt-md-0 basket "><span id="make-buy" class="text-span">Купить</span></div>
-                            </div>
-                                <h5 class="text-center mt-5">Описания товара</h5>
-                                {{product.description}}
-                            <section class="shipped-to">
-                                <p class="mt-4 product-shipped">
-                                    <h5 class="text-center">Доставка</h5>
-                                    -Удалите меня пожалуйста-
-                            </section>
-                        </div>
-                    </div>
-                </section>
-            </div>
         </div>
+        <div class="col-12 head mt-3">
+          <div class="row">
+            <div class="col-12">
+              <h3>{{ product.name }}</h3>
+            </div>
+            <div class="col-12">
+              <small class="text-muted">Код товара: 1111111</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row justify-content-between">
+            <div class="col-12 col-md-12 col-sm-12 col-lg-5 mt-1 body">
+              <div class="col-12 text-center mt-1">
+                <img src="https://via.placeholder.com/300x540">
+              </div>
+              <div class="col-12 text-center mt-1 mb-1">
+                <img src="https://via.placeholder.com/50x50" >
+                <img src="https://via.placeholder.com/50x50" >
+                <img src="https://via.placeholder.com/50x50" >
+                <img src="https://via.placeholder.com/50x50" >
+                <img src="https://via.placeholder.com/50x50" >
+              </div>
+            </div>
+            <div class="col-12 col-md-12 col-sm-12 col-lg-6 body mt-1">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12">
+                    <img src="{% static "check_mark.png" %}" height="18px">
+                    <span class="pl-1">В наличии: 24</span>
+                  </div>
+                  <div class="col-12">
+                    <img src="{% static "stars.png" %}" width="100px">
+                    <span class="pl-2"> <a class="text" href="#">Отзывы: 11</a></span>
+                  </div>
+                </div><hr>
+              </div>
+              <div class="col-12">
+                <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                    <span><h4>Цена:</h4></span>
+                    <span class="cost"><strong><h3>{{ product.price }} грн</h3></strong></span>
+                    <div class="stock" id="stock">{{ product.amount }}</div>
+                    <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
+                    <div class="count-change cart-item">
+                      <label for="product-count"></label><input type="text" id="product-count" value="1" name="product_count" class="product-count">
+                    </div>
+                    <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-2 mt-lg-0">
+                    <div id="make-order" class="button basket text-center">
+                      <span id="make-buy" class="text-span">Купить</span>
+                    </div>
+                  </div>
+                </div>
+              </div><hr>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-6">
+                    <img src="{% static "libra.png" %}" height="18px">
+                    <span><a class="text ml-2" href="#">К сравнению</a></span>
+                  </div>
+                  <div class="col-6">
+                    <img src="{% static "star.png" %}" height="18px">
+                    <span><a class="text" href="#">Добавить в избранное</a></span>
+                  </div>
+                </div><hr>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12 description">
+                    <span>Описание товара: {{ product.description }}</span>
+                  </div>
+                </div><hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-<script src="{% static "ba-js/order-form.js" %}"></script>
-</body>
+    <script src="{% static "ba-js/order-form.js" %}"></script>
+  </body>
 </html>
 {% endblock product_page %}
