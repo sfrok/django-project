@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "ba-css/add_basket.css" %}">
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-sm-center justify-content-md-center justify-content-lg-start">
+        <div class="col-5">
+          <form  action="" method="post"> {% csrf_token %}
+          <div class="row mt-2">
+            <div class="col-10">
+              <span>Check orders</span>
+            </div>
+            <div class="col-2 back_button text-center">
+              <span><a style="color: white" href="/edit/orders/">Back</a></span>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="status" class="form-label-title">Status:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="sum" class="form-label-title">Sum Price:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="user" class="form-label-title">User:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="fio" class="form-label-title">Fio:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="email" class="form-label-title">E-mail:</label>
+              </div>
+              <div class="col-9">
+                <input type="email" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="address" class="form-label-title">Address:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="phone_number" class="form-label-title">Phone number:</label>
+              </div>
+              <div class="col-9">
+                <input type="number" readonly class="form-control" value="---------">
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">
+                <label for="info" class="form-label-title">Info:</label>
+              </div>
+              <div class="col-9">
+                <textarea readonly class="form-control"></textarea>
+              </div>
+            </div>
+          </div><hr>
+          <div class="col-12">
+            <div class="row ">
+              <div class="col-12 text-center">
+                <button type="button submit" class="save_button btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
