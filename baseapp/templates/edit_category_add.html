@@ -14,7 +14,7 @@
             <form method="post" action="/edit/categories/"> {% csrf_token %}
             <div class="row mt-2">
               <div class="col-10">
-                <span>Add categories</span>
+                <span>Add categories</span><a href="/edit/">edit/</a><a href="/edit/categories/">categories/</a>/{{cat}}
               </div>
               <div class="col-2 back_button text-center">
                 <span><a style="color: white" href="/edit/categories/">Back</a></span>

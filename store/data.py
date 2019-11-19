@@ -5,8 +5,8 @@ def getLogger():
 
 
 class HtmlPages():  # Названия html-файлов без .html
-    auth = 'auth'
-    reg = 'registration'
+    auth = 'login_auth'
+    reg = 'login_reg'
     contacts = 'contacts'
     srch_inp = 'base'
     srch_res = 'search_result'
@@ -20,9 +20,9 @@ class HtmlPages():  # Названия html-файлов без .html
     edit_prd = 'edit_product'
     edit_cat = 'edit_category'
     edit_bst = 'edit_basket'
-    add_prd = 'add_product'
-    add_cat = 'add_category'
-    add_bst = 'add_basket'
+    add_prd = 'edit_product_add'
+    add_cat = 'edit_category_add'
+    add_bst = 'edit_basket_add'
 
 
 SELL_STATES = (
