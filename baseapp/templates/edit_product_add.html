@@ -14,7 +14,7 @@
           <form method="post" action="/edit/products/"> {% csrf_token %}
           <div class="row justify-content-between">
             <div class="col-6">
-              <span>Add product</span>
+              <span>Add product</span><a href="/edit/">edit/</a><a href="/edit/products/">products/</a>/{{product.name}}
             </div>
             <div class="col-2 back_button text-center">
               <span><a style="color: white" href="/edit/products/">Back</a></span>
