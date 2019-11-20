@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from store.data import getLogger
 
-from .models import Product, Basket, Category
+from .models import Product, Basket, Category, User
 from .forms import AdminCatForm, AdminProductForm
 from .scripts import HtmlPages, session_clear
 from store.data import SELL_STATES
@@ -20,6 +20,13 @@ def edit_all_view(request):
 def edit_bst_view(request):
     if request.user.is_authenticated and request.user.is_admin:
         return render(request, f'{HtmlPages.edit_bst}.html', {'baskets': Basket.objects.all()})
+    else: return HttpResponseRedirect('/')
+
+
+@session_clear
+def edit_usr_view(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        return render(request, f'{HtmlPages.edit_usr}.html', {'users': User.objects.all()})
     else: return HttpResponseRedirect('/')
 
 
@@ -78,7 +85,20 @@ def edit_prd_view(request):
 @session_clear
 def add_bst_view(request):
     if request.user.is_authenticated and request.user.is_admin:
-        return render(request, f'{HtmlPages.add_bst}.html', {'baskets': Basket.objects.all()})
+        bst_id = int(request.path[13:])
+        if bst_id != 0:
+            bst = Category.objects.get(id=bst_id)
+            return render(request, f'{HtmlPages.add_bst}.html', {'bst':bst})
+    else: return HttpResponseRedirect('/')
+
+
+@session_clear
+def add_usr_view(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        usr_id = int(request.path[12:])
+        if usr_id != 0:
+            usr = Category.objects.get(id=usr_id)
+            return render(request, f'{HtmlPages.add_usr}.html', {'usr':usr})
     else: return HttpResponseRedirect('/')
 
 

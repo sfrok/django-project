@@ -42,9 +42,11 @@ urlpatterns = [
     path(f'edit/orders/', views.edit_bst_view, name=f'{HP.edit_bst}_page'),
     path(f'edit/categories/', views.edit_cat_view, name=f'{HP.edit_cat}_page'),
     path(f'edit/products/', views.edit_prd_view, name=f'{HP.edit_prd}_page'),
+    path(f'edit/users/', views.edit_usr_view, name=f'{HP.edit_usr}_page'),
     re_path(r'(edit/orders/)(\d+)', views.add_bst_view, name=f'{HP.add_bst}_page'),
     re_path(r'(edit/categories/)(\d+)', views.add_cat_view, name=f'{HP.add_cat}_page'),
     re_path(r'(edit/products/)(\d+)', views.add_prd_view, name=f'{HP.add_prd}_page'),
+    re_path(r'(edit/users/)(\d+)', views.add_usr_view, name=f'{HP.add_usr}_page'),
 ]
 
 if settings.DEBUG:
