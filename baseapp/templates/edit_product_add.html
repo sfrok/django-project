@@ -14,7 +14,7 @@
           <form method="post" action="/edit/products/"> {% csrf_token %}
           <div class="row justify-content-between">
             <div class="col-6">
-              <span>Add product</span><a href="/edit/">edit/</a><a href="/edit/products/">products/</a>/{{product.name}}
+              <span>Add product</span><a href="/edit/"></a>  {{product.name}}
             </div>
             <div class="col-2 back_button text-center">
               <span><a style="color: white" href="/edit/products/">Back</a></span>
@@ -36,7 +36,7 @@
                 <label for="description" class="form-label-title">Description:</label>
               </div>
               <div class="col-9">
-                <textarea class="form-control is-invalid" id="validationTextarea" name="description">{{product.description}}</textarea>
+                <textarea class="form-control" id="validationTextarea" name="description">{{product.description}}</textarea>
               </div>
             </div><hr>
           </div>

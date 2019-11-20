@@ -1,0 +1,11 @@
+.info {
+  color: black;
+}
+
+.table_head {
+  background-color: saddlebrown;
+}
+
+.search_button:hover{
+	cursor: pointer;
+}	
