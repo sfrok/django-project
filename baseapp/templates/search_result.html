@@ -34,20 +34,23 @@
                             <h3 class="resualt-head mt-2">Результаты поиска:</h3>
                         </div>
                         {% for item in items %}
-            <div class="col-md-12 col-lg-6">
-                <a href="/product/{{item.id}}" class="link">
+            <div class="col-lg-3 col-12 col-md-6">  
                 <div class="search-card">
-                    <header>
-                        <h4 class="product-head">{{item.name}}</h4>
-                    </header>
-                    <div class="product-image">
-                        <img class="image-width" src="{{item.photo}}" alt="">
-                    </div>
-                    <div class="description">
-                        <p>{{item.description}}</p>
-                    </div>
-                </div>
+                    <a href="/product/{{item.id}}" class="link">
+                        <form method="post" action="/product/{{item.id}}">{% csrf_token %}
+                            <img src="https://via.placeholder.com/250x350" alt="">
+                            <header>    
+                                <h4><span class="product-head ml-2">{{item.name}}</span></h4>
+                            </header>
+                            <img class="ml-2" src="{% static "stars.png" %}" width="100px">
+                            <span class="pl-2"> <a class="text" href="#">Отзывы: 11</a></span>
+                            <span class=" ml-2 price">Цена:{{ item.price }} грн</span>
+                            <div class="text-center mt-2 mb-2">
+                                <button type="button submit" class="checkout btn btn-primary" id="prod_button">Купить</button>
+                             </div>
+                        </form>
                     </a>
+                </div>
             </div>
             {% endfor %}
                     </div>

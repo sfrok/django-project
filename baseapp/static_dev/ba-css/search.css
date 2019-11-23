@@ -1,11 +1,16 @@
-.resualt-head {
+body {
+    background-color: white;
+}
+
+F.resualt-head {
     text-align: center;
     margin-bottom: 20px;
 }
 .search-card {
-    border: 2px solid bisque;
-    max-width: 330px;
+    border: 1px solid #f6f6f6;
     margin: auto auto 20px;
+    width: 252px; 
+    background-color: white;
 }
 
 .description p {
@@ -28,11 +33,29 @@
 }
 
 .search-card:hover {
-    background-color: linen;
+    border: 1px solid #7D7876;
     cursor: pointer;
 }
 
 .bar {
     background-color: bisque;
     height: 100vh;
+}
+
+.price {
+    font-size: 20px;
+}
+
+.text {
+  color: black;
+}
+
+.checkout {
+  border-radius: 3px;
+  height: 50px;
+  text-align: center;
+  background-color: #65c000;
+  color: white;
+  border: 1px solid #65c000;
+  width: 150px;
 }
