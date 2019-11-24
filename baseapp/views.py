@@ -5,7 +5,6 @@ from store.data import getLogger
 from .models import Product, Basket, Category
 from baseapp.scripts import HtmlPages, search, auth, add_order, populate, session_clear
 from baseapp import forms
-from baseapp.views_admin import *
 
 log = lambda *info: getLogger().info(' '.join(info))
 
@@ -38,7 +37,7 @@ def search_input_view(request):
 def search_result_view(request):
     if request.method == 'POST':
         line = request.POST['line']
-        cats = [i for i in Category.objects.all() if request.POST['cat_' + str(i.id)]]
+        cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
         return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
     return render(request, f'{HtmlPages.srch_res}.html', {'items': search()})
 

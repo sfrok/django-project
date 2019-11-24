@@ -16,15 +16,6 @@ class HtmlPages():  # Названия html-файлов без .html
     settings = 'settings'
     ord_list = 'order_list'
     home = 'base'
-    edit_all = 'edit_panel'
-    edit_prd = 'edit_product'
-    edit_cat = 'edit_category'
-    edit_bst = 'edit_basket'
-    edit_usr = 'edit_user'
-    add_prd = 'edit_product_add'
-    add_cat = 'edit_category_add'
-    add_bst = 'edit_basket_add'
-    add_usr = 'edit_user_add'
 
 
 SELL_STATES = (
