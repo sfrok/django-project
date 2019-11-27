@@ -1,6 +1,5 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block product_page %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +19,7 @@
     }
   </style>
   <body>
+    {% block content %}
     <div class="container">
       <div class="row">
         <div class="overlay hide">
@@ -85,6 +85,7 @@
             </div>
           </form>
         </div>
+        
         <div class="col-12 head mt-3">
           <div class="row">
             <div class="col-12">
@@ -166,6 +167,6 @@
       </div>
     </div>
     <script src="{% static "ba-js/order-form.js" %}"></script>
+    {% endblock %}
   </body>
 </html>
-{% endblock product_page %}

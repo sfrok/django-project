@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/base.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/search.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/product_page.css" %}">
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -42,7 +44,9 @@
     </div>
     <!-- HEADER STOP-->
     <!-- BODY START-->
+    {% block content%}
 
+    {% endblock%}
     <!-- FOOTER START-->
         <div class="container-fluid  mt-5">
             <div class="row footer pt-3">
