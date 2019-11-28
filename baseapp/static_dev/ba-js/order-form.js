@@ -7,6 +7,11 @@ quitWithFormBtn.onclick = modalWindowQuit;
 formInstance = document.querySelector('#modal-form');
 overlay = document.querySelector('.hide');
 
+button_back = document.querySelector('.back').onclick = function () {
+    overlay.classList.add('hide');
+    formInstance.style.display = 'none';
+};
+
 
 counterPlusProductCart = document.querySelector('.plus');
 counterMinusProductCart = document.querySelector('.minus');
