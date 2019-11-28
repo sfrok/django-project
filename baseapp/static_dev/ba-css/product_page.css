@@ -28,14 +28,14 @@
     background-color: inherit;
 }
 
-.basket {
+.buy {
     background-color: #65c000;
     color: white;
     height: 50px;
     border-radius: 10px;
 }
 
-.basket:hover{
+.buy:hover{
   cursor: pointer;
 }
 

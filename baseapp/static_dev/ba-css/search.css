@@ -2,7 +2,11 @@ body {
     background-color: white;
 }
 
-F.resualt-head {
+a {
+  color: black;
+}
+
+/*F.resualt-head {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -48,7 +52,7 @@ F.resualt-head {
 
 .text {
   color: black;
-}
+}*/
 
 .checkout {
   border-radius: 3px;
@@ -57,5 +61,34 @@ F.resualt-head {
   background-color: #65c000;
   color: white;
   border: 1px solid #65c000;
-  width: 150px;
+  max-width: 150px;
 }
+
+.checkout:hover {
+  background-color: #00d924;
+  border: 1px solid #00d924;
+}
+
+.card-item {
+  border: 1px solid #DCDCDC;
+  border-radius: 6px;
+}
+
+.card-item:hover {
+  border: 2px solid #D3D3D3;
+}
+
+.product-info {
+  color: black;
+}
+
+.info {
+  font-size: 22px;
+}
+
+.custom-select {
+  width: 200px;
+}
+
+
+

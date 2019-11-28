@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block search_result %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -16,39 +16,62 @@
 </head>
 <body>
     {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-                <div class="col-md-8 col-lg-9 order-md-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
                     <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="resualt-head mt-2">Результаты поиска:</h3>
+                        <div class="col-6 info mt-2 ">
+                            <span><h5>По запросу (запрос) найдено 1111 товаров:</h3></span>
                         </div>
-                        {% for item in items %}
-            <div class="col-lg-3 col-12 col-md-6">  
-                <div class="search-card">
-                    <a href="/product/{{item.id}}" class="link">
-                        <form method="post" action="/product/{{item.id}}">{% csrf_token %}
-                            <img src="https://via.placeholder.com/250x350" alt="">
-                            <header>    
-                                <h4><span class="product-head ml-2">{{item.name}}</span></h4>
-                            </header>
-                            <img class="ml-2" src="{% static "stars.png" %}" width="100px">
-                            <span class="pl-2"> <a class="text" href="#">Отзывы: 11</a></span>
-                            <span class=" ml-2 price">Цена:{{ item.price }} грн</span>
-                            <div class="text-center mt-2 mb-2">
-                                <button type="button submit" class="checkout btn btn-primary" id="prod_button">Купить</button>
-                             </div>
-                        </form>
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
+                        <div class="col-6 text-right mt-2">
+                            <div class="form-group">
+                                <select class="custom-select">
+                                    <option value="">По рейтингу</option>
+                                    <option value="">От дешёвых к дорогим</option>
+                                    <option value="">От дорогих к дешёвым</option>
+                                    <option value="">Популярные</option>
+                                    <option value="">Новинки</option>
+                                    <option value="">Акционные</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            {% for item in items %}
+                <div class="col-9 col-md-6 col-lg-3">  
+                    <div class="card-item mt-3">
+                        <div class="product-code ml-2">
+                            <small class="text-muted">Код товара: 111111</small>
+                        </div>
+                        <a style="text-decoration: none;" href="/product/{{item.id}}">
+                            <form action="/product/{{item.id}}" method="post">
+                                {% csrf_token %}
+                                <header class="text-center product-info">
+                                    <h4><span>"{{item.name}}"</span></h4>
+                                </header>
+                                <div class="text-center">
+                                    <img src="https://via.placeholder.com/200x300" alt="product-image">
+                                </div>
+                                <div class="product-info text-center mt-1">
+                                    <a style="text-decoration: none;" href="#">
+                                        <span>Отзывы: 11</span>
+                                        <img src="{% static "stars.png" %}" width="100px">
+                                    </a>
+                                    <div class="price mt-2">
+                                        <span class="mt-3">{{ item.price }} грн</span>
+                                    </div>
+                                    <div class="text-center mt-2 mb-2">
+                                        <button type="button submit" class="checkout btn btn-primary" id="prod_button">Купить</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </a>
+                    </div>
+                 </div>
+            {% endfor %}
             </div>
         </div>
-    }
+    {% endblock %}
 </body>
-{% endblock %}
 </html>
 {% endblock search_result %}
