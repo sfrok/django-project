@@ -21,17 +21,17 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6 info mt-2 ">
-                            <span><h5>По запросу (запрос) найдено 1111 товаров:</h3></span>
+                            <span><h5>{% if line != ''%}По запросу {{ line }} н{% else %}Н{% endif %}айдено {{ items.length }} товаров:</h3></span>
                         </div>
                         <div class="col-6 text-right mt-2">
                             <div class="form-group">
-                                <select class="custom-select">
-                                    <option value="">По рейтингу</option>
-                                    <option value="">От дешёвых к дорогим</option>
-                                    <option value="">От дорогих к дешёвым</option>
-                                    <option value="">Популярные</option>
-                                    <option value="">Новинки</option>
-                                    <option value="">Акционные</option>
+                                <select name='sort' class="custom-select">
+                                    <option value="0">По рейтингу</option>
+                                    <option value="1">От дешёвых к дорогим</option>
+                                    <option value="2">От дорогих к дешёвым</option>
+                                    <option value="3">Популярные</option>
+                                    <option value="4">Новинки</option>
+                                    <option value="5">Акционные</option>
                                 </select>
                             </div>
                         </div>

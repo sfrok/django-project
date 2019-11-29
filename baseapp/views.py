@@ -38,8 +38,8 @@ def search_result_view(request):
     if request.method == 'POST':
         line = request.POST['line']
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
-        return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats)})
-    return render(request, f'{HtmlPages.srch_res}.html', {'items': search()})
+        return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats), 'line': line})
+    return render(request, f'{HtmlPages.srch_res}.html', {'items': search(), 'line': ''})
 
 
 # PRODUCT
