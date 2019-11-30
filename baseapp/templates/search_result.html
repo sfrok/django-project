@@ -25,7 +25,8 @@
                         </div>
                         <div class="col-6 text-right mt-2">
                             <div class="form-group">
-                                <select name='sort' class="custom-select">
+                            <form action="" method="post">
+                                <select name='sort' class="custom-select" onchange="this.form.submit()">
                                     <option value="0">По рейтингу</option>
                                     <option value="1">От дешёвых к дорогим</option>
                                     <option value="2">От дорогих к дешёвым</option>
@@ -33,6 +34,7 @@
                                     <option value="4">Новинки</option>
                                     <option value="5">Акционные</option>
                                 </select>
+                            </form>
                             </div>
                         </div>
                     </div>
