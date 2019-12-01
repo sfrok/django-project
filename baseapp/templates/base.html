@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="{% static "ba-css/base.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/search.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/product_page.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/order_complete.css" %}">
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -43,6 +44,38 @@
         </div>
     </div>
     <!-- HEADER STOP-->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 authorization_window mt-5">
+               <div class="row">
+                   <div class="col-12 text-center">
+                       <h3>Вход в учетную запись</h3>
+                   </div>
+                   <div class="col-12 text-left">
+                       <label for="login" class="form-label-title">Эл. почта или номер телефона:</label>
+                       <input type="email" class=" login-form">
+                   </div>
+                   <div class="col-12 text-left">
+                        <label for="password" class="form-label-title">Пароль:</label>
+                        <input type="password" class="login-form">
+                    </div>
+                    <div class="col-12 text-left mt-2">
+                        <a href="#" class="recover_password">Забыли пароль?</a>
+                    </div>
+                    <div class="col-12 text-left mt-1">
+                        <input type="checkbox" class="checkbox">
+                        <label for="checkbox" class="form-label-title">Запомнить меня</label>
+                    </div>
+                    <div class="col-6 text-center mb-2">
+                        <button type="button submit" class="enter" id="prod_button">Войти</button>
+                    </div>
+                    <div class="col-6 text-center mb-2 pt-2">
+                        <span class="cancel">Отмена</span>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
     <!-- BODY START-->
     {% block content%}
         <div class="container-fluid ">

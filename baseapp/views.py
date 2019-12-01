@@ -69,32 +69,32 @@ def order_view(request):
 
 @session_clear
 def order_complete_view(request):
-    if request.method == 'POST' and 'bcont' in request.session:
-        form = forms.OrderForm(request.POST)
-        if form.is_valid():
-            log('form data:', str(form.cleaned_data))
-            # Создание корзины, если ее еще нет, или обновление уже существующей
-            basket = Basket.objects.create(
-                fio=form.cleaned_data['fio'],
-                email=form.cleaned_data['email'],
-                address=form.cleaned_data['address'],
-                phone_number=form.cleaned_data['phone_number'],
-                sum_price=sum([i['sum_price'] for i in request.session.get('bcont', [])]),
-                user=request.user if request.user.is_authenticated else None)
-            for item in request.session.get('bcont', []):
-                p = Product.objects.get(id=item.pop('product', None))
-                item.update({'amount': int(item['amount'])})
-                order = basket.singleorder_set.create(product=p, **item)
-                if order.product.amount < order.amount:  # Заказ превысил кол-во товара на складе
-                    basket.delete()  # Вся корзина удаляется (но не из сессии)
-                    request.session.get('bcont', []).remove(item)  # Конфликтный заказ убирается
-                    return HttpResponseRedirect(f'/{HtmlPages.ord}/')
-                order.product.sold += order.amount
-                order.product.amount -= order.amount
-                order.save()
-            del request.session['bcont']
+    # if request.method == 'POST' and 'bcont' in request.session:
+    #     form = forms.OrderForm(request.POST)
+    #     if form.is_valid():
+    #         log('form data:', str(form.cleaned_data))
+    #         # Создание корзины, если ее еще нет, или обновление уже существующей
+    #         basket = Basket.objects.create(
+    #             fio=form.cleaned_data['fio'],
+    #             email=form.cleaned_data['email'],
+    #             address=form.cleaned_data['address'],
+    #             phone_number=form.cleaned_data['phone_number'],
+    #             sum_price=sum([i['sum_price'] for i in request.session.get('bcont', [])]),
+    #             user=request.user if request.user.is_authenticated else None)
+    #         for item in request.session.get('bcont', []):
+    #             p = Product.objects.get(id=item.pop('product', None))
+    #             item.update({'amount': int(item['amount'])})
+    #             order = basket.singleorder_set.create(product=p, **item)
+    #             if order.product.amount < order.amount:  # Заказ превысил кол-во товара на складе
+    #                 basket.delete()  # Вся корзина удаляется (но не из сессии)
+    #                 request.session.get('bcont', []).remove(item)  # Конфликтный заказ убирается
+    #                 return HttpResponseRedirect(f'/{HtmlPages.ord}/')
+    #             order.product.sold += order.amount
+    #             order.product.amount -= order.amount
+    #             order.save()
+    #         del request.session['bcont']
             return render(request, f'{HtmlPages.ord_com}.html')
-    return HttpResponseRedirect('/')
+    # return HttpResponseRedirect('/')
 
 
 @session_clear

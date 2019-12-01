@@ -1,0 +1,17 @@
+.product-img {
+	border: 2px solid #F5F5DC;
+}
+
+.back-button {
+	background-color: #008B8B;
+	border:1px solid #008B8B;
+	border-radius: 6px;
+	height: 50px;
+	width: 150px;
+	line-height: 50px;
+}
+
+.back-button:hover {
+
+}
+

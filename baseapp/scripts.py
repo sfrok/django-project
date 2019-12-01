@@ -39,7 +39,7 @@ def add_order(request, product_id, amount):
             item['amount'] = amount
             break
     if not order_exists:
-        order = SingleOrder(product=product, amount=amount, sum_price=amount*product.price)
+        order = SingleOrder(product=product, amount=amount, sum_price=decimal(amount*product.price))
         orders.append(model_to_dict(order))
     request.session['bcont'] = orders
 

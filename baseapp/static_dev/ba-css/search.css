@@ -6,54 +6,6 @@ a {
   color: black;
 }
 
-/*F.resualt-head {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.search-card {
-    border: 1px solid #f6f6f6;
-    margin: auto auto 20px;
-    width: 252px; 
-    background-color: white;
-}
-
-.description p {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 10px;
-}
-
-.product-head {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.product-image {
-    text-align: center;
-}
-
-.image-width {
-    width: 80%;
-}
-
-.search-card:hover {
-    border: 1px solid #7D7876;
-    cursor: pointer;
-}
-
-.bar {
-    background-color: bisque;
-    height: 100vh;
-}
-
-.price {
-    font-size: 20px;
-}
-
-.text {
-  color: black;
-}*/
-
 .checkout {
   border-radius: 3px;
   height: 50px;
@@ -67,6 +19,7 @@ a {
 .checkout:hover {
   background-color: #00d924;
   border: 1px solid #00d924;
+  cursor: pointer;
 }
 
 .card-item {
