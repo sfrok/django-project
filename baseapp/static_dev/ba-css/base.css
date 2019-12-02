@@ -2,8 +2,20 @@
     font-family: sans-serif;
 }
 
+.header-bottom-text {
+    font-size: 20px;
+}
+
 .header-top {
        background: rgba(88, 26, 13, 0.85)
+}
+
+.header-bottom-container {
+}
+
+.header-bottom {
+    height: 50px;
+    background: bisque;
 }
 
 .authreg {
@@ -21,16 +33,24 @@
     display: inline-block;
 }
 
+.header-sidebar {
+    color: white;
+}
 #sidebar {
     position: fixed;
-    width: 250px;
+    width: 300px;
     height: 100%;
     background-color: #151719;
-    left: -250px;
+    left: -300px;
     transition: all 500ms linear;
+    z-index: 9999;
 }
 
 #sidebar.active {
+    left: 0px;
+}
+
+#sidebar-exit.active {
     left: 0px;
 }
 
@@ -49,24 +69,27 @@
     cursor: pointer;
 }
 
-#sidebar .toggle-btn {
+.toggle-btn {
     position: absolute;
-    left: 258px;
-    top: 32px
+    left: 12px;
+    top: 8px;
 }
 
 #sidebar .toggle-btn:hover {
     cursor: pointer;
 }
 
-#sidebar .toggle-btn span {
+.toggle-btn span {
     display: block;
     width: 30px;
     height: 5px;
-    background: rgba(230, 230, 230, 0.9);
+    background: rgba(21, 23, 25, 0.9);
     margin: 5px 0px;
 }
 
+.sidebar-auth {
+    font-size: 22px;
+}
 
 .footer {
     height: 300px;
