@@ -23,7 +23,7 @@
     <div class="container">
       <div class="row">
         <div class="overlay hide">
-          <form action="/order/" method="post">
+          <form action="/order/add/" method="post">
             {% csrf_token %}
             <div id="modal-form" class="form">
               <div class="container">
@@ -69,10 +69,10 @@
                             <div class="col-12">
                               <div class="row">
                                 <div class="col-12 col-sm-12 col-md-6 mt-lg-4 mt-md-5 mt-sm-5 text-center pt-3">
-                                  <button type="button" class="back btn btn-primary">Вернутся к покупкам</button>
+                                  <button type="button submit" class="back btn btn-primary" id="back_button" name="action" value="continue">Вернутся к покупкам</button>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mt-lg-4 mt-md-5 mt-sm-3 text-center  pt-3">
-                                  <button type="button submit" class="checkout btn btn-primary" id="prod_button">Оформить заказ</button>
+                                  <button type="button submit" class="checkout btn btn-primary" id="prod_button" name="action" value="order">Оформить заказ</button>
                                 </div>
                               </div>
                             </div>
