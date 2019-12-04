@@ -93,30 +93,85 @@
         </div>
     </div>
     <!-- BODY START-->
-    {% block content%}
-        <div class="container-fluid ">
-            <div class="row">
-                    <div id="sidebar" class="sticky-top">
-                        <div class="col-auto mb-2">
-                            <img src="https://via.placeholder.com/35x35" alt="logo" class="img-thumbnail mt-2 mb-2">
-                            <h3 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h3>
-                            <img src="{% static "exit.png" %}" alt="logo" class="img ml-5" id="sidebar-exit" onclick="toggleSidebar()">
-                        </div>
-                        <ul class="">
-                            <li><span class="sidebar-auth">Вход</span></li>
-                            <li><span class="sidebar-auth">Регистрация</span></li>
-                            <hr>
-                            <li>Каталог</li>
-                            <li>Новости</li>
-                            <li>Акции</li>
-                            <li>Контакты</li>
-                        </ul>
+    <div id="sidebar" class="sticky-top">
+        <div class="col-auto mb-2">
+            <img src="https://via.placeholder.com/35x35" alt="logo" class="img-thumbnail mt-2 mb-2">
+            <h3 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h3>
+            <img src="{% static "exit.png" %}" alt="logo" class="img ml-5" id="sidebar-exit" onclick="toggleSidebar()">
+        </div>
+        <ul class="">
+            <li><span class="sidebar-auth">Вход</span></li>
+            <li><span class="sidebar-auth">Регистрация</span></li>
+            <hr>
+            <li>Каталог</li>
+            <li>Новости</li>
+            <li>Акции</li>
+            <li>Контакты</li>
+        </ul>
+    </div>
+    <!-- MAIN CONTENT START-->
+    <div class="container-fluid mt-4">
+        <div class="row text-center justify-content-around no-gutters">
+              <div class="col-md-5 cart mb-4">
+                <div class="main-info">
+                    <img src="https://via.placeholder.com/500x200" alt="">
+                    <h3 class="cart-header"><span class="title-cart mt-4">Название</span></h3>
+                    <div class="cart-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius iusto natus, nisi quaerat quasi quidem quisquam voluptatum. Aliquam, molestiae, similique.</p>
                     </div>
-                <div class="col-md-12 mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias aut beatae cum delectus deserunt dicta doloribus eaque, exercitationem explicabo fugit id incidunt ipsum, libero magni maxime minus molestiae nisi obcaecati provident quaerat qui quisquam ratione rerum similique sit temporibus voluptates! Ab aliquam animi consequatur cum deserunt dicta dolor error eum harum minus neque nisi perspiciatis placeat possimus praesentium, qui quidem ratione, recusandae repellendus tempora totam voluptate voluptatum! Aliquid corporis deserunt eligendi enim est ex explicabo illum ipsa iste iusto maxime natus nobis odit pariatur placeat quam, quis reiciendis sit suscipit tempora ullam velit, veniam, voluptatibus! A at consectetur deleniti deserunt doloribus esse est illo in, inventore ipsa mollitia odit omnis perspiciatis, quasi veritatis. A accusantium, adipisci animi blanditiis culpa cumque cupiditate dicta doloribus et ex exercitationem, facere facilis in laboriosam laudantium modi molestiae nemo officia perspiciatis quas quidem quis sed similique tempora voluptates. Ab aperiam architecto atque autem consectetur consequuntur culpa distinctio dolor doloremque dolores ducimus eos eveniet ipsam iure necessitatibus, non omnis, quam quibusdam quos sed sunt temporibus ullam veniam voluptatem voluptates! Beatae cum dicta eaque eligendi ipsa maiores nobis obcaecati, pariatur praesentium quasi, quo soluta totam ullam vel, vero. Asperiores beatae impedit itaque maiores nobis non quas quod voluptatibus. Ab aperiam asperiores aut corporis doloremque doloribus dolorum ea eos eveniet explicabo facere id illum laborum magnam maxime possimus provident quasi quibusdam quisquam quod recusandae reprehenderit sequi soluta tempora temporibus ullam velit, vero vitae voluptates, voluptatum. A eius laborum modi quae quam quod vel veritatis? Consequuntur officia soluta suscipit. Eligendi provident tempora voluptatum! Aspernatur commodi cum deserunt dolor explicabo labore, laboriosam laborum minima possimus recusandae rem repellat repudiandae rerum similique soluta tempore ullam voluptatum? Accusamus ad adipisci aperiam architecto atque consequuntur cupiditate deleniti, dignissimos dolor doloremque doloribus dolorum et excepturi, exercitationem harum illo ipsa maxime minima neque non nostrum numquam odio omnis quis quisquam quo reiciendis tempore. Assumenda blanditiis facilis laboriosam odit placeat repellendus veritatis voluptates voluptatum. Aliquid beatae earum eos et ex fugiat harum magni, mollitia necessitatibus officia pariatur porro provident quaerat quia quidem recusandae rem temporibus totam vitae voluptatibus. Accusamus, architecto fugiat ipsa minus officiis rem? Beatae, delectus ea est exercitationem rem sed similique! Commodi, molestiae unde! Ab accusantium assumenda beatae cupiditate distinctio et hic illo illum ipsa iure laborum maiores mollitia nam nisi non porro possimus praesentium quaerat repudiandae saepe suscipit voluptate, voluptates? Cupiditate dolore ex impedit repellendus. Assumenda dolores magnam praesentium quo sed. Adipisci atque beatae cumque ducimus ex exercitationem, maxime natus nemo nulla obcaecati praesentium quia similique sit, unde voluptates. Consequuntur ducimus eum itaque odit repellat? Animi expedita, impedit? A aliquid aperiam atque culpa cumque dolorem doloremque et, ipsum itaque molestiae mollitia necessitatibus nemo pariatur provident quasi reprehenderit temporibus. Commodi cum eos explicabo fugiat ipsum nam, repudiandae veritatis. Adipisci dignissimos, unde? Aliquam, autem consequatur culpa deserunt dolorem dolores, laboriosam mollitia numquam porro temporibus vel voluptatem voluptatum. Aliquid beatae consequatur cupiditate debitis dolorem doloremque dolorum exercitationem explicabo fugit ipsam laudantium minus mollitia non, placeat qui, voluptates, voluptatibus. Alias cupiditate, debitis delectus ducimus exercitationem expedita fugiat id incidunt inventore ipsa ipsum magnam minus modi nemo nisi quas qui ratione, rerum sint sunt? Accusantium ad consectetur consequatur natus officiis quas quibusdam saepe sed sint vitae. Assumenda, consectetur ducimus earum est et illo inventore ipsam iure iusto laudantium maxime modi odio officia placeat quibusdam quis repellendus sed temporibus voluptatem voluptatibus. Aperiam asperiores eaque ipsum, itaque iure perferendis perspiciatis sapiente suscipit. Assumenda est fugit laudantium praesentium voluptas? Ad adipisci aut dignissimos dolore doloremque doloribus earum est illo impedit, itaque molestiae nemo non qui sint sit, tempore ullam unde veniam. Alias aliquam aperiam autem dignissimos doloribus eos et expedita inventore laboriosam minima, placeat praesentium quae qui quidem sint unde vero vitae voluptatem. Aliquam error et magnam optio repellat totam voluptatem? Ab amet, animi at, eveniet, ex fuga inventore ipsum labore magni neque nihil obcaecati officia omnis optio quaerat quos sit sunt suscipit tempora tempore ullam veritatis voluptatum. Accusamus adipisci amet at consectetur consequuntur dignissimos dolor doloribus, exercitationem facilis iure natus neque nisi optio quasi totam! Cupiditate delectus dignissimos dolorem est et, fugiat inventore ipsa labore neque quidem repellendus sapiente sunt tenetur. Accusantium commodi consequuntur, cupiditate dolore dolorum ea earum fugiat, ipsa, laboriosam minima natus nemo quasi quod repellendus sapiente sed tempore totam unde. Animi at aut, consectetur deserunt dolore eius ex, exercitationem impedit minima nam necessitatibus nisi non numquam pariatur perferendis quaerat quisquam rem temporibus velit, vero voluptate voluptatem voluptatum. Ab alias aliquam commodi culpa enim et fugit impedit in ipsum iure maiores neque porro quo repellat, sequi ullam vero? A, consequuntur cum dolore eius eligendi nemo officiis, provident qui quidem, quo quod sed voluptatem voluptatum. Ab atque autem dolorum, esse eum ex quis suscipit? Assumenda autem dolore eum incidunt ipsam necessitatibus reiciendis vel! A assumenda earum facere incidunt necessitatibus nesciunt nobis, repellat vel! Dolores exercitationem expedita facilis porro quisquam, sed voluptate! Aperiam atque autem dolore et maxime necessitatibus nulla quasi. Amet asperiores aspernatur cumque dolores natus neque repellat repudiandae veniam vitae! Aspernatur, distinctio, quam. Accusamus, ad amet autem beatae commodi cupiditate dolor illum molestias mollitia, nisi obcaecati pariatur quaerat quas repellendus unde voluptate voluptatibus. A alias aperiam at atque consectetur cupiditate dignissimos dolor dolore dolorem ea eaque eligendi, enim eos fuga, fugit impedit ipsa iste labore laborum magni molestiae molestias nostrum numquam obcaecati odio officia, placeat possimus quam quas quidem ratione repellat sed similique sint suscipit ullam voluptas? Aspernatur eligendi, esse impedit incidunt laboriosam modi porro possimus quasi quisquam sapiente! A alias amet asperiores at autem commodi cum cumque deleniti distinctio dolor dolores doloribus eaque et eveniet expedita fuga illo in, iusto maiores non obcaecati optio possimus quae quia quibusdam quos repellat rerum saepe sed suscipit temporibus totam, ullam ut velit voluptate voluptatem voluptatibus. Deserunt ea error explicabo fugit iure necessitatibus nesciunt officia, possimus quibusdam repellat repellendus repudiandae rerum unde? Fugit nobis omnis repudiandae? Adipisci beatae corporis ea fugiat maiores, minus modi nobis perspiciatis quisquam recusandae sequi similique sunt suscipit ullam vel? Ab autem consequuntur, distinctio doloribus, ea id, molestias non optio quae quasi repellat rerum saepe ullam.</div>
+                </div>
             </div>
-    {% endblock%}
+              <div class="col-md-5 cart mb-4">
+                <div class="main-info">
+                    <img src="https://via.placeholder.com/500x200" alt="">
+                    <h3 class="cart-header"><span class="title-cart mt-4">Название</span></h3>
+                    <div class="cart-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius iusto natus, nisi quaerat quasi quidem quisquam voluptatum. Aliquam, molestiae, similique.</p>
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-5 cart mb-4">
+                <div class="main-info">
+                    <img src="https://via.placeholder.com/500x200" alt="">
+                    <h3 class="cart-header"><span class="title-cart mt-4">Название</span></h3>
+                    <div class="cart-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius iusto natus, nisi quaerat quasi quidem quisquam voluptatum. Aliquam, molestiae, similique.</p>
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-5 cart mb-4">
+                <div class="main-info">
+                    <img src="https://via.placeholder.com/500x200" alt="">
+                    <h3 class="cart-header"><span class="title-cart mt-4">Название</span></h3>
+                    <div class="cart-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius iusto natus, nisi quaerat quasi quidem quisquam voluptatum. Aliquam, molestiae, similique.</p>
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-5 cart mb-4">
+                <div class="main-info">
+                    <img src="https://via.placeholder.com/500x200" alt="">
+                    <h3 class="cart-header"><span class="title-cart mt-4">Название</span></h3>
+                    <div class="cart-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius iusto natus, nisi quaerat quasi quidem quisquam voluptatum. Aliquam, molestiae, similique.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 cart mb-4">
+                <div class="main-info">
+                    <img src="https://via.placeholder.com/500x200" alt="">
+                    <h3 class="cart-header"><span class="title-cart mt-4">Название</span></h3>
+                    <div class="cart-footer">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius iusto natus, nisi quaerat quasi quidem quisquam voluptatum. Aliquam, molestiae, similique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MAIN CONTENT END-->
+    
     <!-- FOOTER START-->
-        <div class="container-fluid  mt-5">
+        <div class="container-fluid mt-4 main-footer">
             <div class="row footer pt-3">
                 <div class="col-md-4 text-center">
                     <h3 class="display-5">Покупателю</h3>
@@ -129,9 +184,7 @@
                 </div>
             </div>
         </div>
-    </div>
-        <!-- FOOTER END-->
-  <script src="{% static "ba-js/sidebar.js" %}"></script>
+    <script src="{% static "ba-js/sidebar.js" %}"></script>
   </body>
 </html>
 

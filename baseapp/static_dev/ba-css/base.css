@@ -90,7 +90,9 @@
 .sidebar-auth {
     font-size: 22px;
 }
-
+.main-footer {
+    position: absolute;
+}
 .footer {
     height: 300px;
     background: rgba(190, 190, 190, 0.4);
@@ -143,4 +145,44 @@
 .cancel:hover {
     cursor: pointer;
     color: #1E90FF;
+}
+
+/*body>cart*/
+
+.cart {
+    max-width: 500px;
+    height: 350px;
+    box-shadow: 5px 0px 11px rgba(52, 52, 52, 0.65);
+}
+
+.cart-header {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 110px;
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.cart-header.active-cart{
+    transition: top 1s;
+}
+
+.cart-footer {
+    display: block;
+    height: 100%;
+    padding: 30px 5px 5px 1px;
+}
+
+.main-info {
+    height: 100%;
+    background-color: rgba(238, 238, 238, 0.91);
+}
+
+.cart-footer p {
+    color: black;
+    position: absolute;
+}
+
+.title-cart {
+    display: block;
 }
