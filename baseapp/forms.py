@@ -68,7 +68,7 @@ class OrderForm(forms.ModelForm):
         model = Basket
         fields = ('fio', 'email', 'address', 'phone_number')
         labels = {
-            'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
+            'fio': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
             'phone_number': 'Номер телефона:'
         }
         widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}

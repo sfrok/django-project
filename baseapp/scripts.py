@@ -37,6 +37,7 @@ def add_order(request, product_id, amount):
         if item['product'] == product.id:
             order_exists = True
             item['amount'] += amount
+            item['sum_price'] += float(amount*product.price)
             break
     if not order_exists:
         order = model_to_dict(SingleOrder(product=product, amount=amount, sum_price=amount*product.price))
