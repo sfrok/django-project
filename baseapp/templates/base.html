@@ -12,6 +12,8 @@
       <link rel="stylesheet" href="{% static "ba-css/search.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/product_page.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/order_complete.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/contacts.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/order.css" %}">
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -29,14 +31,14 @@
                 <div class="row">
                     <div class="col-md-7 col-lg-6 title pl-sm-5 pt-3 pb-3 text-center text-md-left">
                         <div class="img-logo d-none d-sm-inline">
-                            <img src="https://via.placeholder.com/80x80" alt="logo" class="img-thumbnail">
+                            <a href="/base_page/"><img src="https://via.placeholder.com/80x80" alt="logo" class="img-thumbnail"></a>
                         </div>
                         <h1 class="display-4 pl-2 align-middle header-title">Название</h1>
                     </div>
                     <div class="col-md-5 col-lg-6 m-md-auto basket text-right d-none d-md-block pr-lg-5 text-left pr-md-3">
                         <a class="text-center authreg pr-lg-5 pr-md-3" href="/login_auth/">Вход</a>
                         <a class="text-center authreg pr-lg-5 pr-md-3" href="/login_reg/">Регистрация</a>
-                        <img src="https://via.placeholder.com/40x40" alt="basket" class="img-thumbnail">
+                        <a href="/order/"><img src="https://via.placeholder.com/40x40" alt="basket" class="img-thumbnail"></a>
                     </div>
                 </div>
             </div>
@@ -54,7 +56,7 @@
                             <div class="col-md-2 mt-2 d-none d-md-block"><a class="header-bottom-text" href="#">КАТАЛОГ</a></div>
                             <div class="col-md-2 mt-2 d-none d-md-block"><a class="header-bottom-text" href="#">НОВОСТИ</a></div>
                             <div class="col-md-2 mt-2 d-none d-md-block"><a class="header-bottom-text" href="#">АКЦИИ</a></div>
-                            <div class="col-md-2 mt-2 d-none d-md-block"><a class="header-bottom-text" href="#">КОНТАКТЫ</a></div>
+                            <div class="col-md-2 mt-2 d-none d-md-block"><a class="header-bottom-text" href="/contacts/">КОНТАКТЫ</a></div>
                         </div>
                     </div>
                 </div>

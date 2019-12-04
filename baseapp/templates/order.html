@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +14,23 @@
     }
   </style>
   <body>
+    {% block content %}
+    <!-- EMPTY BASKET START -->
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 mt-4 text-center">
+          <span><h3>В данный момент Ваша корзина пуста:</h3></span>
+        </div>
+        <div class="col-12 text-center mt-4">
+          <a href="/search_result/"><button type="button submit" class="btn btn-primary back-shopping ">Вернутся к покупкам</button></a>
+        </div>
+      </div>
+    </div>
+    <!-- EMPTY BASKET END -->
     <form action="/order/complete/" method="post"> {% csrf_token %}
       <div class="container">
         <div class="row justify-content-between">
-          <div class="col-12 col-md-12 col-lg-6">
+          <div class="col-12 col-md-12 col-lg-6 mt-3">
             <div class="col-12">
               <div class="row contacts">
                 <div class="col-12">
@@ -32,7 +46,7 @@
                 {% endfor %}
                 <div class="col-12">
                   <div class="row ">
-                    <div class="col-12 text-center ">
+                    <div class="col-12 text-center mt-2">
                       <button type="button submit" class="checkout btn btn-primary">Подтвердить заказ</button>
                     </div>
                   </div>
@@ -43,7 +57,7 @@
           <div class="col-12 col-md-12 col-lg-5 mt-md-5 mt-lg-0">
             <div class="col-12">
               <div class="row product">
-                <div class="col-12 text-lg-right text-md-left text-right">
+                <div class="col-12 text-lg-right text-md-left text-right mt-3">
                   <span class="header">Ваш заказ</span><hr>
                 </div>
                 <div class="col-8 order-info">
@@ -65,6 +79,9 @@
                   <div class="col-4 order-info">
                     <span><strong>{{i.price}}.00 грн</strong></span>
                   </div><hr>
+                  <div class="col-12 text-center mt-2">
+                    <button type="button submit" class="btn btn-primary delete-product">Удалить продукт из корзины</button>
+                  </div>
                 {% endfor %}
               </div>
             </div>
@@ -72,5 +89,6 @@
         </div>
       </div>
     </form>
+    {% endblock %}
   </body>
 </html>
