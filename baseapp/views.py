@@ -23,20 +23,17 @@ def auth_view(request):
 
 @session_clear
 def home_view(request):
-    return render(request, f'{HtmlPages.home}.html', {'items': Category.objects.all()})
+    pages = [HtmlPages.auth, HtmlPages.reg, HtmlPages.settings, HtmlPages.ord_list, HtmlPages.srch_res]
+    return render(request, f'{HtmlPages.home}.html',
+        {'cats': Category.objects.all(), 'line': request.POST.get('line', ''), 'pages': pages})
 
 
 # SEARCH
 
 @session_clear
-def search_input_view(request):
-    return render(request, f'{HtmlPages.srch_inp}.html', {'items': Category.objects.all()})
-
-
-@session_clear
 def search_result_view(request):
     if request.method == 'POST':
-        line = request.POST['line']
+        line = request.POST.get('line', '')
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
         return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats), 'line': line})
     return render(request, f'{HtmlPages.srch_res}.html', {'items': search(), 'line': ''})
@@ -51,12 +48,19 @@ def product_view(request):
     return render(request, f'{HtmlPages.product}.html', {'product': product})
 
 
+def order_add_view(request):  # Добавление нового заказа в корзину
+    if request.method == 'POST' and 'product_count' in request.POST:
+        amount = int(request.POST['product_count'])
+        add_order(request, request.session.get('pid', None), amount)
+        action = request.POST.get('action', None)
+        if action == 'continue': return HttpResponseRedirect('/product/' + str(request.session['pid']))
+        del request.session['pid']
+        if action == 'order': return HttpResponseRedirect('/order/')
+    return HttpResponseRedirect('/')
+
+
 @session_clear
 def order_view(request):
-    if request.method == 'POST':  # Добавление нового заказа в корзину
-        amount = request.POST['product_count']
-        add_order(request, request.session.get('pid', None), amount)
-        del request.session['pid']
     if 'bcont' in request.session:
         form = forms.OrderForm(instance=request.user if request.user.is_authenticated else None)
         c = request.session.get('bcont', [])
@@ -64,7 +68,7 @@ def order_view(request):
             'sum_price': sum([i['sum_price'] for i in c]), 'items': [{
                 'name': Product.objects.get(pk=i['product']).name,
                 'price': i['sum_price']} for i in c], 'form': form})
-    return HttpResponseRedirect('/')
+    return render(request, f'{HtmlPages.ord}.html')
 
 
 @session_clear
