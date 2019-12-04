@@ -23,8 +23,9 @@ def auth_view(request):
 
 @session_clear
 def home_view(request):
+    pages = [HtmlPages.auth, HtmlPages.reg, HtmlPages.settings, HtmlPages.ord_list, HtmlPages.srch_res]
     return render(request, f'{HtmlPages.home}.html', 
-        {'cats': Category.objects.all(), 'line': request.POST.get('line', '')})
+        {'cats': Category.objects.all(), 'line': request.POST.get('line', ''), 'pages': pages})
 
 
 # SEARCH
@@ -32,7 +33,7 @@ def home_view(request):
 @session_clear
 def search_result_view(request):
     if request.method == 'POST':
-        line = request.POST['line']
+        line = request.POST.get('line', '')
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
         return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats), 'line': line})
     return render(request, f'{HtmlPages.srch_res}.html', {'items': search(), 'line': ''})
