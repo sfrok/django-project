@@ -27,12 +27,11 @@ urlpatterns = [
     path(f'{HP.reg}/', views.reg_view, name=f'{HP.reg}_page'),
     path(f'{HP.auth}/', views.auth_view, name=f'{HP.auth}_page'),
 
-    path(f'{HP.srch_inp}/', views.search_input_view, name=f'{HP.srch_inp}_page'),
     path(f'{HP.srch_res}/', views.search_result_view, name=f'{HP.srch_res}_page'),
-
     re_path(r'(product/)(\d+)', views.product_view, name=f'{HP.product}_page'),
     path(f'{HP.ord}/', views.order_view, name=f'{HP.ord}_page'),
-    path(f'{HP.ord_com}/', views.order_complete_view, name=f'{HP.ord_com}_page'),
+    path(f'{HP.ord_add}/', views.order_add_view, name=f'{HP.ord_add}_page'),
+    path(f'{HP.ord}/{HP.ord_com}/', views.order_complete_view, name=f'{HP.ord_com}_page'),
     path(f'{HP.ord_list}/', views.order_list_view, name=f'{HP.ord_list}_page'),
 
     path(f'{HP.settings}/', views.settings_view, name=f'{HP.settings}_page'),

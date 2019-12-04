@@ -8,6 +8,7 @@ log = lambda *info: getLogger().info(' '.join(info))
 
 
 class UserAuthorizationForm(forms.ModelForm):
+    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ('email', 'password')
@@ -68,7 +69,7 @@ class OrderForm(forms.ModelForm):
         model = Basket
         fields = ('fio', 'email', 'address', 'phone_number')
         labels = {
-            'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
+            'fio': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
             'phone_number': 'Номер телефона:'
         }
         widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}
@@ -83,13 +84,3 @@ class SettingsForm(forms.ModelForm):
             'phone_number': 'Номер телефона:'
         }
         widgets = {i: forms.TextInput(attrs={'class':'form-control mb-2'}) for i in fields}
-
-
-class AdminCatForm(forms.Form):
-    name = forms.CharField(max_length=32, required=False)
-
-
-class AdminProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ('__all__')

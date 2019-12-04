@@ -36,11 +36,13 @@ def add_order(request, product_id, amount):
     for item in orders:
         if item['product'] == product.id:
             order_exists = True
-            item['amount'] = amount
+            item['amount'] += amount
+            item['sum_price'] += float(amount*product.price)
             break
     if not order_exists:
-        order = SingleOrder(product=product, amount=amount, sum_price=decimal(amount*product.price))
-        orders.append(model_to_dict(order))
+        order = model_to_dict(SingleOrder(product=product, amount=amount, sum_price=amount*product.price))
+        order.update({'sum_price': float(amount*product.price)})
+        orders.append(order)
     request.session['bcont'] = orders
 
 
@@ -74,7 +76,7 @@ def session_clear(func):
         if request.method == 'POST': log(f'POST: {request.POST}')
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
-        if request.path[:9] != '/product/' and request.path != '/order/':
+        if request.path != '/order/add/':
             if 'pid' in request.session: del request.session['pid']
         return func(request)
     return wrapper

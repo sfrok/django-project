@@ -8,13 +8,13 @@ class HtmlPages():  # Названия html-файлов без .html
     auth = 'login_auth'
     reg = 'login_reg'
     contacts = 'contacts'
-    srch_inp = 'base'
-    srch_res = 'search_result'
+    srch_res = 'search'
     product = 'product_page'
     ord = 'order'
-    ord_com = 'order_complete'
+    ord_add = 'order/add'
+    ord_com = 'complete'
     settings = 'settings'
-    ord_list = 'order_list'
+    ord_list = 'basket'
     home = 'base'
 
 
