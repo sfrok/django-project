@@ -14,11 +14,11 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6 info mt-2 ">
-                            <span><h5>{% if line != ''%}По запросу {{ line }} н{% else %}Н{% endif %}айдено {{ items|length }} товаров:</h3></span>
+                            <span><h5>{% if line != ''%}По запросу {{ line }} н{% else %}Н{% endif %}айдено {{ items|length }} товаров:</h5></span>
                         </div>
                         <div class="col-6 text-right mt-2">
                             <div class="form-group">
-                            <form action="" method="post">
+                           <form action="" method="post"> {%csrf_token%}
                                 <select name='sort' class="custom-select" onchange="this.form.submit()">
                                     <option value="0">По рейтингу</option>
                                     <option value="1">От дешёвых к дорогим</option>

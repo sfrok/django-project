@@ -10,12 +10,18 @@
        background: rgba(88, 26, 13, 0.85)
 }
 
-.header-bottom-container {
-}
 
 .header-bottom {
     height: 50px;
     background: bisque;
+}
+
+.header-bottom-text {
+    color: black;
+}
+
+.header-bottom-text:hover {
+    cursor: pointer;
 }
 
 .authreg {
@@ -38,19 +44,15 @@
 }
 #sidebar {
     position: fixed;
-    width: 300px;
+    width: 260px;
     height: 100%;
     background-color: #151719;
-    left: -300px;
+    left: -260px;
     transition: all 500ms linear;
     z-index: 9999;
 }
 
 #sidebar.active {
-    left: 0px;
-}
-
-#sidebar-exit.active {
     left: 0px;
 }
 
@@ -90,99 +92,9 @@
 .sidebar-auth {
     font-size: 22px;
 }
-.main-footer {
-    position: absolute;
-}
+
 .footer {
     height: 300px;
     background: rgba(190, 190, 190, 0.4);
     box-shadow: 0px 0px 15px #D3D3D3;
-}
-
-.authorization_window {
-    max-width: 540px;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: auto;
-    position: fixed;
-    background-color: #F0FFF0;
-    z-index: 999;
-    display: none;
-}
-
-.login-form {
-    width: 236px;
-    display: block;
-    color: grey;
-    border: 1.5px solid #20B2AA;
-    border-radius: 6px;
-    outline: none;
-}
-
-.recover_password {
-    font-size: 15px;
-    color: #1E90FF;
-}
-
-.enter {
-    background-color: #65c000;
-    color: white;
-    outline: none;
-    border: 1px solid #65c000;
-    border-radius: 4px;
-    width: 120px;
-    height: 40px;
-
-}
-
-.enter:hover {
-   background-color: #00d924;
-   border: 1px solid #00d924;
-   cursor: pointer;
-   outline: none;
-}
-
-.cancel:hover {
-    cursor: pointer;
-    color: #1E90FF;
-}
-
-/*body>cart*/
-
-.cart {
-    max-width: 500px;
-    height: 350px;
-    box-shadow: 5px 0px 11px rgba(52, 52, 52, 0.65);
-}
-
-.cart-header {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 110px;
-    background: rgba(255, 255, 255, 0.65);
-}
-
-.cart-header.active-cart{
-    transition: top 1s;
-}
-
-.cart-footer {
-    display: block;
-    height: 100%;
-    padding: 30px 5px 5px 1px;
-}
-
-.main-info {
-    height: 100%;
-    background-color: rgba(238, 238, 238, 0.91);
-}
-
-.cart-footer p {
-    color: black;
-    position: absolute;
-}
-
-.title-cart {
-    display: block;
 }

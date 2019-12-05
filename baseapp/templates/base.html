@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-7 col-lg-6 title pl-sm-5 pt-3 pb-3 text-center text-md-left">
                         <div class="img-logo d-none d-sm-inline">
-                            <a href="/base_page/"><img src="https://via.placeholder.com/80x80" alt="logo" class="img-thumbnail"></a>
+                            <a href="/"><img src="https://via.placeholder.com/80x80" alt="logo" class="img-thumbnail"></a>
                         </div>
                         <h1 class="display-4 pl-2 align-middle header-title">Название</h1>
                     </div>
@@ -56,44 +56,11 @@
                 </div>
             </div>
     <!-- HEADER STOP-->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 authorization_window mt-5">
-               <div class="row">
-                   <div class="col-12 text-center">
-                       <h3>Вход в учетную запись</h3>
-                   </div>
-                   <div class="col-12 text-left">
-                       <label for="login" class="form-label-title">Эл. почта или номер телефона:</label>
-                       <input type="email" class=" login-form">
-                   </div>
-                   <div class="col-12 text-left">
-                        <label for="password" class="form-label-title">Пароль:</label>
-                        <input type="password" class="login-form">
-                    </div>
-                    <div class="col-12 text-left mt-2">
-                        <a href="#" class="recover_password">Забыли пароль?</a>
-                    </div>
-                    <div class="col-12 text-left mt-1">
-                        <input type="checkbox" class="checkbox">
-                        <label for="checkbox" class="form-label-title">Запомнить меня</label>
-                    </div>
-                    <div class="col-6 text-center mb-2">
-                        <button type="button submit" class="enter" id="prod_button">Войти</button>
-                    </div>
-                    <div class="col-6 text-center mb-2 pt-2">
-                        <span class="cancel">Отмена</span>
-                    </div>
-               </div>
-            </div>
-        </div>
-    </div>
     <!-- BODY START-->
     <div id="sidebar" class="sticky-top">
         <div class="col-auto mb-2">
             <img src="https://via.placeholder.com/35x35" alt="logo" class="img-thumbnail mt-2 mb-2">
             <h3 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h3>
-            <img src="{% static "exit.png" %}" alt="logo" class="img ml-5" id="sidebar-exit" onclick="toggleSidebar()">
         </div>
         <ul class="">
             <li><span class="sidebar-auth">Вход</span></li>
