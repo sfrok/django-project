@@ -94,7 +94,7 @@ class Basket(models.Model):
     delivery_date = models.DateTimeField(null=True)
     sum_price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    fio = models.CharField(max_length=130, default='')
+    name = models.CharField(max_length=128, default='')
     email = models.EmailField(default='', max_length=255)
     address = models.CharField(max_length=128, default='')
     phone_number = models.CharField(max_length=16, default='')

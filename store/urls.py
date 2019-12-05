@@ -27,7 +27,7 @@ urlpatterns = [
     path(f'{HP.reg}/', views.reg_view, name=f'{HP.reg}_page'),
     path(f'{HP.auth}/', views.auth_view, name=f'{HP.auth}_page'),
 
-    path(f'{HP.srch_res}/', views.search_result_view, name=f'{HP.srch_res}_page'),
+    path(f'{HP.src}/', views.search_view, name=f'{HP.src}_page'),
     re_path(r'(product/)(\d+)', views.product_view, name=f'{HP.product}_page'),
     path(f'{HP.ord}/', views.order_view, name=f'{HP.ord}_page'),
     path(f'{HP.ord_add}/', views.order_add_view, name=f'{HP.ord_add}_page'),
