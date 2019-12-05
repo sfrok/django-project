@@ -1,32 +1,26 @@
-{% extends 'base.html' %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "ba-css/order.css" %}">
-    <title></title>
-  </head>
-  <style>
-    body {
-      background: #f6f6f6;
-    }
-  </style>
-  <body>
-    {% block content %}
+{% extends 'base.html' %}{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static "ba-css/order.css" %}">
+{% endblock %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
     <!-- EMPTY BASKET START -->
+    {% if items|length == 0 %}
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 mt-4 text-center">
-          <span><h3>В данный момент Ваша корзина пуста:</h3></span>
+          <span><h3>В данный момент Ваша корзина пуста.</h3></span>
         </div>
         <div class="col-12 text-center mt-4">
-          <a href="/search_result/"><button type="button submit" class="btn btn-primary back-shopping ">Вернутся к покупкам</button></a>
+          <a href="/search_result/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
         </div>
       </div>
     </div>
     <!-- EMPTY BASKET END -->
+    {% else %}
     <form action="/order/complete/" method="post"> {% csrf_token %}
       <div class="container">
         <div class="row justify-content-between">
@@ -89,6 +83,5 @@
         </div>
       </div>
     </form>
-    {% endblock %}
-  </body>
-</html>
+    {% endif %}
+{% endblock %}

@@ -7,6 +7,7 @@ from baseapp.scripts import HtmlPages, search, auth, add_order, populate, sessio
 from baseapp import forms
 
 log = lambda *info: getLogger().info(' '.join(info))
+pages = [HtmlPages.auth, HtmlPages.reg, HtmlPages.settings, HtmlPages.ord_list, HtmlPages.srch_res]
 
 
 # AUTH
@@ -23,7 +24,6 @@ def auth_view(request):
 
 @session_clear
 def home_view(request):
-    pages = [HtmlPages.auth, HtmlPages.reg, HtmlPages.settings, HtmlPages.ord_list, HtmlPages.srch_res]
     return render(request, f'{HtmlPages.home}.html',
         {'cats': Category.objects.all(), 'line': request.POST.get('line', ''), 'pages': pages})
 
@@ -31,12 +31,12 @@ def home_view(request):
 # SEARCH
 
 @session_clear
-def search_result_view(request):
+def search_view(request):
     if request.method == 'POST':
         line = request.POST.get('line', '')
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
         return render(request, f'{HtmlPages.srch_res}.html', {'items': search(line, cats), 'line': line})
-    return render(request, f'{HtmlPages.srch_res}.html', {'items': search(), 'line': ''})
+    return render(request, f'{HtmlPages.srch_res}.html', {'items': search(), 'line': '', 'pages': pages})
 
 
 # PRODUCT
@@ -45,7 +45,7 @@ def search_result_view(request):
 def product_view(request):
     request.session['pid'] = int(request.path[9:])
     product = Product.objects.get(id=request.session['pid'])
-    return render(request, f'{HtmlPages.product}.html', {'product': product})
+    return render(request, f'{HtmlPages.product}.html', {'product': product, 'pages': pages})
 
 
 def order_add_view(request):  # Добавление нового заказа в корзину

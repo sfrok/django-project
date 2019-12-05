@@ -67,9 +67,9 @@ class UserChangeForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Basket
-        fields = ('fio', 'email', 'address', 'phone_number')
+        fields = ('name', 'email', 'address', 'phone_number')
         labels = {
-            'fio': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
+            'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
             'phone_number': 'Номер телефона:'
         }
         widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}

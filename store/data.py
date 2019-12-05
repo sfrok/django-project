@@ -9,13 +9,13 @@ class HtmlPages():  # Названия html-файлов без .html
     reg = 'login_reg'
     contacts = 'contacts'
     srch_res = 'search'
-    product = 'product_page'
+    product = 'product'
     ord = 'order'
     ord_add = 'order/add'
     ord_com = 'complete'
     settings = 'settings'
     ord_list = 'basket'
-    home = 'base'
+    home = 'home'
 
 
 SELL_STATES = (

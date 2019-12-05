@@ -1,15 +1,12 @@
-{% extends 'base.html' %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "ba-css/contacts.css" %}">
-    <title></title>
-  </head>
-  <body>
-    {% block content %}
+{% extends 'base.html' %}{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static "ba-css/contacts.css" %}">
+{% endblock %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
     <div class="container">
       <div class="row">
         <div class="col-12 mt-5">
@@ -38,6 +35,4 @@
         </div>
       </div>
     </div>
-    {% endblock %}
-  </body>
-</html>
+{% endblock %}
