@@ -1,0 +1,22 @@
+.login-form {
+	width: 300px;
+	border-radius: 6px;
+	border: 1px solid black;
+	height: 40px;
+	outline: none;
+}
+
+.authorization-button {
+	width: 200px;
+	height: 50px;
+	border: 1px solid #65c000;
+	background-color: #65c000;
+	color: #fff;
+	border-radius: 6px;
+}
+
+.authorization-button:hover {
+	background-color: #00d924;
+  	border: 1px solid #00d924;
+  	cursor: pointer;
+}

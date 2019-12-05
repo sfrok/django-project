@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
       <link rel="stylesheet" href="{% static "ba-css/base.css" %}">
+      <link rel="stylesheet" href="{% static "ba-css/auth.css" %}">
       {% block styles %}{% endblock %}
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -73,7 +74,8 @@
         </ul>
     </div>
     <!-- MAIN CONTENT START-->
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
     <!-- MAIN CONTENT END-->
 
     <!-- FOOTER START-->

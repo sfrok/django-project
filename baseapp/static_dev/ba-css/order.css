@@ -36,12 +36,15 @@
   height: 55px;
   text-align: center;
   background-color: #65c000;
+  border: 1px solid #65c000;
   color: white;
   max-width: 250px;
 }
 
 .checkout:hover {
   cursor: pointer;
+  background-color: #65c000;
+  border: 1px solid #65c000;
 }
 
 .delete-product {

@@ -65,16 +65,17 @@
                     <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
                   </div>
                   <div class="col-8 description"><hr>
-                    {{i.name}}
+                    {{i.name}}<br>
+                    <span>Количество: </span>
                   </div>
-                  <div class="col-8 order-info">
+                  <div class="col-6 order-info">
                     <span>Цена:</span>
                   </div>
-                  <div class="col-4 order-info">
+                  <div class="col-6 order-info">
                     <span><strong>{{i.price}}.00 грн</strong></span>
                   </div><hr>
                   <div class="col-12 text-center mt-2">
-                    <button type="button submit" class="btn btn-primary delete-product">Удалить продукт из корзины</button>
+                    <button type="button submit" class="btn btn-primary delete-product">Удалить</button>
                   </div>
                 {% endfor %}
               </div>
