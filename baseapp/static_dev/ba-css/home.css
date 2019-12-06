@@ -33,6 +33,11 @@
     position: relative;
     overflow: hidden;
 }
+
+.wrapper-img img {
+    width: 100%;
+}
+
 .wrapper-img h3 {
     padding: 23px;
 }
