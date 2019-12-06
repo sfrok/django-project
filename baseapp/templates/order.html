@@ -15,17 +15,17 @@
           <span><h3>В данный момент Ваша корзина пуста.</h3></span>
         </div>
         <div class="col-12 text-center mt-4">
-          <a href="/search_result/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
+          <a href="/{{pages.4}}/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
         </div>
       </div>
     </div>
     <!-- EMPTY BASKET END -->
     {% else %}
-    <form action="/order/complete/" method="post"> {% csrf_token %}
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-12 col-md-12 col-lg-6 mt-3">
             <div class="col-12">
+            <form action="/order/complete/" method="post"> {% csrf_token %}
               <div class="row contacts">
                 <div class="col-12">
                   <span class="header">Оформление заказа</span><hr>
@@ -46,6 +46,7 @@
                   </div>
                 </div>
               </div>
+            </form>
             </div>
           </div>
           <div class="col-12 col-md-12 col-lg-5 mt-md-5 mt-lg-0">
@@ -58,7 +59,7 @@
                   <span>Всего к оплате:</span>
                 </div>
                 <div class="col-4 order-info">
-                  <span><strong>{{sum_price}}.00 грн</strong></span>
+                  <span><strong>{{sum_price}} грн</strong></span>
                 </div>
                 {% for i in items %}
                   <div class="col-4 image-place"><hr>
@@ -72,10 +73,12 @@
                     <span>Цена:</span>
                   </div>
                   <div class="col-6 order-info">
-                    <span><strong>{{i.price}}.00 грн</strong></span>
+                    <span><strong>{{i.price}} грн</strong></span>
                   </div><hr>
                   <div class="col-12 text-center mt-2">
-                    <button type="button submit" class="btn btn-primary delete-product">Удалить</button>
+                    <form action="/order/del/" method="post"> {% csrf_token %}
+                    <button type="button submit" class="btn btn-primary delete-product" name="oid" value="{{i.id}}">Удалить</button>
+                    </form>
                   </div>
                 {% endfor %}
               </div>
@@ -83,6 +86,5 @@
           </div>
         </div>
       </div>
-    </form>
     {% endif %}
 {% endblock %}

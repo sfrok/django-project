@@ -62,6 +62,21 @@ def order_add_view(request):  # Добавление нового заказа �
     return HttpResponseRedirect('/')
 
 
+def order_del_view(request):  # Удаление заказа из корзины
+    if request.method == 'POST' and 'oid' in request.POST:
+        orders = request.session.get('bcont', [])
+        item = 0
+        for i in range(len(orders)):
+            if str(orders[i]['id']) == str(request.POST['oid']):
+                item = i
+                break
+        del orders[item]
+        if orders != []: request.session['bcont'] = orders
+        elif 'bcont' in request.session: del request.session['bcont']
+        return HttpResponseRedirect(f'/{HtmlPages.ord}/')
+    return HttpResponseRedirect('/')
+
+
 @session_clear
 def order_view(request):
     if 'bcont' in request.session:

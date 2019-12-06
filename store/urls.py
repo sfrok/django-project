@@ -31,6 +31,7 @@ urlpatterns = [
     re_path(r'(product/)(\d+)', views.product_view, name=f'{HP.product}_page'),
     path(f'{HP.ord}/', views.order_view, name=f'{HP.ord}_page'),
     path(f'{HP.ord_add}/', views.order_add_view, name=f'{HP.ord_add}_page'),
+    path(f'{HP.ord_del}/', views.order_del_view, name=f'{HP.ord_del}_page'),
     path(f'{HP.ord}/{HP.ord_com}/', views.order_complete_view, name=f'{HP.ord_com}_page'),
     path(f'{HP.ord_list}/', views.order_list_view, name=f'{HP.ord_list}_page'),
 

@@ -12,6 +12,7 @@ class HtmlPages():  # Названия html-файлов без .html
     product = 'product'
     ord = 'order'
     ord_add = 'order/add'
+    ord_del = 'order/del'
     ord_com = 'complete'
     settings = 'settings'
     ord_list = 'basket'
