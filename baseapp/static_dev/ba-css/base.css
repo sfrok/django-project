@@ -93,6 +93,34 @@
     font-size: 22px;
 }
 
+.search-box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.search-box input {
+    height: 50px;
+    width: 0px;
+    border-radius: 40px;
+    border: 0px;
+    padding-right: 50px;
+    transition: 1.5s;
+}
+
+.search-box input:focus {
+    width: 400px;
+    padding-left: 20px;
+}
+
+.search-box:before {
+    content: "\f002";
+    font-family: 'FontAwesome', sans-serif;
+    position: absolute;
+    top: 14px;
+    right: 17px;
+
+}
+
 .footer {
     height: 300px;
     background: rgba(190, 190, 190, 0.4);

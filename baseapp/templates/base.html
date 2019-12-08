@@ -16,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -24,13 +25,20 @@
         <div class="row header-content">
             <div class="col-md-12 header-top">
                 <div class="row">
-                    <div class="col-md-7 col-lg-6 title pl-sm-5 pt-3 pb-3 text-center text-md-left">
+                    <div class="col-md-auto title pl-sm-5 pt-3 pb-3 text-center text-md-left">
                         <div class="img-logo d-none d-sm-inline">
                             <a href="/"><img src="https://via.placeholder.com/80x80" alt="logo" class="img-thumbnail"></a>
                         </div>
                         <h1 class="display-4 pl-2 align-middle header-title">Название</h1>
                     </div>
-                    <div class="col-md-5 col-lg-6 m-md-auto basket text-right d-none d-md-block pr-lg-5 text-left pr-md-3">
+                    <div class="col-md-auto m-auto">
+                        <div class="search-box">
+                            <form action="" method="post"> {% csrf_token %}
+                                <input class="search-txt" type="text" name="" placeholder="Нажмите для поиска">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-auto m-md-auto basket text-right d-none d-md-block pr-lg-5 text-left pr-md-3">
                         {% if user.is_authenticated %}
                         <div class="text-center authreg pr-lg-5 pr-md-3">Добро пожаловать, <a href="/{{pages.2}}">{{ user.name }}</a></div>
                         <a class="text-center authreg pr-lg-5 pr-md-3" href="/{{pages.3}}">Выйти</a>
