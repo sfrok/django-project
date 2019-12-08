@@ -13,7 +13,7 @@ a {
   background-color: #65c000;
   color: white;
   border: 1px solid #65c000;
-  max-width: 150px;
+  width: 200px;
 }
 
 .checkout:hover {

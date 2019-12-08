@@ -70,11 +70,8 @@
                     <span>Количество: </span>
                     <span><strong>{{i.amount}}</strong></span>
                   </div>
-                  <div class="col-6 order-info">
-                    <span>Цена: </span>
-                  </div>
-                  <div class="col-6 order-info">
-                    <span><strong>{{i.price}} грн</strong></span>
+                  <div class="col-12 order-info text-right">
+                    <span>Цена: <strong>{{i.price}} грн</strong></span>
                   </div><hr>
                   <div class="col-12 text-center mt-2">
                     <form action="/order/del/" method="post"> {% csrf_token %}

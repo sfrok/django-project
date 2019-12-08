@@ -26,6 +26,7 @@
             </div>
             <div class="col-lg-4 col-12 col-md-12 text-center text-lg-right mt-2" >
               <span><h3>Цена товара: {{ i.sum_price }} грн</h3></span>
+              <span><h4>Количество:</h4></span>
             </div>
           </div><hr>
         {% endfor %}
@@ -40,12 +41,8 @@
             </div>
           </div>
         </div>
-        <div class="col-12 ">
-          <div class="row justify-content-center">
-             <div class="col-lg-4 col-8 col-md-8 text-center back-button">
-              <a style="text-decoration: none; color:white;" href="/">Вернутся к покупкам!</a>
-            </div>
-          </div>
+        <div class="col-12 text-center mt-4">
+          <a href="/"><button type="button submit" class="btn btn-primary back-button ">Приступить к покупкам!</button></a>
         </div>
       </div> 
     </div>
