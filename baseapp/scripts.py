@@ -76,6 +76,5 @@ def session_clear(func):
         if request.method == 'POST': log(f'POST: {request.POST}')
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
-        if 'pid' in request.session: del request.session['pid']
         return func(request)
     return wrapper

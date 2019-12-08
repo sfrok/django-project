@@ -31,8 +31,13 @@
                         <h1 class="display-4 pl-2 align-middle header-title">Название</h1>
                     </div>
                     <div class="col-md-5 col-lg-6 m-md-auto basket text-right d-none d-md-block pr-lg-5 text-left pr-md-3">
+                        {% if user.is_authenticated %}
+                        <div class="text-center authreg pr-lg-5 pr-md-3">Добро пожаловать, <a href="/{{pages.2}}">{{ user.name }}</a></div>
+                        <a class="text-center authreg pr-lg-5 pr-md-3" href="/{{pages.3}}">Выйти</a>
+                        {% else %}
                         <a class="text-center authreg pr-lg-5 pr-md-3" href="/{{pages.0}}">Вход</a>
                         <a class="text-center authreg pr-lg-5 pr-md-3" href="/{{pages.1}}">Регистрация</a>
+                        {% endif %}
                         <a href="/order/"><img src="https://via.placeholder.com/40x40" alt="basket" class="img-thumbnail"></a>
                     </div>
                 </div>

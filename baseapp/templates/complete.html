@@ -16,17 +16,19 @@
           <h3>Ваши товары:</h3>
         </div>
         <div class="col-12"><hr>
+        {% for i in items %}
           <div class="row">
             <div class="col-lg-2 col-3 col-md-3">
               <img class="product-img" src="https://via.placeholder.com/80x80" alt="product_img">
             </div>
             <div class="col-lg-6 col-8  col-md-9 text-center text-lg-left text-md-center">
-              <span><h3>Товар 1</h3></span>
+              <span><h3>{{ i.product.name }}</h3></span>
             </div>
             <div class="col-lg-4 col-12 col-md-12 text-center text-lg-right mt-2" >
-              <span><h3>Цена товара: 1000грн</h3></span>
+              <span><h3>Цена товара: {{ i.sum_price }} грн</h3></span>
             </div>
           </div><hr>
+        {% endfor %}
         </div>
         <div class="col-12">
           <div class="row">
@@ -41,7 +43,7 @@
         <div class="col-12 ">
           <div class="row justify-content-center">
              <div class="col-lg-4 col-8 col-md-8 text-center back-button">
-              <a style="text-decoration: none; color:white;" href="/base/">Вернутся к покупкам</a>
+              <a style="text-decoration: none; color:white;" href="/">Вернутся к покупкам!</a>
             </div>
           </div>
         </div>

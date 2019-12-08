@@ -9,9 +9,9 @@
 {% block content %}
     <div class="container">
       <div class="row">
-        <div class="overlay hide">
-          <form action="/order/add/" method="post">
-            {% csrf_token %}
+        <form action="/order/add/" method="post">
+          {% csrf_token %}
+          <div class="overlay hide">
             <div id="modal-form" class="form">
               <div class="container">
                 <div class="row">
@@ -70,8 +70,7 @@
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
         
         <div class="col-12 head mt-3">
           <div class="row">
@@ -120,6 +119,7 @@
                   </div>
                   <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-2 mt-lg-0">
                     <div id="make-order" class="button buy text-center">
+                      <input type="hidden" name="pid" value="{{ product.id }}">
                       <span id="make-buy" class="text-span">Купить</span>
                     </div>
                   </div>
@@ -135,6 +135,7 @@
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
     <script src="{% static "ba-js/order-form.js" %}"></script>

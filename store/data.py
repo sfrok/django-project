@@ -7,6 +7,7 @@ def getLogger():
 class HtmlPages():  # Названия html-файлов без .html
     auth = 'login_auth'
     reg = 'login_reg'
+    out = 'logout'
     contacts = 'contacts'
     src = 'search'
     product = 'product'
