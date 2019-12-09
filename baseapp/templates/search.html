@@ -20,11 +20,11 @@
                             <div class="form-group">
                             <form action="" method="post"> {% csrf_token %}
                                 <select name='sort' class="custom-select" onchange="this.form.submit()">
-                                    <option value="sold" selected>По рейтингу</option>
-                                    <option value="price">От дешёвых к дорогим</option>
-                                    <option value="-price">От дорогих к дешёвым</option>
-                                    <option value="name">Популярные</option>
-                                    <option value="-post_date">Новинки</option>
+                                    <option value="sold" {% if sort == "sold" %}selected{% endif %}>По рейтингу</option>
+                                    <option value="price" {% if sort == "price" %}selected{% endif %}>От дешёвых к дорогим</option>
+                                    <option value="-price" {% if sort == "-price" %}selected{% endif %}>От дорогих к дешёвым</option>
+                                    <option value="name" {% if sort == "name" %}selected{% endif %}>Популярные</option>
+                                    <option value="-post_date" {% if sort == "-post_date" %}selected{% endif %}>Новинки</option>
                                 </select>
                             </form>
                             </div>
@@ -49,7 +49,7 @@
                                 <div class="product-info text-center mt-1">
                                     <a style="text-decoration: none;" href="#"></a>
                                     <div class="product-info mt-2">
-                                        <span class="text-muted">В наличии:</span>
+                                        <span class="text-muted">В наличии: {{ item.amount }}</span>
                                     </div>
                                     <div class="price mt-2">
                                         <span class="mt-3">{{ item.price }} грн</span>

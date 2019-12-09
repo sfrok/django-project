@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-4 col-12 col-md-12 text-center text-lg-right mt-2" >
               <span><h3>Цена товара: {{ i.sum_price }} грн</h3></span>
-              <span><h4>Количество:</h4></span>
+              <span><h4>Количество: {{ i.amount }}</h4></span>
             </div>
           </div><hr>
         {% endfor %}
@@ -37,7 +37,7 @@
               <span><h3>Итоговая сума:</h3></span>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
-              <span><h3>1000 грн</h3></span>
+              <span><h3> {{ order.sum_price }} грн</h3></span>
             </div>
           </div>
         </div>

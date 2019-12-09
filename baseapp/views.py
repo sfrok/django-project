@@ -39,12 +39,14 @@ def logout_view(request):
 @session_clear
 def search_view(request):
     if request.method == 'POST':
+        log(str(request.POST))
         line = request.POST.get('line', '')
-        sort = request.POST.get('sort', 'name')
+        sort = request.POST.get('sort', 'sold')
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
         return render(request, f(HtmlPages.src), 
-            {'items': search(line, cats, sort), 'line': line, 'pages': pages})
-    return render(request, f(HtmlPages.src), {'items': search(), 'line': '', 'pages': pages})
+            {'items': search(line, cats, sort), 'line': line, 'pages': pages, 'sort': sort})
+    return render(request, f(HtmlPages.src), 
+        {'items': search(sort_attr='sold'), 'line': '', 'pages': pages, 'sort': 'sold'})
 
 
 # PRODUCT
@@ -121,7 +123,8 @@ def order_complete_view(request):
                 order.product.save()
                 order.save()
             del request.session['bcont']
-            return render(request, f(HtmlPages.ord_com), {'pages': pages, 'items': basket.singleorder_set.all()})
+            return render(request, f(HtmlPages.ord_com), 
+                {'pages': pages, 'items': basket.singleorder_set.all(), 'order': basket})
     return HttpResponseRedirect('/')
 
 
