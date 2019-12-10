@@ -1,9 +1,11 @@
 .login-form {
-	width: 300px;
-	border-radius: 6px;
-	border: 1px solid black;
-	height: 40px;
 	outline: none;
+	border: none;
+	border-bottom: 2px solid black;
+	width: 25%;
+	margin-bottom: 10px;
+	color: black;
+	background: transparent;
 }
 
 .authorization-button {

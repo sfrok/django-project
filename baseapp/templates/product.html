@@ -33,15 +33,7 @@
                         </div>
                         <div class="col-12">
                           <div class="row">
-                            <div class="col-5 col-md-5 col-sm-5 text-center">
-                              <div class="stock" id="stock">{{ product.amount }}</div>
-                              <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
-                              <div class="count-change cart-item">
-                                  <label for="product-count"></label><input type="text" id="product-count" value="1" name="product_count" class="product-count">
-                              </div>
-                               <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
-                            </div>
-                            <div class="col-7 col-md-7 col-sm-7 sum-for-product text-right" >{{ product.price }}</div>
+                            <div class="col-12 col-md-12 col-sm-12 sum-for-product text-left" ><span>Цена:   </span>{{ product.price }}</div>
                           </div>
                           <hr>
                         </div>
