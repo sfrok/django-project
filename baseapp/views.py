@@ -3,7 +3,7 @@ from django.shortcuts import render
 from store.data import getLogger
 
 from .models import Product, Basket, Category
-from baseapp.scripts import HtmlPages, search, auth, add_order, populate, session_clear
+from baseapp.scripts import HtmlPages, search, auth, add_order, session_clear
 from baseapp import forms
 
 log = lambda *info: getLogger().info(' '.join(info))

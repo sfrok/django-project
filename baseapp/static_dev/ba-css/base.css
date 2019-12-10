@@ -1,38 +1,28 @@
 * {
     font-family: sans-serif;
 }
-
-.header-bottom-text {
-    font-size: 20px;
+.main-header {
+    background: dimgrey;
+}
+.top-header {
+    font-size: 15px;
 }
 
-.header-top {
-       background: rgba(88, 26, 13, 0.85)
-}
-
-
-.header-bottom {
-    height: 50px;
-    background: bisque;
-}
-
-.header-bottom-text {
-    color: black;
-}
-
-.header-bottom-text:hover {
-    cursor: pointer;
-}
-
-.authreg {
-    font-family: sans-serif;
-    font-size: 20px;
-    color: black !important;
-}
-
-
-.img-logo {
+.welcome-title {
     display: inline-block;
+    color: white;
+}
+
+.welcome-title a {
+    color: white;
+}
+
+.user-data u {
+    color: white;
+}
+
+.contact-page a {
+    color: white;
 }
 
 .header-title {
