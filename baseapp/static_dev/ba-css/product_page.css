@@ -48,13 +48,14 @@
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 100;
     background-color: rgba(0,0,0,.5);
     z-index: 9999;
+    height: 100%;
 }
 
 .hide {
@@ -69,7 +70,7 @@
     border-radius: 6px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 250px;
+    margin-top: 75px;
     left: 0;
     right: 0;
     display: none;
@@ -89,6 +90,10 @@
 
 .close-button {
   width: 20px;
+}
+
+.close-button:hover {
+  cursor: pointer;
 }
 
 .image-place {
