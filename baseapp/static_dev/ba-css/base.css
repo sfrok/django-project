@@ -32,6 +32,32 @@
 .header-sidebar {
     color: white;
 }
+
+.down-header-title {
+    font-size: 30px;
+}
+
+.down-header-catalog {
+    padding-left: 200px;
+}
+
+.catalog-border {
+    padding: 10px 40px;
+    border-radius: 3px;
+    border: 1px solid white;
+    color: black;
+}
+
+.catalog-border:hover {
+    color: black;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px #D3D3D3;
+}
+
+.down-header {
+    background: dimgrey;
+}
+
 #sidebar {
     position: fixed;
     width: 260px;
@@ -81,34 +107,6 @@
 
 .sidebar-auth {
     font-size: 22px;
-}
-
-.search-box {
-    position: absolute;
-    transform: translate(-50%, -50%);
-}
-
-.search-box input {
-    height: 50px;
-    width: 0px;
-    border-radius: 40px;
-    border: 0px;
-    padding-right: 50px;
-    transition: 1.5s;
-}
-
-.search-box input:focus {
-    width: 400px;
-    padding-left: 20px;
-}
-
-.search-box:before {
-    content: "\f002";
-    font-family: 'FontAwesome', sans-serif;
-    position: absolute;
-    top: 14px;
-    right: 17px;
-
 }
 
 .footer {
