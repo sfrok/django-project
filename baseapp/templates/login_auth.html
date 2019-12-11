@@ -1,4 +1,3 @@
-{% extends 'base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,20 +5,19 @@
 	<link rel="stylesheet" href="{% static "ba-css/auth.css" %}">
      <link rel="stylesheet" href="{% static "ba-css/settings.css" %}">
 	<meta charset="UTF-8">
-	<title>{% block title %}{% endblock %}</title>
+	<title>Вход</title>
 </head>
 <body>
-	{%  block content %}
 	<form id="auth_form" action="" method="post"> {% csrf_token %}
 		<div class="container">
-			<div class="row">
+			<div class="row"> {{ form.non_field_errors }}
 				<div class="col-12 text-center">
-					<label class="form-label-title" for="login">Введите логин:</label><br>
-					<input type="login" class="login-form" placeholder="User">
+					<label class="form-label-title" for="email">Введите логин:</label><br>
+					<input type="login" name="email" class="login-form" placeholder="Email">
 				</div>
 				<div class="col-12 text-center">
 					<label class="form-label-title" for="password">Введите пароль:</label><br>
-					<input type="password" class="login-form" placeholder="Password">
+					<input type="password" name="password" class="login-form" placeholder="Password">
 				</div>
 				<div class="col-12 text-center mt-4">
 					<button type="submit" class="authorization-button">Войти</button>
@@ -30,12 +28,5 @@
 			</div>
 		</div>
 	</form>
-	{% endblock %}
 </body>
 </html>
-<!-- {% load static %}
-<form id="auth_form" action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input id="auth_button" type="submit" value="Submit">
-</form> -->

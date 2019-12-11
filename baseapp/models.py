@@ -29,7 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    name = models.CharField(max_length=128, default='')
+    name = models.CharField(max_length=33, default='')
     address = models.CharField(max_length=128, default='')
     phone_number = models.CharField(max_length=16, default='')
     date_joined = models.DateTimeField(default=timezone.now)
