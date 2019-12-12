@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from store.data import getLogger
 
 from .models import Product, Basket, Category
-from baseapp.scripts import HtmlPages, search, auth, add_order, session_clear
+from baseapp.scripts import HtmlPages, search, auth, add_order, session_clear, token as token1
 from baseapp import forms
 
 log = lambda *info: getLogger().info(' '.join(info))
@@ -45,7 +45,7 @@ def activation_view(self, request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-    if user is not None and token.check_token(user, token):
+    if user is not None and token1.check_token(user, token):
         user.is_active = True  # activate user
         user.save()
         form = PasswordChangeForm(request.user)

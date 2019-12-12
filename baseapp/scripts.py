@@ -12,6 +12,16 @@ from django.utils import six
 log = lambda *info: getLogger().info(' '.join(info))
 
 
+class TokenGenerator(PasswordResetTokenGenerator):
+    def _make_hash_value(self, user, timestamp):
+        return (
+            six.text_type(user.pk) + six.text_type(timestamp) +
+            six.text_type(user.is_active)
+        )
+
+token = TokenGenerator()
+
+
 def search(line='', cats=[], sort_attr='name'):
     response = Product.objects.filter(name__icontains=line)
     if cats: response = response.filter(category_id__in=[i.id for i in cats])
@@ -31,9 +41,9 @@ def auth(request, form, page):  # Main auth func for both auth and reg
             mail_subject = 'Activate your account.'
             current_site = get_current_site(request)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = token.make_token(user)
-            activation_link = "{0}/?uid={1}&token{2}".format(current_site, uid, token)
-            message = "Hello {0},\n {1}".format(user.username, activation_link)
+            token1 = token.make_token(user)
+            activation_link = "{0}/?uid={1}&token{2}".format(current_site, uid, token1)
+            message = "Hello {0},\n {1}".format(user.name, activation_link)
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
@@ -96,13 +106,3 @@ def session_clear(func):
             del request.session['ucs']
         return func(request)
     return wrapper
-
-
-class TokenGenerator(PasswordResetTokenGenerator):
-    def _make_hash_value(self, user, timestamp):
-        return (
-            six.text_type(user.pk) + six.text_type(timestamp) +
-            six.text_type(user.is_active)
-        )
-
-token = TokenGenerator()
