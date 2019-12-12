@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth import logout
 from store.data import getLogger
 
 from .models import Product, Basket, Category
@@ -29,9 +30,29 @@ def home_view(request):
 
 
 def logout_view(request):
-    from django.contrib.auth import logout
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def activation_view(self, request, uidb64, token):
+    from django.contrib.auth import get_user_model, login, update_session_auth_hash
+    from django.contrib.auth.forms import PasswordChangeForm
+    from django.utils.encoding import force_bytes, force_text
+    from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+    from .models import User
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and token.check_token(user, token):
+        user.is_active = True  # activate user
+        user.save()
+        form = PasswordChangeForm(request.user)
+        return HttpResponseRedirect('/')
+    else:
+        logout(request)
+        return HttpResponseRedirect(f'/{HtmlPages.auth}')
 
 
 # SEARCH
