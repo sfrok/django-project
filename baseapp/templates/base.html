@@ -34,10 +34,9 @@
                         <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.2}}">{{ user.name }}</a></u></div>
                         <a class="text-center mr-4" href="/{{pages.3}}"><u>Выйти</u></a>
                         {% else %}
-                        <a class="mr-4" href="/{{pages.0}}"><u>Вход</u></a>
-                        <a class="mr-4" href="/{{pages.1}}"><u>Регистрация</u></a>
+                        <a class="pr-4" href="/{{pages.0}}"><u>Вход</u></a>
+                        <a class="pr-4" href="/{{pages.1}}"><u>Регистрация</u></a>
                         {% endif %}
-                        <a href=""><img src="https://via.placeholder.com/40x40" alt="checkout"></a>
                     </div>
                 </div>
             </div>
@@ -51,12 +50,15 @@
                     <a href="/"><div class="down-header-title align-middle d-inline pl-3">Название</div></a>
                 </div>
             </div>
-            <div class="col-9">
-                <div class="down-header-search-wrap pb-3 pl-5">
+            <div class="col-7 text-center">
+                <div class="down-header-search-wrap pb-3 pl-4">
                     <form action="/{{ pages.4 }}/" method="post"> {% csrf_token %}
-                        <input class="search-bar" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" class="search-btn">
+                        <input class="search-bar" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" class="search-btn" value="Найти">
                     </form>
                 </div>
+            </div>
+            <div class="col-md-2 text-right">
+                <a href=""><img class="mr-4" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
@@ -70,13 +72,13 @@
             </div>
             </div>
             <div class="col-10 pt-2 text-center">
-                <div class="down-header-search-wrap pb-2 pl-5">
+                <div class="pb-2 pl-5">
                     <form action="/{{ pages.4 }}/" method="post"> {% csrf_token %}
-                        <input class="search-bar-mobile" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" class="search-btn-mobile">
+                        <input class="search-bar-mobile" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" value="Найти" class="search-btn-mobile">
                     </form>
                 </div>
             </div>
-         <a href=""><img class="mobile-img pt-2" src="https://via.placeholder.com/40x40" alt="checkout"></a>
+         <a href="" class=""><img class="mobile-img pt-2 ml-1 mr-1" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
