@@ -34,34 +34,51 @@
                         <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.2}}">{{ user.name }}</a></u></div>
                         <a class="text-center mr-4" href="/{{pages.3}}"><u>Выйти</u></a>
                         {% else %}
-                        <a class="mr-4" href="/{{pages.0}}"><u>Вход</u></a>
-                        <a class="mr-4" href="/{{pages.1}}"><u>Регистрация</u></a>
+                        <a class="pr-4" href="/{{pages.0}}"><u>Вход</u></a>
+                        <a class="pr-4" href="/{{pages.1}}"><u>Регистрация</u></a>
                         {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid down-header">
+    <div class="container-fluid down-header d-none d-lg-block">
         <div class="row align-items-center">
-            <div class="col-5">
+            <div class="col-3">
                 <div class="down-header-logo ml-4 pb-3 pt-2 d-inline-block">
-                    <img src="https://via.placeholder.com/40x40" alt="logo">
-                    <div class="down-header-title align-middle d-inline pl-3">Название</div>
-                </div>
-{#                        <div class="down-header-catalog d-inline-block align-middle">#}
-{#                            <a class="catalog-border"  href="#">Каталог</a>#}
-{#                        </div>#}
-            </div>
-            <div class="col-5">
-                <div class="down-header-search-wrap pb-3">
-                            search
+                    <a href="/"><img src="https://via.placeholder.com/40x40" alt="logo"></a>
+                    <a href="/"><div class="down-header-title align-middle d-inline pl-3">Название</div></a>
                 </div>
             </div>
-            <div class="col-2">
-                <div class="down-header-checkout pb-3">
-                            checkout
+            <div class="col-7 text-center">
+                <div class="down-header-search-wrap pb-3 pl-4">
+                    <form action="/{{ pages.4 }}/" method="post"> {% csrf_token %}
+                        <input class="search-bar" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" class="search-btn" value="Найти">
+                    </form>
                 </div>
+            </div>
+            <div class="col-md-2 text-right">
+                <a href=""><img class="mr-4" src="https://via.placeholder.com/40x40" alt="checkout"></a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid down-header sticky-top d-block d-lg-none">
+        <div class="row">
+            <div class="sidebar-wrapper">
+                <div class="toggle-btn" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            </div>
+            <div class="col-10 pt-2 text-center">
+                <div class="pb-2 pl-5">
+                    <form action="/{{ pages.4 }}/" method="post"> {% csrf_token %}
+                        <input class="search-bar-mobile" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" value="Найти" class="search-btn-mobile">
+                    </form>
+                </div>
+            </div>
+         <a href="" class=""><img class="mobile-img pt-2 ml-1 mr-1" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
@@ -69,16 +86,15 @@
     <!-- BODY START-->
     <div id="sidebar" class="sticky-top">
         <div class="col-auto mb-2">
-            <img src="https://via.placeholder.com/35x35" alt="logo" class="img-thumbnail mt-2 mb-2">
-            <h3 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h3>
+            <img src="https://via.placeholder.com/40x40" alt="logo" class="img mt-2 mb-2">
+            <h5 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h5>
+            <a href="#"><img src="https://via.placeholder.com/30x30" alt="checkout" class="img-mt-2 ml-5"></a>
         </div>
         <ul class="">
-            <li><span class="sidebar-auth">Вход</span></li>
-            <li><span class="sidebar-auth">Регистрация</span></li>
+            <a href="/{{pages.0}}" class="sidebar-auth"><li>Вход</li></a>
+            <a href="/{{pages.1}}" class="sidebar-auth"><li>Регистрация</li></a>
             <hr>
-            <li>Каталог</li>
-            <li>Новости</li>
-            <li>Акции</li>
+            <a href="/{{pages.4}} " class="sidebar-catalog"><li>Каталог</li></a>
             <li>Контакты</li>
         </ul>
     </div>
