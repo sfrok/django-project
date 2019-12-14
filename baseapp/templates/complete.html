@@ -21,10 +21,10 @@
             <div class="col-lg-2 col-3 col-md-3">
               <img class="product-img" src="https://via.placeholder.com/80x80" alt="product_img">
             </div>
-            <div class="col-lg-6 col-8  col-md-9 text-center text-lg-left text-md-center">
+            <div class="col-lg-4 col-8  col-md-9 text-center text-lg-left text-md-center">
               <span><h3>{{ i.product.name }}</h3></span>
             </div>
-            <div class="col-lg-4 col-12 col-md-12 text-center text-lg-right mt-2" >
+            <div class="col-lg-6 col-12 col-md-12 text-center text-lg-right mt-2" >
               <span><h3>Цена товара: {{ i.sum_price }} грн</h3></span>
               <span><h4>Количество: {{ i.amount }}</h4></span>
             </div>
@@ -33,11 +33,8 @@
         </div>
         <div class="col-12">
           <div class="row">
-            <div class="col-lg-10 text-center text-lg-right">
-              <span><h3>Итоговая сума:</h3></span>
-            </div>
-            <div class="col-lg-2 text-center text-lg-right">
-              <span><h3> {{ order.sum_price }} грн</h3></span>
+            <div class="col-lg-12 text-center text-lg-right">
+              <span><h3>Итоговая сума: {{ order.sum_price }} грн</h3></span>
             </div>
           </div>
         </div>

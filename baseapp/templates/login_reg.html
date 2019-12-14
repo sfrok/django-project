@@ -11,15 +11,15 @@
   <form action="" method="post">
     {% csrf_token %}
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-lg-6 col-sm-12 col-md-12 mt-2 form">
-          <div class="col-12 text-lg-left text-sm-center text-md-center">
+          <div class="col-12 text-center">
             <span><h1>Регистрация</h1></span>
           </div>
           {{ form.non_field_errors }}
           {% for field in form %}
             <div class="col-12 {% if field.name != "name" %}mt-1{% endif %}">
-                <label class="form-label-title" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
+                <label class="form-label-title text" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
                 {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
             </div>
           {% endfor %}

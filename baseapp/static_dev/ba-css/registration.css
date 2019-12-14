@@ -1,5 +1,56 @@
-.reg_button{
-  background-color: green;
-  border: green;
-  border-radius: 6px;
+@media screen and (min-width: 768px) {
+	.text {
+		font-size: 40px;
+	}
+	
+	.input-field {
+		height: 60px;
+	}
+
+	.form-text {
+		font-size: 25px;
+	}
+
+	.reg_button {
+		height: 75px;
+		border: 1px solid #65c000;
+		background-color: #65c000;
+		border-radius: 6px;
+		font-size: 35px;
+
+	}
+
+	.reg_button:hover {
+	background-color: #00d924;
+  	border: 1px solid #00d924;
+  	cursor: pointer;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.text {
+		font-size: 20px;
+	}
+
+	.input-field {
+		height: 25px;
+	}
+
+	.form-text {
+		font-size: 12px;
+	}
+
+	.reg_button {
+		height: 50px;
+		border: 1px solid #65c000;
+		background-color: #65c000;
+		border-radius: 6px;
+		font-size: 20px;
+	}
+
+	.reg_button:hover {
+		background-color: #00d924;
+  		border: 1px solid #00d924;
+  		cursor: pointer;
+	}
 }
