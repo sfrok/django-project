@@ -33,10 +33,14 @@
     color: white;
     height: 50px;
     border-radius: 10px;
+    width: 150px;
+    border: none;
 }
 
 .buy:hover{
   cursor: pointer;
+  border: none;
+  background-color: #32CD32;
 }
 
 .text-span {
@@ -116,11 +120,13 @@
   background-color: #48D1CC;
   color: white;
   width: 260px;
-  border: 1px solid  #48D1CC;
+  border: none;
 }
 
 .back:hover {
   cursor: pointer;
+  border: none;
+  background-color: #40E0D0;
 }
 
 .checkout {
@@ -134,8 +140,14 @@
 
 .checkout:hover{
   cursor: pointer;
+  border: none;
+  background-color: #32CD32;
 }
 
 .text {
   color: black;
+}
+
+.cost {
+  font-size: 25px;
 }

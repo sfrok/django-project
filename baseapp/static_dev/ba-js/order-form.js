@@ -21,7 +21,12 @@ let clickMinus = counterMinusProductCart.onclick = minusProduct;
 
 function modalWindowShow() {
     formInstance.style.display = 'block';
-    overlay.classList.remove('hide')
+    overlay.classList.remove('hide');
+    let cost = document.querySelector('.cost').innerText;
+    let count = document.querySelector('#main-count').innerText;
+    let total_price = document.querySelector('#full-sum');
+    let full_sum = count * cost;
+    total_price.innerText = full_sum;
 }
 
 function modalWindowQuit() {
@@ -43,7 +48,6 @@ function plusProduct() {
         makeMainInt += 1;
         upMainCounter.innerText = makeMainInt;
     }
-
 }
 
 function minusProduct() {

@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-xs-center">
         <form action="/order/add/" method="post">
           {% csrf_token %}
           <div class="overlay hide">
@@ -43,7 +43,7 @@
                               <h5 class="main-count">Количество: <span id="main-count">1</span></h5>
                             </div>
                             <div class="col-6 text-right">
-                              <h5>Итоговая сумма: <strong id="full-sum">{{ product.price }}</strong></h5>
+                              <h5>Итоговая сумма: <strong id="full-sum">{{ product.price }}</strong><b>.00 </b>грн</h5>
                             </div>
                             <div class="col-12">
                               <div class="row">
@@ -75,8 +75,8 @@
           </div>
         </div>
         <div class="col-12">
-          <div class="row justify-content-between">
-            <div class="col-12 col-md-12 col-sm-12 col-lg-5 mt-1 body">
+          <div class="row">
+            <div class="col-12 col-md-12 col-sm-12 col-lg-6 mt-1 body">
               <div class="col-12 text-center mt-1">
                 <img src="https://via.placeholder.com/300x540">
               </div>
@@ -101,7 +101,7 @@
                 <div class="row align-items-center">
                   <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                     <span><h4>Цена:</h4></span>
-                    <span class="cost"><strong><h3>{{ product.price }} грн</h3></strong></span>
+                    <span id="cost" class="cost"><strong>{{ product.price }}</strong></span><span class="cost"> грн</span>
                     <div class="stock" id="stock">{{ product.amount }}</div>
                     <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
                     <div class="count-change cart-item">
@@ -109,11 +109,9 @@
                     </div>
                     <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-2 mt-lg-0">
-                    <div id="make-order" class="button buy text-center">
-                      <input type="hidden" name="pid" value="{{ product.id }}">
-                      <span id="make-buy" class="text-span">Купить</span>
-                    </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-2 mt-lg-0 text-center" id="make-order">
+                    <input type="hidden" name="pid" value="{{ product.id }}">
+                    <button type="button" class="buy btn btn-primary">Купить</button>
                   </div>
                 </div>
               </div><hr>
