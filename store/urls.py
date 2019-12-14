@@ -40,6 +40,8 @@ urlpatterns = [
     path(f'{HP.contacts}/', views.contacts_view, name=f'{HP.contacts}_page'),
 ]
 
+handler404 = 'baseapp.views.not_found'
+
 if settings.DEBUG:
     # only serves the actual STATIC_ROOT folder
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

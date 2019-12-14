@@ -176,3 +176,7 @@ def order_list_view(request):
 @session_clear
 def contacts_view(request):
     return render(request, f(HtmlPages.contacts), {'pages': pages})
+
+
+def not_found(request, exception):
+    return HttpResponseRedirect('/')

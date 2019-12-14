@@ -19,6 +19,7 @@
                         <div class="col-6 text-right mt-2">
                             <div class="form-group">
                             <form action="" method="post"> {% csrf_token %}
+                                <input type="hidden" name="line" value="{{ line }}">
                                 <select name='sort' class="custom-select" onchange="this.form.submit()">
                                     <option value="sold" {% if sort == "sold" %}selected{% endif %}>По рейтингу</option>
                                     <option value="price" {% if sort == "price" %}selected{% endif %}>От дешёвых к дорогим</option>
