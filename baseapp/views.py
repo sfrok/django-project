@@ -118,6 +118,7 @@ def order_complete_view(request):
                 user=request.user if request.user.is_authenticated else None)
             for item in orders:  # Обработка каждого товара в корзине
                 p = Product.objects.get(id=item.pop('product', None))
+                item.pop('id', None)
                 order = basket.singleorder_set.create(product=p, **item)
                 if order.product.amount < order.amount:  # Заказ превысил кол-во товара на складе
                     basket.delete()  # Вся корзина удаляется (но не из сессии)
