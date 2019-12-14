@@ -2,7 +2,7 @@
 	outline: none;
 	border: none;
 	border-bottom: 2px solid black;
-	width: 25%;
+	width: 250px;
 	margin-bottom: 10px;
 	color: black;
 	background: transparent;
@@ -24,5 +24,5 @@
 }
 
 .auth {
-	margin-top: 170px;
+	text-align: center;
 }

@@ -10,13 +10,13 @@
 
 {% block content %}
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-6 info mt-2 ">
+                        <div class="col-12 col-lg-6 info mt-2 text-center text-lg-left">
                             <span><h5>{% if line != ''%}По запросу {{ line }} н{% else %}Н{% endif %}айдено {{ items|length }} товаров:</h5></span>
                         </div>
-                        <div class="col-6 text-right mt-2">
+                        <div class="col-lg-6 text-lg-right text-center mt-2">
                             <div class="form-group">
                             <form action="" method="post"> {% csrf_token %}
                                 <select name='sort' class="custom-select" onchange="this.form.submit()">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            {% for item in items %}
+             {% for item in items %}
                 <div class="col-9 col-md-6 col-lg-3">  
                     <div class="card-item mt-3">
                         <div class="product-code ml-2">

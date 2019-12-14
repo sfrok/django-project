@@ -10,9 +10,9 @@
 <body>
 	<form id="auth_form" action="" method="post"> {% csrf_token %}
 		<div class="container">
-			<div class="row auth"> {{ form.non_field_errors }}
+			<div class="row auth align-items-center"> {{ form.non_field_errors }}
 				<div class="col-12 text-center mt-2">
-					<h3>Авторизация</h3>
+					<h1>Авторизация</h1>
 				</div>
 				<div class="col-12 text-center mt-2">
 					<label class="form-label-title" for="email">Введите логин:</label><br>
