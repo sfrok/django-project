@@ -27,6 +27,7 @@ urlpatterns = [
     path(f'{HP.reg}/', views.reg_view, name=f'{HP.reg}_page'),
     path(f'{HP.auth}/', views.auth_view, name=f'{HP.auth}_page'),
     path(f'{HP.out}/', views.logout_view, name=f'{HP.out}_page'),
+    path('activate/<str:uid>/<str:token>', views.activation_view, name='activation_page'),
 
     path(f'{HP.src}/', views.search_view, name=f'{HP.src}_page'),
     re_path(r'(product/)(\d+)', views.product_view, name=f'{HP.product}_page'),
@@ -42,7 +43,6 @@ urlpatterns = [
 
 handler404 = 'baseapp.views.not_found'
 
-if settings.DEBUG:
-    # only serves the actual STATIC_ROOT folder
+if settings.DEBUG: #  only serves the actual STATIC_ROOT folder
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
