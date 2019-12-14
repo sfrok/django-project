@@ -26,16 +26,16 @@
                 <div class="row">
                     <div class="col-md-3 text-left">
                         <div class="contact-page ml-4">
-                            <u><a href="/contacts">Контакты</a></u>
+                            <u><a href="/{{pages.contacts}}">Контакты</a></u>
                         </div>
                     </div>
                     <div class="col-md-9 text-right user-data">
                         {% if user.is_authenticated %}
-                        <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.2}}">{{ user.name }}</a></u></div>
-                        <a class="text-center mr-4" href="/{{pages.3}}"><u>Выйти</u></a>
+                        <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.settings}}">{{ user.name }}</a></u></div>
+                        <a class="text-center mr-4" href="/{{pages.out}}"><u>Выйти</u></a>
                         {% else %}
-                        <a class="pr-4" href="/{{pages.0}}"><u>Вход</u></a>
-                        <a class="pr-4" href="/{{pages.1}}"><u>Регистрация</u></a>
+                        <a class="pr-4" href="/{{pages.auth}}"><u>Вход</u></a>
+                        <a class="pr-4" href="/{{pages.reg}}"><u>Регистрация</u></a>
                         {% endif %}
                     </div>
                 </div>
@@ -52,13 +52,13 @@
             </div>
             <div class="col-7 text-center">
                 <div class="down-header-search-wrap pb-3 pl-4">
-                    <form action="/{{ pages.4 }}/" method="post"> {% csrf_token %}
+                    <form action="/{{ pages.src }}/" method="post"> {% csrf_token %}
                         <input class="search-bar" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" class="search-btn" value="Найти">
                     </form>
                 </div>
             </div>
             <div class="col-md-2 text-right">
-                <a href=""><img class="mr-4" src="https://via.placeholder.com/40x40" alt="checkout"></a>
+                <a href="/{{ pages.ord }}"><img class="mr-4" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
@@ -73,12 +73,12 @@
             </div>
             <div class="col-10 pt-2 text-center">
                 <div class="pb-2 pl-5">
-                    <form action="/{{ pages.4 }}/" method="post"> {% csrf_token %}
+                    <form action="/{{ pages.src }}/" method="post"> {% csrf_token %}
                         <input class="search-bar-mobile" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" value="Найти" class="search-btn-mobile">
                     </form>
                 </div>
             </div>
-         <a href="" class=""><img class="mobile-img pt-2 ml-1 mr-1" src="https://via.placeholder.com/40x40" alt="checkout"></a>
+         <a href="/{{ pages.ord }}" class=""><img class="mobile-img pt-2 ml-1 mr-1" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
@@ -88,13 +88,13 @@
         <div class="col-auto mb-2">
             <img src="https://via.placeholder.com/40x40" alt="logo" class="img mt-2 mb-2">
             <h5 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h5>
-            <a href="#"><img src="https://via.placeholder.com/30x30" alt="checkout" class="img-mt-2 ml-5"></a>
+            <a href="/{{ pages.ord }}"><img src="https://via.placeholder.com/30x30" alt="checkout" class="img-mt-2 ml-5"></a>
         </div>
         <ul class="">
-            <a href="/{{pages.0}}" class="sidebar-auth"><li>Вход</li></a>
-            <a href="/{{pages.1}}" class="sidebar-auth"><li>Регистрация</li></a>
+            <a href="/{{pages.auth}}" class="sidebar-auth"><li>Вход</li></a>
+            <a href="/{{pages.reg}}" class="sidebar-auth"><li>Регистрация</li></a>
             <hr>
-            <a href="/{{pages.4}} " class="sidebar-catalog"><li>Каталог</li></a>
+            <a href="/{{pages.src}}" class="sidebar-catalog"><li>Каталог</li></a>
             <li>Контакты</li>
         </ul>
     </div>

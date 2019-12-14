@@ -22,13 +22,17 @@ class UserAuthorizationForm(forms.ModelForm):
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput)
+    password = forms.CharField(label='Придумайте пароль:', 
+        widget=forms.PasswordInput(attrs={'class':'input-field form-control'}))
+    password2 = forms.CharField(label='Повторите пароль:', 
+        widget=forms.PasswordInput(attrs={'class':'input-field form-control'}))
 
     class Meta:
         model = User
         fields = ('name', 'email', 'password', 'password2', 'address', 'phone_number',)
-        labels = {'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:', 'phone_number': 'Телефон:',}
+        labels = {'name': 'ФИО:', 'email': 'E-mail:', 
+            'address': 'Адрес:', 'phone_number': 'Телефон:',}
+        widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -66,7 +70,7 @@ class UserChangeForm(forms.ModelForm):
 
 class OrderForm(forms.ModelForm):
     class Meta:
-        model = Basket
+        model = User
         fields = ('name', 'email', 'address', 'phone_number')
         labels = {
             'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',

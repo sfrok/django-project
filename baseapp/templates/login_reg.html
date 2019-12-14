@@ -19,7 +19,7 @@
           {{ form.non_field_errors }}
           {% for field in form %}
             <div class="col-12 {% if field.name != "name" %}mt-1{% endif %}">
-                {{ field.errors }} <label class="form-label-title" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }}
+                <label class="form-label-title" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
                 {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
             </div>
           {% endfor %}

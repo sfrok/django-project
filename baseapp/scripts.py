@@ -1,79 +1,45 @@
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.forms import model_to_dict
-
+from store.data import getLogger
 from .models import Product, SingleOrder
-from store.data import HtmlPages, getLogger
-
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils import six
 
 log = lambda *info: getLogger().info(' '.join(info))
 
 
-class TokenGenerator(PasswordResetTokenGenerator):
-    def _make_hash_value(self, user, timestamp):
-        return (
-            six.text_type(user.pk) + six.text_type(timestamp) +
-            six.text_type(user.is_active)
-        )
-
-token = TokenGenerator()
-
-
-def search(line='', cats=[], sort_attr='name'):
-    response = Product.objects.filter(name__icontains=line)
-    if cats: response = response.filter(category_id__in=[i.id for i in cats])
-    response = response.order_by(sort_attr)
+def search(line='', cats=[], sort_attr='sold'):  # Поиск товаров
+    response = Product.objects.filter(name__icontains=line)  # Фильтр по имени
+    if cats: response = response.filter(category_id__in=[i.id for i in cats])  # По категории
+    response = response.order_by(sort_attr)  # Сортировка
     return response
 
 
-def auth(request, form, page):  # Main auth func for both auth and reg
-    if form.is_valid():
-        if page == HtmlPages.reg:
-            from django.contrib.sites.shortcuts import get_current_site
-            from django.utils.encoding import force_bytes
-            from django.utils.http import urlsafe_base64_encode
-            from django.core.mail import EmailMessage
-            user = form.save()  # Saving new user
-            try:
-                # Send an email to the user with the token:
-                mail_subject = 'Activate your account.'
-                current_site = get_current_site(request)
-                uid = urlsafe_base64_encode(force_bytes(user.pk))
-                token1 = token.make_token(user)
-                activation_link = "{0}/?uid={1}&token{2}".format(current_site, uid, token1)
-                message = "Hello {0},\n {1}".format(user.name, activation_link)
-                to_email = form.cleaned_data.get('email')
-                email = EmailMessage(mail_subject, message, to=[to_email])
-                email.send()
-            except: pass
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(email=email, password=password)
-        if user:
-            login(request, user)
-            return HttpResponseRedirect('/')
-    logout(request)
-    return render(request, f'{page}.html', {'form': form})
-
-
-def add_order(request, product_id, amount):
-    product = Product.objects.get(id=product_id)
-    orders = request.session.get('bcont', [])
+def add_order(request):  # Добавление товара в корзину
+    product = Product.objects.get(id=int(request.POST['pid']))  # Товар
+    amount = int(request.POST['product_count'])  # Количество
+    orders = request.session.get('bcont', [])  # Корзина
     order_exists = False
-    for item in orders:
+    for item in orders:  # Обновление товара в корзине, если он там уже есть
         if item['product'] == product.id:
-            order_exists = True
             item['amount'] += amount
             item['sum_price'] += float(amount*product.price)
+            order_exists = True
             break
-    if not order_exists:
-        order = model_to_dict(SingleOrder(product=product, amount=amount, sum_price=amount*product.price))
-        order.update({'sum_price': float(amount*product.price)})
+    if not order_exists:  # Добавление товара в корзину, если его там еще нет
+        order = model_to_dict(SingleOrder(product=product, amount=amount))
+        order.update({'sum_price': float(amount*product.price), 'id': len(orders)})
         orders.append(order)
-    request.session['bcont'] = orders
+    request.session['bcont'] = orders  # Сохранение обновленной корзины в сессию
+
+
+def session_clear(func):  # Декоратор логирования и удаления сессионных переменных
+    def wrapper(request, *args):
+        session_vars = [f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]
+        if session_vars: log("session:", ',\t'.join(session_vars))
+        if request.method == 'POST': log(f'POST: {request.POST}')
+        if request.method == 'GET': log(f'GET: {request.GET}')
+        if request.path != '/settings/' and 'ucs' in request.session:
+            del request.session['ucs']
+        return func(request)
+    return wrapper
 
 
 def populate():
@@ -97,14 +63,3 @@ def populate():
             category=Category.objects.get(pk=randint(1, 4)),
             amount=100 - i * randint(3, 5),
             price=(i + 1) ** 2 * 1000 - 1000 * i)
-
-
-def session_clear(func):
-    def wrapper(request, *args):
-        session_vars = [f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]
-        if session_vars: log("session:", ',\t'.join(session_vars))
-        if request.method == 'POST': log(f'POST: {request.POST}')
-        if request.path != '/settings/' and 'ucs' in request.session:
-            del request.session['ucs']
-        return func(request)
-    return wrapper
