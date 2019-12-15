@@ -38,6 +38,8 @@ def session_clear(func):  # Декоратор логирования и уда�
         if request.method == 'GET': log(f'GET: {request.GET}')
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
+        if request.path[:7] != '/order/' and 'bcont' in request.session:
+            del request.session['bcont']
         return func(request)
     return wrapper
 

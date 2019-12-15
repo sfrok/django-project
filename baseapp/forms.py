@@ -26,7 +26,7 @@ class UserAuthorizationForm(forms.ModelForm):  # Форма для автори�
         fields = ('email', 'password')
 
     def clean(self):
-        log('UserAuthorizationForm cleaned data:', self.cleaned_data)
+        log('UserAuthorizationForm cleaned data:', str(self.cleaned_data))
         user_in_database = User(email=self.cleaned_data.get('email'))
         if user_in_database is None:  # if current_username is empty:
             raise forms.ValidationError('Incorrect login! Try again')
@@ -55,7 +55,7 @@ class UserCreationForm(forms.ModelForm):  # Форма для создания (
         return password2
 
     def save(self):  # Сохранение пароля в хешированном формате
-        log('UserCreationForm cleaned data:', self.cleaned_data)
+        log('UserCreationForm cleaned data:', str(self.cleaned_data))
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password"])
         user.save()
@@ -78,7 +78,7 @@ class UserChangeForm(forms.ModelForm):  # Форма для обновления
 
 class OrderForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Basket
         fields = ('name', 'email', 'address', 'phone_number')
         labels = {
             'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
