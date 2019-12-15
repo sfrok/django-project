@@ -1,4 +1,4 @@
-.login-form {
+/*.login-form {
 	outline: none;
 	border: none;
 	border-bottom: 2px solid black;
@@ -11,9 +11,7 @@
 .authorization-button {
 	width: 200px;
 	height: 50px;
-	border: 1px solid #65c000;
 	background-color: #65c000;
-	color: #fff;
 	border-radius: 6px;
 }
 
@@ -21,8 +19,78 @@
 	background-color: #00d924;
   	border: 1px solid #00d924;
   	cursor: pointer;
+}*/
+
+@media screen and (min-width: 768px) {
+	 label {
+	 	font-size: 40px;
+	 }
+
+	 .login-form {
+	 	outline: none;
+	 	border: none;
+	 	border-bottom: 2px solid black;
+	 	color: black;
+	 	width: 295px;
+	 	font-size: 35px;
+	 	height: auto;
+	 }
+
+	 .login-form::-webkit-input-placeholder {
+	 	font-size: 35px;
+	 }
+
+	 .authorization-button {
+		height: auto;
+		font-size: 30px;
+		width: 250px;
+		background-color: #65c000;
+		border-radius: 6px;
+		border: none;
+		color: #fff;
+	 }
+
+	 .cancel {
+	 	font-size: 20px;
+	 }
 }
 
-.auth {
-	text-align: center;
+@media screen and (min-width: 1024px) {
+	label {
+	 	font-size: 25px;
+	 }
+
+	 .login-form {
+	 	outline: none;
+	 	border: none;
+	 	border-bottom: 2px solid black;
+	 	color: black;
+	 	width: 205px;
+	 	font-size: 15px;
+	 	height: auto;
+	 }
+
+	 .login-form::-webkit-input-placeholder {
+	 	font-size: 15px;
+	 }
+
+	 .authorization-button {
+	 	width: 200px;
+		height: 40px;
+		border: none;
+		background-color: #65c000;
+		color: #fff;
+		border-radius: 6px;
+		font-size: 20px;
+	 }
+
+	 .authorization-button:hover {
+		background-color: #00d924;
+  		border: 1px solid #00d924;
+  		cursor: pointer;
+	}
+
+	.canecl {
+		font-size: 20px;
+	}
 }

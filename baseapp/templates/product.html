@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="container">
-      <div class="row justify-content-xs-center">
+      <div class="row justify-content-center">
         <form action="/order/add/" method="post">
           {% csrf_token %}
           <div class="overlay hide">
@@ -66,10 +66,10 @@
         
         <div class="col-12 head mt-3">
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-lg-left text-center">
               <h3>{{ product.name }}</h3>
             </div>
-            <div class="col-12">
+            <div class="col-12 text-lg-left text-center">
               <small class="text-muted">Код товара: {{product.id}}</small>
             </div>
           </div>
@@ -91,7 +91,7 @@
             <div class="col-12 col-md-12 col-sm-12 col-lg-6 body mt-1">
               <div class="col-12">
                 <div class="row">
-                  <div class="col-12">
+                  <div class="col-12 text-center text-lg-left">
                     <img src="{% static "check_mark.png" %}" height="18px">
                     <span class="pl-1">В наличии: {{ product.amount }}</span>
                   </div>
@@ -99,9 +99,11 @@
               </div>
               <div class="col-12">
                 <div class="row align-items-center">
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-                    <span><h4>Цена:</h4></span>
-                    <span id="cost" class="cost"><strong>{{ product.price }}</strong></span><span class="cost"> грн</span>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-8 text-center text-lg-left">
+                   <span>Цена:</span>
+                   <span id="cost" class="cost"><b>{{ product.price }}</b></span><span class="cost"> грн</span><br>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
                     <div class="stock" id="stock">{{ product.amount }}</div>
                     <img src="{% static "minus.png" %}" class="counter minus cart-item" alt="minus"/>
                     <div class="count-change cart-item">
@@ -109,7 +111,7 @@
                     </div>
                     <img src="{% static "plus.png" %}" class="counter plus cart-item" alt="plus"/>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-2 mt-lg-0 text-center" id="make-order">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-2 mt-lg-3 text-center" id="make-order">
                     <input type="hidden" name="pid" value="{{ product.id }}">
                     <button type="button" class="buy btn btn-primary">Купить</button>
                   </div>
@@ -117,8 +119,8 @@
               </div><hr>
               <div class="col-12">
                 <div class="row">
-                  <div class="col-12 description">
-                    <span>Описание товара: {{ product.description }}</span>
+                  <div class="col-12 description text-lg-left text-center">
+                    <span>Описание товара: <br>{{ product.description }}</span>
                   </div>
                 </div><hr>
               </div>
