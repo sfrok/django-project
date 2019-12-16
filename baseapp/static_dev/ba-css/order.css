@@ -13,14 +13,11 @@
 }
 
 .input-field {
-  width: 350px;
+  width: 100%;
 }
 
 .field {
   margin-top: 16px;
-}
-
-.image-place {
 }
 
 .description {
@@ -36,15 +33,15 @@
   height: 55px;
   text-align: center;
   background-color: #65c000;
-  border: 1px solid #65c000;
+  border: none;
   color: white;
   max-width: 250px;
 }
 
 .checkout:hover {
   cursor: pointer;
-  background-color: #65c000;
-  border: 1px solid #65c000;
+  background-color: #32CD32;
+  border: none;
 }
 
 .delete-product {

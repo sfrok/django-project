@@ -1,4 +1,4 @@
-@media screen and (min-width: 768px) {
+/*@media screen and (min-width: 768px) {
 	.text {
 		font-size: 40px;
 	}
@@ -53,4 +53,9 @@
   		border: 1px solid #00d924;
   		cursor: pointer;
 	}
+}
+*/
+
+.form-label-title {
+    font-size: 20px;
 }

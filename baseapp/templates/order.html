@@ -21,68 +21,51 @@
     </div>
     <!-- EMPTY BASKET END -->
     {% else %}
-      <div class="container">
-        <div class="row justify-content-between">
-          <div class="col-12 col-md-12 col-lg-6 mt-3">
-            <div class="col-12">
-            <form action="/order/complete/" method="post"> {% csrf_token %}
-              <div class="row contacts">
-                <div class="col-12">
-                  <span class="header">Оформление заказа</span><hr>
-                </div>
-                <div class="col-12">
-                  <span class="header">Контактные данные:</span>
-                </div> {{ form.non_field_errors }}
-                {% for field in form %}
-                  <div class="col-12">
-                    <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
-                  </div>
-                {% endfor %}
-                <div class="col-12">
-                  <div class="row ">
-                    <div class="col-12 text-center mt-2">
-                      <button type="button submit" class="checkout btn btn-primary">Подтвердить заказ</button>
-                    </div>
-                  </div>
-                </div>
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col-12 col-lg-6">
+          <form action="/order/complete/" method="post">{% csrf_token %}
+            <div class="row contacts">
+              <div class="col-12">
+                <h3>Контактные данные:</h3><hr>
+              </div>{{ form.non_field_errors }}
+              {% for field in form %}
+              <div class="col-12">
+                <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
               </div>
-            </form>
+              {% endfor %}
+              <div class="col-12 text-center mt-md-2">
+               <button type="button submit" class="checkout btn btn-primary">Подтвердить заказ</button>
+              </div>
+            </div> 
+          </form>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="row product">
+            <div class="col-12 text-lg-right text-center">
+              <h3>Ваш заказ:</h3><hr>
             </div>
-          </div>
-          <div class="col-12 col-md-12 col-lg-5 mt-md-5 mt-lg-0">
-            <div class="col-12">
-              <div class="row product">
-                <div class="col-12 text-lg-right text-md-left text-right mt-3">
-                  <span class="header">Ваш заказ</span><hr>
-                </div>
-                <div class="col-8 order-info">
-                  <span>Всего к оплате:</span>
-                </div>
-                <div class="col-4 order-info">
-                  <span><strong>{{sum_price}} грн</strong></span>
-                </div>
-                {% for i in items %}
-                  <div class="col-4 image-place"><hr>
-                    <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
-                  </div>
-                  <div class="col-8 description"><hr>
-                    {{i.name}}<br>
-                    <span>Количество: </span>
-                    <span><strong>{{i.amount}}</strong></span>
-                  </div>
-                  <div class="col-12 order-info text-right">
-                    <span>Цена: <strong>{{i.price}} грн</strong></span>
-                  </div><hr>
-                  <div class="col-12 text-center mt-2">
-                    <form action="/order/del/" method="post"> {% csrf_token %}
-                    <button type="button submit" class="btn btn-primary delete-product" name="oid" value="{{i.id}}">Удалить</button>
-                    </form>
-                  </div>
-                {% endfor %}
-              </div>
+            {% for i in items %}
+            <div class="col-4">
+              <img src="https://psmedia.playstation.com/is/image/psmedia/ps4-pro-listing-thumb-01-ps4-eu-06sep16?$Icon$" class="img-fluid img-thumbnail">
+            </div>
+            <div class="col-8 description">
+              {{i.name}}<br>
+              <span>Количество: {{i.amount}} шт.</span><br>
+              <span>Цена: {{i.price}} грн</span>
+            </div>
+            <div class="col-12 text-center mt-2">
+              <form action="/order/del/" method="post"> {% csrf_token %}
+                <button type="button submit" class="btn btn-primary delete-product" name="oid" value="{{i.id}}">Удалить</button>
+              </form>
+            </div>
+            {% endfor %}
+            <div class="col-12 order-info text-center text-lg-right">
+              <hr><span>Всего к оплате:<b> {{sum_price}} грн</b></span><hr>
             </div>
           </div>
         </div>
       </div>
+    </div>
     {% endif %}
 {% endblock %}
