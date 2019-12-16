@@ -3,7 +3,8 @@
 import os, sys
 from store.data import getLogger
 
-log = lambda *info: getLogger().info(' '.join(info))
+
+def log(*info): getLogger().info(' '.join(info))  # Ф-ия логирования
 
 
 def main():

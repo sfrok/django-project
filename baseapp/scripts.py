@@ -2,7 +2,8 @@ from django.forms import model_to_dict
 from store.data import getLogger
 from .models import Product, SingleOrder
 
-log = lambda *info: getLogger().info(' '.join(info))
+
+def log(*info): getLogger().info(' '.join(info))  # Ф-ия логирования
 
 
 def search(line='', cats=[], sort_attr='sold'):  # Поиск товаров
@@ -20,12 +21,12 @@ def add_order(request):  # Добавление товара в корзину
     for item in orders:  # Обновление товара в корзине, если он там уже есть
         if item['product'] == product.id:
             item['amount'] += amount
-            item['sum_price'] += float(amount*product.price)
+            item['sum_price'] += float(amount * product.price)
             order_exists = True
             break
     if not order_exists:  # Добавление товара в корзину, если его там еще нет
         order = model_to_dict(SingleOrder(product=product, amount=amount))
-        order.update({'sum_price': float(amount*product.price), 'id': len(orders)})
+        order.update({'sum_price': float(amount * product.price), 'id': len(orders)})
         orders.append(order)
     request.session['bcont'] = orders  # Сохранение обновленной корзины в сессию
 
@@ -38,6 +39,8 @@ def session_clear(func):  # Декоратор логирования и уда�
         if request.method == 'GET': log(f'GET: {request.GET}')
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
+        if request.path[:7] != '/order/' and 'bcont' in request.session:
+            del request.session['bcont']
         return func(request)
     return wrapper
 

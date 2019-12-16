@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 import baseapp.scripts as func
-from baseapp.models import Product, Category
+from baseapp.models import Product
 
 
 class TestDB(TestCase):

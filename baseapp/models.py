@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 from django.core.mail import send_mail
+from store.settings import EMAIL_HOST_USER
 
 from store.data import SELL_STATES, STATUSES
 
@@ -27,7 +28,7 @@ class MyUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     name = models.CharField(max_length=33, default='')
     address = models.CharField(max_length=128, default='')
@@ -45,8 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):  # Is the user a member of staff?
         return self.is_admin  # Simplest possible answer: All admins are staff
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        """Send an email to this user."""
+    def email_user(self, subject, message, from_email=EMAIL_HOST_USER, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
@@ -67,7 +67,8 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=3000, default='')
-    category = models.ForeignKey(Category, db_column='category', on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, db_column='category', 
+        on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
     discount = models.FloatField(default=0.0)
     amount = models.IntegerField(default=0)

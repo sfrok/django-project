@@ -7,7 +7,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SettingsForm, OrderF
 from .models import Product, Basket, Category
 from .scripts import search, add_order, session_clear
 
-f = lambda s: f'{s}.html' #  Конвертация пути в название файла: home -> home.html
+f = lambda s: f'{s}.html'  # Конвертация пути в название файла: home -> home.html
 base = lambda other={}, line='': {**{'line': line, 'pages': HtmlPages}, **other}  # Расш. context
 check = lambda keys, post: all((key in post for key in keys))  # Ф-ия для проверки полноты POST
 
@@ -31,6 +31,7 @@ def logout_view(request):
 
 @session_clear
 def home_view(request):
+    # request.user.email_user('HI!!!', 'Use %s to confirm email' % '111')
     return render(request, f(HtmlPages.home), base({'cats': Category.objects.all()}))
 
 
@@ -88,8 +89,9 @@ def order_del_view(request):  # Удаление товара из корзин�
 @session_clear
 def order_view(request):
     if 'bcont' in request.session:
-        form = OrderForm(instance=request.user if request.user.is_authenticated else None)
-        c = request.session.get('bcont', [])
+        if 'buinfo' in request.session: form = OrderForm(request.session['buinfo'])
+        else: form = OrderForm(instance=request.user if request.user.is_authenticated else None)
+        c = request.session['bcont']
         return render(request, f(HtmlPages.ord), base({
             'sum_price': sum((i['sum_price'] for i in c)), 
             'items': [{
@@ -106,6 +108,7 @@ def order_view(request):
 def order_complete_view(request):
     if request.method == 'POST' and 'bcont' in request.session:
         form = OrderForm(request.POST)
+        request.session['buinfo'] = form.data
         if form.is_valid():
             # Создание объекта корзины на основе сессионной переменной
             orders = request.session['bcont']
@@ -131,7 +134,7 @@ def order_complete_view(request):
                 order.save()
             del request.session['bcont']
             return render(request, f(HtmlPages.ord_com), 
-                base({'items': basket.singleorder_set.all(), 'order': basket}))
+                base({'items': basket.singleorder_set.all(), 'order': basket}))        
         return HttpResponseRedirect(f'/{HtmlPages.ord}/')
     return HttpResponseRedirect('/')
 
