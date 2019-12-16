@@ -31,6 +31,7 @@ def logout_view(request):
 
 @session_clear
 def home_view(request):
+    # request.user.email_user('HI!!!', 'Use %s to confirm email' % '111')
     return render(request, f(HtmlPages.home), base({'cats': Category.objects.all()}))
 
 

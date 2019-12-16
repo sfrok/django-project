@@ -18,6 +18,7 @@ class HtmlPages():  # Названия html-файлов без .html
     settings = 'settings'
     ord_list = 'basket'
     home = 'home'
+    cab = 'cabinet'
 
 
 SELL_STATES = (

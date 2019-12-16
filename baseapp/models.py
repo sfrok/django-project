@@ -1,9 +1,9 @@
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
-from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from django.db import models
 from django.utils import timezone
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
+from store.settings import EMAIL_HOST_USER
 
 from store.data import SELL_STATES, STATUSES
 
@@ -26,9 +26,9 @@ class MyUserManager(BaseUserManager):
         return user
 
 
-class User(SimpleEmailConfirmationUserMixin, AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     name = models.CharField(max_length=33, default='')
     address = models.CharField(max_length=128, default='')
@@ -46,9 +46,8 @@ class User(SimpleEmailConfirmationUserMixin, AbstractBaseUser, PermissionsMixin)
     def is_staff(self):  # Is the user a member of staff?
         return self.is_admin  # Simplest possible answer: All admins are staff
 
-    # def email_user(self, subject, message, from_email=None, **kwargs):
-    #     """Send an email to this user."""
-    #     send_mail(subject, message, from_email, [self.email], **kwargs)
+    def email_user(self, subject, message, from_email=EMAIL_HOST_USER, **kwargs):
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class Category(models.Model):

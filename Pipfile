@@ -17,7 +17,6 @@ pillow = "*"
 django-crispy-forms = "*"
 elasticsearch-dsl = "<7.0,>=6.0"
 django-elasticsearch-dsl = ">=6.0,<7.0"
-django-simple-email-confirmation = "*"
 
 [requires]
 python_version = "3.6"
