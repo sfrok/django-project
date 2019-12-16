@@ -33,14 +33,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['*'] #  FOR TESTING ONLY!
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'MAIL HERE'
-EMAIL_HOST_PASSWORD = '**********'
-DEFAULT_FROM_EMAIL = 'MAIL HERE'
-
 
 # Application definition
 
@@ -51,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'simple_email_confirmation',
     'crispy_forms',
     'baseapp',
 ]

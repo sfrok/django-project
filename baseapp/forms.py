@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import User, Basket, Category, Product
-from store.data import getLogger, SELL_STATES
+from .models import User, Basket
+from store.data import getLogger
 from django.forms import Field
 from django.utils.translation import gettext as _
 
@@ -16,11 +16,13 @@ Field.default_error_messages = {  # Локализация ошибок поле
     'min_value': _("Введенное значение слишком мало."),
 }
 
-log = lambda *info: getLogger().info(' '.join(info))  # Ф-ия логирования
+
+def log(*info): getLogger().info(' '.join(info))  # Ф-ия логирования
 
 
 class UserAuthorizationForm(forms.ModelForm):  # Форма для авторизации пользователей
     password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput)
+
     class Meta:
         model = User
         fields = ('email', 'password')
@@ -35,16 +37,16 @@ class UserAuthorizationForm(forms.ModelForm):  # Форма для автори�
 class UserCreationForm(forms.ModelForm):  # Форма для создания (регистрации) пользователей
 
     password = forms.CharField(label='Придумайте пароль:', 
-        widget=forms.PasswordInput(attrs={'class':'input-field form-control'}))
+        widget=forms.PasswordInput(attrs={'class': 'input-field form-control'}))
     password2 = forms.CharField(label='Повторите пароль:', 
-        widget=forms.PasswordInput(attrs={'class':'input-field form-control'}))
+        widget=forms.PasswordInput(attrs={'class': 'input-field form-control'}))
 
     class Meta:
         model = User
         fields = ('name', 'email', 'password', 'password2', 'address', 'phone_number',)
         labels = {'name': 'ФИО:', 'email': 'E-mail:', 
-            'address': 'Адрес:', 'phone_number': 'Телефон:',}
-        widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}
+            'address': 'Адрес:', 'phone_number': 'Телефон:', }
+        widgets = {i: forms.TextInput(attrs={'class': 'input-field form-control'}) for i in fields}
 
     def clean_password2(self):  # Проверка на совпадение паролей
         password = self.cleaned_data.get("password")
@@ -84,7 +86,7 @@ class OrderForm(forms.ModelForm):
             'name': 'ФИО:', 'email': 'E-mail:', 'address': 'Адрес:',
             'phone_number': 'Номер телефона:'
         }
-        widgets = {i: forms.TextInput(attrs={'class':'input-field form-control'}) for i in fields}
+        widgets = {i: forms.TextInput(attrs={'class': 'input-field form-control'}) for i in fields}
 
 
 class SettingsForm(forms.ModelForm):
@@ -92,4 +94,4 @@ class SettingsForm(forms.ModelForm):
         model = User
         fields = ('name', 'address', 'phone_number')
         labels = {'name': 'ФИО:', 'address': 'Адрес:', 'phone_number': 'Номер телефона:'}
-        widgets = {i: forms.TextInput(attrs={'class':'form-control mb-2'}) for i in fields}
+        widgets = {i: forms.TextInput(attrs={'class': 'form-control mb-2'}) for i in fields}

@@ -7,7 +7,7 @@ from .forms import UserCreationForm, UserAuthorizationForm, SettingsForm, OrderF
 from .models import Product, Basket, Category
 from .scripts import search, add_order, session_clear
 
-f = lambda s: f'{s}.html' #  Конвертация пути в название файла: home -> home.html
+f = lambda s: f'{s}.html'  # Конвертация пути в название файла: home -> home.html
 base = lambda other={}, line='': {**{'line': line, 'pages': HtmlPages}, **other}  # Расш. context
 check = lambda keys, post: all((key in post for key in keys))  # Ф-ия для проверки полноты POST
 
@@ -133,8 +133,7 @@ def order_complete_view(request):
                 order.save()
             del request.session['bcont']
             return render(request, f(HtmlPages.ord_com), 
-                base({'items': basket.singleorder_set.all(), 'order': basket}))
-        
+                base({'items': basket.singleorder_set.all(), 'order': basket}))        
         return HttpResponseRedirect(f'/{HtmlPages.ord}/')
     return HttpResponseRedirect('/')
 
