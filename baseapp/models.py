@@ -3,7 +3,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 from django.core.mail import send_mail
-from store.settings import EMAIL_HOST_USER
+# from store.settings import EMAIL_HOST_USER
 
 from store.data import SELL_STATES, STATUSES
 
@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):  # Is the user a member of staff?
         return self.is_admin  # Simplest possible answer: All admins are staff
 
-    def email_user(self, subject, message, from_email=EMAIL_HOST_USER, **kwargs):
+    def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 

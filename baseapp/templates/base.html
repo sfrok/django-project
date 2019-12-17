@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-9 text-right user-data">
                         {% if user.is_authenticated %}
-                        <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.settings}}">{{ user.name }}</a></u></div>
+                        <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.cab}}">{{ user.name }}</a></u></div>
                         <a class="text-center mr-4" href="/{{pages.out}}"><u>Выйти</u></a>
                         {% else %}
                         <a class="pr-4" href="/{{pages.auth}}"><u>Вход</u></a>

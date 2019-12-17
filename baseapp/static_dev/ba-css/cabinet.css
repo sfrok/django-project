@@ -3,6 +3,11 @@
     vertical-align: middle;
 }
 
+.form-label-title {
+    font-size: 20px;
+}
+
+
 .order-cart {
     border: 1px solid black;
     max-width: 1200px;

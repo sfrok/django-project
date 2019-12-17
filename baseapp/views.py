@@ -143,12 +143,12 @@ def order_complete_view(request):
 
 @session_clear
 @login_required(login_url=f'/{HtmlPages.auth}/')
-def settings_view(request):
+def cabinet_view(request):
     if request.method == 'POST':
         form = SettingsForm(request.POST, instance=request.user)
         if form.is_valid(): form.save()
     form = SettingsForm(instance=request.user)
-    return render(request, f(HtmlPages.settings), base({'form': form}))
+    return render(request, f(HtmlPages.cab), base({'form': form}))
 
 
 @session_clear

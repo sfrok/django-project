@@ -15,7 +15,6 @@ class HtmlPages():  # Названия html-файлов без .html
     ord_add = 'order/add'
     ord_del = 'order/del'
     ord_com = 'complete'
-    settings = 'settings'
     ord_list = 'basket'
     home = 'home'
     cab = 'cabinet'
