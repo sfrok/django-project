@@ -2,7 +2,7 @@
     font-family: sans-serif;
 }
 .main-header {
-    background: dimgrey;
+    background: #161c35 
 }
 .top-header {
     font-size: 15px;
@@ -35,16 +35,17 @@
 
 .down-header-logo a {
     text-decoration: none;
-    color: black !important;
+    color: white !important;
 }
 
 .down-header-title {
     font-size: 29px;
+    color: white;
 }
 
 
 .down-header {
-    background: dimgrey;
+    background: #161c35 
 }
 
 .down-header-search-wrap {
@@ -186,7 +187,8 @@
     display: block;
     width: 25px;
     height: 4px;
-    background: rgba(21, 23, 25, 0.9);
+    background: white;
+    opacity: 0.8;
     margin: 5px 0px;
 }
 
