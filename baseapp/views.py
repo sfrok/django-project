@@ -148,14 +148,8 @@ def cabinet_view(request):
         form = SettingsForm(request.POST, instance=request.user)
         if form.is_valid(): form.save()
     form = SettingsForm(instance=request.user)
-    return render(request, f(HtmlPages.cab), base({'form': form}))
-
-
-@session_clear
-@login_required(login_url=f'/{HtmlPages.auth}/')
-def order_list_view(request):
     orders = Basket.objects.filter(user_id=request.user.id)
-    return render(request, f(HtmlPages.ord_list), base({'orders': orders}))
+    return render(request, f(HtmlPages.cab), base({'form': form, 'orders': orders}))
 
 
 # ДРУГОЕ
