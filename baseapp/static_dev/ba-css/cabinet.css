@@ -1,4 +1,5 @@
 .page-title {
+    font-size: 1.9rem;
     display: inline-block;
     vertical-align: middle;
 }
@@ -17,4 +18,22 @@
 
 .order-cart-light {
     background-color: white;
+}
+
+.btn:hover {
+    cursor: default;
+}
+
+.btn-info:hover {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:focus {
+    box-shadow: none !important;
+}
+
+.btn-info:active {
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
 }

@@ -6,9 +6,60 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
+    <div class="container-fluid d-block d-lg-none">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <img src="{% static "userconfig.png" %}" alt="settings" class="img-thumbnail">
+                <h1 class="display-4 page-title">Настройки</h1>
+                  <div class="form mt-4">
+                      <form action="" method="post"> {% csrf_token %} {{ form.non_field_errors }}
+                      {% for field in form %}
+                          <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
+                      {% endfor %}
+                      <div class="row justify-content-center">
+                          <div class="col-auto form-button">
+                              <button type="submit" class="btn btn-outline-success btn-lg mt-3" id="apply_button">Сохранить данные</button>
+                          </div>
+                      </div>
+                  </form>
+                  </div>
+            </div>
+             <div class="col-12 mt-4">
+                <img src="{% static "order.png" %}" alt="settings" class="img-thumbnail m-2">
+                <h1 class="display-4 page-title">Ваши заказы</h1>
+                <p class="lead m-2 page-description">Панель управления заказами пользователя</p>
+                <hr>
+                  <button type="button" class="btn btn-info mb-3">
+                          Все заказы <span class="badge badge-dark">0</span>
+                  </button>
+                  <table class="table table-striped table-bordered">
+                      <thead class="thead-dark text-center">
+                        <tr>
+                          <th scope="col">Дата</th>
+                          <th scope="col" class="d-none d-sm-table-cell">Адрес</th>
+                          <th scope="col" class="d-none d-sm-table-cell">Статус</th>
+                          <th scope="col">Сумма</th>
+                          <th scope="col">Товары</th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                        {% for i in user.basket_set.all %}
+                        <tr>
+                          <td>{{i.date}}</td>
+                          <td class="d-none d-sm-table-cell">{{i.address}}</td>
+                          <td class="d-none d-sm-table-cell">{{i.status}}</td>
+                          <td>{{i.sum_price}}</td>
+                          <td>{{i.singleorder_set.all|join:", "}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 d-none d-lg-block">
         <div class="row">
-          <div class="col-3">
+          <div class="col-3 text-center">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
               <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
                   Настройки
@@ -45,7 +96,7 @@
                           Все заказы <span class="badge badge-dark">0</span>
                   </button>
                   <table class="table table-striped table-bordered">
-          <thead class="thead-dark">
+          <thead class="thead-dark text-center">
             <tr>
               <th scope="col">Дата</th>
               <th scope="col">Адрес</th>
@@ -54,7 +105,7 @@
               <th scope="col">Товары</th>
             </tr>
           </thead>
-        <tbody>
+        <tbody class="text-center">
             {% for i in user.basket_set.all %}
             <tr>
               <td>{{i.date}}</td>

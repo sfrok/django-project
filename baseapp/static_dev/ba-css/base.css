@@ -13,15 +13,30 @@
     color: white;
 }
 
+.welcome-title u a {
+    text-decoration: underline;
+    color: white;
+}
+
 .welcome-title a {
     color: white;
 }
 
 .user-data u {
+    text-decoration: none;
     color: white;
 }
 
-.contact-page a {
+.user-data a:hover {
+    color: white;
+}
+
+.contact-page > u {
+    color: white;
+    text-decoration: none;
+}
+
+.contact-page  a {
     color: white;
 }
 

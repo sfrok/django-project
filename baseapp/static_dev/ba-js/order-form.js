@@ -25,8 +25,7 @@ function modalWindowShow() {
     let cost = document.querySelector('.cost').innerText;
     let count = document.querySelector('#main-count').innerText;
     let total_price = document.querySelector('#full-sum');
-    let full_sum = count * cost;
-    total_price.innerText = full_sum;
+    total_price.innerText = count * cost;
 }
 
 function modalWindowQuit() {

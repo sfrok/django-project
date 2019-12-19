@@ -13,10 +13,20 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-12 col-lg-6 info mt-2 text-center text-lg-left">
+                    <div class="col-12 d-none d-md-block mt-4">
+                                    <div class="media">
+                                          <img src="https://via.placeholder.com/100x100" class="align-self-start mr-3" alt="">
+                                          <div class="media-body">
+                                            <h5 class="mt-0">Категория: "Название"</h5>
+                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                            <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                          </div>
+                                    </div>
+                            </div>
+                        <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left">
                             <span><h5>{% if line != ''%}По запросу {{ line }} н{% else %}Н{% endif %}айдено {{ items|length }} товаров:</h5></span>
                         </div>
-                        <div class="col-lg-6 text-lg-right text-center mt-2">
+                        <div class="col-lg-6 text-lg-right text-center mt-4">
                             <div class="form-group">
                             <form action="" method="post"> {% csrf_token %}
                                 <input type="hidden" name="line" value="{{ line }}">
