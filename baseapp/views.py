@@ -48,8 +48,8 @@ def search_view(request):  # Страница поиска/каталога
         sort = request.POST.get('sort', 'sold')
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
         return render(request, f(HtmlPages.src), 
-            base({'items': search(line, cats, sort), 'sort': sort}, line))
-    return render(request, f(HtmlPages.src), base({'items': search(), 'sort': 'sold'}))
+            base({'items': search(line, cats, sort), 'sort': sort, 'cat': cats}, line))
+    return render(request, f(HtmlPages.src), base({'items': search(), 'sort': 'sold', 'cat': []}))
 
 
 # PRODUCT

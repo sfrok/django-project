@@ -156,7 +156,7 @@ LANGUAGE_CODE = 'ru-ru'
 DATETIME_FORMAT = 'd.m.Y, G:i'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
+USE_L10N = False  # Was True
 USE_TZ = True
 
 

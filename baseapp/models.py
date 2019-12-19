@@ -52,6 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Category(models.Model):
     name = models.CharField(max_length=32, default='')
+    lore = models.TextField(max_length=3000, default='')
     discount = models.FloatField(default=0.0)
 
     def __str__(self):
