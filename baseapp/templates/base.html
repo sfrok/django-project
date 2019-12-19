@@ -91,8 +91,13 @@
             <a href="/{{ pages.ord }}"><img src="https://via.placeholder.com/30x30" alt="checkout" class="img-mt-2 ml-5"></a>
         </div>
         <ul class="">
+            {% if user.is_authenticated %}
+            <a href="/{{pages.cab}}" class="sidebar-auth"><li>Ваш кабинет</li></a>
+            <a href="/{{pages.out}}" class="sidebar-auth"><li>Выйти</li></a>
+            {% else %}
             <a href="/{{pages.auth}}" class="sidebar-auth"><li>Вход</li></a>
             <a href="/{{pages.reg}}" class="sidebar-auth"><li>Регистрация</li></a>
+            {% endif %}
             <hr>
             <a href="/{{pages.src}}" class="sidebar-catalog"><li>Каталог</li></a>
             <li>Контакты</li>
