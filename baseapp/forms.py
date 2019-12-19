@@ -21,11 +21,17 @@ def log(*info): getLogger().info(' '.join(info))  # Ф-ия логировани
 
 
 class UserAuthorizationForm(forms.ModelForm):  # Форма для авторизации пользователей
-    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput)
 
     class Meta:
+        _attrs = {'class': 'login-form'}
+        _fields = (
+            ('email', _('Введите почту:'), forms.EmailInput(_attrs)),
+            ('password', _('Введите пароль:'), forms.PasswordInput(_attrs))
+        )
         model = User
-        fields = ('email', 'password')
+        fields = tuple(f[0] for f in _fields)
+        labels = {f[0]: f[1] for f in _fields}
+        widgets = {f[0]: f[2] for f in _fields}
 
     def clean(self):
         log('UserAuthorizationForm cleaned data:', str(self.cleaned_data))
@@ -35,18 +41,16 @@ class UserAuthorizationForm(forms.ModelForm):  # Форма для автори�
 
 
 class UserCreationForm(forms.ModelForm):  # Форма для создания (регистрации) пользователей
-
-    password = forms.CharField(label='Придумайте пароль:', 
-        widget=forms.PasswordInput(attrs={'class': 'input-field form-control'}))
-    password2 = forms.CharField(label='Повторите пароль:', 
-        widget=forms.PasswordInput(attrs={'class': 'input-field form-control'}))
+    _attrs = {'class': 'input-field form-control'}
+    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput(_attrs))
+    password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
 
     class Meta:
         model = User
         fields = ('name', 'email', 'password', 'password2', 'address', 'phone_number',)
         labels = {'name': 'ФИО:', 'email': 'E-mail:', 
             'address': 'Адрес:', 'phone_number': 'Телефон:', }
-        widgets = {i: forms.TextInput(attrs={'class': 'input-field form-control'}) for i in fields}
+        widgets = {i: forms.TextInput({'class': 'input-field form-control'}) for i in fields}
 
     def clean_password2(self):  # Проверка на совпадение паролей
         password = self.cleaned_data.get("password")

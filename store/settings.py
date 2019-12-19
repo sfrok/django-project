@@ -33,19 +33,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['*'] #  FOR TESTING ONLY!
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = pc.EMAIL
-# EMAIL_HOST_PASSWORD = pc.EMAIL_PASSWORD
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'protonmail.com'
 EMAIL_USE_TLS = True
+EMAIL_PORT = 1025
+# EMAIL_HOST_USER = pc.EMAIL
+EMAIL_HOST_PASSWORD = pc.EMAIL_PASSWORD
+DEFAULT_FROM_EMAIL = pc.EMAIL
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'apps', 'emails')
 
 
 # Application definition
@@ -157,7 +152,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
+DATETIME_FORMAT = 'd.m.Y, G:i'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
