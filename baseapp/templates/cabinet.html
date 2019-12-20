@@ -108,7 +108,7 @@
         <tbody class="text-center">
             {% for i in user.basket_set.all %}
             <tr>
-              <td>{{i.date}}</td>
+              <td class="text-data">{{i.date}}</td>
               <td>{{i.address}}</td>
               <td>{{i.get_status_display}}</td>
               <td>{{i.sum_price}}</td>

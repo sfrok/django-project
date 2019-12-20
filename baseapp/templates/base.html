@@ -20,6 +20,7 @@
   </head>
   <body>
     <!-- HEADER START-->
+    <div class="overlay"></div>
     <div class="container-fluid main-header">
         <div class="row">
             <div class="col-md-12 top-header mt-2 pb-2 d-none d-lg-block">
@@ -88,7 +89,7 @@
         <div class="col-auto mb-2">
             <img src="https://via.placeholder.com/40x40" alt="logo" class="img mt-2 mb-2">
             <h5 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h5>
-            <a href="/{{ pages.ord }}"><img src="https://via.placeholder.com/30x30" alt="checkout" class="img-mt-2 ml-5"></a>
+            <img src="{% static "exit.png" %}" alt="checkout" class="img-mt-2 ml-5 sidebar-exit">
         </div>
         <ul class="">
             {% if user.is_authenticated %}
