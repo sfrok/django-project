@@ -39,6 +39,7 @@ def auth(request, form, page):  # Главная ф-ия авторизации
                 text = (_("Здравствуйте"), _("перейдите по этой ссылке для активации"))
                 message = "{0}, {1}, {2}:\n {3}".format(text[0], user.name, text[1], link)
                 user.email_user(subject, message)
+                return HttpResponseRedirect('/?r=')
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
