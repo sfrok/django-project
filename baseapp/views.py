@@ -1,4 +1,6 @@
-from django.http import HttpResponseRedirect
+import json
+
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -46,8 +48,8 @@ def search_view(request):  # Страница поиска/каталога
         line = request.POST.get('line', '')
         sort = request.POST.get('sort', 'sold')
         cats = [Category.objects.get(pk=int(i)) for i in request.POST.get('cats', [])]
-        return render(request, f(HtmlPages.src), 
-            {'items': search(line, cats, sort), 'sort': sort, 'cats': cats})
+        context = {'items': search(line, cats, sort), 'sort': sort, 'cats': cats}
+        return render(request, f(HtmlPages.src), context)
     return render(request, f(HtmlPages.src), {'items': search(), 'sort': 'sold', 'cats': []})
 
 
@@ -55,8 +57,10 @@ def search_view(request):  # Страница поиска/каталога
 
 @session_clear
 def product_view(request):  # Страница товара
-    try: product = Product.objects.get(id=int(request.path[9:]))
-    except: return HttpResponseRedirect('/')
+    try:
+        product = Product.objects.get(id=int(request.path[9:]))
+    except:
+        return HttpResponseRedirect('/')
     return render(request, f(HtmlPages.prd), {'product': product})
 
 
@@ -64,8 +68,10 @@ def product_view(request):  # Страница товара
 def order_add_view(request):  # Добавление товара в корзину
     if request.method == 'POST' and check(('product_count', 'pid', 'action'), request.POST):
         add_order(request)
-        if request.POST['action'] == 'order': return HttpResponseRedirect(f'/{HtmlPages.ord}/')
-        else: return HttpResponseRedirect(f'/{HtmlPages.prd}/' + str(request.POST['pid']))
+        if request.POST['action'] == 'order':
+            return HttpResponseRedirect(f'/{HtmlPages.ord}/')
+        else:
+            return HttpResponseRedirect(f'/{HtmlPages.prd}/' + str(request.POST['pid']))
     return HttpResponseRedirect('/')
 
 
@@ -78,8 +84,10 @@ def order_del_view(request):  # Удаление товара из корзин�
                 if str(orders[i]['id']) == str(request.POST['oid']):
                     del orders[i]
                     break
-        if orders: request.session['bcont'] = orders  # Сохранение, если корзина не пустая
-        elif 'bcont' in request.session: del request.session['bcont']  # Удаление, если пустая
+        if orders:
+            request.session['bcont'] = orders  # Сохранение, если корзина не пустая
+        elif 'bcont' in request.session:
+            del request.session['bcont']  # Удаление, если пустая
         return HttpResponseRedirect(f'/{HtmlPages.ord}/')
     return HttpResponseRedirect('/')
 
@@ -87,17 +95,19 @@ def order_del_view(request):  # Удаление товара из корзин�
 @session_clear
 def order_view(request):
     if 'bcont' in request.session:
-        if 'buinfo' in request.session: form = OrderForm(request.session['buinfo'])
-        else: form = OrderForm(instance=request.user if request.user.is_authenticated else None)
+        if 'buinfo' in request.session:
+            form = OrderForm(request.session['buinfo'])
+        else:
+            form = OrderForm(instance=request.user if request.user.is_authenticated else None)
         c = request.session['bcont']
         return render(request, f(HtmlPages.ord), {
-            'sum_price': sum((i['sum_price'] for i in c)), 
+            'sum_price': sum((i['sum_price'] for i in c)),
             'items': [{
-                'id': i['id'], 
+                'id': i['id'],
                 'name': Product.objects.get(pk=i['product']).name,
-                'price': i['sum_price'], 
+                'price': i['sum_price'],
                 'amount': i['amount'],
-            } for i in c], 
+            } for i in c],
             'form': form})
     return render(request, f(HtmlPages.ord))
 
@@ -131,8 +141,8 @@ def order_complete_view(request):
                 order.product.save()
                 order.save()
             del request.session['bcont']
-            return render(request, f(HtmlPages.ord_com), 
-                {'items': basket.singleorder_set.all(), 'order': basket})        
+            return render(request, f(HtmlPages.ord_com),
+                          {'items': basket.singleorder_set.all(), 'order': basket})
         return HttpResponseRedirect(f'/{HtmlPages.ord}/')
     return HttpResponseRedirect('/')
 

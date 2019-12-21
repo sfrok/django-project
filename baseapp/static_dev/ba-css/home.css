@@ -23,7 +23,7 @@
     background: rgba(119, 136, 153, 0.7);
 }
 
-.cart-content a:hover h3{
+.cart-content .wrapper-img:hover h3{
     top: 0px;
     transition: top 1s;
 }
@@ -52,7 +52,7 @@
     display: block;
 }
 
-a:hover h3 span {
+.wrapper-img:hover h3 span {
     transition: margin-top 1s;
     margin-top: 11%;
     display: block;

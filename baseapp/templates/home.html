@@ -11,16 +11,21 @@
 <div class="container-fluid mt-4">
 <div class="row text-center justify-content-around no-gutters">
     {% for cat in cats %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <div class="w-100"></div>
+        {% endif %}
     <div class="col-10 col-md-5 col-xl-3 cart mb-4">
+        <a href="/{{ request.pages.src }}/{{ cat.id }}">
         <div class="cart-content">
-            <a href="/{{request.pages.prd}}" class="wrapper-img"> {% csrf_token %}
+            <div class="wrapper-img">
                 <img src="https://via.placeholder.com/460x200" alt="" class="cart-img">
                 <h3 class="cart-title" id = "{{cat.id}}"><span>{{ cat }}</span></h3>
-            </a>
+            </div>
             <div class="cart-footer">
                 <p>{{ cat.lore }}</p>
             </div>
         </div>
+        </a>
     </div>
     {% endfor %}
 </div>
