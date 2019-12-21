@@ -10,7 +10,7 @@ class HtmlPages():  # Названия html-файлов без .html
     out = 'logout'
     contacts = 'contacts'
     src = 'search'
-    product = 'product'
+    prd = 'products'
     ord = 'order'
     ord_add = 'order/add'
     ord_del = 'order/del'

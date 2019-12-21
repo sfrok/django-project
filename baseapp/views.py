@@ -8,7 +8,6 @@ from .models import Product, Basket, Category
 from .scripts import search, add_order, session_clear
 
 f = lambda s: f'{s}.html'  # Конвертация пути в название файла: home -> home.html
-base = lambda other={}, line='': {**{'line': line, 'pages': HtmlPages}, **other}  # Расш. context
 check = lambda keys, post: all((key in post for key in keys))  # Ф-ия для проверки полноты POST
 
 
@@ -31,7 +30,7 @@ def logout_view(request):
 
 @session_clear
 def home_view(request):
-    return render(request, f(HtmlPages.home), base({'cats': Category.objects.all()}))
+    return render(request, f(HtmlPages.home), {'cats': Category.objects.all()})
 
 
 @session_clear
@@ -47,9 +46,10 @@ def search_view(request):  # Страница поиска/каталога
         line = request.POST.get('line', '')
         sort = request.POST.get('sort', 'sold')
         cats = [i for i in Category.objects.all() if request.POST.get('cat_' + str(i.id), False)]
+        request.line = line
         return render(request, f(HtmlPages.src), 
-            base({'items': search(line, cats, sort), 'sort': sort, 'cat': cats}, line))
-    return render(request, f(HtmlPages.src), base({'items': search(), 'sort': 'sold', 'cat': []}))
+            {'items': search(line, cats, sort), 'sort': sort, 'cat': cats})
+    return render(request, f(HtmlPages.src), {'items': search(), 'sort': 'sold', 'cat': []})
 
 
 # PRODUCT
@@ -58,7 +58,7 @@ def search_view(request):  # Страница поиска/каталога
 def product_view(request):  # Страница товара
     try: product = Product.objects.get(id=int(request.path[9:]))
     except: return HttpResponseRedirect('/')
-    return render(request, f(HtmlPages.product), base({'product': product}))
+    return render(request, f(HtmlPages.prd), {'product': product})
 
 
 @session_clear
@@ -66,7 +66,7 @@ def order_add_view(request):  # Добавление товара в корзи�
     if request.method == 'POST' and check(('product_count', 'pid', 'action'), request.POST):
         add_order(request)
         if request.POST['action'] == 'order': return HttpResponseRedirect(f'/{HtmlPages.ord}/')
-        else: return HttpResponseRedirect(f'/{HtmlPages.product}/' + str(request.POST['pid']))
+        else: return HttpResponseRedirect(f'/{HtmlPages.prd}/' + str(request.POST['pid']))
     return HttpResponseRedirect('/')
 
 
@@ -91,7 +91,7 @@ def order_view(request):
         if 'buinfo' in request.session: form = OrderForm(request.session['buinfo'])
         else: form = OrderForm(instance=request.user if request.user.is_authenticated else None)
         c = request.session['bcont']
-        return render(request, f(HtmlPages.ord), base({
+        return render(request, f(HtmlPages.ord), {
             'sum_price': sum((i['sum_price'] for i in c)), 
             'items': [{
                 'id': i['id'], 
@@ -99,8 +99,8 @@ def order_view(request):
                 'price': i['sum_price'], 
                 'amount': i['amount'],
             } for i in c], 
-            'form': form}))
-    return render(request, f(HtmlPages.ord), base())
+            'form': form})
+    return render(request, f(HtmlPages.ord))
 
 
 @session_clear
@@ -133,7 +133,7 @@ def order_complete_view(request):
                 order.save()
             del request.session['bcont']
             return render(request, f(HtmlPages.ord_com), 
-                base({'items': basket.singleorder_set.all(), 'order': basket}))        
+                {'items': basket.singleorder_set.all(), 'order': basket})        
         return HttpResponseRedirect(f'/{HtmlPages.ord}/')
     return HttpResponseRedirect('/')
 
@@ -148,14 +148,14 @@ def cabinet_view(request):
         if form.is_valid(): form.save()
     form = SettingsForm(instance=request.user)
     orders = Basket.objects.filter(user_id=request.user.id)
-    return render(request, f(HtmlPages.cab), base({'form': form, 'orders': orders}))
+    return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders})
 
 
 # ДРУГОЕ
 
 @session_clear
 def contacts_view(request):
-    return render(request, f(HtmlPages.contacts), base())
+    return render(request, f(HtmlPages.contacts))
 
 
 @session_clear

@@ -29,8 +29,8 @@ urlpatterns = [
     path(f'{HP.out}/', views.logout_view, name=f'{HP.out}_page'),
     path('activate/<str:uid>/<str:token>', views.activation_view, name='activation_page'),
 
-    path(f'{HP.src}/', views.search_view, name=f'{HP.src}_page'),
-    re_path(r'(product/)(\d+)', views.product_view, name=f'{HP.product}_page'),
+    path(f'{HP.prd}/', views.search_view, name=f'{HP.src}_page'),
+    re_path(r'(products/)(\d+)', views.product_view, name=f'{HP.prd}_page'),
     path(f'{HP.ord}/', views.order_view, name=f'{HP.ord}_page'),
     path(f'{HP.ord_add}/', views.order_add_view, name=f'{HP.ord_add}_page'),
     path(f'{HP.ord_del}/', views.order_del_view, name=f'{HP.ord_del}_page'),

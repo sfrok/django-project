@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-{% if line == '' %}Каталог{% else %}Результаты для "{{line}}"{% endif %}
+{% if request.line == '' %}Каталог{% else %}Результаты для "{{request.line}}"{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,8 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="row">
-                        {% if cat %}<div class="col-12 d-none d-md-block mt-4">
+                        {% if cat|length != 0 %}
+                        <div class="col-12 d-none d-md-block mt-4">
                             <div class="media">
                                 <img src="https://via.placeholder.com/100x100" class="align-self-start mr-3" alt="">
                                 <div class="media-body">
@@ -21,14 +22,16 @@
                                     <p>{{ cat.0.lore }}</p>
                                 </div>
                             </div>
-                        </div>{% endif %}
+                        </div>
+                        {% endif %}
+                        {% if items|length != 0 %}
                         <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left">
-                            <span><h5>{% if line != ''%}По запросу {{ line }} н{% else %}Н{% endif %}айдено {{ items|length }} товаров:</h5></span>
+                            <span><h5>{% if request.line != '' %}По запросу {{ request.line }} н{% else %}Н{% endif %}айдено {{ items|length }} товаров:</h5></span>
                         </div>
                         <div class="col-lg-6 text-lg-right text-center mt-4">
                             <div class="form-group">
                             <form action="" method="post"> {% csrf_token %}
-                                <input type="hidden" name="line" value="{{ line }}">
+                                <input type="hidden" name="line" value="{{ request.line }}">
                                 <select name='sort' class="custom-select" onchange="this.form.submit()">
                                     <option value="sold" {% if sort == "sold" %}selected{% endif %}>По рейтингу</option>
                                     <option value="price" {% if sort == "price" %}selected{% endif %}>От дешёвых к дорогим</option>
@@ -39,6 +42,11 @@
                             </form>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left">
+                            <span><h5>{% if request.line != '' %}По запросу {{ request.line }} н{% else %}Н{% endif %}ичего не найдено!</h5></span>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
              {% for item in items %}
@@ -47,7 +55,7 @@
                         <div class="product-code ml-2">
                             <small class="text-muted">Код товара: {{item.id}}</small>
                         </div>
-                        <a style="text-decoration: none;" href="/product/{{item.id}}">
+                        <a style="text-decoration: none;" href="/products/{{item.id}}">
                             <form action="/product/{{item.id}}" method="post">
                                 {% csrf_token %}
                                 <header class="text-center product-info">
