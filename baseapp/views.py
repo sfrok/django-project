@@ -35,7 +35,7 @@ def home_view(request):
 
 
 @session_clear
-def activation_view(request, uidb64, token):
+def activation_view(request, uidb64=None, token=None):
     return activate(request, uidb64, token)
 
 
@@ -155,7 +155,6 @@ def cabinet_view(request):
 
 @session_clear
 def contacts_view(request):
-    request.user.email_user('HI!!!', 'Use %s to confirm email' % '111')
     return render(request, f(HtmlPages.contacts), base())
 
 

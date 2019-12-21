@@ -29,6 +29,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
+    is_confirmed = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     name = models.CharField(max_length=33, default='')
     address = models.CharField(max_length=128, default='')
