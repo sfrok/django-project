@@ -44,24 +44,27 @@ def activation_view(request, uidb64=None, token=None):
 
 @session_clear
 def search_view(request):  # Страница поиска/каталога
+    cat_id = request.GET.get('id', None)
     if request.method == 'POST':
         line = request.POST.get('line', '')
         sort = request.POST.get('sort', 'sold')
-        cats = [Category.objects.get(pk=int(i)) for i in request.POST.get('cats', [])]
-        context = {'items': search(line, cats, sort), 'sort': sort, 'cats': cats}
+        if not cat_id: cat_id = request.POST.get('cat', None)
+        cat = Category.objects.get(pk=cat_id) if cat_id else None
+        context = {'items': search(cat, line, sort), 'sort': sort, 'cat': cat}
         return render(request, f(HtmlPages.src), context)
-    return render(request, f(HtmlPages.src), {'items': search(), 'sort': 'sold', 'cats': []})
+    cat = Category.objects.get(pk=cat_id) if cat_id else None
+    return render(request, f(HtmlPages.src), {'items': search(cat), 'sort': 'sold', 'cat': cat})
 
 
 # PRODUCT
 
 @session_clear
 def product_view(request):  # Страница товара
-    try:
-        product = Product.objects.get(id=int(request.path[9:]))
-    except:
-        return HttpResponseRedirect('/')
-    return render(request, f(HtmlPages.prd), {'product': product})
+    prd_id = request.GET.get('id', None)
+    if prd_id:
+        product = Product.objects.get(id=prd_id)
+        return render(request, f(HtmlPages.prd), {'product': product})
+    return HttpResponseRedirect('/')
 
 
 @session_clear
@@ -71,7 +74,7 @@ def order_add_view(request):  # Добавление товара в корзи�
         if request.POST['action'] == 'order':
             return HttpResponseRedirect(f'/{HtmlPages.ord}/')
         else:
-            return HttpResponseRedirect(f'/{HtmlPages.prd}/' + str(request.POST['pid']))
+            return HttpResponseRedirect(f'/{HtmlPages.prd}/?id=' + str(request.POST['pid']))
     return HttpResponseRedirect('/')
 
 

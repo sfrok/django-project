@@ -6,10 +6,10 @@ from .models import Product, SingleOrder
 def log(*info): getLogger().info(' '.join(info))  # Ф-ия логирования
 
 
-def search(line='', cats=[], sort_attr='sold'):  # Поиск товаров
+def search(cat=None, line='', sort_attr='sold'):  # Поиск товаров
     response = Product.objects.filter(name__icontains=line)  # Фильтр по имени
-    if cats: 
-        response = response.filter(category_id__in=[i.id for i in cats])  # По категории
+    if cat: 
+        response = response.filter(category_id=cat.id)  # По категории
     response = response.order_by(sort_attr)  # Сортировка
     return response
 

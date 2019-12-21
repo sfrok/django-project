@@ -54,7 +54,7 @@
             </div>
             <div class="col-7 text-center">
                 <div class="down-header-search-wrap pb-3 pl-4">
-                    <form action="/{{ request.pages.prd }}/" method="post"> {% csrf_token %}
+                    <form action="/{{ request.pages.src }}/" method="post"> {% csrf_token %}
                         <input class="search-bar" type="text" name="line" value="{{ request.line }}" placeholder=""><input type="submit" class="search-btn" value="Найти">
                     </form>
                 </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-10 pt-2 text-center">
                 <div class="pb-2 pl-5">
-                    <form action="/{{ request.pages.prd }}/" method="post"> {% csrf_token %}
+                    <form action="/{{ request.pages.src }}/" method="post"> {% csrf_token %}
                         <input class="search-bar-mobile" type="text" name="line" value="{{ request.line }}" placeholder=""><input type="submit" value="Найти" class="search-btn-mobile">
                     </form>
                 </div>
@@ -101,7 +101,7 @@
             <a href="/{{request.pages.reg}}" class="sidebar-auth"><li>Регистрация</li></a>
             {% endif %}
             <hr>
-            <a href="/{{request.pages.prd}}" class="sidebar-catalog"><li>Каталог</li></a>
+            <a href="/{{request.pages.src}}" class="sidebar-catalog"><li>Каталог</li></a>
             <li>Контакты</li>
         </ul>
     </div>

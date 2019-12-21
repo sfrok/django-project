@@ -14,19 +14,49 @@
         {% if forloop.counter0|divisibleby:3 %}
         <div class="w-100"></div>
         {% endif %}
-    <div class="col-10 col-md-5 col-xl-3 cart mb-4">
-        <a href="/{{ request.pages.src }}/{{ cat.id }}">
-        <div class="cart-content">
-            <div class="wrapper-img">
-                <img src="https://via.placeholder.com/460x200" alt="" class="cart-img">
-                <h3 class="cart-title" id = "{{cat.id}}"><span>{{ cat }}</span></h3>
+        <div class="col-10 col-md-5 col-xl-3 cart mb-4">
+            <a href="/{{ request.pages.src }}/?id={{ cat.id }}">
+            <div class="cart-content">
+                <div class="wrapper-img">
+                    <img src="https://via.placeholder.com/460x200" alt="" class="cart-img">
+                    <h3 class="cart-title" id = "{{cat.id}}"><span>{{ cat }}</span></h3>
+                </div>
+                <div class="cart-footer">
+                    <p>{{ cat.lore }}</p>
+                </div>
             </div>
-            <div class="cart-footer">
-                <p>{{ cat.lore }}</p>
-            </div>
+            </a>
         </div>
-        </a>
-    </div>
+        {% if cats|length == forloop.counter %}{% if cats|length|add:"1"|divisibleby:3 or cats|length|add:"2"|divisibleby:3 %}
+            <div class="col-10 col-md-5 col-xl-3 cart mb-4">
+                <a href="/{{ request.pages.src }}/?id={{ cat.id }}">
+                <div class="cart-content">
+                    <div class="wrapper-img">
+                        <img src="https://via.placeholder.com/460x200" alt="" class="cart-img">
+                        <h3 class="cart-title" id = "1111"><span>1111</span></h3>
+                    </div>
+                    <div class="cart-footer">
+                        <p>1111</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% if cats|length|add:"2"|divisibleby:3 %}
+            <div class="col-10 col-md-5 col-xl-3 cart mb-4">
+                <a href="/{{ request.pages.src }}/?id={{ cat.id }}">
+                <div class="cart-content">
+                    <div class="wrapper-img">
+                        <img src="https://via.placeholder.com/460x200" alt="" class="cart-img">
+                        <h3 class="cart-title" id = "222"><span>222</span></h3>
+                    </div>
+                    <div class="cart-footer">
+                        <p>222</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endif %}
+        {% endif %}{% endif %}
     {% endfor %}
 </div>
 </div>
