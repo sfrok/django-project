@@ -59,7 +59,7 @@ def activate(request, uidb64, token):
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     if user is not None and tokenGen.check_token(user, token):
-        user.is_confirmed = True  # activate user
+        user.is_active = True  # activate user
         user.save()
         login(request, user)
     return HttpResponseRedirect('/')

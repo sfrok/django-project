@@ -13,8 +13,7 @@
     {% for cat in cats %}
     <div class="col-10 col-md-5 col-xl-3 cart mb-4">
         <div class="cart-content">
-            <a href="/{{pages.src}}" class="wrapper-img">
-                {% csrf_token %}
+            <a href="/{{request.pages.src}}" class="wrapper-img"> {% csrf_token %}
                 <img src="https://via.placeholder.com/460x200" alt="" class="cart-img">
                 <h3 class="cart-title" id={{cat.id}}><span>{{ cat }}</span></h3>
             </a>

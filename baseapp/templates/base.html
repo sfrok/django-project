@@ -28,16 +28,16 @@
                 <div class="row">
                     <div class="col-md-3 text-left">
                         <div class="contact-page ml-4">
-                            <u><a href="/{{pages.contacts}}">Контакты</a></u>
+                            <u><a href="/{{request.pages.contacts}}">Контакты</a></u>
                         </div>
                     </div>
                     <div class="col-md-9 text-right user-data">
                         {% if user.is_authenticated %}
-                        <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{pages.cab}}">{{ user.name }}</a></u></div>
-                        <a class="text-center mr-4" href="/{{pages.out}}"><u>Выйти</u></a>
+                        <div class="text-center welcome-title mr-5">Добро пожаловать, <u><a href="/{{request.pages.cab}}">{{ user.name }}</a></u></div>
+                        <a class="text-center mr-4" href="/{{request.pages.out}}"><u>Выйти</u></a>
                         {% else %}
-                        <a class="pr-4" href="/{{pages.auth}}"><u>Вход</u></a>
-                        <a class="pr-4" href="/{{pages.reg}}"><u>Регистрация</u></a>
+                        <a class="pr-4" href="/{{request.pages.auth}}"><u>Вход</u></a>
+                        <a class="pr-4" href="/{{request.pages.reg}}"><u>Регистрация</u></a>
                         {% endif %}
                     </div>
                 </div>
@@ -54,13 +54,13 @@
             </div>
             <div class="col-7 text-center">
                 <div class="down-header-search-wrap pb-3 pl-4">
-                    <form action="/{{ pages.src }}/" method="post"> {% csrf_token %}
-                        <input class="search-bar" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" class="search-btn" value="Найти">
+                    <form action="/{{ request.pages.prd }}/" method="post"> {% csrf_token %}
+                        <input class="search-bar" type="text" name="line" value="{{ request.line }}" placeholder=""><input type="submit" class="search-btn" value="Найти">
                     </form>
                 </div>
             </div>
             <div class="col-md-2 text-right">
-                <a href="/{{ pages.ord }}"><img class="mr-4" src="https://via.placeholder.com/40x40" alt="checkout"></a>
+                <a href="/{{ request.pages.ord }}"><img class="mr-4" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
@@ -75,12 +75,12 @@
             </div>
             <div class="col-10 pt-2 text-center">
                 <div class="pb-2 pl-5">
-                    <form action="/{{ pages.src }}/" method="post"> {% csrf_token %}
-                        <input class="search-bar-mobile" type="text" name="line" value="{{ line }}" placeholder=""><input type="submit" value="Найти" class="search-btn-mobile">
+                    <form action="/{{ request.pages.prd }}/" method="post"> {% csrf_token %}
+                        <input class="search-bar-mobile" type="text" name="line" value="{{ request.line }}" placeholder=""><input type="submit" value="Найти" class="search-btn-mobile">
                     </form>
                 </div>
             </div>
-         <a href="/{{ pages.ord }}" class=""><img class="mobile-img pt-2 ml-1 mr-1" src="https://via.placeholder.com/40x40" alt="checkout"></a>
+         <a href="/{{ request.pages.ord }}" class=""><img class="mobile-img pt-2 ml-1 mr-1" src="https://via.placeholder.com/40x40" alt="checkout"></a>
             </div>
         </div>
     </div>
@@ -94,14 +94,14 @@
         </div>
         <ul class="">
             {% if user.is_authenticated %}
-            <a href="/{{pages.cab}}" class="sidebar-auth"><li>Ваш кабинет</li></a>
-            <a href="/{{pages.out}}" class="sidebar-auth"><li>Выйти</li></a>
+            <a href="/{{request.pages.cab}}" class="sidebar-auth"><li>Ваш кабинет</li></a>
+            <a href="/{{request.pages.out}}" class="sidebar-auth"><li>Выйти</li></a>
             {% else %}
-            <a href="/{{pages.auth}}" class="sidebar-auth"><li>Вход</li></a>
-            <a href="/{{pages.reg}}" class="sidebar-auth"><li>Регистрация</li></a>
+            <a href="/{{request.pages.auth}}" class="sidebar-auth"><li>Вход</li></a>
+            <a href="/{{request.pages.reg}}" class="sidebar-auth"><li>Регистрация</li></a>
             {% endif %}
             <hr>
-            <a href="/{{pages.src}}" class="sidebar-catalog"><li>Каталог</li></a>
+            <a href="/{{request.pages.prd}}" class="sidebar-catalog"><li>Каталог</li></a>
             <li>Контакты</li>
         </ul>
     </div>
