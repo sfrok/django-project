@@ -8,7 +8,8 @@ def log(*info): getLogger().info(' '.join(info))  # Ф-ия логировани
 
 def search(line='', cats=[], sort_attr='sold'):  # Поиск товаров
     response = Product.objects.filter(name__icontains=line)  # Фильтр по имени
-    if cats: response = response.filter(category_id__in=[i.id for i in cats])  # По категории
+    if cats: 
+        response = response.filter(category_id__in=[i.id for i in cats])  # По категории
     response = response.order_by(sort_attr)  # Сортировка
     return response
 

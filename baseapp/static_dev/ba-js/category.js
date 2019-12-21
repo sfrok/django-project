@@ -5,7 +5,7 @@ $(".wrapper-img").click(function () {
        type: "POST",
        url: "/products/",
        data: {
-           categoryData:categoryid,
+           cats:categoryid,
            csrfmiddlewaretoken: csrftoken,
        },
        dataType: "json",
