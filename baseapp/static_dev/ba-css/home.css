@@ -62,3 +62,16 @@
     padding: 30px 20px;
 
 }
+
+.alert {
+    width: 100%;
+    z-index: 15;
+}
+
+.cart-decoration a {
+    text-decoration: none;
+}
+
+.block-invisible {
+    box-shadow: 0px 0px 0px;
+}
