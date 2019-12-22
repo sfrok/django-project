@@ -68,6 +68,36 @@ class UserCreationForm(forms.ModelForm):  # Форма для создания (
         return user
 
 
+class UserPasswordResetForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput({'class': 'input-field form-control'}))
+
+
+class UserPasswordChangeForm(forms.ModelForm):  # Форма смены пароля
+    _attrs = {'class': 'input-field form-control'}
+    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput(_attrs))
+    password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
+
+    class Meta:
+        model = User
+        fields = ('password', 'password2',)
+
+    def clean_password(self):  # Проверка на совпадение паролей
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            self.add_error(field='password', 
+                error=forms.ValidationError(_("Пароли не совпадают!"), code='invalid'))
+        return password
+
+    def clean_password2(self):  # Проверка на совпадение паролей
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            self.add_error(field='password2', 
+                error=forms.ValidationError(_("Пароли не совпадают!"), code='invalid'))
+        return password2
+
+
 class UserChangeForm(forms.ModelForm):  # Форма для обновления пользователей
     password = ReadOnlyPasswordHashField()
 

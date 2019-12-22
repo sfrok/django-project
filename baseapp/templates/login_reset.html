@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+  <link rel="stylesheet" href="{% static "ba-css/registration.css" %}">
+  <title>Сброс пароля</title>
+</head>
+<body>
+  <div class="container form">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center mt-2">
+        <h1>Сброс пароля</h1>
+      </div>
+      {% if success %}
+        <div class="col-12">Письмо отправлено, проверьте почтовый ящик!</div>
+      {% else %}
+        <form id="auth_form" action="" method="post"> {% csrf_token %}
+          {{ form.non_field_errors }}
+          {% for field in form %}
+            <div class="col-12">
+              Мы пришлем ссылку смены пароля вам на почту.
+              <label class="form-label-title text" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
+            </div>
+          {% endfor %}
+          <div class="col-12 text-center mt-4">
+            <button type="submit" class="authorization-button">Отправить письмо</button>
+          </div>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

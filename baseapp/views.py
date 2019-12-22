@@ -4,8 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from .auth import HtmlPages, auth, deAuth, activate
-from .forms import UserCreationForm, UserAuthorizationForm, SettingsForm, OrderForm
+from .auth import HtmlPages, auth, deAuth, activate, reset, change
+from .forms import *
 from .models import Product, Basket, Category
 from .scripts import search, add_order, session_clear
 
@@ -36,8 +36,8 @@ def home_view(request):
 
 
 @session_clear
-def activation_view(request, uidb64=None, token=None):
-    return activate(request, uidb64, token)
+def activation_view(request):
+    return activate(request, request.GET.get('uid', None), request.GET.get('token', None))
 
 
 # SEARCH
@@ -161,6 +161,34 @@ def cabinet_view(request):
     form = SettingsForm(instance=request.user)
     orders = Basket.objects.filter(user_id=request.user.id)
     return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders})
+
+
+@session_clear
+def password_reset_view(request):
+    success = False  # GET - поле для ввода почты
+    form = UserPasswordResetForm(request.POST or None)
+    if form.is_valid():  # POST - пользователь ввел почту
+        reset(request, form.cleaned_data.get("email"))
+        success = True  # Сообщение было отправлено
+    return render(request, f(HtmlPages.reset), {'success': success, 'form': form})
+
+
+@session_clear
+def password_change_view(request, uidb64=None, token=None):  # for changing and resetting
+    success = False  # GET - поле для ввода нового пароля
+    uidb64 = request.GET.get('uid', None)
+    token = request.GET.get('token', None)
+    form = UserPasswordChangeForm(request.POST or None)
+    if form.is_valid():  # POST - пользователь ввел новый пароль
+        if not uidb64: uidb64 = request.POST.get('uidb64', None)
+        if not token: token = request.POST.get('token', None)
+        if not uidb64 or not token: return HttpResponseRedirect('/')
+        change(request, uidb64, token, form)
+        success = True  # Пароль был изменен
+    if not uidb64 and not token and not request.user.is_authenticated:
+        return HttpResponseRedirect('/')
+    return render(request, f(HtmlPages.cng), 
+        {'success': success, 'form': form, 'uidb64': uidb64, 'token': token})
 
 
 # ДРУГОЕ

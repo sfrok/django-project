@@ -26,8 +26,10 @@ urlpatterns = [
     path('', views.home_view, name=f'{HP.home}_page'),
     path(f'{HP.reg}/', views.reg_view, name=f'{HP.reg}_page'),
     path(f'{HP.auth}/', views.auth_view, name=f'{HP.auth}_page'),
+    path(f'{HP.reset}/', views.password_reset_view, name=f'{HP.reset}_page'),
     path(f'{HP.out}/', views.logout_view, name=f'{HP.out}_page'),
-    path('activate/<str:uid>/<str:token>', views.activation_view, name='activation_page'),
+    path(f'{HP.act}/', views.activation_view, name=f'{HP.act}_page'),
+    path(f'{HP.cng}/', views.password_change_view, name=f'{HP.cng}_page'),
 
     path(f'{HP.src}/', views.search_view, name=f'{HP.src}_page'),
     path(f'{HP.prd}/', views.product_view, name=f'{HP.prd}_page'),

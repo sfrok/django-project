@@ -1,0 +1,36 @@
+{% extends 'base.html' %}{% load static %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static "ba-css/cabinet.css" %}">
+{% endblock %}
+
+{% block title %}Смена пароля{% endblock %}
+
+{% block content %}
+        <div class="col-md-12 mt-4">
+          <img src="{% static "userconfig.png" %}" alt="settings" class="img-thumbnail">
+          <h1 class="display-4 page-title">Смена пароля</h1>
+          <div class="form mt-4">
+            {% if success %}
+              <div class="col-12">Пароль успешно изменен.</div>
+              <div class="col-12 text-center mt-4">
+                <a href="/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
+              </div>
+            {% else %}
+              <form action="" method="post"> {% csrf_token %} {{ form.non_field_errors }}
+                {% for field in form %}
+                  <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
+                {% endfor %}
+                <input type="hidden" name="uidb64" value={{ uidb64 }}>
+                <input type="hidden" name="token" value={{ token }}>
+                <div class="row justify-content-center">
+                  <div class="col-auto form-button">
+                    <button type="submit" class="btn btn-outline-success btn-lg mt-3" id="apply_button">Сохранить</button>
+                  </div>
+                </div>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+{% endblock content %}

@@ -24,6 +24,22 @@ class TokenGenerator(PasswordResetTokenGenerator):
 tokenGen = TokenGenerator()
 
 
+def encodeLink(request, user, page):
+    current_site = get_current_site(request)
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = tokenGen.make_token(user)
+    return '{0}/{1}/?uid={2}&token={3}'.format(current_site, page, uid, token)
+
+
+def decodeLink(request, uidb64):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    return user
+
+
 def auth(request, form, page):  # Главная ф-ия авторизации
     if request.method == 'POST':
         if form.is_valid():
@@ -31,13 +47,10 @@ def auth(request, form, page):  # Главная ф-ия авторизации
             password = form.cleaned_data.get("password")
             if page == HtmlPages.reg:
                 user = form.save()  # Сохранение нового пользователя
-                subject = 'Activate your account.'
-                current_site = get_current_site(request)
-                uid = urlsafe_base64_encode(force_bytes(user.pk))
-                token = tokenGen.make_token(user)
-                link = "{0}/?uid={1}&token{2}".format(current_site, uid, token)
+                subject = _('Активация аккаунта')
+                link = encodeLink(request, user, HtmlPages.act)
                 text = (_("Здравствуйте"), _("перейдите по этой ссылке для активации"))
-                message = "{0}, {1}, {2}:\n {3}".format(text[0], user.name, text[1], link)
+                message = makeEmail(text, user.name, link)
                 user.email_user(subject, message)
             user = authenticate(email=email, password=password)
             if user:
@@ -47,19 +60,46 @@ def auth(request, form, page):  # Главная ф-ия авторизации
     return render(request, f'{page}.html', {'form': form})
 
 
+def activate(request, uidb64, token):
+    user = decodeLink(request, uidb64)
+    if user is not None and tokenGen.check_token(user, token):
+        user.is_active = True  # Активация пользователя
+        user.save()
+        login(request, user)
+    return HttpResponseRedirect('/')
+
+
+def reset(request, email):  # Главная ф-ия авторизации
+    user = User.objects.get(email=email)
+    subject = 'Восстановление пароля'
+    link = encodeLink(request, user, HtmlPages.cng)
+    text = (_("Здравствуйте"), _("перейдите по этой ссылке для восстановления пароля"))
+    message = makeEmail(text, user.name, link)
+    user.email_user(subject, message)
+
+
+def change(request, uidb64, token, form):
+    user = decodeLink(request, uidb64)
+    if user is not None and tokenGen.check_token(user, token):
+        user.set_password(form.cleaned_data["password"])
+        user.save()
+        login(request, user)
+
 def deAuth(request):  # Главная ф-ия деавторизации
     logout(request)
     return HttpResponseRedirect('/')
 
 
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and tokenGen.check_token(user, token):
-        user.is_active = True  # activate user
-        user.save()
-        login(request, user)
-    return HttpResponseRedirect('/')
+def makeEmail(text, name, link):
+    return """
+        <!DOCTYPE html>
+        <html>
+        <head></head>
+        <body>
+            <p>
+            {0}, {1}, {2}:<br>
+            <a href="{3}">{3}</a>
+            </p>
+        </body>
+        </html>
+        """.format(text[0], name, text[1], link)
