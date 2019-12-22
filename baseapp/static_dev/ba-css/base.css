@@ -234,7 +234,11 @@
 }
 
 .footer {
-    height: 300px;
+    height: 125px;
     background: rgba(190, 190, 190, 0.4);
     box-shadow: 0px 0px 15px #D3D3D3;
+}
+
+.footer-font {
+    font-size: 20px;
 }

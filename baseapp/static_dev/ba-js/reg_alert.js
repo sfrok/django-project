@@ -1,0 +1,1 @@
+$('.alert').fadeOut(4500, function(){ $(this).remove();});

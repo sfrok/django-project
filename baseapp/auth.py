@@ -52,6 +52,7 @@ def auth(request, form, page):  # Главная ф-ия авторизации
                 text = (_("Здравствуйте"), _("перейдите по этой ссылке для активации"))
                 message = makeEmail(text, user.name, link)
                 user.email_user(subject, message)
+                return HttpResponseRedirect('/?r=')
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)

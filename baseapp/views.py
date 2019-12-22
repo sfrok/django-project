@@ -32,7 +32,8 @@ def logout_view(request):
 
 @session_clear
 def home_view(request):
-    return render(request, f(HtmlPages.home), {'cats': Category.objects.all()})
+    greet = request.GET.get('r', False)
+    return render(request, f(HtmlPages.home), {'cats': Category.objects.all(), 'greet': greet})
 
 
 @session_clear
