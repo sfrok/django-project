@@ -6,6 +6,10 @@ a {
   color: black;
 }
 
+.container-height {
+  height: 100vh;
+}
+
 .checkout {
   border-radius: 3px;
   height: 50px;
