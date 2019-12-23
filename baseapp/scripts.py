@@ -36,8 +36,8 @@ def session_clear(func):  # Декоратор логирования и уда�
     def wrapper(request, *args):
         session_vars = [f'{k}:{v}' for k, v in request.session.items() if len(k) < 6]
         if session_vars: log("session:", ',\t'.join(session_vars))
-        if request.method == 'POST': log(f'POST: {request.POST}')
-        if request.method == 'GET': log(f'GET: {request.GET}')
+        if request.method == 'POST': log(request.path, f'POST: {request.POST}')
+        if request.method == 'GET': log(request.path, f'GET: {request.GET}')
         if request.path != '/settings/' and 'ucs' in request.session:
             del request.session['ucs']
         if request.path[:7] != '/order/' and 'bcont' in request.session:

@@ -199,6 +199,5 @@ def contacts_view(request):
     return render(request, f(HtmlPages.contacts))
 
 
-@session_clear
-def not_found(request, exception):
+def not_found(request, exception=None):
     return HttpResponseRedirect('/')

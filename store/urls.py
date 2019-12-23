@@ -43,6 +43,7 @@ urlpatterns = [
 ]
 
 handler404 = 'baseapp.views.not_found'
+handler500 = 'baseapp.views.not_found'
 
 if settings.DEBUG:  # only serves the actual STATIC_ROOT folder
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
