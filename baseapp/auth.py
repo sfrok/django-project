@@ -51,7 +51,7 @@ def auth(request, form, page):  # Главная ф-ия авторизации
                 link = encodeLink(request, user, HtmlPages.act)
                 text = (_("Здравствуйте"), _("перейдите по этой ссылке для активации"))
                 message = makeEmail(text, user.name, link)
-                user.email_user(subject, message)
+                user.email_user(subject, message[1], message[0])
                 return HttpResponseRedirect('/?r=')
             user = authenticate(email=email, password=password)
             if user:
@@ -76,7 +76,7 @@ def reset(request, email):  # Главная ф-ия авторизации
     link = encodeLink(request, user, HtmlPages.cng)
     text = (_("Здравствуйте"), _("перейдите по этой ссылке для восстановления пароля"))
     message = makeEmail(text, user.name, link)
-    user.email_user(subject, message)
+    user.email_user(subject, message[1], message[0])
 
 
 def change(request, uidb64, token, form):
@@ -92,10 +92,8 @@ def deAuth(request):  # Главная ф-ия деавторизации
 
 
 def makeEmail(text, name, link):
-    return """
-        <!DOCTYPE html>
+    return ("""
         <html>
-        <head></head>
         <body>
             <p>
             {0}, {1}, {2}:<br>
@@ -103,4 +101,5 @@ def makeEmail(text, name, link):
             </p>
         </body>
         </html>
-        """.format(text[0], name, text[1], link)
+        """.format(text[0], name, text[1], link),
+    '{0}, {1}, {2}:\n{3}')
