@@ -2,7 +2,7 @@ from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from store.settings import EMAIL_HOST_USER
 
 from store.data import SELL_STATES, STATUSES
@@ -46,11 +46,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):  # Is the user a member of staff?
         return self.is_admin  # Simplest possible answer: All admins are staff
 
-    def email_user(self, subject, message, from_email=EMAIL_HOST_USER, **kwargs):
-        try:
-            send_mail(subject, message, from_email, [self.email], **kwargs, fail_silently=True)
-        except:
-            pass
+    def email_user(self, subject, message, html, from_email=EMAIL_HOST_USER, **kwargs):
+        mail = EmailMultiAlternatives(subject, message, from_email, [self.email], **kwargs)
+        mail.attach_alternative(html, "text/html")
+        mail.send()
 
 
 class Category(models.Model):
