@@ -47,7 +47,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.is_admin  # Simplest possible answer: All admins are staff
 
     def email_user(self, subject, message, from_email=EMAIL_HOST_USER, **kwargs):
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+        try:
+            send_mail(subject, message, from_email, [self.email], **kwargs, fail_silently=True)
+        except:
+            pass
 
 
 class Category(models.Model):

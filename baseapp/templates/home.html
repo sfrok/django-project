@@ -17,7 +17,7 @@
 <div class="row text-center justify-content-around no-gutters">
     {% for cat in cats %}
         {% if forloop.counter0|divisibleby:3 %}
-        <div class="w-100"></div>
+        <div class="w-100 d-md-none d-xl-block"></div>
         {% endif %}
         <div class="col-10 col-md-5 col-xl-3 cart mb-4 cart-decoration">
             <a href="/{{ request.pages.src }}/?id={{ cat.id }}">
@@ -33,10 +33,15 @@
             </a>
         </div>
         {% if cats|length == forloop.counter %}{% if cats|length|add:"1"|divisibleby:3 or cats|length|add:"2"|divisibleby:3 %}
-            <div class="col-10 col-md-5 col-xl-3 cart mb-4 cart-decoration block-invisible">
+            {% if not cats|length|add:"2"|divisibleby:3  %}
+            <div class="col-10 col-md-5 col-xl-3 cart mb-4 cart-decoration block-invisible d-none d-md-block">
             </div>
+                {% else %}
+                <div class="col-10 col-md-5 col-xl-3 cart mb-4 cart-decoration block-invisible d-none d-md-none d-xl-block ">
+            </div>
+                {% endif %}
             {% if cats|length|add:"2"|divisibleby:3 %}
-            <div class="col-10 col-md-5 col-xl-3 cart mb-4 cart-decoration block-invisible">
+            <div class="col-10 col-md-5 col-xl-3 cart mb-4 cart-decoration block-invisible d-none d-md-none d-xl-block ">
             </div>
             {% endif %}
         {% endif %}{% endif %}
