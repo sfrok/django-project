@@ -79,7 +79,8 @@
     margin-top: 75px;
     left: 0;
     right: 0;
-    display: none;
+    display: block;
+
 }
 
 .header {
