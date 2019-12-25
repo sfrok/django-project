@@ -10,7 +10,7 @@
 
 {% block content %}
         <div class="container flex-grow-1"><!-- container-height -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center ">
                 <div class="col-12">
                     <div class="row">
                         {% if cat %}
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         {% else %}
-                        <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left">
+                        <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left flex-grow-1">
                             <span><h5>{% if request.line != '' %}По запросу {{ request.line }} н{% else %}Н{% endif %}ичего не найдено!</h5></span>
                         </div>
                         {% endif %}
