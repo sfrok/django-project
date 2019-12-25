@@ -48,7 +48,7 @@
             <div class="col-3">
                 <div class="down-header-logo ml-4 pb-3 pt-2 d-inline-block">
                     <a href="/"><img src="https://via.placeholder.com/40x40" alt="logo"></a>
-                    <a href="/"><div class="down-header-title align-middle d-inline pl-3">Название</div></a>
+                    <a href="/"><div class="down-header-title align-middle d-inline pl-3">{{ request.name }}</div></a>
                 </div>
             </div>
             <div class="col-7 text-center">
@@ -88,7 +88,7 @@
     <div id="sidebar" class="sticky-top">
         <div class="col-auto mb-2">
             <img src="https://via.placeholder.com/40x40" alt="logo" class="img mt-2 mb-2">
-            <h5 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">Название</h5>
+            <h5 class="display-7 pl-2 align-middle header-sidebar header-title mt-2">{{ request.name }}</h5>
             <img src="{% static "exit.png" %}" alt="checkout" class="img-mt-2 ml-5 sidebar-exit">
         </div>
         <ul class="">

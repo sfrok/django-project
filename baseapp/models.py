@@ -27,17 +27,21 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True)
-    is_active = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
-    name = models.CharField(max_length=33, default='')
-    address = models.CharField(max_length=128, default='')
-    phone_number = models.CharField(max_length=16, default='')
-    date_joined = models.DateTimeField(default=timezone.now)
+    email = models.EmailField(max_length=64, unique=True, verbose_name = "Эл. почта")
+    is_active = models.BooleanField(default=False, verbose_name = "Подтвердил почту")
+    is_admin = models.BooleanField(default=False, verbose_name = "Модератор")
+    name = models.CharField(max_length=33, default='', verbose_name = "ФИО")
+    address = models.CharField(max_length=64, default='', verbose_name = "Адрес")
+    phone_number = models.CharField(max_length=16, default='', verbose_name = "Телефон")
+    date_joined = models.DateTimeField(default=timezone.now, verbose_name = "Дата регистрации")
     objects = MyUserManager()
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = "пользователь"
+        verbose_name_plural = "Пользователи"
 
     def __str__(self):
         return self.name
@@ -49,18 +53,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, html, from_email=EMAIL_HOST_USER, **kwargs):
         mail = EmailMultiAlternatives(subject, message, from_email, [self.email], **kwargs)
         mail.attach_alternative(html, "text/html")
-        mail.send()
+        mail.send(fail_silently=True)
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=32, default='')
-    lore = models.TextField(max_length=3000, default='')
-    discount = models.FloatField(default=0.0)
+    name = models.CharField(max_length=28, default='', verbose_name = "Название")
+    lore = models.TextField(max_length=3000, default='', verbose_name = "Описание")
+    discount = models.FloatField(default=0.0, verbose_name = "Скидка")
 
     def __str__(self):
         return self.name
 
     class Meta:
+        verbose_name = "категория"
+        verbose_name_plural = "Категории"
         constraints = [
             models.CheckConstraint(check=models.Q(discount__gte=0), name='discount2'),
             models.CheckConstraint(check=models.Q(discount__lte=100), name='discount3'),
@@ -68,22 +74,25 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.TextField(max_length=3000, default='')
+    name = models.CharField(max_length=50, verbose_name = "Название")
+    description = models.TextField(max_length=3000, default='', verbose_name = "Описание")
     category = models.ForeignKey(Category, db_column='category', 
-        on_delete=models.SET_NULL, null=True)
-    price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
-    discount = models.FloatField(default=0.0)
-    amount = models.IntegerField(default=0)
+        on_delete=models.SET_NULL, null=True, verbose_name = "Категория")
+    price = models.DecimalField(default=0.0, max_digits=10, 
+        decimal_places=2, verbose_name = "Цена")
+    discount = models.FloatField(default=0.0, verbose_name = "Скидка")
+    amount = models.IntegerField(default=0, verbose_name = "Количество")
     sell_state = models.IntegerField(default=0, choices=SELL_STATES)
-    photo = models.ImageField(default=None)
-    post_date = models.DateTimeField(default=timezone.now)
-    sold = models.IntegerField(default=0)
+    photo = models.ImageField(default=None, null=True, verbose_name = "Изображение")
+    post_date = models.DateTimeField(default=timezone.now, verbose_name = "Дата выставки")
+    sold = models.IntegerField(default=0, verbose_name = "Продано")
 
     def __str__(self):
         return self.name
 
     class Meta:
+        verbose_name = "товар"
+        verbose_name_plural = "Товары"
         constraints = [
             models.CheckConstraint(check=models.Q(price__gte=0), name='price0'),
             models.CheckConstraint(check=models.Q(discount__gte=0), name='discount0'),
@@ -93,31 +102,35 @@ class Product(models.Model):
 
 
 class Basket(models.Model):
-    status = models.IntegerField(default=0, choices=STATUSES)
-    date = models.DateTimeField(default=timezone.now)
-    delivery_date = models.DateTimeField(null=True)
-    sum_price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
+    status = models.IntegerField(default=0, choices=STATUSES, verbose_name = "Статус")
+    date = models.DateTimeField(default=timezone.now, verbose_name = "Дата оформления")
+    delivery_date = models.DateTimeField(null=True, verbose_name = "Дата доставки")
+    sum_price = models.DecimalField(default=0.0, max_digits=10, 
+        decimal_places=2, verbose_name = "Суммарная цена")
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=128, default='')
-    email = models.EmailField(default='', max_length=255)
-    address = models.CharField(max_length=128, default='')
-    phone_number = models.CharField(max_length=16, default='')
-    info = models.TextField(max_length=512, default='')
+    name = models.CharField(max_length=128, default='', verbose_name = "ФИО")
+    email = models.EmailField(default='', max_length=255, verbose_name = "Эл. почта")
+    address = models.CharField(max_length=128, default='', verbose_name = "Адрес")
+    phone_number = models.CharField(max_length=16, default='', verbose_name = "Телефон")
+    info = models.TextField(max_length=512, default='', verbose_name = "Заметки модераторов")
 
     class Meta:
+        verbose_name = "заказ"
+        verbose_name_plural = "Заказы"
         constraints = [
             models.CheckConstraint(check=models.Q(sum_price__gte=0), name='sum_price2')
         ]
 
     def __str__(self):
-        return self.sum_price
+        return str(self.date) + ' - ' + str(STATUSES[self.status][1]) + ' - ' + self.name
 
 
 class SingleOrder(models.Model):
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=1)
-    sum_price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
+    basket = models.ForeignKey(Basket, on_delete=models.CASCADE, verbose_name = "Заказ")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name = "Товар")
+    amount = models.IntegerField(default=1, verbose_name = "Количество")
+    sum_price = models.DecimalField(default=0.0, max_digits=10, 
+        decimal_places=2, verbose_name = "Суммарная цена")
 
     class Meta:
         constraints = [
@@ -127,15 +140,3 @@ class SingleOrder(models.Model):
 
     def __str__(self):
         return self.product.name + ' x' + str(self.amount)
-
-
-class PersonalDiscount(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
-    expires = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=64, default='')
-    value = models.IntegerField(default=0)
-    amount = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name
