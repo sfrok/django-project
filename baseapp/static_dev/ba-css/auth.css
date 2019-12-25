@@ -1,28 +1,37 @@
-input {
-	border: none;
-	border-bottom: 2px solid black;
-	width: auto;
-	outline: none;
+body, html {
+	height: 100%;
 }
 
-h1 {
-	font-size: 25px;
-	font-weight: bold;
+.login-form {
+	border: none;
+	border-bottom: 2px solid #fff;
+	width: 250px;
+	outline: none;
+	color: white;
+	background: none
 }
 
 h2 {
-	font-size: 20px;
+	
 	font-weight: normal;
 }
 
 button {
-	width: 170px;
+	width: 250px;
 }
 
-body {
+.form {
 	background-color: #161c35;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
-label {
+.info {
+	font-size: 22px;
+	color: #fff;
+}
+
+.cancel a {
 	color: #fff;
 }

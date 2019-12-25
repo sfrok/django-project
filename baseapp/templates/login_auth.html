@@ -8,27 +8,31 @@
 	<title>Авторизация</title>
 </head>
 <body>
-	<form id="auth_form" action="" method="post"> {% csrf_token %}
-		<div class="container">
-			<div class="row">
-				{{ form.non_field_errors }}
-				{% for field in form %}
-					<div class="col-12 text-center">
-					<label class="form-label-title" for="{{ field.id_for_label }}">{{ field.label }}</label><br>
-					{{ field }} {{ field.errors }}
-					</div>
-				{% endfor %}
-				<div class="col-12 text-center mt-3">
-					<button type="submit" class="btn btn-success">Войти</button>
-				</div>
-				<div class="col-12 text-center cancel mt-2">
-					<a href="/{{request.pages.reset}}">Забыли пароль?</a>
-				</div>
-				<div class="col-12 text-center cancel mt-2">
-					<a href="/">Отмена</a>
+	<div class="form">
+		<div class="container h-100">
+			<div class="row h-100 justify-content-center align-items-center">
+				<div class="col-md-12 auth-form">
+					<form id="auth_form" action="" method="post"> {% csrf_token %}
+						{{ form.non_field_errors }}
+						{% for field in form %}
+						<div class="col-12 text-center align-self-center mt-4">
+							<label class="form-label-title info" for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+							{{ field }} {{ field.errors }}
+						</div>
+						{% endfor %}
+						<div class="col-12 text-center mt-3 align-self-center">
+							<button type="submit" class="btn btn-success">Войти</button>
+						</div>
+						<div class="col-12 text-center cancel mt-2 align-self-center">
+							<a href="/{{request.pages.reset}}">Забыли пароль?</a>
+						</div>
+						<div class="col-12 text-center cancel mt-2 align-self-center">
+							<a href="/">Отмена</a>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 </body>
 </html>
