@@ -51,6 +51,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         mail.attach_alternative(html, "text/html")
         mail.send(fail_silently=True)
 
+    def has_perm(self, perm, obj=None):
+        return (self.is_superuser or self.is_staff) and self.is_active
+
+    def has_module_perms(self, app_label):
+        return (self.is_superuser or self.is_staff) and self.is_active
+
 
 class Category(models.Model):
     name = models.CharField(max_length=28, default='', verbose_name = "Название")

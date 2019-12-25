@@ -153,15 +153,3 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'baseapp/static_dev'),
     os.path.join(BASE_DIR, 'baseapp/media')
 )
-
-ADMIN_REORDER = (
-    # First group
-    {'app': 'baseapp', 'label': 'Обслуживание',
-     'models': ('baseapp.User',
-                'baseapp.Basket',)
-    },
-    # Second group: same app, but different label
-    {'app': 'baseapp', 'label': 'Товары',
-     'models': ('baseapp.Product',
-     'baseapp.Category',)
-    },)
