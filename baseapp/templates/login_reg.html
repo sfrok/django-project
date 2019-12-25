@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">>
   <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
   <link rel="stylesheet" href="{% static "ba-css/registration.css" %}">
   <title>Регистрация</title>
@@ -20,6 +20,9 @@
           {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
         </div>
       {% endfor %}
+      <div class="col-12 text-center mt-3">
+          <button type="submit" class="btn reg">Регистрация</button>
+        </div>
     </div>
   </div>
 </body>

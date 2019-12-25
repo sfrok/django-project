@@ -1,22 +1,20 @@
-/*.login-form {
-	outline: none;
+input {
 	border: none;
 	border-bottom: 2px solid black;
-	width: 250px;
-	margin-bottom: 10px;
-	color: black;
-	background: transparent;
+	width: auto;
+	outline: none;
 }
 
-.authorization-button {
-	width: 200px;
-	height: 50px;
-	background-color: #65c000;
-	border-radius: 6px;
+h1 {
+	font-size: 25px;
+	font-weight: bold;
 }
 
-.authorization-button:hover {
-	background-color: #00d924;
-  	border: 1px solid #00d924;
-  	cursor: pointer;
-}*/
+h2 {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+button {
+	width: 170px;
+}

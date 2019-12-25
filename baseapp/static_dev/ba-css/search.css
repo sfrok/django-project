@@ -35,8 +35,9 @@ a {
   border: 2px solid #D3D3D3;
 }
 
-.product-info {
+.product-info span{
   color: black;
+  font-size: 20px;
 }
 
 .info {
