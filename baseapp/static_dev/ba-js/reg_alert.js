@@ -1,1 +1,1 @@
-$('.alert').fadeOut(4500, function(){ $(this).remove();});
+$('.home-alert').fadeOut(4500, function(){ $(this).remove();});

@@ -1,3 +1,10 @@
+html,
+body {
+	display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 * {
     font-family: sans-serif;
 }
@@ -234,6 +241,7 @@
 }
 
 .footer {
+    flex-shrink: 0;
     height: 125px;
     background: rgba(190, 190, 190, 0.4);
     box-shadow: 0px 0px 15px #D3D3D3;

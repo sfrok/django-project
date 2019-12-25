@@ -20,8 +20,8 @@
     background-color: white;
 }
 
-.btn:hover {
-    cursor: default;
+.btn-success:hover {
+    cursor: pointer;
 }
 
 .btn-info:hover {
