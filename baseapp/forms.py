@@ -73,7 +73,7 @@ class UserPasswordResetForm(forms.Form):
 
 
 class UserPasswordChangeForm(forms.ModelForm):  # Форма смены пароля
-    _attrs = {'class': 'input-field form-control'}
+    _attrs = {'class': 'input-field form-control mb-1'}
     password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput(_attrs))
     password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
 

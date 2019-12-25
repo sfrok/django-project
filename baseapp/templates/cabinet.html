@@ -57,6 +57,46 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-12 mt-4">
+                <div class="row">
+                      <div class="col-md-12">
+                          <img src="{% static "changepassword.png" %}" alt="changepassword" class="img-thumbnail align-middle">
+                      <h1 class="display-4 page-title align-middle d-inline-block ">Смена пароля</h1>
+                      </div>
+                        {% if success %}
+                          <div class="col-12">
+                          <div class="alert alert-success mt-3" role="alert">
+                            Пароль успешно изменен!
+                            </div>
+                          </div>
+                          <div class="col-12 text-center mt-3">
+                      <a href="/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
+                        </div>
+                        {% else %}
+                          <div class="col-md-12 mt-3 form-label-title">
+                          <form action="" method="post"> {% csrf_token %}
+                                <label for="old-pass">Текущий пароль:</label>
+                                <div class="input-group mb-1">
+                                    <input type="password" class="form-control" id="old-pass" aria-describedby="basic-addon3">
+                                </div>
+                              <label for="new-pass">Новый пароль:</label>
+                                <div class="input-group mb-1">
+                                    <input type="password" class="form-control" id="new-pass" aria-describedby="basic-addon3">
+                                </div>
+                              <label for="new-pass-repeat">Новый пароль:</label>
+                                <div class="input-group mb-1">
+                                    <input type="password" class="form-control" id="new-pass-repeat" aria-describedby="basic-addon3">
+                                </div>
+                              <div class="row justify-content-center">
+                              <div class="col-auto form-button">
+                                <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                        {% endif %}
+                      </div>
+            </div>
         </div>
     </div>
     <div class="container mt-5 d-none d-lg-block flex-grow-1">
@@ -68,6 +108,9 @@
               </a>
               <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                   Список заказов
+              </a>
+                <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">
+                  Смена пароля
               </a>
             </div>
           </div>
@@ -119,6 +162,47 @@
             {% endfor %}
         </tbody>
     </table>
+              </div>
+                        <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+                    <div class="row">
+                      <div class="col-md-12">
+                          <img src="{% static "changepassword.png" %}" alt="changepassword" class="img-thumbnail align-middle">
+                      <h1 class="display-4 page-title align-middle d-inline-block ">Смена пароля</h1>
+                      </div>
+                        {% if success %}
+                          <div class="col-12">
+                          <div class="alert alert-success mt-3" role="alert">
+                            Пароль успешно изменен!
+                            </div>
+                          </div>
+                          <div class="col-12 text-center mt-3">
+                      <a href="/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
+                        </div>
+                        {% else %}
+                          <div class="col-md-12 mt-3 form-label-title">
+                          <form action="" method="post"> {% csrf_token %}
+                                <label for="old-pass">Текущий пароль:</label>
+                                <div class="input-group mb-1">
+                                    <input type="password" class="form-control" id="old-pass" aria-describedby="basic-addon3">
+                                </div>
+                              <label for="new-pass">Новый пароль:</label>
+                                <div class="input-group mb-1">
+                                    <input type="password" class="form-control" id="new-pass" aria-describedby="basic-addon3">
+                                </div>
+                              <label for="new-pass-repeat">Новый пароль:</label>
+                                <div class="input-group mb-1">
+                                    <input type="password" class="form-control" id="new-pass-repeat" aria-describedby="basic-addon3">
+                                </div>
+                              <div class="row justify-content-center">
+                              <div class="col-auto form-button">
+                                <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
               </div>
             </div>
           </div>
