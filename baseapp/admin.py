@@ -5,7 +5,7 @@ from .forms import UserChangeForm, UserCreationForm
 from .models import Product, User, SingleOrder, Basket, Category
 
 admin.site.register(Category)
-# admin.site.unregister(Group)
+admin.site.unregister(Group)
 
 
 class BasketInline(admin.TabularInline):
