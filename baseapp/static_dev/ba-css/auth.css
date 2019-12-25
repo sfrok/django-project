@@ -19,9 +19,10 @@ button {
 	width: 170px;
 }
 
-.col-12 .box {
-	align-self: flex-end;
-	border: 2px solid black;
-	height: 150px;
-	width: 150px;
+body {
+	background-color: #161c35;
+}
+
+label {
+	color: #fff;
 }
