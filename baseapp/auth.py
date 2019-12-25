@@ -71,12 +71,15 @@ def activate(request, uidb64, token):
 
 
 def reset(request, email):  # Главная ф-ия авторизации
-    user = User.objects.get(email=email)
-    subject = 'Восстановление пароля'
-    link = encodeLink(request, user, HtmlPages.cng)
-    text = (_("Здравствуйте"), _("перейдите по этой ссылке для восстановления пароля"))
-    message = makeEmail(text, user.name, link)
-    user.email_user(subject, message[1], message[0])
+    try:
+        user = User.objects.get(email=email)
+        subject = 'Восстановление пароля'
+        link = encodeLink(request, user, HtmlPages.cng)
+        text = (_("Здравствуйте"), _("перейдите по этой ссылке для восстановления пароля"))
+        message = makeEmail(text, user.name, link)
+        user.email_user(subject, message[1], message[0])
+    except User.DoesNotExist:
+        pass
 
 
 def change(request, uidb64, token, form):

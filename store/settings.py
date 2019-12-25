@@ -18,6 +18,9 @@ import store.privacy as pc
 
 logger = logging.getLogger('Settings')
 
+
+APP_NAME = 'Gotosync'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -59,30 +62,6 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'baseapp.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# LOGGING = {
-    # 'version': 1,
-    # 'disable_existing_loggers': False,
-    # 'formatters': {
-        # 'simple': {
-            # 'format': '[Request] %(message)s'
-        # },
-    # },
-    # 'handlers': {
-        # 'console': {
-            # 'level': 'INFO',
-            # 'class': 'logging.StreamHandler',
-            # 'formatter': 'simple'
-        # },
-    # },
-    # 'loggers': {
-        # 'django.request': {
-            # 'handlers': ['console'],
-            # 'level': 'INFO',
-            # 'propagate': True,
-        # },
-    # }
-# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

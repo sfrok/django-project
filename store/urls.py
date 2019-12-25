@@ -20,9 +20,10 @@ from django.urls import path, re_path
 
 from baseapp import views
 from .data import HtmlPages as HP
+from .settings import APP_NAME
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('gts/', admin.site.urls),
     path('', views.home_view, name=f'{HP.home}_page'),
     path(f'{HP.reg}/', views.reg_view, name=f'{HP.reg}_page'),
     path(f'{HP.auth}/', views.auth_view, name=f'{HP.auth}_page'),
@@ -44,6 +45,8 @@ urlpatterns = [
 
 handler404 = 'baseapp.views.not_found'
 handler500 = 'baseapp.views.not_found'
+admin.site.site_header = "Администрация " + APP_NAME
+admin.site.site_title = APP_NAME
 
 if settings.DEBUG:  # only serves the actual STATIC_ROOT folder
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
