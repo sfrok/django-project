@@ -27,8 +27,9 @@ button {
 	height: 100%;
 }
 
-.info {
+.form-info {
 	font-size: 22px;
+	color: #fff;
 }
 
 .cancel a {
