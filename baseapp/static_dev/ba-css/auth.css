@@ -18,3 +18,11 @@ h2 {
 button {
 	width: 170px;
 }
+
+body {
+	background-color: #161c35;
+}
+
+label {
+	color: #fff;
+}

@@ -31,7 +31,7 @@
                         <div class="col-lg-6 text-lg-right text-center mt-4">
                             <div class="form-group">
                             <form action="" method="post"> {% csrf_token %}
-                                <input type="hidden" name="cat" value="{{ cat.id }}">
+                                {% if cat %}<input type="hidden" name="cat" value="{{ cat.id }}">{% endif %}
                                 <input type="hidden" name="line" value="{{ request.line }}">
                                 <select name='sort' class="custom-select" onchange="this.form.submit()">
                                     <option value="sold" {% if sort == "sold" %}selected{% endif %}>По рейтингу</option>
