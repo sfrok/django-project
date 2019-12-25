@@ -10,7 +10,7 @@
 
 {% block content %}
         <div class="container flex-grow-1"><!-- container-height -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center ">
                 <div class="col-12">
                     <div class="row">
                         {% if cat %}
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         {% else %}
-                        <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left">
+                        <div class="col-12 col-lg-6 info mt-4 text-center text-lg-left flex-grow-1">
                             <span><h5>{% if request.line != '' %}По запросу {{ request.line }} н{% else %}Н{% endif %}ичего не найдено!</h5></span>
                         </div>
                         {% endif %}
@@ -56,9 +56,9 @@
                         <div class="product-code ml-2">
                             <small class="text-muted">Код товара: {{item.id}}</small>
                         </div>
-                        <a style="text-decoration: none;" href="/products/?id={{item.id}}">
-                            <form action="/product/{{item.id}}" method="post">
-                                {% csrf_token %}
+                        <a style="text-decoration: none;" href="/{{request.pages.prd}}/?id={{item.id}}">
+                            <form action="/{{request.pages.prd}}/" method="get">
+                                <input type="hidden" name="id" value={{item.id}}>
                                 <header class="text-center product-info mb-3">
                                     <span>"{{item.name}}"</span>
                                 </header>
