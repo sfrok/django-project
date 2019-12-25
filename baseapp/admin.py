@@ -5,7 +5,7 @@ from .forms import UserChangeForm, UserCreationForm
 from .models import Product, User, SingleOrder, Basket, Category
 
 admin.site.register(Category)
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
 
 
 class BasketInline(admin.TabularInline):
@@ -38,12 +38,12 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('name', 'email', 'is_admin', 'is_active',)
-    list_filter = ('is_admin','is_active',)
+    list_display = ('name', 'email', 'is_staff', 'is_active',)
+    list_filter = ('is_staff','is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password', 'is_active', 'date_joined',)}),
         ('Персональная информация', {'fields': ('name', 'phone_number', 'address',)}),
-        ('Доступ', {'fields': ('is_admin',)}),
+        ('Доступ', {'fields': ('is_staff',)}),
     )
     inlines = [
         BasketInline,
