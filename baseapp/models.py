@@ -29,7 +29,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=64, unique=True, verbose_name = "Эл. почта")
     is_active = models.BooleanField(default=False, verbose_name = "Подтвердил почту")
-    is_admin = models.BooleanField(default=False, verbose_name = "Модератор")
+    is_staff = models.BooleanField(default=False, verbose_name = "Модератор")
     name = models.CharField(max_length=33, default='', verbose_name = "ФИО")
     address = models.CharField(max_length=64, default='', verbose_name = "Адрес")
     phone_number = models.CharField(max_length=16, default='', verbose_name = "Телефон")
@@ -45,10 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.name
-
-    @property
-    def is_staff(self):  # Is the user a member of staff?
-        return self.is_admin  # Simplest possible answer: All admins are staff
 
     def email_user(self, subject, message, html, from_email=EMAIL_HOST_USER, **kwargs):
         mail = EmailMultiAlternatives(subject, message, from_email, [self.email], **kwargs)

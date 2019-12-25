@@ -13,16 +13,18 @@
       <div class="col-12 text-center mt-2">
         <h1>Регистрация</h1>
       </div>
-      {{ form.non_field_errors }}
-      {% for field in form %}
-        <div class="col-12 {% if field.name != "name" %}mt-1{% endif %}">
-          <label class="form-label-title text" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
-          {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
+      <form id="auth_form" action="" method="post"> {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+          <div class="col-12 {% if field.name != "name" %}mt-1{% endif %}">
+            <label class="form-label-title text" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
+            {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
+          </div>
+        {% endfor %}
+        <div class="col-12 text-center mt-3">
+          <button type="submit" class="btn reg">Зарегистрироваться</button>
         </div>
-      {% endfor %}
-      <div class="col-12 text-center mt-3">
-          <button type="submit" class="btn reg">Регистрация</button>
-        </div>
+      </form>
     </div>
   </div>
 </body>

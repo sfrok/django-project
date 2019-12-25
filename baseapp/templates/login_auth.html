@@ -11,25 +11,25 @@
 	<form id="auth_form" action="" method="post"> {% csrf_token %}
 		<div class="container">
 			<div class="row">
-				<div class="col-12 text-center mt-5">
-					<h1>Авторизация</h1>
-				</div>
-				<div class="col-12 text-center mt-3">
-					<h2>Введите логин</h2>
-				</div>
-				<div class="col-12 text-center">
-					<label class="form-label-title text" for="login"></label> 	
-					<input type="login input-field form-control" placeholder="Логин">
-				</div>
-				<div class="col-12 text-center mt-3">
-					<h2>Введите пароль</h2>
-				</div>
-				<div class="col-12 text-center">
-					<label class="form-label-title text" for="password"></label>
-					<input type="password input-field form-control" placeholder="Пароль">
-				</div>
+				<div class="col-12 text-center mt-5 d-none d-md-none d-lg-block"></div>
+				<div class="col-12 text-center mt-5 d-none d-md-none d-lg-block"></div>
+				<div class="col-12 text-center mt-5 d-none d-md-none d-lg-block"></div>
+				<div class="col-12 text-center mt-5"></div>
+				{{ form.non_field_errors }}
+				{% for field in form %}
+					<div class="col-12 text-center">
+					<label class="form-label-title" for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+					{{ field }} {{ field.errors }}
+					</div>
+				{% endfor %}
 				<div class="col-12 text-center mt-3">
 					<button type="submit" class="btn btn-success">Войти</button>
+				</div>
+				<div class="col-12 text-center cancel mt-2">
+					<a href="/{{request.pages.reset}}">Забыли пароль?</a>
+				</div>
+				<div class="col-12 text-center cancel mt-2">
+					<a href="/">Отмена</a>
 				</div>
 			</div>
 		</div>
