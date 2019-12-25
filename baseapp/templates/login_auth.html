@@ -11,10 +11,9 @@
 	<form id="auth_form" action="" method="post"> {% csrf_token %}
 		<div class="container">
 			<div class="row">
-				<div class="col-12 text-center mt-5 d-none d-md-none d-lg-block"></div>
-				<div class="col-12 text-center mt-5 d-none d-md-none d-lg-block"></div>
-				<div class="col-12 text-center mt-5 d-none d-md-none d-lg-block"></div>
-				<div class="col-12 text-center mt-5"></div>
+				<div class="col-12 text-center tittle">
+					<h1>Авторизация</h1>
+				</div>
 				{{ form.non_field_errors }}
 				{% for field in form %}
 					<div class="col-12 text-center">

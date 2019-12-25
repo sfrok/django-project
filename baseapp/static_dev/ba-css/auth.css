@@ -18,3 +18,10 @@ h2 {
 button {
 	width: 170px;
 }
+
+.col-12 .box {
+	align-self: flex-end;
+	border: 2px solid black;
+	height: 150px;
+	width: 150px;
+}
