@@ -72,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'store.middleware.HeaderInfo',
+    'store.middleware.AdminAccess',
 ]
 
 ROOT_URLCONF = 'store.urls'
