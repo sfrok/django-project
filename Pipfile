@@ -10,13 +10,9 @@ pytest = "*"
 selenium = "*"
 
 [packages]
-psycopg2-binary = "*"
-python-logstash = "*"
 pillow = "*"
 django-crispy-forms = "*"
-elasticsearch-dsl = "<7.0,>=6.0"
-django-elasticsearch-dsl = ">=6.0,<7.0"
 django = "==2.2.9"
 
 [requires]
-python_version = "3.6"
+python_version = "*"
