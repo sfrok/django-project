@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth import authenticate
 
 from .models import User, Basket
 from store.data import getLogger
@@ -35,9 +36,10 @@ class UserAuthorizationForm(forms.ModelForm):  # Форма для автори�
 
     def clean(self):
         log('UserAuthorizationForm cleaned data:', str(self.cleaned_data))
-        user_in_database = User(email=self.cleaned_data.get('email'))
-        if user_in_database is None:  # if current_username is empty:
-            raise forms.ValidationError('Incorrect login! Try again')
+        user = authenticate(email=self.cleaned_data.get('email'),
+            password=self.cleaned_data.get('password'))
+        if user is None:  # if current_username is empty:
+            raise forms.ValidationError('Неправильные почта или пароль!')
 
 
 class UserCreationForm(forms.ModelForm):  # Форма для создания (регистрации) пользователей
@@ -68,13 +70,13 @@ class UserCreationForm(forms.ModelForm):  # Форма для создания (
         return user
 
 
-class UserPasswordResetForm(forms.Form):
+class UserPasswordResetEmailForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput({'class': 'input-field form-control'}))
 
 
-class UserPasswordChangeForm(forms.ModelForm):  # Форма смены пароля
+class UserPasswordResetForm(forms.ModelForm):  # Форма смены пароля
     _attrs = {'class': 'input-field form-control mb-1'}
-    password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput(_attrs))
+    password = forms.CharField(label='Новый пароль:', widget=forms.PasswordInput(_attrs))
     password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
 
     class Meta:
@@ -96,6 +98,60 @@ class UserPasswordChangeForm(forms.ModelForm):  # Форма смены паро
             self.add_error(field='password2', 
                 error=forms.ValidationError(_("Пароли не совпадают!"), code='invalid'))
         return password2
+
+
+class UserPasswordChangeForm(forms.ModelForm):
+    _attrs = {'class': 'input-field form-control mb-1'}
+    password_old = forms.CharField(label='Старый пароль:', widget=forms.PasswordInput(_attrs))
+    password = forms.CharField(label='Новый пароль:', widget=forms.PasswordInput(_attrs))
+    password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
+    email = forms.CharField(widget=forms.HiddenInput())
+
+    class Meta:
+        model = User
+        fields = ('email', 'password', 'password2', 'password_old',)
+
+    def clean_password(self):  # Проверка на совпадение паролей
+        log('new', self.cleaned_data)
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            self.add_error(field='password', 
+                error=forms.ValidationError(_("Пароли не совпадают!"), code='invalid'))
+        return password
+
+    def clean_password2(self):  # Проверка на совпадение паролей
+        log('repeat', self.cleaned_data)
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            self.add_error(field='password2', 
+                error=forms.ValidationError(_("Пароли не совпадают!"), code='invalid'))
+        return password2
+
+    def clean_password_old(self):  # Проверка на совпадение паролей
+        log('old', self.cleaned_data)
+        password = self.cleaned_data.get("password_old")
+        user = authenticate(email=self.cleaned_data.get('email'), password=password)
+        if user is None:  # if current_username is empty:
+            self.add_error(field='password_old', 
+                error=forms.ValidationError(_("Неверный пароль!"), code='invalid'))
+        return password
+
+    def clean(self):
+        log('UserPasswordChangeForm cleaned data:', str(self.cleaned_data))
+        super().clean()
+
+    def save(self):  # Сохранение пароля в хешированном формате
+        log('UserPasswordChangeForm save data:', str(self.cleaned_data))
+        user = authenticate(email=self.cleaned_data.get('email'),
+            password=self.cleaned_data.get('password_old'))
+        if user is None:  # if current_username is empty:
+            raise forms.ValidationError('Не удалось сменить пароль!')
+        else:
+            user.set_password(self.cleaned_data["password"])
+            user.save()
+        return user
 
 
 class UserChangeForm(forms.ModelForm):  # Форма для обновления пользователей
