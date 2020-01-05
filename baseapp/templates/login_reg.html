@@ -8,23 +8,25 @@
   <title>Регистрация</title>
 </head>
 <body>
-  <div class="container form">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center mt-2">
-        <h1>Регистрация</h1>
-      </div>
-      <form id="auth_form" action="" method="post"> {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form %}
+  <div class="form-test">
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <form id="auth_form" action="" method="post"> {% csrf_token %}
+          <div class="col-12 text-center mb-5">
+            <h1>Регистрация</h1>
+          </div>
+          {{ form.non_field_errors }}
+          {% for field in form %}
           <div class="col-12 {% if field.name != "name" %}mt-1{% endif %}">
-            <label class="form-label-title text" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field }} {{ field.errors }}
+            <label class="form-label-title text" for="{{ field.id_for_label }}">{{ field.label }}</label><br> {{ field }} {{ field.errors }}
             {% if field.name == "password" %} <small class="form-text text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small> {% endif %}
           </div>
-        {% endfor %}
-        <div class="col-12 text-center mt-3">
-          <button type="submit" class="btn reg">Зарегистрироваться</button>
-        </div>
-      </form>
+          {% endfor %}
+          <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn reg">Зарегистрироваться</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </body>
