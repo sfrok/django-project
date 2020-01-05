@@ -43,7 +43,7 @@ class UserAuthorizationForm(forms.ModelForm):  # Форма для автори�
 
 
 class UserCreationForm(forms.ModelForm):  # Форма для создания (регистрации) пользователей
-    _attrs = {'class': 'input-field form-control'}
+    _attrs = {'class': 'reg-form'}
     password = forms.CharField(label='Придумайте пароль:', widget=forms.PasswordInput(_attrs))
     password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
 
@@ -52,7 +52,7 @@ class UserCreationForm(forms.ModelForm):  # Форма для создания (
         fields = ('name', 'email', 'password', 'password2', 'address', 'phone_number',)
         labels = {'name': 'ФИО:', 'email': 'E-mail:', 
             'address': 'Адрес:', 'phone_number': 'Телефон:', }
-        widgets = {i: forms.TextInput({'class': 'input-field form-control'}) for i in fields}
+        widgets = {i: forms.TextInput({'class': 'reg-form'}) for i in fields}
 
     def clean_password2(self):  # Проверка на совпадение паролей
         password = self.cleaned_data.get("password")

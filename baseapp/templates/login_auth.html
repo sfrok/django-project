@@ -8,10 +8,10 @@
 	<title>Авторизация</title>
 </head>
 <body>
-	<div class="form">
+	<div class="auth-form">
 		<div class="container h-100">
 			<div class="row h-100 justify-content-center align-items-center">
-				<div class="col-md-12 auth-form">
+				<div class="col-md-12 ">
 					<form id="auth_form" action="" method="post"> {% csrf_token %}
 						{{ form.non_field_errors }}
 						{% for field in form %}
