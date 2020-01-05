@@ -63,29 +63,24 @@
                           <img src="{% static "changepassword.png" %}" alt="changepassword" class="img-thumbnail align-middle">
                       <h1 class="display-4 page-title align-middle d-inline-block ">Смена пароля</h1>
                       </div>
-                        {% if success %}
-                          <div class="col-12">
-                          <div class="alert alert-success mt-3" role="alert">
-                            Пароль успешно изменен!
-                            </div>
-                          </div>
-                          <div class="col-12 text-center mt-3">
-                      <a href="/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
-                        </div>
-                        {% else %}
                           <div class="col-md-12 mt-3 form-label-title">
                           <form action="" method="post"> {% csrf_token %}
-                                <label for="old-pass">Текущий пароль:</label>
+                              {{ form2.non_field_errors }}
+                                <input type="hidden" name="email" value="{{ user.email }}">
+                                <label for="old-pass">{{ form2.password_old.label_tag }}</label>
                                 <div class="input-group mb-1">
-                                    <input type="password" class="form-control" id="old-pass" aria-describedby="basic-addon3">
+                                    <input name="password_old" type="password" class="form-control" id="old-pass" aria-describedby="basic-addon3">
+                                    {{ form2.password_old.errors }}
                                 </div>
-                              <label for="new-pass">Новый пароль:</label>
+                              <label for="new-pass">{{ form2.password.label_tag }}</label>
                                 <div class="input-group mb-1">
-                                    <input type="password" class="form-control" id="new-pass" aria-describedby="basic-addon3">
+                                    <input name="password" type="password" class="form-control" id="new-pass" aria-describedby="basic-addon3">
+                                    {{ form2.password.errors }}
                                 </div>
-                              <label for="new-pass-repeat">Новый пароль:</label>
+                              <label for="new-pass-repeat">{{ form2.password2.label_tag }}</label>
                                 <div class="input-group mb-1">
-                                    <input type="password" class="form-control" id="new-pass-repeat" aria-describedby="basic-addon3">
+                                    <input name="password2" type="password" class="form-control" id="new-pass-repeat" aria-describedby="basic-addon3">
+                                    {{ form2.password2.errors }}
                                 </div>
                               <div class="row justify-content-center">
                               <div class="col-auto form-button">
@@ -94,7 +89,6 @@
                             </div>
                           </form>
                           </div>
-                        {% endif %}
                       </div>
             </div>
         </div>

@@ -48,7 +48,7 @@ class UserAdmin(BaseUserAdmin):
     inlines = [
         BasketInline,
     ]
-    readonly_fields = ('email', 'name', 'phone_number', 'address', 'is_active',)
+    readonly_fields = ('email', 'name', 'phone_number', 'address',)
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (

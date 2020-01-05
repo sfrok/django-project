@@ -156,18 +156,21 @@ def order_complete_view(request):
 @session_clear
 @login_required(login_url=f'/{HtmlPages.auth}/')
 def cabinet_view(request):
+    form = SettingsForm(request.POST or None)
+    form2 = UserPasswordChangeForm(request.POST or None)
     if request.method == 'POST':
-        form = SettingsForm(request.POST, instance=request.user)
         if form.is_valid(): form.save()
+        if form2.is_valid(): form2.save()
     form = SettingsForm(instance=request.user)
+    form2 = UserPasswordChangeForm(instance=request.user)
     orders = Basket.objects.filter(user_id=request.user.id)
-    return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders})
+    return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders, 'form2': form2})
 
 
 @session_clear
 def password_reset_view(request):
     success = False  # GET - поле для ввода почты
-    form = UserPasswordResetForm(request.POST or None)
+    form = UserPasswordResetEmailForm(request.POST or None)
     if form.is_valid():  # POST - пользователь ввел почту
         reset(request, form.cleaned_data.get("email"))
         success = True  # Сообщение было отправлено
@@ -179,7 +182,7 @@ def password_change_view(request, uidb64=None, token=None):  # for changing and 
     success = False  # GET - поле для ввода нового пароля
     uidb64 = request.GET.get('uid', None)
     token = request.GET.get('token', None)
-    form = UserPasswordChangeForm(request.POST or None)
+    form = UserPasswordResetForm(request.POST or None)
     if form.is_valid():  # POST - пользователь ввел новый пароль
         if not uidb64: uidb64 = request.POST.get('uidb64', None)
         if not token: token = request.POST.get('token', None)
