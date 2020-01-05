@@ -162,7 +162,7 @@ def cabinet_view(request):
         if form.is_valid(): form.save()
         if form2.is_valid(): form2.save()
     form = SettingsForm(instance=request.user)
-    form2 = UserPasswordChangeForm(instance=request.user)
+    form2 = UserPasswordChangeForm()
     orders = Basket.objects.filter(user_id=request.user.id)
     return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders, 'form2': form2})
 
