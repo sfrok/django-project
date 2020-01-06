@@ -4,45 +4,48 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+  <link rel="stylesheet" href="{% static "ba-css/reset.css" %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Сброс пароля</title>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 mt-4 text-center">
-        <h1>Сброс пароля</h1>
-      </div>
-      {% if success %}
-        <div class="col-md-12">
-        <div class="alert alert-success" role="alert">
-            Письмо c инструкцией отправлено, проверьте почтовый ящик!
+  <div class="reset-form">
+    <div class="container-fluid h-100 flex-grow-1">
+      <div class="row justify-content-center">
+        <div class="col-md-12 mt-4 text-center align-self-end">
+          <h1>Сброс пароля</h1>
         </div>
-      {% else %}
-          <div class="col-md-12 mt-2 text-center">
-             <p class="lead">Введите адрес электронной почты, который был привязан к вашему аккаунту, и мы отправим на него дальнейшие инструкции.</p>
-         </div>
-        <div class="col-md-12">
-            <form id="auth_form" action="" method="post"> {% csrf_token %}
-          {{ form.non_field_errors }}
-          {% for field in form %}
-              <div class="row justify-content-center">
-              <div class="col-auto align-self-center font-weight-bold">
-                E-mail
-              </div>
-                <div class="col-8 pb-3">
-                  <label class="form-label-title text" for="{{ field.id_for_label }}"></label>
-                    {{ field }} {{ field.errors }}
-                </div>
-              </div>
-          {% endfor %}
+        {% if success %}
+          <div class="col-md-12">
           <div class="col-12 text-center">
-            <button type="submit" class="btn btn-success">Сбросить пароль</button>
+              Письмо c инструкцией отправлено, проверьте почтовый ящик!
           </div>
-        </form>
-        </div>
-      {% endif %}
+        {% else %}
+            <div class="col-md-12 mt-2 text-center text-content">
+               <p class="lead">Введите адрес электронной почты, который был привязан к вашему аккаунту, и мы отправим на него дальнейшие инструкции.</p>
+           </div>
+          <div class="col-md-12">
+              <form id="auth_form" action="" method="post"> {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="row justify-content-center">
+                <div class="col-12 align-self-center font-weight-bold text-center">
+                  E-mail
+                </div>
+                  <div class="col-auto text-center"> <br>
+                    <label class="form-label-title text" for="{{ field.id_for_label }}"></label>
+                      {{ field }} {{ field.errors }}
+                  </div>
+                </div>
+            {% endfor %}
+            <div class="col-12 text-center mt-3">
+              <button type="submit" class="btn btn-success">Сбросить пароль</button>
+            </div>
+          </form>
+          </div>
+        {% endif %}
+      </div>
     </div>
-  </div>
+  </div> 
 </body>
 </html>

@@ -1,0 +1,20 @@
+body, html {
+	height: 100%;
+}
+
+.reset-form {
+	background-color: #161c35;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	position: absolute;
+}
+
+.res-form {
+	border: none;
+	border-bottom: 2px solid #fff;
+	width: 270px;
+	outline: none;
+	color: #fff;
+	background: none
+}

@@ -13,13 +13,15 @@
 			<div class="row h-100 justify-content-center align-items-center">
 				<div class="col-md-12 ">
 					<form id="auth_form" action="" method="post"> {% csrf_token %}
-						{{ form.non_field_errors }}
+						
 						{% for field in form %}
 						<div class="col-12 text-center align-self-center mt-4">
 							<label class="form-label-title form-info" for="{{ field.id_for_label }}">{{ field.label }}</label><br>
 							{{ field }} {{ field.errors }}
 						</div>
 						{% endfor %}
+						<div class="col-12 error text-center mt-2">{{ form.non_field_errors }}</div>
+						
 						<div class="col-12 text-center mt-3 align-self-center">
 							<button type="submit" class="btn btn-success">Войти</button>
 						</div>

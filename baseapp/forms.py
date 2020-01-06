@@ -71,11 +71,11 @@ class UserCreationForm(forms.ModelForm):  # Форма для создания (
 
 
 class UserPasswordResetEmailForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput({'class': 'input-field form-control'}))
+    email = forms.EmailField(widget=forms.EmailInput({'class': 'res-form'}))
 
 
 class UserPasswordResetForm(forms.ModelForm):  # Форма смены пароля
-    _attrs = {'class': 'input-field form-control mb-1'}
+    _attrs = {'class': 'chng-form mb-1'}
     password = forms.CharField(label='Новый пароль:', widget=forms.PasswordInput(_attrs))
     password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
 

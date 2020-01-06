@@ -1,45 +1,46 @@
-{% extends 'base.html' %}{% load static %}
 {% load static %}
-
-{% block styles %}
-<link rel="stylesheet" href="{% static "ba-css/change.css" %}">
-{% endblock %}
-
-{% block title %}Смена пароля{% endblock %}
-
-{% block content %}
-        <div class="container-fluid flex-grow-1">
-        <div class="row justify-content-center">
-          <div class="col-md-12 text-center mt-4">
-              <img src="{% static "changepassword.png" %}" alt="settings" class="img-thumbnail align-middle">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="{% static "ba-css/bootstrap.css" %}">
+  <link rel="stylesheet" href="{% static "ba-css/change.css" %}">
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div class="change-form">
+    <div class="container-fluid h-100 flex-grow-1">
+      <div class="row h-100 justify-content-center">
+        <div class="col-md-12 text-center mt-4 align-self-end">
+          <img src="{% static "changepassword.png" %}" alt="settings" class="img-thumbnail align-middle">
           <h1 class="display-4 change-title align-middle d-inline-block ">Смена пароля</h1>
+      </div>
+        {% if success %}
+          <div class="col-12 text-center align-self-center">
+              Пароль успешно изменен!
           </div>
-            {% if success %}
-              <div class="col-12">
-              <div class="alert alert-success mt-3" role="alert">
-                Пароль успешно изменен!
-                </div>
-              </div>
-              <div class="col-12 text-center mt-3">
-          <a href="/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
-            </div>
-            {% else %}
-              <div class="col-md-8 mt-3">
-              <form action="" method="post"> {% csrf_token %} {{ form.non_field_errors }}
-                {% for field in form %}
-                  <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
-                {% endfor %}
-                <input type="hidden" name="uidb64" value={{ uidb64 }}>
-                <input type="hidden" name="token" value={{ token }}>
-
-                  <div class="row justify-content-center">
-                  <div class="col-auto form-button">
-                    <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
-                  </div>
-                </div>
-              </form>
-              </div>
-            {% endif %}
-          </div>
+          <div class="col-12 text-center mt-3">
+      <a href="/"><button type="button submit" class="btn btn-primary back-shopping ">Приступить к покупкам!</button></a>
         </div>
-{% endblock content %}
+        {% else %}
+          <div class="col-md-8 mt-3 text-center">
+          <form action="" method="post"> {% csrf_token %} {{ form.non_field_errors }}
+            {% for field in form %}
+              <div class="form-label-title text-center">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
+            {% endfor %}
+            <input type="hidden" name="uidb64" value={{ uidb64 }}>
+            <input type="hidden" name="token" value={{ token }}>
+
+              <div class="row justify-content-center">
+              <div class="col-auto form-button">
+                <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

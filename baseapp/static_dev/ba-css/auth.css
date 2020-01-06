@@ -35,3 +35,12 @@ button {
 .cancel a {
 	color: #fff;
 }
+
+.error ul li{
+	color: #fff;
+	margin-right: 35px;
+}
+
+.errorlist {
+	list-style: none
+}
