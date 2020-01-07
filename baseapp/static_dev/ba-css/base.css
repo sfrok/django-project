@@ -166,7 +166,7 @@ body {
     background: #b4b4b4;
 }
 
-.overlay {
+.overlay-base {
     position: fixed;
     width: 100%;
     height: 100%;
