@@ -156,15 +156,19 @@ def order_complete_view(request):
 @session_clear
 @login_required(login_url=f'/{HtmlPages.auth}/')
 def cabinet_view(request):
+    tab = 0
     form = SettingsForm(request.POST or None)
     form2 = UserPasswordChangeForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid(): form.save()
         if form2.is_valid(): form2.save()
+        if 'password' in request.POST: tab = 1 
+    print(tab)
+    print("password" in request.POST)   
     form = SettingsForm(instance=request.user)
     form2 = UserPasswordChangeForm()
     orders = Basket.objects.filter(user_id=request.user.id)
-    return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders, 'form2': form2})
+    return render(request, f(HtmlPages.cab), {'form': form, 'orders': orders, 'form2': form2, 'tab': tab})
 
 
 @session_clear

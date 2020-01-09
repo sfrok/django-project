@@ -8,196 +8,73 @@
 {% block title %}Личный кабинет{% endblock %}
 
 {% block content %}
-<!-- Mobile -->
-<div class="container-fluid d-block d-lg-none flex-grow-1">
+<div class="container">
   <div class="row">
-        <div class="col-md-12 mt-4">
-            <img src="{% static "userconfig.png" %}" alt="settings" class="img-thumbnail">
-                <h1 class="display-4 page-title">Настройки</h1>
-                  <div class="form mt-4">
-                    <form action="" method="post"> {% csrf_token %} {{ form.non_field_errors }}
-                      {% for field in form %}
-                          <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
-                      {% endfor %}
-                      <div class="row justify-content-center">
-                          <div class="col-auto form-button">
-                              <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить данные</button>
-                          </div>
-                      </div>
-                    </form>
-                  </div>
+    <div class="table">   
+      <div class="col-12 mt-4 text-center">
+        <div class="header">
+          <h1>Личный кабинет</h1><hr>
         </div>
-        <div class="col-12 mt-4">
-                <img src="{% static "order.png" %}" alt="settings" class="img-thumbnail m-2">
-                <h1 class="display-4 page-title">Ваши заказы</h1>
-                <p class="lead m-2 page-description">Панель управления заказами пользователя</p>
-                <hr>
-                  <button type="button" class="btn btn-info mb-3">
-                          Все заказы <span class="badge badge-dark">0</span>
-                  </button>
-                  <table class="table table-striped table-bordered">
-                      <thead class="thead-dark text-center">
-                        <tr>
-                          <th scope="col">Дата</th>
-                          <th scope="col" class="d-none d-sm-table-cell">Адрес</th>
-                          <th scope="col" class="d-none d-sm-table-cell">Статус</th>
-                          <th scope="col">Сумма</th>
-                          <th scope="col">Товары</th>
-                        </tr>
-                      </thead>
-                    <tbody>
-                        {% for i in user.basket_set.all %}
-                        <tr>
-                          <td>{{i.date}}</td>
-                          <td class="d-none d-sm-table-cell">{{i.address}}</td>
-                          <td class="d-none d-sm-table-cell">{{i.status}}</td>
-                          <td>{{i.sum_price}}</td>
-                          <td>{{i.singleorder_set.all|join:", "}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-        </div>
-        <div class="col-12 mt-4">
-                <div class="row">
-                      <div class="col-md-12">
-                        <img src="{% static "changepassword.png" %}" alt="changepassword" class="img-thumbnail align-middle">
-                        <h1 class="display-4 page-title align-middle d-inline-block ">Смена пароля</h1>
-                      </div>
-                      <div class="col-md-12 mt-3 form-label-title">
-                            <form action="" method="post"> {% csrf_token %} {{ form2.non_field_errors }}
-                                <input type="hidden" name="email" value="{{ user.email }}">
-                                <label for="old-pass">{{ form2.password_old.label_tag }}</label>
-                                <div class="input-group mb-1">
-                                    <input name="password_old" type="password" class="form-control" id="old-pass" aria-describedby="basic-addon3">
-                                    {{ form2.password_old.errors }}
-                                </div>
-                                <label for="new-pass">{{ form2.password.label_tag }}</label>
-                                <div class="input-group mb-1">
-                                    <input name="password" type="password" class="form-control" id="new-pass" aria-describedby="basic-addon3">
-                                    {{ form2.password.errors }}
-                                </div>
-                                <label for="new-pass-repeat">{{ form2.password2.label_tag }}</label>
-                                <div class="input-group mb-1">
-                                    <input name="password2" type="password" class="form-control" id="new-pass-repeat" aria-describedby="basic-addon3">
-                                    {{ form2.password2.errors }}
-                                </div>
-                                <div class="row justify-content-center">
-                                  <div class="col-auto form-button">
-                                    <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
-                                  </div>
-                                </div>
-                            </form>
-                      </div>
-                </div>
-        </div>
-  </div>
-</div>
-
-<!-- Desktop -->
-<div class="container mt-5 d-none d-lg-block flex-grow-1">
-        <div class="row">
-          <div class="col-3 text-center">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
-                  Настройки
-              </a>
-              <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-                  Список заказов
-              </a>
-                <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">
-                  Смена пароля
-              </a>
-            </div>
-          </div>
-          <div class="col-9">
-            <div class="tab-content" id="v-pills-tabContent">
-              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <img src="{% static "userconfig.png" %}" alt="settings" class="img-thumbnail">
-                <h1 class="display-4 page-title">Настройки</h1>
-                  <div class="form mt-4">
-                    <form action="" method="post"> {% csrf_token %}
-                      {{ form.non_field_errors }}
-                      {% for field in form %}
-                          <div class="form-label-title">{{ field.label_tag }}</div> {{ field }} {{ field.errors }}
-                      {% endfor %}
-                      <div class="row justify-content-center">
-                          <div class="col-auto form-button">
-                              <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить данные</button>
-                          </div>
-                      </div>
-                    </form>
-                  </div>
-              </div>
-              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <img src="{% static "order.png" %}" alt="settings" class="img-thumbnail m-2">
-                <h1 class="display-4 page-title">Ваши заказы</h1>
-                <p class="lead m-2 page-description">Панель управления заказами пользователя</p>
-                <hr>
-                  <button type="button" class="btn btn-info mb-3">
-                          Все заказы <span class="badge badge-dark">0</span>
-                  </button>
-                  <table class="table table-striped table-bordered">
+      </div>
+      <div class="col-12 header-orders">      
+        <img src="{% static "order.png" %}" alt="settings">
+        <span class="ml-4">Ваши заказы</span>
+        <hr>
+      </div>
+      <div class="col-12 table-orders">
+        <table class="table table-striped table-bordered">
           <thead class="thead-dark text-center">
             <tr>
               <th scope="col">Дата</th>
-              <th scope="col">Адрес</th>
-              <th scope="col">Статус</th>
+              <th scope="col" class="d-none d-sm-table-cell">Адрес</th>
+              <th scope="col" class="d-none d-sm-table-cell">Статус</th>
               <th scope="col">Сумма</th>
               <th scope="col">Товары</th>
             </tr>
           </thead>
-        <tbody class="text-center">
+          <tbody>
             {% for i in user.basket_set.all %}
             <tr>
-              <td class="text-data">{{i.date}}</td>
-              <td>{{i.address}}</td>
-              <td>{{i.get_status_display}}</td>
+              <td>{{i.date}}</td>
+              <td class="d-none d-sm-table-cell">{{i.address}}</td>
+              <td class="d-none d-sm-table-cell">{{i.status}}</td>
               <td>{{i.sum_price}}</td>
               <td>{{i.singleorder_set.all|join:", "}}</td>
             </tr>
             {% endfor %}
-        </tbody>
-    </table>
-              </div>
-                        <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
-                    <div class="row">
-                      <div class="col-md-12">
-                          <img src="{% static "changepassword.png" %}" alt="changepassword" class="img-thumbnail align-middle">
-                      <h1 class="display-4 page-title align-middle d-inline-block ">Смена пароля</h1>
-                      </div>
-                          <div class="col-md-12 mt-3 form-label-title">
-                          <form action="" method="post"> {% csrf_token %} {{ form2.non_field_errors }}
-                                <input type="hidden" name="email" value="{{ user.email }}">
-                                <label for="old-pass">{{ form2.password_old.label_tag }}</label>
-                                <div class="input-group mb-1">
-                                    <input name="password_old" type="password" class="form-control" id="old-pass" aria-describedby="basic-addon3">
-                                    {{ form2.password_old.errors }}
-                                </div>
-                                <label for="new-pass">{{ form2.password.label_tag }}</label>
-                                <div class="input-group mb-1">
-                                    <input name="password" type="password" class="form-control" id="new-pass" aria-describedby="basic-addon3">
-                                    {{ form2.password.errors }}
-                                </div>
-                                <label for="new-pass-repeat">{{ form2.password2.label_tag }}</label>
-                                <div class="input-group mb-1">
-                                    <input name="password2" type="password" class="form-control" id="new-pass-repeat" aria-describedby="basic-addon3">
-                                    {{ form2.password2.errors }}
-                                </div>
-                                <div class="row justify-content-center">
-                                  <div class="col-auto form-button">
-                                    <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
-                                  </div>
-                                </div>
-                          </form>
-                          </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 text-center">
+        <button type="button" class="btn btn-info mt-2">
+          Все заказы <span class="badge badge-dark">0</span>
+        </button>
+      </div>
     </div>
-
-
+    <div class="col-12 header-settings"><hr>
+      <img src="{% static "userconfig.png" %}" alt="settings">
+      <span>Настройки</span><hr>
+    </div>
+    <div class="col-12">
+      <form class="form-settings" action="" method="post">
+        <label for="">ФИО:</label>
+        <input type="text" class="form-control">
+        <label for="">Адрес:</label>
+        <input type="text" class="form-control">
+        <label for="">Телефон:</label>
+        <input type="text" class="form-control">
+        <label for="">Старый пароль:</label><br>
+        <small class="text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small>
+        <input type="password" class="form-control">
+        <label for="">Новый пароль:</label>
+        <input type="password" class="form-control">
+        <label for="">Повторите пароль:</label>
+        <input type="password" class="form-control">
+        <div class="col-auto form-button text-center">
+          <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock content %}

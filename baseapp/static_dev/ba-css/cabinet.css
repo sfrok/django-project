@@ -1,43 +1,12 @@
-.page-title {
-    font-size: 1.9rem;
-    display: inline-block;
-    vertical-align: middle;
+.header-orders, .header-settings{
+    font-size: 35px;
+    font-weight: 400;
 }
 
-.form-label-title {
+.table-orders {
+    font-size: 18px;
+}
+
+.form-settings label {
     font-size: 20px;
-}
-
-
-.order-cart {
-    border: 1px solid black;
-    max-width: 1200px;
-    height: 50px;
-    background-color: #c9ddeb;
-}
-
-.order-cart-light {
-    background-color: white;
-}
-
-.btn-success:hover {
-    cursor: pointer;
-}
-
-.btn-info:hover {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-
-.btn-info:focus {
-    box-shadow: none !important;
-}
-
-.btn-info:active {
-    background-color: #17a2b8 !important;
-    border-color: #17a2b8 !important;
-}
-
-.table th, .table td {
-    padding: 0.4rem 0.3rem;
 }
