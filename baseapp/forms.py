@@ -7,16 +7,6 @@ from store.data import getLogger
 from django.forms import Field
 from django.utils.translation import gettext as _
 
-Field.default_error_messages = {  # Локализация ошибок полей
-    'required': _("Это поле обязательное."),
-    'invalid': _("Пожалуйста, введите корректную информацию."),
-    'max_length': _("Введенный текст слишком длинный."),
-    'min_length': _("Введенный текст слишком короткий."),
-    'invalid_choice': _("Пожалуйста, выберите существующую опцию."),
-    'max_value': _("Введенное значение слишком велико."),
-    'min_value': _("Введенное значение слишком мало."),
-}
-
 
 def log(*info): getLogger().info(' '.join(info))  # Ф-ия логирования
 
