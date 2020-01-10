@@ -91,11 +91,10 @@ class UserPasswordResetForm(forms.ModelForm):  # Форма смены паро�
 
 
 class UserPasswordChangeForm(forms.Form):
-    _attrs = {'class': 'input-field form-control mb-1'}
-    password_old = forms.CharField(label='Старый пароль:', widget=forms.PasswordInput(_attrs))
-    password = forms.CharField(label='Новый пароль:', widget=forms.PasswordInput(_attrs))
-    password2 = forms.CharField(label='Повторите пароль:', widget=forms.PasswordInput(_attrs))
-    email = forms.CharField(widget=forms.HiddenInput())
+    _attrs = forms.PasswordInput({'class': 'form-control'})
+    password_old = forms.CharField(label='Старый пароль:', widget=_attrs, required=False)
+    password = forms.CharField(label='Новый пароль:', widget=_attrs, required=False)
+    password2 = forms.CharField(label='Повторите пароль:', widget=_attrs, required=False)
 
     def clean_password(self):  # Проверка на совпадение паролей
         password = self.cleaned_data.get("password")
@@ -113,15 +112,19 @@ class UserPasswordChangeForm(forms.Form):
                 error=forms.ValidationError(_("Пароли не совпадают!"), code='invalid'))
         return password2
 
-    def save(self):  # Сохранение пароля в хешированном формате
+    def save(self, email):  # Сохранение пароля в хешированном формате
         log('UserPasswordChangeForm save data:', str(self.cleaned_data))
-        user = authenticate(email=self.cleaned_data.get('email'),
-            password=self.cleaned_data.get('password_old'))
-        if user is None:  # if current_username is empty:
-            raise forms.ValidationError(_("Неверный пароль!"))
-        else:
+        p0 = self.cleaned_data.get('password_old')
+        p1 = self.cleaned_data.get('password')
+        p2 = self.cleaned_data.get('password2')
+        user = authenticate(email=email, password=p0)
+        if p0 and user is None:  # if current_username is empty:
+            self.add_error(field='password_old', 
+                error=forms.ValidationError(_("Неверный пароль!"), code='invalid'))
+        if p0 and p1 and p2 and user is not None:
             user.set_password(self.cleaned_data["password"])
             user.save()
+        print(self.errors)
         return user
 
 
@@ -155,4 +158,10 @@ class SettingsForm(forms.ModelForm):
         model = User
         fields = ('name', 'address', 'phone_number')
         labels = {'name': 'ФИО:', 'address': 'Адрес:', 'phone_number': 'Номер телефона:'}
-        widgets = {i: forms.TextInput(attrs={'class': 'form-control mb-2'}) for i in fields}
+        widgets = {i: forms.TextInput(attrs={'class': 'form-control'}) for i in fields}
+    
+    def save(self, user=None):  # Сохранение пароля в хешированном формате
+        user.name = self.cleaned_data['name']
+        user.address = self.cleaned_data['address']
+        user.phone_number = self.cleaned_data['phone_number']
+        return user
