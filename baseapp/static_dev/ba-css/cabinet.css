@@ -3,10 +3,39 @@
     font-weight: 400;
 }
 
-.table-orders {
-    font-size: 18px;
-}
-
 .form-settings label {
     font-size: 20px;
+}
+
+.page-title {
+    font-size: 1.9rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.form-label-title {
+    font-size: 20px;
+}
+
+
+.btn-success:hover {
+    cursor: pointer;
+}
+
+.btn-info:hover {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:focus {
+    box-shadow: none !important;
+}
+
+.btn-info:active {
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
+
+.table th, .table td {
+    padding: 0.4rem 0.3rem;
 }
