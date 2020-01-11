@@ -13,13 +13,25 @@
     <div class="table">   
       <div class="col-12 mt-4 text-center">
         <div class="header">
-          <h1>Личный кабинет</h1><hr>
+          <h1>Личный кабинет</h1>
         </div>
       </div>
-      <div class="col-12 header-orders">      
+      <div class="col-12 header-settings"><hr>
+        <img src="{% static "userconfig.png" %}" alt="settings">
+        <span>Настройки</span><hr>
+      </div>
+      <div class="col-12">
+        <form class="form-settings" action="" method="post">{% csrf_token %}
+          {{ form }}
+          {{ form2 }}
+          <div class="col-auto form-button text-center">
+            <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 header-orders"><hr>   
         <img src="{% static "order.png" %}" alt="settings">
-        <span class="ml-4">Ваши заказы</span>
-        <hr>
+        <span class="ml-4">Ваши заказы</span><hr>
       </div>
       <div class="col-12 mt-2 mb-3 text-left">
         <button type="button" class="btn btn-info mt-2">
@@ -50,30 +62,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="col-12 header-settings"><hr>
-      <img src="{% static "userconfig.png" %}" alt="settings">
-      <span>Настройки</span><hr>
-    </div>
-    <div class="col-12">
-      <form class="form-settings" action="" method="post">
-        <label for="">ФИО:</label>
-        <input type="text" class="form-control">
-        <label for="">Адрес:</label>
-        <input type="text" class="form-control">
-        <label for="">Телефон:</label>
-        <input type="text" class="form-control">
-        <label for="">Старый пароль:</label><br>
-        <small class="text-muted">Пароль должен иметь не менее 8 симловов и не должен совпадать с именем E-mail</small>
-        <input type="password" class="form-control">
-        <label for="">Новый пароль:</label>
-        <input type="password" class="form-control">
-        <label for="">Повторите пароль:</label>
-        <input type="password" class="form-control">
-        <div class="col-auto form-button text-center">
-          <button type="submit" class="btn btn-success mt-3" id="apply_button">Сохранить</button>
-        </div>
-      </form>
     </div>
   </div>
 </div>
