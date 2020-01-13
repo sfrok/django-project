@@ -67,7 +67,7 @@
 
 .form {
     max-width: 850px;
-    height: 550px;
+    height: 500px;
     border: 1px solid black;
     background-color: #f6f6f6;
     border-radius: 6px;
@@ -153,4 +153,8 @@
 
 .cost {
   font-size: 25px;
+}
+
+.img-description img {
+  margin-top: 10px;
 }
